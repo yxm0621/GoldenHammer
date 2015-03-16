@@ -92,6 +92,10 @@ public class Grid : MonoBehaviour {
 					} else if (grid.items[x ,z].obj.name.Contains("Bomb")
 					           || grid.items[x ,z].obj.name.Contains("Special")){
 						newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.5f, pos.y + 1, pos.z-width/2+z +.5f), Quaternion.identity);
+					} else if (x == 4){
+						newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.3f, pos.y + 1, pos.z-width/2+z +.5f), Quaternion.identity);
+					} else if (x == 7){
+						newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.7f, pos.y + 1, pos.z-width/2+z +.5f), Quaternion.identity);
 					} else {
 						newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.5f, pos.y, pos.z-width/2+z +.5f), Quaternion.identity);
 					}

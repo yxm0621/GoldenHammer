@@ -15,10 +15,11 @@ public class birdBehavior : MonoBehaviour {
 	public float flyDis = -10f;
 	public float flySec = 10f;
 	
-	public AudioClip birdJump;
+	public AudioClip[] birdJump;
 	public AudioClip birdSmash;
 	public AudioClip birdHit;
 	bool             hasPlayed = false; // Whether birdSmash has played
+	int				 birdType = 0;
 	
 	// Use this for initialization
 	void Start () {
@@ -30,6 +31,7 @@ public class birdBehavior : MonoBehaviour {
 		if (bird.transform.position.x < 0) {
 			flyDis = 10f;
 		}
+		birdType = Random.Range (0, 2);
 	}
 	
 	// Update is called once per frame
@@ -43,8 +45,10 @@ public class birdBehavior : MonoBehaviour {
 			iTween.MoveBy(bird, iTween.Hash("x", flyDis, "easeType", "easeInOutExpo", "time", flySec));
 //			iTween.MoveBy(bird, iTween.Hash("y", -.2f, "easeType", "linearTween","loopType", "pingPong ", "time", 1));
 			startFly = true;
-			gameMain.audioSource.PlayOneShot (birdJump);
 		}
+//		if (bird.transform.position.x <= .5f || bird.transform.position.x >= -.5f ) {
+//			gameMain.audioSource.PlayOneShot (birdJump[birdType]);
+//		}
 		if (bird.transform.position.x < 2 || bird.transform.position.x > -2) {
 			bird.transform.Translate(Vector3.down*Time.deltaTime*0.2f);
 //			iTween.MoveTo(bird, iTween.Hash("y", 1, "easeType", "easeInOutExpo", "time", .2f));
@@ -88,19 +92,25 @@ public class birdBehavior : MonoBehaviour {
 		if(other.collider.tag == "Character"){
 			birdAction = birdState.Hit;
 			Debug.Log("hit bird!");
-			gameMain.audioSource.PlayOneShot (birdHit);
+			gameMain.audioSource.PlayOneShot (birdJump[birdType]);
 			
 			//TODO end game when obstacle hit
 			gameMain.GameOver ();
 		} else {
 			birdAction = birdState.Hit;
-			gameMain.audioSource.PlayOneShot (birdHit);
+			gameMain.audioSource.PlayOneShot (birdJump[birdType]);
 		}
 	}
-	
+
+	void OnTriggerEnter(Collider other) {
+		if (other.collider.tag == "BirdTrigger") {
+			gameMain.audioSource.PlayOneShot (birdJump[birdType]);
+		}
+	}
+
 	void birdDead(){
 		if (!hasPlayed) {
-			gameMain.audioSource.PlayOneShot (birdSmash);
+			gameMain.audioSource.PlayOneShot (birdJump[birdType]);
 			hasPlayed = true;
 		}
 		Destroy (gameObject);
