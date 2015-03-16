@@ -47,19 +47,19 @@ public class ObjectManager : MonoBehaviour {
 		}
 
 		if(thisObject.name == "Cloud"){
-			value = 20;
+			value = 100;
 			hitPoints = 10;
 		}
 		if(thisObject.name.Contains("Planet")){
-			value = 20;
+			value = 500;
 			hitPoints = 5;
 		}
 		if(thisObject.name == "BlackHole"){
-			value = 20;
+			value = 200;
 			hitPoints = 5;
 		}
 		if((thisObject.name == "Sun") || (thisObject.name == "Moon")){
-			value = 20;
+			value = 1000;
 			hitPoints = 5;
 		}
 
@@ -109,16 +109,33 @@ public class ObjectManager : MonoBehaviour {
 					gameMain.buildingType = thisObject.name;
 				}
 
+				//bomb explode effect
 				if(thisObject.name == "Bomb") {
-//					Debug.Log("explode");
+					Debug.Log("explode");
 					GameObject explode = (GameObject)Instantiate(gameMain.explodeEffect, thisObject.transform.position, Quaternion.identity);
 					explode.name = gameMain.explodeEffect.name;
+					gameMain.audioSource.PlayOneShot (gameMain.explodeSFX);
 				}
 
+				//special effect to smash the whole line
 				if(thisObject.name == "Special") {
-//					Debug.Log("special");
+					Debug.Log("special");
 					GameObject line = (GameObject)Instantiate(gameMain.lineEffect, thisObject.transform.position, Quaternion.identity);
 					line.name = gameMain.lineEffect.name;
+					gameMain.audioSource.PlayOneShot (gameMain.lineSFX);
+				}
+
+				//kill people, polices come
+				if (thisObject.name.Contains("Human")) {
+					GameObject.Find("Traffic").GetComponent<TrafficController>().spawnPolice = true;
+				}
+				//kill police, tanks come
+				if (thisObject.name.Contains("PoliceCar")) {
+					GameObject.Find("Traffic").GetComponent<TrafficController>().spawnTank = true;
+				}
+				//kill tank, helicopters come
+				if (thisObject.name.Contains("Tank")) {
+					GameObject.Find("Traffic").GetComponent<TrafficController>().spawnHelicopter = true;
 				}
 
 				//Destroy
@@ -158,10 +175,10 @@ public class ObjectManager : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other){
-		if(other.gameObject.name == gameMain.explodeEffect.name){
+		if(other.gameObject.name == "damage"){
 			hitPoints--;
 		}
-		if(other.gameObject.name == gameMain.lineEffect.name){
+		if(other.gameObject.name == "spinCutters"){
 			hitPoints--;
 		}
 	}

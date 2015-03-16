@@ -8,6 +8,7 @@ public class TrafficController : MonoBehaviour {
 	public GameObject					car;
 
 	public GameObject					human;
+	public GameObject[]					people;
 
 	public float						humanSpawnTimer = 20.0f;
 	public float						carSpawnTimer = 10.0f;
@@ -50,6 +51,15 @@ public class TrafficController : MonoBehaviour {
 	public int							flyNum;
 	public bool							spawnFly = false;
 
+	//feedback for killing people
+	public bool							spawnPolice = false;
+	public bool							spawnTank = false;
+	public bool							spawnHelicopter = false;
+
+	public GameObject					policeCar;
+	public GameObject					tank;
+	public GameObject					helicopter;
+
 
 	// Use this for initialization
 	void Start () {
@@ -77,7 +87,7 @@ public class TrafficController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		human = people[Random.Range(0,people.Length)];
 		if (GameManager.gameState == GameManager.State.InGame) {
 			humanSpawnTimer -= 1 * Time.deltaTime;
 			carSpawnTimer -= 1 * Time.deltaTime;
@@ -92,11 +102,28 @@ public class TrafficController : MonoBehaviour {
 				Human ();
 			}
 
-			//[TODO] Spawn Car in left lane every 5 seconds (or don't spawn)
+			//[TODO] Spawn Cars
 			if(carSpawnTimer <= 0){
 				spawnCar = true;
 				carSpawnTimer = Random.Range(carTimeLow, carTimeHigh);
-				Car ();
+				//spawn normal cars
+				if(spawnCar && !spawnPolice && !spawnTank){
+					Car(car, "car");
+					spawnCar = false;
+				}
+				//spawn police cars
+				if(spawnCar && spawnPolice && !spawnTank){
+					Car(policeCar, "PoliceCar");
+					spawnCar = false;
+					spawnPolice = false;
+				}
+				//spawn tanks
+				if(spawnCar && !spawnPolice && spawnTank){
+					Car(tank, "Tank");
+					spawnCar = false;
+					spawnTank = false;
+				}
+
 				//Debug.Log ("Car timer up. Next timer: " + carSpawnTimer);
 			}
 
@@ -123,59 +150,62 @@ public class TrafficController : MonoBehaviour {
 
 				if(gameMain.buildingType == "Cube"){
 					Instantiate (human, humanPos, Quaternion.identity);
+					Debug.Log ("1 Human fell from building");
 				}
 				if(gameMain.buildingType == "Cube_1"){
 					Instantiate (human, humanPos, Quaternion.identity);
+					//Debug.Log ("Human fell from building");
 					Instantiate (human, humanPos, Quaternion.identity);
+					//Debug.Log ("Human fell from building");
 					Instantiate (human, humanPos, Quaternion.identity);
+					Debug.Log ("3 Human fell from building");
 				}
 				if(gameMain.buildingType == "Cube_2"){
 					Instantiate (human, humanPos, Quaternion.identity);
+					//Debug.Log ("Human fell from building");
 					Instantiate (human, humanPos, Quaternion.identity);
+					Debug.Log ("2 Human fell from building");
 				}
 			}
 
-
-
+			if(gameMain.levelCount == 2){
+				humanSpawnTimer = humanSpawnTimer * 0.2f;
+				carSpawnTimer = carSpawnTimer * 0.2f;
+				animalSpawnTimer = animalSpawnTimer * 0.2f;
+				flySpawnTimer = flySpawnTimer * 0.2f;
+			}
+			if(gameMain.levelCount == 3){
+				humanSpawnTimer = humanSpawnTimer * 0.21f;
+				carSpawnTimer = carSpawnTimer * 0.25f;
+				animalSpawnTimer = animalSpawnTimer * 0.21f;
+				flySpawnTimer = flySpawnTimer * 0.21f;
+			}
+			if(gameMain.levelCount == 4){
+				humanSpawnTimer = humanSpawnTimer * 0.3f;
+				carSpawnTimer = carSpawnTimer * 0.3f;
+				animalSpawnTimer = animalSpawnTimer * 0.3f;
+				flySpawnTimer = flySpawnTimer * 0.3f;
+			}
 		}
-
-		if(gameMain.levelCount == 2){
-			humanSpawnTimer = humanSpawnTimer * 0.2f;
-			carSpawnTimer = carSpawnTimer * 0.2f;
-			animalSpawnTimer = animalSpawnTimer * 0.2f;
-			flySpawnTimer = flySpawnTimer * 0.2f;
-		}
-		if(gameMain.levelCount == 3){
-			humanSpawnTimer = humanSpawnTimer * 0.35f;
-			carSpawnTimer = carSpawnTimer * 0.35f;
-			animalSpawnTimer = animalSpawnTimer * 0.35f;
-			flySpawnTimer = flySpawnTimer * 0.35f;
-		}
-		if(gameMain.levelCount == 4){
-			humanSpawnTimer = humanSpawnTimer * 0.45f;
-			carSpawnTimer = carSpawnTimer * 0.45f;
-			animalSpawnTimer = animalSpawnTimer * 0.45f;
-			flySpawnTimer = flySpawnTimer * 0.45f;
-		}
-
 	}
 
-	public void Car(){
-		if(spawnCar){
-			Debug.Log ("Creating Cars");
-			Instantiate (car, lLSpawnPos, Quaternion.identity);
-			Instantiate (car, rLSpawnPos, Quaternion.identity);
-			spawnCar = false;
-		}
-
-
+	public void Car(GameObject obj, string name){
+		GameObject newCarL = (GameObject) Instantiate (obj, lLSpawnPos, Quaternion.identity);
+		newCarL.transform.localEulerAngles = new Vector3 (0, 180, 0);
+		newCarL.name = name+"L";
+		iTweenEvent.GetEvent(newCarL, "leftCar").Play();
+		
+		GameObject newCarR = (GameObject) Instantiate (obj, rLSpawnPos, Quaternion.identity);
+		newCarR.transform.localEulerAngles = new Vector3 (0, 180, 0);
+		newCarR.name = name+"R";
+		iTweenEvent.GetEvent(newCarR, "rightCar").Play();
 	}
 
 	public void Human(){
 		if(spawnHuman){
 			Debug.Log ("Creating Humans");
 			//[TODO] Spawn humans randomly up or down street
-			Instantiate (human, upStreetPos, Quaternion.identity);
+			Instantiate ((GameObject)human, upStreetPos, Quaternion.identity);
 			spawnHuman = false;
 		}
 	}

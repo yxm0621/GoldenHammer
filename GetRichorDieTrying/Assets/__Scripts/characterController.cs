@@ -347,4 +347,11 @@ public class characterController : MonoBehaviour {
 //			iTween.MoveTo(character, iTween.Hash("y", characterPos.y, "easeType", "easeInOutExpo", "loopType", "none", "time", .3));
 		character.transform.localScale += new Vector3 (0, .3f, 0);
 		}
+
+	void OnTriggerEnter(Collider other){
+		if(other.tag == "SegmentKill"){
+			Destroy (gameObject);
+			gameMain.GameOver();
+		}
+	}
 }

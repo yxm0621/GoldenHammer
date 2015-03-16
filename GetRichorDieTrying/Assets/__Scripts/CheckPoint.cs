@@ -36,8 +36,8 @@ public class CheckPoint : MonoBehaviour {
 				//gameMain.levelGoal *= 3; //Increase goal x3
 
 				if(gameMain.levelCount == 1){
-					gameMain.levelTimer = 20;
-					gameMain.levelGoal = 500;
+					gameMain.levelTimer = 30;
+					gameMain.levelGoal = 1000;
 				}
 				if(gameMain.levelCount == 2){
 					gameMain.levelTimer = 30;
@@ -45,11 +45,11 @@ public class CheckPoint : MonoBehaviour {
 				}
 				if(gameMain.levelCount == 3){
 					gameMain.levelTimer = 30;
-					gameMain.levelGoal = 5000;
+					gameMain.levelGoal = 3500;
 				}
 				if(gameMain.levelCount == 4){
 					gameMain.levelTimer = 30;
-					gameMain.levelGoal = 7500;
+					gameMain.levelGoal = 5000;
 				}
 			}
 		}

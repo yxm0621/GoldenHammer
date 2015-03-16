@@ -93,7 +93,14 @@ public class LevelSegments : MonoBehaviour {
 			}
 			foreach (GameObject obs in obss) {
 //				obs.transform.position -= new Vector3(0,0,3f);
-				obs.transform.Translate(new Vector3 (0,0, -1) * Time.deltaTime * timeToPos);
+				if (obs.name.Contains("PoliceCarL") || obs.name.Contains("TankL") ||
+				    obs.name.Contains("Human_")) {
+					obs.transform.Translate(new Vector3 (0,0, 1) * Time.deltaTime * timeToPos);
+				} else if (obs.name.Contains("PoliceCarR") || obs.name.Contains("TankR")) {
+					obs.transform.Translate(new Vector3 (1,0,0) * Time.deltaTime * timeToPos);
+				} else {
+					obs.transform.Translate(new Vector3 (0,0, -1) * Time.deltaTime * timeToPos);
+				}
 				if(obs.transform.position.z <= -6f){
 					Destroy (obs);
 				}
@@ -101,35 +108,16 @@ public class LevelSegments : MonoBehaviour {
 //				characterController.forward = false;
 //		}
 		}
-//		if (GameManager.gameState == GameManager.State.Over) {
-//			GameObject[] segs = GameObject.FindGameObjectsWithTag("Segment");
-//			GameObject[] obss = GameObject.FindGameObjectsWithTag("Obstacle");
-//			foreach (GameObject seg in segs) {
-//				Destroy(seg);
-//			}
-//			foreach (GameObject obs in obss) {
-//				Destroy (obs);
-//			}
+		gameMain.moveSpeed = timeToPos;
+	}
+
+	//
+//	void OnTriggerEnter(Collider other){
+//		if(other.tag == "SegmentKill"){
+//			Debug.Log ("Destroy Segment");
+//			Destroy (thisSegment);
+//			gameMain.NewSegment();
 //		}
-	}
+//	}
 
-	/*
-	void OnTriggerEnter(Collider other){
-		Debug.Log("Tigger Entered");
-
-		if(other.tag == "SegmentKill"){
-			Debug.Log ("Destroy Segment");
-			Destroy (thisSegment);
-			gameMain.NewSegment();
-			EndOfRoad ();
-		}
-	}
-
-	public void EndOfRoad(){
-		//if(thisSegment.transform.position.z <= -7.0f){
-			Debug.Log("Spawning new Segment & Deleting Old");
-			gameMain.NewSegment();
-			Destroy (thisSegment);
-		//}
-	}*/
 }

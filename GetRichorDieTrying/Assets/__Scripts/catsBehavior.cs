@@ -87,7 +87,7 @@ public class catsBehavior : MonoBehaviour {
 			//TODO end game when obstacle hit
 			gameMain.GameOver ();
 		}
-		if(other.collider.name == "car(Clone)" || other.collider.name == "car" ){
+		if(other.collider.name.Contains("car") || other.collider.name.Contains("Police") || other.collider.name.Contains("Tank")){
 			catAction = CatState.Smash;
 			gameMain.audioSource.PlayOneShot (catHit);
 		}

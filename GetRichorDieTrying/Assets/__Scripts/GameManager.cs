@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour {
 	public int							levelGoal = 0;
 	public TextMesh						goalText;
 	public int							levelCount = 0; //This is changed in CheckPoint
+	public float						moveSpeed;
 
 	public int							bonus = 1;
 
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour {
 
 	public Vector3						coinPos; //Position in the world for coins to instantiate
 
-	//Spawn Human after building Destruction -- Set in Object Manager - Checked in Traffic Controller
+	//Spawn Human after building Destruction -- Set in CashOut() - Checked in Traffic Controller
 	public bool							buildingDestroyed = false;
 	public Vector3						spawnHumanPos;
 	public string						buildingType;
@@ -92,19 +93,30 @@ public class GameManager : MonoBehaviour {
 
 	//feedback based on player's behavior
 	public bool                         killAnimal = false;
+	public int							killPeople;
+	public int 							killPolice;
+	public int							killTank;
+	public int							killHelicopter;
 	//public TextMesh						feedbackText;
 
 	//scene manager to control the scene change and load new assets
 	public SceneManager                 sceneManager;
 
 	public AudioClip					cityBGM;
-	public AudioClip					citySmashBGM;
+	//public AudioClip					citySmashBGM; //Sounds more annoying than helpful so turned off
 	public AudioClip					spaceBGM;
 	
 	public GUISkin						menuSkin;
 
+	//special effect data
 	public GameObject					explodeEffect;
 	public GameObject					lineEffect;
+	public AudioClip					explodeSFX;
+	public AudioClip					lineSFX;
+
+	public GameObject					itweenPath;
+
+	public TrafficController			traffic;
 
 	void Awake(){
 //		DontDestroyOnLoad(camPath);
@@ -113,6 +125,7 @@ public class GameManager : MonoBehaviour {
 		if(manager == null){
 			DontDestroyOnLoad(this.gameObject);
 			manager = this;
+			Instantiate (itweenPath, new Vector3(0,0,0), Quaternion.identity);
 		} else if(manager != this){ //If there is another Game Manager destroy's this one
 			Destroy(gameObject);
 		}
@@ -145,13 +158,16 @@ public class GameManager : MonoBehaviour {
 		bgmCombo = GameObject.Find ("GH-BGM-Combo").GetComponent<AudioSource>();
 //		Debug.Log (audioSource + " Found");
 
-		score = 0;
-		comboMax = 0;
-		levelCount = 0;
+		if(currentLevel != "GameOver"){
+			score = 0;
+			comboMax = 0;
+			levelCount = 0;
+			
+			levelGoal = 500;
+			
+			levelTimer = 30;
+		}
 
-		levelGoal = 100;
-
-		levelTimer = 10;
 
 		scoreText = GameObject.Find("Score").GetComponent<TextMesh>();
 		timerText = GameObject.Find("Timer").GetComponent<TextMesh>();
@@ -159,8 +175,11 @@ public class GameManager : MonoBehaviour {
 		comboTimerText = GameObject.Find("ComboTimer").GetComponent<TextMesh>();
 		goalText = GameObject.Find ("Goal").GetComponent<TextMesh>();
 
-
-
+		//feedback for killing!
+		killPeople = 0;
+		killPolice = 0;
+		killTank = 0;
+		killHelicopter = 0;
 		//feedbackText = GameObject.Find("Feedback").GetComponent<TextMesh>();
 
 		//Add coin groups to list
@@ -173,7 +192,7 @@ public class GameManager : MonoBehaviour {
 
 		sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 		sceneManager.changeScene(SceneManager.scene.city);
-
+		traffic = GameObject.Find("Traffic").GetComponent<TrafficController>();
 		//try space scene
 //		GameObject.Find("GlobalObjects").GetComponent<globalObjects>().sunDown();
 //		GameObject.Find("GlobalObjects").GetComponent<globalObjects>().moonDown();
@@ -197,6 +216,9 @@ public class GameManager : MonoBehaviour {
 		switch(gameState) {
 		case State.Menu:
 			GameObject.Find("Player").GetComponent<characterController>().canControl = false;
+			if(comboStarted){
+				ComboEnd ();
+			}
 			//temp trigger
 //			gameState = State.InGame;
 			break;
@@ -216,7 +238,7 @@ public class GameManager : MonoBehaviour {
 				bgmBeat.clip = cityBGM;
 				bgmBeat.Play();
 				bgmBeat.loop = true;
-				bgmSmash.clip = citySmashBGM;
+				//bgmSmash.clip = citySmashBGM;
 			}
 			if (sceneManager.currentScene == SceneManager.scene.space && bgmBeat.clip != spaceBGM) {
 //				Debug.Log("spaceBGM");
@@ -224,13 +246,13 @@ public class GameManager : MonoBehaviour {
 				bgmBeat.clip = spaceBGM;
 				bgmBeat.Play();
 				bgmBeat.loop = true;
-				bgmSmash.Stop();
-				bgmSmash.clip = null;
+				//bgmSmash.Stop();
+				//bgmSmash.clip = null;
 			}
 			if ((score > 1) && (bgmSmash!=null) && (!bgmSmash.isPlaying) 
 			    && (sceneManager.currentScene == SceneManager.scene.city)) {
-				bgmSmash.Play();
-				bgmSmash.loop = true;
+				//bgmSmash.Play();
+				//bgmSmash.loop = true;
 			}
 			if((bonus>=5) && (bgmCombo!=null) && (!bgmCombo.isPlaying)) {
 //				Debug.Log("combo");
@@ -284,12 +306,28 @@ public class GameManager : MonoBehaviour {
 				killAnimal = false;
 			}
 
+			if (killPeople >= 3) {
+				traffic.spawnPolice = true;
+				killPeople = 0;
+			}
+			if (killPolice >= 1) {
+				traffic.spawnTank = true;
+				killPolice = 0;
+			}
+			if (killTank >= 1) {
+				traffic.spawnHelicopter = true;
+				killTank = 0;
+			}
+
 			break;
 		case State.Pause:
 			GameObject.Find("Player").GetComponent<characterController>().canControl = false;
 			break;
 		case State.Over:
 			GameObject.Find("Player").GetComponent<characterController>().canControl = false;
+			if(comboStarted){
+				ComboEnd ();
+			}
 			break;
 		}
 
@@ -347,16 +385,25 @@ public class GameManager : MonoBehaviour {
 		if(objectName == "Cube" || objectName == "Cube_1"){
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 0;
+			//Spawning Humans from building - Data Checked in TrafficController
+			buildingDestroyed = true;
+			buildingType = objectName;
+			spawnHumanPos = coinPos;
 		}
 		if(objectName == "Cube_2"){
+
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 1;
+			//Spawning Humans from building - Data Checked in TrafficController
+			buildingDestroyed = true;
+			buildingType = objectName;
+			spawnHumanPos = coinPos;
 		}
-		if(objectName == "Tree" || objectName == "Tree_1" || objectName == "Cat" ||
-		   objectName == "Dog" || objectName == "Bird" ||
-		   objectName == "Mshr1Prefab" || objectName == "Mshr2Prefab" ||
-		   objectName == "Mshr3Prefab" || objectName == "Mshr4Prefab" ||
-		   objectName == "Mshr5Prefab"){
+		if(objectName == "Cat" || objectName == "Dog" || objectName == "Bird"){
+			//audioSource.PlayOneShot ();
+			listItem = 2;
+		}
+		if(objectName.Contains ("Tree") || objectName.Contains ("obj") || objectName.Contains ("env")){
 			audioSource.PlayOneShot (woodSmash);
 			listItem = 2;
 		}
@@ -380,20 +427,23 @@ public class GameManager : MonoBehaviour {
 			listItem = 3;
 			GameObject.Find("GlobalObjects").GetComponent<globalObjects>().moonDown();
 		}
-		if(objectName == "car" || objectName == "car(Clone)"){
+		if(objectName.Contains("car") || objectName.Contains("Police") || objectName.Contains("Tank")){
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 4;
 		}
-		if(objectName == "Human" || objectName == "Human(Clone)"){
+		if(objectName.Contains("Human")){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 5;
 		}
-		if(objectName == "Start"){
+		if(objectName == "Start" || objectName == "Special" || objectName == "Bomb"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 2;
 		}
+
+		if (objectName != "Special" && objectName != "Bomb") {
 		//StartCoroutine (Shake ()); //Camera Shake
-		CamShake ();
+			CamShake ();
+		}
 
 		//Spawn Coins
 		GameObject coinsGroup = (GameObject)Instantiate (coinGroups[listItem], coinPos, Quaternion.identity);
@@ -420,7 +470,7 @@ public class GameManager : MonoBehaviour {
 
 	//[X] iTween's camera shake
 	public void CamShake(){
-		float xPos = Random.Range (-1, 1);
+		float xPos = Random.Range (-.5f, .5f);
 
 		iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "y", 0.5f, "time", duration, "oncompletetarget", this.gameObject,"oncomplete", "CamFix")); //X & Y shake
 		//iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "time", duration)); //X shake only
@@ -508,7 +558,9 @@ public class GameManager : MonoBehaviour {
 
 		characterMove.Clear ();
 
-
+		if(comboStarted){
+			ComboEnd ();
+		}
 
 		Debug.Log ("Restarting Level " + currentLevel);
 

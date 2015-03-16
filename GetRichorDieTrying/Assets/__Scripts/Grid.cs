@@ -83,27 +83,39 @@ public class Grid : MonoBehaviour {
 			for (int z = 0; z < width; z++) {
 				if(grid.items[x ,z] != null){
 //					Debug.Log("Instantiate " + grid.items[x ,z].obj.name + " at pos: " + new Vector3(pos.x-length/2+x, pos.y, pos.z-width/2+z));
-					GameObject newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.5f, pos.y + 1f, pos.z-width/2+z +.5f), Quaternion.identity);
+					GameObject newObj;
+					if(grid.items[x ,z].obj.name.Contains("env")
+//					   || grid.items[x ,z].obj.name.Contains("Tree")
+//					   || grid.items[x ,z].obj.name.Contains("Cube")
+					   ) {
+						newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.5f, pos.y + .5f, pos.z-width/2+z +.5f), Quaternion.identity);
+					} else if (grid.items[x ,z].obj.name.Contains("Bomb")
+					           || grid.items[x ,z].obj.name.Contains("Special")){
+						newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.5f, pos.y + 1, pos.z-width/2+z +.5f), Quaternion.identity);
+					} else {
+						newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.5f, pos.y, pos.z-width/2+z +.5f), Quaternion.identity);
+					}
+//					GameObject newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.5f, pos.y, pos.z-width/2+z +.5f), Quaternion.identity);
 					newObj.transform.parent = newSeg.transform;
 					newObj.name = grid.items[x, z].obj.name;
-					if (newObj.name == "Mshr1Prefab" || 
-					    newObj.name == "Mshr2Prefab" ||
-					    newObj.name == "Mshr3Prefab" ||
-					    newObj.name == "Mshr4Prefab" ||
-					    newObj.name == "Mshr5Prefab") {
-						newObj.transform.localEulerAngles = new Vector3 (270, 0, 0);
-						newObj.transform.position -= new Vector3(0,.5f,0);
-					}
-					newObj.GetComponent<ObjectManager>().objPosX = x;
-					newObj.GetComponent<ObjectManager>().objPosZ = z;
-					newObj.GetComponent<ObjectManager>().objLength = grid.items[x ,z].length;
-					newObj.GetComponent<ObjectManager>().objWidth = grid.items[x ,z].width;
+//					if (newObj.name == "Mshr1Prefab" || 
+//					    newObj.name == "Mshr2Prefab" ||
+//					    newObj.name == "Mshr3Prefab" ||
+//					    newObj.name == "Mshr4Prefab" ||
+//					    newObj.name == "Mshr5Prefab") {
+//						newObj.transform.localEulerAngles = new Vector3 (270, 0, 0);
+//						newObj.transform.position -= new Vector3(0,.5f,0);
+//					}
+//					newObj.GetComponent<ObjectManager>().objPosX = x;
+//					newObj.GetComponent<ObjectManager>().objPosZ = z;
+//					newObj.GetComponent<ObjectManager>().objLength = grid.items[x ,z].length;
+//					newObj.GetComponent<ObjectManager>().objWidth = grid.items[x ,z].width;
 				}
 			}
 		}
-		playerMove = grid.canMove;
-		GameManager.manager.addMovement (playerMove);
-		newSeg.GetComponent<LevelSegments> ().segEmpty = playerMove;
+//		playerMove = grid.canMove;
+//		GameManager.manager.addMovement (playerMove);
+//		newSeg.GetComponent<LevelSegments> ().segEmpty = playerMove;
 	}
 }
 

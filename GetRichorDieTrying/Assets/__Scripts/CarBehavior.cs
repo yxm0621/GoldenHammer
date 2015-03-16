@@ -9,20 +9,20 @@ public class CarBehavior : MonoBehaviour {
 
 	public GameObject				human;
 	
-	public float					movementSpeed = 100.0f; //Seconds from end to end
+//	public float					movementSpeed = 100.0f; //Seconds from end to end
 	
-	public GameObject				character;
+//	public GameObject				character;
 
-	public Vector3					currentPos;
+//	public Vector3					currentPos;
 	
-	public GameObject				rightDownPos; //Down the street Right Lane
-	public GameObject				rightUpPos; //Up the street Right Lane
+//	public GameObject				rightDownPos; //Down the street Right Lane
+//	public GameObject				rightUpPos; //Up the street Right Lane
 
-	public GameObject				leftDownPos; //Down the street Left Lane
-	public GameObject				leftUpPos; //Up the street Left Lane
+//	public GameObject				leftDownPos; //Down the street Left Lane
+//	public GameObject				leftUpPos; //Up the street Left Lane
 	
-	public bool						rightLane;
-	public bool						leftLane;
+//	public bool						rightLane;
+//	public bool						leftLane;
 
 	public int						value; //Value of object
 	public int						hitPoints; //Hits to break object
@@ -35,21 +35,21 @@ public class CarBehavior : MonoBehaviour {
 		gameMain = GameManager.manager;
 		
 		car = this.gameObject;
-		iTween.Init (car);
-		
-		if(car.transform.position.x < 0){
-			leftLane = true;
-			Debug.Log ("Left Lane");
-			movementSpeed = 5.0f;
-			iTween.MoveTo(car, iTween.Hash ("position", leftDownPos.transform.position, "time", movementSpeed, "easetype", iTween.EaseType.linear));
-		}
-		if(car.transform.position.x > 0){
-			rightLane = true;
+//		iTween.Init (car);
+//		
+//		if(car.transform.position.x < 0){
+//			leftLane = true;
+//			Debug.Log ("Left Lane");
+//			movementSpeed = 5.0f;
+//			iTween.MoveTo(car, iTween.Hash ("position", leftDownPos.transform.position, "time", movementSpeed, "easetype", iTween.EaseType.linear));
+//		}
+//		if(car.transform.position.x > 0){
+//			rightLane = true;
 			//[TODO] Spawn car in right lane staggered from left lane via Movementspeed
-			movementSpeed = 10.0f;
-			Debug.Log ("Right Lane");
-			iTween.MoveTo (car, iTween.Hash ("position", rightDownPos.transform.position, "time", movementSpeed, "easetype", iTween.EaseType.linear));
-		}
+//			movementSpeed = 10.0f;
+//			Debug.Log ("Right Lane");
+//			iTween.MoveTo (car, iTween.Hash ("position", rightDownPos.transform.position, "time", movementSpeed, "easetype", iTween.EaseType.linear));
+//		}
 		
 		
 		//if(thisObject.name == "car" || thisObject.name == "car(Clone)"){
@@ -69,8 +69,18 @@ public class CarBehavior : MonoBehaviour {
 		}
 		*/
 
-		currentPos = car.transform.position;
+//		currentPos = car.transform.position;
+
+		//Stop police cars and tanks
+		if (!car.name.Contains("car") && car.name.Contains("R") && car.transform.position.z <= 1.5f) {
+			iTween.Stop(car);
+				car.transform.localEulerAngles = new Vector3 (0, 90, 0);
+		}
+		if (!car.name.Contains("car") && car.name.Contains("L") && car.transform.position.z <= 1.2f) {
+			iTween.Stop(car);
+		}
 		
+
 		if(hitPoints <= 0){
 			
 			gameMain.objectName = car.name;
@@ -81,6 +91,13 @@ public class CarBehavior : MonoBehaviour {
 			gameMain.coinPos = car.transform.position;
 			//Spawn Coins Here
 			gameMain.CashOut(10);
+
+			if (car.name.Contains("Police")) {
+				gameMain.killPolice++;
+			}
+			if (car.name.Contains("Tank")) {
+				gameMain.killTank++;
+			}
 
 			//Person falls out of car
 			Instantiate (human, car.transform.position, Quaternion.identity);
@@ -94,7 +111,7 @@ public class CarBehavior : MonoBehaviour {
 		if(other.collider.tag == "Character"){
 			
 			Debug.Log("hit by Car!");
-			//gameMain.audioSource.PlayOneShot (humanHit);
+			gameMain.audioSource.PlayOneShot (hitAudio);
 			
 			//TODO end game when obstacle hit
 			gameMain.GameOver ();
@@ -104,16 +121,16 @@ public class CarBehavior : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		
 		
-		if(other.collider.tag == "car"){
-			if(leftLane){ //Checks which side game object started from and destroys it at end
+		if(other.collider.tag == "Car"){
+//			if(leftLane){ //Checks which side game object started from and destroys it at end
 				
-				Debug.Log ("At end");
+//				Debug.Log ("At end");
+//				Destroy (car);
+//			}
+//			if(rightLane){ //Checks which side game object started from and destroys it at end
+//				Debug.Log ("At end");
 				Destroy (car);
-			}
-			if(rightLane){ //Checks which side game object started from and destroys it at end
-				Debug.Log ("At end");
-				Destroy (car);
-			}
+//			}
 		}
 
 	}

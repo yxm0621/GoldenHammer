@@ -2,70 +2,72 @@ using UnityEngine;
 using System.Collections;
 
 public class HumanBehavior : MonoBehaviour {
-
+	
 	public GameManager				gameMain;
-
+	
 	public GameObject				human;
-
+	
 	public float					movementSpeed = 5.0f; //20 Seconds from end to end
-
+	
 	public GameObject				character;
-
+	
 	public Vector3					currentPos;
-
+	
 	public Vector3					rightDownPos; //Down the street - Right
 	public Vector3					rightUpPos; //Up the street - Right
 	public Vector3					leftDownPos; //Down the street - Left
 	public Vector3					leftUpPos; //Up the street - Left
-
+	
 	public bool						startedRight;
 	public bool						startedLeft;
-
+	
 	public int						value; //Value of object
 	public int						hitPoints; //Hits to break object
 	
 	public AudioClip				hitAudio;
 	public bool						sameDir;
-
+	
 	// Use this for initialization
 	void Start () {
-	
+		
 		gameMain = GameManager.manager;
-
+		
 		human = this.gameObject;
+		human.transform.localEulerAngles = new Vector3 (0, 180, 0);
 		iTween.Init (human);
-
+		
 		//[TODO] Make Humans walk to -1.3x or 1.3xonce complete move to one of the End points
-
+		
 		if(human.transform.position.x < 0){
 			startedLeft = true;
-			rightDownPos = GameObject.Find ("Right-HumanDownStreet").transform.position;
-			rightUpPos = GameObject.Find ("Right-HumanUpStreet").transform.position;
-//			Debug.Log ("Started Down");
+			leftDownPos = GameObject.Find ("Left-HumanDownStreet").transform.position;
+			leftUpPos = GameObject.Find ("Left-HumanUpStreet").transform.position;
+			//			Debug.Log ("Started Down");
 			//sameDir = true;
-			iTween.MoveTo(human, iTween.Hash("x", -1.3, "time", movementSpeed, "easetype", iTween.EaseType.linear, "oncomplete", "Move"));
-//			iTween.MoveBy(human, iTween.Hash ("z", 100, "time", movementSpeed, "easetype", iTween.EaseType.linear));
-//			iTween.MoveTo(human, iTween.Hash ("z", upPos.transform.position.z, "time", movementSpeed, "easetype", iTween.EaseType.linear));
+			iTween.MoveTo(human, iTween.Hash("x", -1.3, "time", 1f, "easetype", iTween.EaseType.linear, "oncomplete", "Move", "oncompletetarget", human));
+			//			iTween.MoveBy(human, iTween.Hash ("z", 100, "time", movementSpeed, "easetype", iTween.EaseType.linear));
+			//			iTween.MoveTo(human, iTween.Hash ("z", upPos.transform.position.z, "time", movementSpeed, "easetype", iTween.EaseType.linear));
 		}
 		if(human.transform.position.x > 0){
 			startedRight = true;
-			leftDownPos = GameObject.Find ("Left-HumanDownStreet").transform.position;
-			leftUpPos = GameObject.Find ("Left-HumanUpStreet").transform.position;
-//			Debug.Log ("Started Up");
+			rightDownPos = GameObject.Find ("Right-HumanDownStreet").transform.position;
+			rightUpPos = GameObject.Find ("Right-HumanUpStreet").transform.position;
+			
+			//			Debug.Log ("Started Up");
 			//sameDir = false;
-			iTween.MoveTo(human, iTween.Hash("x", 1.3, "time", movementSpeed, "easetype", iTween.EaseType.linear, "oncomplete", "Move"));
-//			iTween.MoveTo (human, iTween.Hash ("z", downPos.transform.position.z, "time", movementSpeed, "easetype", iTween.EaseType.linear));
+			iTween.MoveTo(human, iTween.Hash("x", 1.3, "time", 0.5f, "easetype", iTween.EaseType.linear, "oncomplete", "Move", "oncompletetarget", human));
+			//			iTween.MoveTo (human, iTween.Hash ("z", downPos.transform.position.z, "time", movementSpeed, "easetype", iTween.EaseType.linear));
 		}
-
+		
 		//if(human.name == "Human" || thisObject.name == "Human(Clone)"){
-			value = 7;
-			hitPoints = 3;
+		value = 7;
+		hitPoints = 1;
 		//}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 		/*
 		//people move
 		if (sameDir) {
@@ -74,9 +76,9 @@ public class HumanBehavior : MonoBehaviour {
 			human.transform.Translate(Vector3.back * Time.deltaTime * .5f);
 		}
 		*/
-
+		
 		currentPos = human.transform.position;
-
+		
 		if(hitPoints <= 0){
 			
 			gameMain.objectName = human.name;
@@ -88,32 +90,39 @@ public class HumanBehavior : MonoBehaviour {
 			//Spawn Coins Here
 			gameMain.CashOut(7);
 			
+			gameMain.killPeople++;
+			
 			//Destroy
 			Destroy(human);
 		}
-
+		
 	}
-
+	
 	public void Move(){
+		Debug.Log ("Human On Sidewalk");
+		
 		//Move using translate
-		human.transform.Translate(Vector3.back * Time.deltaTime * .5f);
+		//human.transform.Translate(Vector3.back * Time.deltaTime * .5f);
+		//Debug.Log ("Moving down road");
 		
 		//Move using itween
-
-			if(startedLeft){
-				iTween.MoveTo(human, iTween.Hash ("z", leftDownPos, "time", movementSpeed, "easetype", iTween.EaseType.linear));
-
-			}
+		
+		if(startedLeft){
+			Debug.Log ("Moving down road");
+			iTween.MoveTo(human, iTween.Hash ("z", leftDownPos.z, "time", 4.0f, "easetype", iTween.EaseType.linear));
 			
-		if(startedRight){
-			iTween.MoveTo(human, iTween.Hash ("z", rightDownPos, "time", movementSpeed, "easetype", iTween.EaseType.linear));
 		}
-
+		
+		if(startedRight){
+			Debug.Log ("Moving down road");
+			iTween.MoveTo(human, iTween.Hash ("z", rightDownPos.z, "time", 4.0f, "easetype", iTween.EaseType.linear));
+		}
+		
 	}
-
+	
 	void OnCollisionEnter(Collision other) {
 		if(other.collider.tag == "Character"){
-
+			
 			Debug.Log("hit human!");
 			//gameMain.audioSource.PlayOneShot (humanHit);
 			
@@ -127,17 +136,17 @@ public class HumanBehavior : MonoBehaviour {
 			Destroy (human);
 		}
 	}
-
+	
 	void OnTriggerEnter(Collider other){
-
-
-
+		
+		
+		
 		if(startedLeft){ //Checks which side game object started from and destroys it at end
 			if(other.tag == "human"){
 				Debug.Log ("Human At end");
 				Destroy (human);
 			}
-				
+			
 		}
 		if(startedRight){ //Checks which side game object started from and destroys it at end
 			if(other.tag == "human"){
@@ -146,7 +155,7 @@ public class HumanBehavior : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	void OnMouseDown(){
 		
 		GameObject cam = Camera.main.gameObject;
