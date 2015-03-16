@@ -192,7 +192,9 @@ public class GameManager : MonoBehaviour {
 
 		sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 		sceneManager.changeScene(SceneManager.scene.city);
-		traffic = GameObject.Find("Traffic").GetComponent<TrafficController>();
+		if (GameObject.Find("Traffic") != null) {
+			traffic = GameObject.Find("Traffic").GetComponent<TrafficController>();
+		}
 		//try space scene
 //		GameObject.Find("GlobalObjects").GetComponent<globalObjects>().sunDown();
 //		GameObject.Find("GlobalObjects").GetComponent<globalObjects>().moonDown();

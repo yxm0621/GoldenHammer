@@ -95,12 +95,12 @@ public class TrafficController : MonoBehaviour {
 			flySpawnTimer -= 1 * Time.deltaTime;
 
 			//[TODO]Spawn Human at top or bottom of street every 20 seconds
-			if(humanSpawnTimer <= 0){
+//			if(humanSpawnTimer <= 0){
 				//Debug.Log ("Human Timer Up");
-				spawnHuman = true;
-				humanSpawnTimer = Random.Range(10.0f, 20.0f);
-				Human ();
-			}
+//				spawnHuman = true;
+//				humanSpawnTimer = Random.Range(10.0f, 20.0f);
+//				Human ();
+//			}
 
 			//[TODO] Spawn Cars
 			if(carSpawnTimer <= 0){
