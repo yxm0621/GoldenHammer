@@ -279,7 +279,12 @@ public class GameManager : MonoBehaviour {
 			}
 			
 			//update score text
-			scoreText.text = score.ToString ("$ " + "0,000");
+			if(score < 1000){
+				scoreText.text = score.ToString ("$ " + "0");
+			} else{
+				scoreText.text = score.ToString ("$ " + "0,000");
+			}
+
 			
 			//update level timer
 //			timerText.text = levelTimer.ToString ("n2");
@@ -590,9 +595,21 @@ public class GameManager : MonoBehaviour {
 			comboMaxText = GameObject.Find("ComboMax").GetComponent<TextMesh>();
 			scoreRecap = GameObject.Find("ScoreRecap").GetComponent<TextMesh>();
 
-			scoreRecap.text = score.ToString ("$ " + "0,000");
+
+			if(score < 1000){
+				scoreRecap.text = score.ToString ("$ " + "0");
+			} else{
+				scoreRecap.text = score.ToString ("$ " + "0,000");
+			}
+
 			comboMaxText.text = comboMax.ToString ("0");
-			highScoreText.text = highScore.ToString ("$" + "0,000");
+
+			if(highScore < 1000){
+				highScoreText.text = highScore.ToString ("$ " + "0");
+			} else{
+				highScoreText.text = highScore.ToString ("$ " + "0,000");
+			}
+
 			//levelCountText.text = levelCount.ToString ("Goals met \t" + 0);
 			//Debug.Log ("Setting Text");
 		}
