@@ -19,26 +19,52 @@ public class characterController : MonoBehaviour {
 	public GameObject               character;
 	public Vector3                  characterPos;
 
+<<<<<<< HEAD
 	public bool                     canForward;
 	public bool                     canBackward;
 	public bool                     canMoveLeft;
 	public bool                     canMoveRight;
 	public bool						continueForward;
+=======
+	public Vector3					movePos0;
+	public Vector3					movePos1;
+	public Vector3					movePos2;
+	public Vector3					movePos3;
+	public Vector3					movePos4;
+
+//	public bool                     canForward;
+//	public bool                     canBackward;
+//	public bool                     canMoveLeft;
+//	public bool                     canMoveRight;
+//	public bool						continueForward;
+>>>>>>> origin/master
 
 	public static bool              forward = false;
 	public static bool              onSidewalk = false;
 	
 	public float                    moveOffset = 1;
+<<<<<<< HEAD
 //	public float                    jumpOffset = 2f;
 //	public float                    dodgeOffset = .2f;
 
 	public int                    	curPosX;
 	public int                   	curPosZ;
+=======
+	public float                    jumpOffset = .9f;
+	public int						jumpForce = 350;
+	public float                    dodgeOffset = .2f;
+
+	public int                    	curPosX;
+	public int                   	curPosZ;
+
+	public bool 					touching = false;
+>>>>>>> origin/master
 	
 	// Use this for initialization
 	void Start () {
 		gameMain = GameManager.manager; //Set Ref to GameManager Script
 		if (!gameMain.firstRun) {
+<<<<<<< HEAD
 			gameMain.Start ();
 		}
 
@@ -48,6 +74,26 @@ public class characterController : MonoBehaviour {
 		curPosX = gameMain.segmentLength / 2;
 		curPosZ = 3;
 		continueForward = false;
+=======
+			if(Application.loadedLevelName != "GameOver"){
+				gameMain.Start ();
+			}
+
+		}
+
+		movePos0 = GameObject.Find ("Pos0").transform.position;
+		movePos1 = GameObject.Find ("Pos1").transform.position;
+		movePos2 = GameObject.Find ("Pos2").transform.position;
+		movePos3 = GameObject.Find ("Pos3").transform.position;
+		movePos4 = GameObject.Find ("Pos4").transform.position;
+
+		characterPos = new Vector3 (.5f, .5f, -1.4f);
+		character = GameObject.FindGameObjectWithTag("Character");
+		character.transform.position = characterPos;
+		curPosX = Mathf.Clamp (2,-1,4); //(Current Value, Min, Max)
+		curPosZ = 3;
+//		continueForward = false;
+>>>>>>> origin/master
 	}
 	
 	// Update is called once per frame
@@ -62,12 +108,21 @@ public class characterController : MonoBehaviour {
 		SwipeCheck();
 
 		//check whether the character can go to 4 directions
+<<<<<<< HEAD
 		canForward = gameMain.getMovement(curPosX, curPosZ + 1);
 		canBackward = gameMain.getMovement(curPosX, curPosZ - 1);
 		canMoveLeft = gameMain.getMovement(curPosX - 1, curPosZ);
 		canMoveRight = gameMain.getMovement(curPosX + 1, curPosZ);
 
 		Debug.Log ("curX: " + curPosX + ", curZ: "+curPosZ+", FBLR: "+canForward + canBackward+canMoveLeft+canMoveRight);
+=======
+//		canForward = gameMain.getMovement(curPosX, curPosZ + 1);
+//		canBackward = gameMain.getMovement(curPosX, curPosZ - 1);
+//		canMoveLeft = gameMain.getMovement(curPosX - 1, curPosZ);
+//		canMoveRight = gameMain.getMovement(curPosX + 1, curPosZ);
+
+//		Debug.Log ("curX: " + curPosX + ", curZ: "+curPosZ+", FBLR: "+canForward + canBackward+canMoveLeft+canMoveRight);
+>>>>>>> origin/master
 
 //		//constant moving
 //		if (continueForward) {
@@ -92,6 +147,12 @@ public class characterController : MonoBehaviour {
 //			character.animation.CrossFade("run");
 			switch (swipeDirection) {
 			case Swipe.Up:
+<<<<<<< HEAD
+=======
+					forceJump();
+//					StartCoroutine(jump());
+					/*
+>>>>>>> origin/master
 				//moving forward
 				character.transform.localEulerAngles = new Vector3 (0, 0, 0);
 				//reach the edge of the grid
@@ -110,6 +171,7 @@ public class characterController : MonoBehaviour {
 				}
 				//other conditions
 				if (canForward) {
+<<<<<<< HEAD
 					moveForward ();
 					curPosZ++;
 					break;
@@ -138,6 +200,41 @@ public class characterController : MonoBehaviour {
 					moveRight ();
 					curPosX++;
 				}
+=======
+					//moveForward ();
+					curPosZ++;
+					break;
+				}*/
+				break;
+			case Swipe.Down:
+//					character.rigidbody.AddForce(Vector3.down*500);
+					//StartCoroutine(dodge());
+					/*
+				//moving backward
+				character.transform.localEulerAngles = new Vector3 (0, 180, 0);
+				if (canBackward && curPosZ != 3) {
+					//moveBack ();
+					curPosZ--;
+				}*/
+				break;
+			case Swipe.Left:
+				//moving left
+				//character.transform.localEulerAngles = new Vector3 (0, -90, 0);
+				//if (canMoveLeft) {
+					//moveLeft ();
+					curPosX--;
+					move();
+				//}
+				break;
+			case Swipe.Right:
+				//moving right
+				//character.transform.localEulerAngles = new Vector3 (0, 90, 0);
+				//if (canMoveRight) {
+					//moveRight ();
+					curPosX++;
+					move ();
+				//}
+>>>>>>> origin/master
 				break;
 			default:
 				break;
@@ -152,7 +249,11 @@ public class characterController : MonoBehaviour {
 //			Debug.Log(state.name);
 //		}
 
+<<<<<<< HEAD
 		if (curPosX == gameMain.segmentLength / 2) {
+=======
+		if (curPosX == 0 || curPosX == 3) {
+>>>>>>> origin/master
 			onSidewalk = true;
 		}
 
@@ -166,9 +267,17 @@ public class characterController : MonoBehaviour {
 		
 		if(Input.touches.Length > 0){
 			Touch t = Input.GetTouch(0);
+<<<<<<< HEAD
 			
 			if (t.phase == TouchPhase.Began){
 				firstPressPos = new Vector2(t.position.x, t.position.y);
+=======
+			touching = true;
+			
+			if (t.phase == TouchPhase.Began){
+				firstPressPos = new Vector2(t.position.x, t.position.y);
+
+>>>>>>> origin/master
 			}
 			
 			if(t.phase == TouchPhase.Ended){
@@ -176,7 +285,11 @@ public class characterController : MonoBehaviour {
 				currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
 				
 				//make sure it was a legit swipe not a tap
+<<<<<<< HEAD
 				if(currentSwipe.magnitude < minSwipeLength){
+=======
+				if(currentSwipe.magnitude < minSwipeLength || !touching){
+>>>>>>> origin/master
 					swipeDirection = Swipe.None;
 					return;
 				}
@@ -186,24 +299,40 @@ public class characterController : MonoBehaviour {
 				if(currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f){
 					Debug.Log("Up Swipe");
 					swipeDirection = Swipe.Up;
+<<<<<<< HEAD
+=======
+					touching = false;
+>>>>>>> origin/master
 				}
 				
 				//swipe down
 				if(currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f){
 					Debug.Log ("Down Swipe");
 					swipeDirection = Swipe.Down;
+<<<<<<< HEAD
+=======
+					touching = false;
+>>>>>>> origin/master
 				}
 				
 				//swipe left
 				if(currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f){
 					Debug.Log ("Left Swipe");
 					swipeDirection = Swipe.Left;
+<<<<<<< HEAD
+=======
+					touching = false;
+>>>>>>> origin/master
 				}
 				
 				//swipe right
 				if(currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f){
 					Debug.Log ("Right Swipe");
 					swipeDirection = Swipe.Right;
+<<<<<<< HEAD
+=======
+					touching = false;
+>>>>>>> origin/master
 				}
 			}
 		} else{
@@ -229,11 +358,19 @@ public class characterController : MonoBehaviour {
 			//touch upwards
 			if(currentTouch.y > 0 && currentTouch.x > -0.5f && currentTouch.x < 0.5f){
 				Debug.Log("Up Touch");
+<<<<<<< HEAD
 				continueForward = true;
 			}
 		}
 		if(Input.GetMouseButtonUp(0)){
 			continueForward = false;
+=======
+//				continueForward = true;
+			}
+		//}
+		//if(Input.GetMouseButtonUp(0)){
+//			continueForward = false;
+>>>>>>> origin/master
 
 			//save ended touch 2d point
 			secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -270,6 +407,7 @@ public class characterController : MonoBehaviour {
 		}
 	}
 
+<<<<<<< HEAD
 	void moveForward(){
 		iTween.MoveTo(character, iTween.Hash("z", character.transform.position.z + moveOffset, "easeType", "easeInOutExpo", "loopType", "none", "time", .3));
 	}
@@ -302,4 +440,66 @@ public class characterController : MonoBehaviour {
 	//		yield return new WaitForSeconds (.4f);
 	//		iTween.MoveTo(character, iTween.Hash("y", characterPos.y, "easeType", "easeInOutExpo", "loopType", "none", "time", .3));
 	//	}
+=======
+	void move(){
+				if(curPosX == 0){
+					iTween.MoveTo(character, iTween.Hash("x", movePos0.x, "easeType", "easeInOutExpo", "time", .3));
+				}
+				if(curPosX == 1){
+					iTween.MoveTo(character, iTween.Hash("x", movePos1.x, "easeType", "easeInOutExpo", "time", .3));
+				}
+				if(curPosX == 2){
+					iTween.MoveTo(character, iTween.Hash("x", movePos2.x, "easeType", "easeInOutExpo", "time", .3));
+				}
+				if(curPosX == 3){
+					iTween.MoveTo(character, iTween.Hash("x", movePos3.x, "easeType", "easeInOutExpo", "time", .3));
+				}
+	}
+
+//	void moveForward(){
+//		iTween.MoveTo(character, iTween.Hash("z", character.transform.position.z + moveOffset, "easeType", "easeInOutExpo", "loopType", "none", "time", .3));
+//	}
+//	
+//	void moveBack(){
+//		iTween.MoveTo(character, iTween.Hash("z", character.transform.position.z - moveOffset, "easeType", "easeInOutExpo", "loopType", "none", "time", .3));
+//	}
+//
+//	void moveLeft(){
+//		iTween.MoveTo(character, iTween.Hash("x", character.transform.position.x - moveOffset, "easeType", "easeInOutExpo", "loopType", "none", "time", .3));
+//	}
+//
+//	void moveRight(){
+//		iTween.MoveTo(character, iTween.Hash("x", character.transform.position.x + moveOffset, "easeType", "easeInOutExpo", "loopType", "none", "time", .3));
+//	}
+
+	void forceJump(){
+//		rigidbody.velocity = new Vector3(0, 10, 0);
+		rigidbody.AddForce(Vector3.up * jumpForce);
+	}
+	
+//		IEnumerator jump(){
+//			iTween.MoveBy(character, iTween.Hash("y", -.01f, "easeType", "easeInOutExpo", "loopType", "none", "time", .05f));
+//			yield return new WaitForSeconds (.05f);
+//			iTween.MoveBy(character, iTween.Hash("y", jumpOffset, "easeType", "easeInOutExpo", "loopType", "none", "time", .2f));
+//			yield return new WaitForSeconds (.4f);
+//			iTween.MoveBy(character, iTween.Hash("y", 0-jumpOffset, "easeType", "easeInOutExpo", "loopType", "none", "time", .1f));
+//			yield return new WaitForSeconds (.1f);
+//			iTween.MoveTo(character, iTween.Hash("y", movePos3.y, "easeType", "easeInOutExpo","time", .2f));
+//		}
+	
+		IEnumerator dodge(){
+		character.transform.localScale -= new Vector3(0,.3f,0);
+//			iTween.MoveTo(character, iTween.Hash("y", characterPos.y - dodgeOffset, "easeType", "easeInOutExpo", "loopType", "none", "time", .3));
+			yield return new WaitForSeconds (.5f);
+//			iTween.MoveTo(character, iTween.Hash("y", characterPos.y, "easeType", "easeInOutExpo", "loopType", "none", "time", .3));
+		character.transform.localScale += new Vector3 (0, .3f, 0);
+		}
+
+	void OnTriggerEnter(Collider other){
+		if(other.tag == "SegmentKill"){
+			Destroy (gameObject);
+			gameMain.GameOver();
+		}
+	}
+>>>>>>> origin/master
 }

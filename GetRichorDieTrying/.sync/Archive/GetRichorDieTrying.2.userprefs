@@ -1,5 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\__Scripts\GameManager.cs">
     <Files>
       <File FileName="GetRichorDieTrying.sln" Line="1" Column="1" />
@@ -12,6 +13,17 @@
       <File FileName="Assets\__Scripts\Grid.cs" Line="129" Column="11" />
       <File FileName="Assets\__Scripts\characterController.cs" Line="1" Column="1" />
       <File FileName="Assets\__Scripts\Reset.cs" Line="1" Column="1" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\__Scripts\ObjectManager.cs">
+    <Files>
+      <File FileName="Assets\__Scripts\GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\HumanBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\Grid.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\ObjectManager.cs" Line="163" Column="86" />
+      <File FileName="Assets\__Scripts\CarBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\CheckPoint.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\TrafficController.cs" Line="1" Column="1" />
+>>>>>>> origin/master
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

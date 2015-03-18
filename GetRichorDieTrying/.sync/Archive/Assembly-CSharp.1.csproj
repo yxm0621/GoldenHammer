@@ -19,7 +19,11 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
+<<<<<<< HEAD
 	<DefineConstants>DEBUG;TRACE;UNITY_4_6_0;UNITY_4_6;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+=======
+	<DefineConstants>DEBUG;TRACE;UNITY_4_6_0;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+>>>>>>> origin/master
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -46,6 +50,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
      <Compile Include="Assets\Buildr\Scripts\BuildrBay.cs" />
      <Compile Include="Assets\Buildr\Scripts\BuildrBuilding.cs" />
      <Compile Include="Assets\Buildr\Scripts\BuildrBuildingBox.cs" />
@@ -92,12 +97,23 @@
      <Compile Include="Assets\__Scripts\GameManager.cs" />
      <Compile Include="Assets\__Scripts\Grid.cs" />
      <Compile Include="Assets\__Scripts\HammerController.cs" />
+=======
+     <Compile Include="Assets\Art\Skybox\Fantasy Skybox FREE\Scripts\FSPlayer.cs" />
+     <Compile Include="Assets\Models\PrimitivePlus\Scripts\PrimitivePlusEditor.cs" />
+     <Compile Include="Assets\__Scripts\CarBehavior.cs" />
+     <Compile Include="Assets\__Scripts\CheckPoint.cs" />
+     <Compile Include="Assets\__Scripts\Coins.cs" />
+     <Compile Include="Assets\__Scripts\CoinsGroup.cs" />
+     <Compile Include="Assets\__Scripts\GameManager.cs" />
+     <Compile Include="Assets\__Scripts\Grid.cs" />
+>>>>>>> origin/master
      <Compile Include="Assets\__Scripts\HumanBehavior.cs" />
      <Compile Include="Assets\__Scripts\LevelSegments.cs" />
      <Compile Include="Assets\__Scripts\ObjectManager.cs" />
      <Compile Include="Assets\__Scripts\Reset.cs" />
      <Compile Include="Assets\__Scripts\SceneManager.cs" />
      <Compile Include="Assets\__Scripts\TrafficController.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\__Scripts\catsBehavior.cs" />
      <Compile Include="Assets\__Scripts\characterController.cs" />
      <Compile Include="Assets\__Scripts\globalObjects.cs" />
@@ -122,10 +138,43 @@
      <None Include="Assets\Buildr\Textures\license.txt" />
      <None Include="Assets\Buildr\XML\paristextures.xml" />
      <None Include="Assets\Buildr\Textures\textures.xml" />
+=======
+     <Compile Include="Assets\__Scripts\birdBehavior.cs" />
+     <Compile Include="Assets\__Scripts\catsBehavior.cs" />
+     <Compile Include="Assets\__Scripts\characterController.cs" />
+     <Compile Include="Assets\__Scripts\dogBehavior.cs" />
+     <Compile Include="Assets\__Scripts\globalObjects.cs" />
+     <Compile Include="Assets\__Scripts\planetManager.cs" />
+     <Compile Include="Assets\iTweenEditor\Examples\StartAndStopTween.cs" />
+     <Compile Include="Assets\iTweenEditor\Helper Classes\EventParamMappings.cs" />
+     <Compile Include="Assets\iTweenEditor\Helper Classes\Vector3OrTransform.cs" />
+     <Compile Include="Assets\iTweenEditor\Helper Classes\Vector3OrTransformArray.cs" />
+     <Compile Include="Assets\iTweenEditor\iTween.cs" />
+     <Compile Include="Assets\iTweenEditor\iTweenEvent.cs" />
+     <Compile Include="Assets\iTweenEditor\iTweenPath.cs" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
+     <None Include="Assets\Art\KY_effects\FX_free_pack\ReadMe.txt" />
+     <None Include="Assets\iTweenEditor\README.txt" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
+     <None Include="Assets\Models\PrimitivePlus\Documentation\ReadMe.txt" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
+     <None Include="Assets\Art\Skybox\Fantasy Skybox FREE\Readme\Readme.txt" />
+     <None Include="Assets\__Scripts\data\sceneObjData.txt" />
+>>>>>>> origin/master
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{AD6A2E00-3047-3B61-7497-46AD18319C9B}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
+      <Project>{A35C407F-8542-CC5E-39AF-91865115F1C6}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+  </ItemGroup>
+>>>>>>> origin/master
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 	   Other similar extension points exist, see Microsoft.Common.targets.

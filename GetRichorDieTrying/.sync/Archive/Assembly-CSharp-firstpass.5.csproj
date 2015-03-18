@@ -54,6 +54,10 @@
      <None Include="Assets\Models\PrimitivePlus\Documentation\ReadMe.txt" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
+<<<<<<< HEAD
+=======
+     <None Include="Assets\Art\Fonts\Silkscreen\Kottke Silkscreen License.txt" />
+>>>>>>> origin/master
      <None Include="Assets\Art\Skybox\Fantasy Skybox FREE\Readme\Readme.txt" />
      <None Include="Assets\__Scripts\data\sceneObjData.txt" />
  <Reference Include="UnityEngine.UI">

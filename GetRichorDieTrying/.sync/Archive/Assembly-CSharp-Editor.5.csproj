@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
      <Compile Include="Assets\Buildr\Editor\BuildrBuiltInTextureEditor.cs" />
      <Compile Include="Assets\Buildr\Editor\BuildrEditModeBuilding.cs" />
      <Compile Include="Assets\Buildr\Editor\BuildrEditModeDetails.cs" />
@@ -85,6 +86,21 @@
      <None Include="Assets\Models\Mushroom_Collection\Readme.txt" />
      <None Include="Assets\Buildr\Textures\textures.xml" />
      <None Include="Assets\Models\Ornamental Flower Set\Shaders\Transparent-BumpSpecNoCull.shader" />
+=======
+     <Compile Include="Assets\Editor\SetPivot.cs" />
+     <Compile Include="Assets\iTweenEditor\Editor\iTweenEventDataEditor.cs" />
+     <Compile Include="Assets\iTweenEditor\Editor\iTweenPathEditor.cs" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
+     <None Include="Assets\Art\KY_effects\FX_free_pack\ReadMe.txt" />
+     <None Include="Assets\iTweenEditor\README.txt" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
+     <None Include="Assets\Models\PrimitivePlus\Documentation\ReadMe.txt" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
+     <None Include="Assets\Art\Fonts\Silkscreen\Kottke Silkscreen License.txt" />
+     <None Include="Assets\Art\Skybox\Fantasy Skybox FREE\Readme\Readme.txt" />
+     <None Include="Assets\__Scripts\data\sceneObjData.txt" />
+>>>>>>> origin/master
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -96,6 +112,13 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{AD6A2E00-3047-3B61-7497-46AD18319C9B}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
+      <Project>{A35C407F-8542-CC5E-39AF-91865115F1C6}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+>>>>>>> origin/master
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{7B77C310-A7A3-7D09-29C4-9D7E4AF2DED3}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript.unityproj">

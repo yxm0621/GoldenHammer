@@ -16,7 +16,18 @@ public class CheckPoint : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 		if (goal > 0) {
+<<<<<<< HEAD
 			gameObject.transform.FindChild("check").GetComponent<TextMesh>().text = goal.ToString("$0");
+=======
+
+			//Checks if goal has been met. If not Display Goal message
+			if(gameMain.score > gameMain.levelGoal){
+				gameObject.transform.FindChild("check").GetComponent<TextMesh>().text = "Good Job!";
+				gameObject.transform.FindChild ("CheckPointLine").GetComponent<Renderer>().material.color.g;
+			}else{
+				gameObject.transform.FindChild("check").GetComponent<TextMesh>().text = goal.ToString("Goal $ " + "0");
+			}
+>>>>>>> origin/master
 		}
 	}
 
@@ -37,6 +48,7 @@ public class CheckPoint : MonoBehaviour {
 
 				if(gameMain.levelCount == 1){
 					gameMain.levelTimer = 30;
+<<<<<<< HEAD
 					gameMain.levelGoal = 2500;
 				}
 				if(gameMain.levelCount == 2){
@@ -50,6 +62,21 @@ public class CheckPoint : MonoBehaviour {
 				if(gameMain.levelCount == 4){
 					gameMain.levelTimer = 30;
 					gameMain.levelGoal = 15000;
+=======
+					gameMain.levelGoal = 1000;
+				}
+				if(gameMain.levelCount == 2){
+					gameMain.levelTimer = 30;
+					gameMain.levelGoal = 2000;
+				}
+				if(gameMain.levelCount == 3){
+					gameMain.levelTimer = 30;
+					gameMain.levelGoal = 3500;
+				}
+				if(gameMain.levelCount == 4){
+					gameMain.levelTimer = 30;
+					gameMain.levelGoal = 5000;
+>>>>>>> origin/master
 				}
 			}
 		}
