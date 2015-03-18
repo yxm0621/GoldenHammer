@@ -4,10 +4,17 @@ using System.Collections;
 public class CheckPoint : MonoBehaviour {
 	public int goal;
 	public GameManager gameMain;
+	
+	public GameObject 			barColor;		
+
 
 	// Use this for initialization
 	void Start () {
 		gameMain = GameManager.manager;
+
+		barColor = GameObject.Find("CheckPointLine");
+		Debug.Log ("Found CheckPointLine");
+
 	}
 	
 	// Update is called once per frame
@@ -16,7 +23,17 @@ public class CheckPoint : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 		if (goal > 0) {
-			gameObject.transform.FindChild("check").GetComponent<TextMesh>().text = goal.ToString("$0");
+
+			//Checks if goal has been met. If not Display Goal message
+			if(gameMain.score > gameMain.levelGoal){
+				gameObject.transform.FindChild("check").GetComponent<TextMesh>().text = "Good Job!";
+				//.GetComponent<Renderer>();
+
+				barColor.renderer.material.color = new Color(0,1,0);
+
+			}else{
+				gameObject.transform.FindChild("check").GetComponent<TextMesh>().text = goal.ToString("Goal $ " + "0");
+			}
 		}
 	}
 

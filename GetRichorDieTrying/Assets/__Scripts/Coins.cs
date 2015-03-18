@@ -14,7 +14,7 @@ public class Coins : MonoBehaviour {
 		iTween.Init (coin);
 
 
-		timer = 3;
+		timer = 1.5f;
 	}
 	
 	// Update is called once per frame

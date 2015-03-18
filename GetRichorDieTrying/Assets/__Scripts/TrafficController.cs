@@ -182,9 +182,9 @@ public class TrafficController : MonoBehaviour {
 			}
 			if(gameMain.levelCount == 4){
 				humanSpawnTimer = humanSpawnTimer * 0.3f;
-				carSpawnTimer = carSpawnTimer * 0.3f;
-				animalSpawnTimer = animalSpawnTimer * 0.3f;
-				flySpawnTimer = flySpawnTimer * 0.3f;
+				carSpawnTimer = carSpawnTimer * 0.25f;
+				animalSpawnTimer = animalSpawnTimer * 0.25f;
+				flySpawnTimer = flySpawnTimer * 0.25f;
 			}
 		}
 	}

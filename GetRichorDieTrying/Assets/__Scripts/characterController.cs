@@ -41,6 +41,8 @@ public class characterController : MonoBehaviour {
 
 	public int                    	curPosX;
 	public int                   	curPosZ;
+
+	public bool 					touching = true;
 	
 	// Use this for initialization
 	void Start () {
@@ -136,7 +138,7 @@ public class characterController : MonoBehaviour {
 				break;
 			case Swipe.Down:
 //					character.rigidbody.AddForce(Vector3.down*500);
-					StartCoroutine(dodge());
+					//StartCoroutine(dodge());
 					/*
 				//moving backward
 				character.transform.localEulerAngles = new Vector3 (0, 180, 0);
@@ -190,9 +192,11 @@ public class characterController : MonoBehaviour {
 		
 		if(Input.touches.Length > 0){
 			Touch t = Input.GetTouch(0);
+			touching = true;
 			
 			if (t.phase == TouchPhase.Began){
 				firstPressPos = new Vector2(t.position.x, t.position.y);
+
 			}
 			
 			if(t.phase == TouchPhase.Ended){
@@ -200,7 +204,7 @@ public class characterController : MonoBehaviour {
 				currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
 				
 				//make sure it was a legit swipe not a tap
-				if(currentSwipe.magnitude < minSwipeLength){
+				if(currentSwipe.magnitude < minSwipeLength || !touching){
 					swipeDirection = Swipe.None;
 					return;
 				}
@@ -210,24 +214,28 @@ public class characterController : MonoBehaviour {
 				if(currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f){
 					Debug.Log("Up Swipe");
 					swipeDirection = Swipe.Up;
+					touching = false;
 				}
 				
 				//swipe down
 				if(currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f){
 					Debug.Log ("Down Swipe");
 					swipeDirection = Swipe.Down;
+					touching = false;
 				}
 				
 				//swipe left
 				if(currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f){
 					Debug.Log ("Left Swipe");
 					swipeDirection = Swipe.Left;
+					touching = false;
 				}
 				
 				//swipe right
 				if(currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f){
 					Debug.Log ("Right Swipe");
 					swipeDirection = Swipe.Right;
+					touching = false;
 				}
 			}
 		} else{
@@ -238,9 +246,10 @@ public class characterController : MonoBehaviour {
 		if(Input.GetMouseButtonDown(0)){
 			//save began touch 2d point
 			firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            //touching = true;
 		}
 
-		if(Input.GetMouseButton(0)){
+		if(Input.GetMouseButton(0) && touching){
 			//save ended touch 2d point
 			continuePressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 			
@@ -255,8 +264,8 @@ public class characterController : MonoBehaviour {
 				Debug.Log("Up Touch");
 //				continueForward = true;
 			}
-		}
-		if(Input.GetMouseButtonUp(0)){
+		//}
+		//if(Input.GetMouseButtonUp(0)){
 //			continueForward = false;
 
 			//save ended touch 2d point
@@ -269,29 +278,40 @@ public class characterController : MonoBehaviour {
 			currentSwipe.Normalize ();
 			
 			//swipe upwards
-			if(currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f){
+			if((currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+			&&touching){
 				Debug.Log("Up Swipe");
 				swipeDirection = Swipe.Up;
+				touching  = false;
 			}
 			
 			//swipe down
-			if(currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f){
+			if((currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+			   &&touching){
 				Debug.Log ("Down Swipe");
 				swipeDirection = Swipe.Down;
+				touching = false;
 			}
 			
 			//swipe left
-			if(currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f){
+			if((currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+			   &&touching){
 				Debug.Log ("Left Swipe");
 				swipeDirection = Swipe.Left;
+				touching = false;
 			}
 			
 			//swipe right
-			if(currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f){
+			if((currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+			   &&touching){
 				Debug.Log ("Right Swipe");
 				swipeDirection = Swipe.Right;
+				touching = false;
 			}
 		}
+        if (Input.GetMouseButtonUp(0)) {
+            touching = true;
+        }
 	}
 
 	void move(){
