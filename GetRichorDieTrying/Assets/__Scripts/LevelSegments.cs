@@ -11,7 +11,7 @@ public class LevelSegments : MonoBehaviour {
 
 	public Vector3					currentPos;
 
-	private float					moveToPos = -10.0f;
+//	private float					moveToPos = -10.0f;
 	public float					timeToPos = .2f;
 
 	public bool[,]					segEmpty;

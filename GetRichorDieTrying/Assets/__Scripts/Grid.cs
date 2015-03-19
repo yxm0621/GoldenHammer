@@ -50,9 +50,9 @@ public class Grid : MonoBehaviour {
 	}
 
 	//instanciate the new grid
-	public void generateGrid(GameObject spawnPoint, Vector3 pos, int length, int width){
-		this.length = length;
-		this.width = width;
+	public void generateGrid(GameObject spawnPoint, Vector3 pos, int gridLength, int gridWidth){
+		this.length = gridLength;
+		this.width = gridWidth;
 		GameObject newSeg = (GameObject) Instantiate (spawnPoint, pos, Quaternion.identity);
 		newSeg.AddComponent<LevelSegments>();
 		newSeg.tag = "Segment";

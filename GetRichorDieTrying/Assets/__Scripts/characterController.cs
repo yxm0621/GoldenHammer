@@ -192,11 +192,10 @@ public class characterController : MonoBehaviour {
 		
 		if(Input.touches.Length > 0){
 			Touch t = Input.GetTouch(0);
-			touching = true;
 			
 			if (t.phase == TouchPhase.Began){
 				firstPressPos = new Vector2(t.position.x, t.position.y);
-
+				touching = true;
 			}
 			
 			if(t.phase == TouchPhase.Ended){
@@ -246,24 +245,28 @@ public class characterController : MonoBehaviour {
 		if(Input.GetMouseButtonDown(0)){
 			//save began touch 2d point
 			firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            //touching = true;
+//            touching = true;
 		}
 
-		if(Input.GetMouseButton(0) && touching){
+		if(Input.GetMouseButton(0)){
+			if(!touching) {
+				swipeDirection = Swipe.None;
+				return;
+			}
 			//save ended touch 2d point
-			continuePressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+//			continuePressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 			
 			//creat vector from the two points
-			currentTouch = new Vector2(continuePressPos.x - firstPressPos.x, continuePressPos.y - firstPressPos.y);
+//			currentTouch = new Vector2(continuePressPos.x - firstPressPos.x, continuePressPos.y - firstPressPos.y);
 			
 			//normalize the 2d vector
-			currentTouch.Normalize ();
+//			currentTouch.Normalize ();
 			
 			//touch upwards
-			if(currentTouch.y > 0 && currentTouch.x > -0.5f && currentTouch.x < 0.5f){
-				Debug.Log("Up Touch");
+//			if(currentTouch.y > 0 && currentTouch.x > -0.5f && currentTouch.x < 0.5f){
+//				Debug.Log("Up Touch");
 //				continueForward = true;
-			}
+//			}
 		//}
 		//if(Input.GetMouseButtonUp(0)){
 //			continueForward = false;
@@ -316,16 +319,16 @@ public class characterController : MonoBehaviour {
 
 	void move(){
 				if(curPosX == 0){
-					iTween.MoveTo(character, iTween.Hash("x", movePos0.x, "easeType", "easeInOutExpo", "time", .3));
+					iTween.MoveTo(character, iTween.Hash("x", movePos0.x, "easeType", "easeInOutExpo", "time", .2f));
 				}
 				if(curPosX == 1){
-					iTween.MoveTo(character, iTween.Hash("x", movePos1.x, "easeType", "easeInOutExpo", "time", .3));
+					iTween.MoveTo(character, iTween.Hash("x", movePos1.x, "easeType", "easeInOutExpo", "time", .2f));
 				}
 				if(curPosX == 2){
-					iTween.MoveTo(character, iTween.Hash("x", movePos2.x, "easeType", "easeInOutExpo", "time", .3));
+					iTween.MoveTo(character, iTween.Hash("x", movePos2.x, "easeType", "easeInOutExpo", "time", .2f));
 				}
 				if(curPosX == 3){
-					iTween.MoveTo(character, iTween.Hash("x", movePos3.x, "easeType", "easeInOutExpo", "time", .3));
+					iTween.MoveTo(character, iTween.Hash("x", movePos3.x, "easeType", "easeInOutExpo", "time", .2f));
 				}
 	}
 

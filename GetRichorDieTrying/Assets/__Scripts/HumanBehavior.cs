@@ -158,7 +158,7 @@ public class HumanBehavior : MonoBehaviour {
 	
 	void OnMouseDown(){
 		
-		GameObject cam = Camera.main.gameObject;
+//		GameObject cam = Camera.main.gameObject;
 		GameObject hammer = GameObject.Find ("Hammer");
 		hammer.transform.position = human.transform.position + new Vector3 (.5f,1,0);
 		//		hammer.transform.localRotation = Quaternion.Euler(0,0,90);

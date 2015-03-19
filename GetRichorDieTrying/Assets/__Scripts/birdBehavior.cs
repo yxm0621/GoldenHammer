@@ -36,7 +36,7 @@ public class birdBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float dist = Vector3.Distance(character.transform.position, bird.transform.position);
+//		float dist = Vector3.Distance(character.transform.position, bird.transform.position);
 //				Debug.Log("Distance to other: " + dist);
 //		if (dist <= startDis && !startFly) {
 		if (!startFly) {
