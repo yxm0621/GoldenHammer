@@ -1,4 +1,18 @@
 ﻿<Properties>
+<<<<<<< HEAD
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\__Scripts\GameManager.cs">
+    <Files>
+      <File FileName="Assets\__Scripts\TrafficController.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\LevelSegments.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\GameManager.cs" Line="402" Column="8" />
+      <File FileName="Assets\__Scripts\catsBehavior.cs" Line="39" Column="18" />
+      <File FileName="Assets\__Scripts\ScoreSystem.cs" Line="16" Column="2" />
+      <File FileName="Assets\__Scripts\ObjectManager.cs" Line="70" Column="9" />
+      <File FileName="Assets\__Scripts\Grid.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\characterController.cs" Line="19" Column="31" />
+      <File FileName="Assets\__Scripts\Reset.cs" Line="26" Column="2" />
+=======
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\__Scripts\HumanBehavior.cs">
     <Files>
@@ -9,6 +23,7 @@
       <File FileName="Assets\__Scripts\CheckPoint.cs" Line="1" Column="1" />
       <File FileName="Assets\__Scripts\TrafficController.cs" Line="1" Column="1" />
       <File FileName="Assets\__Scripts\GameManager.cs" Line="1" Column="1" />
+>>>>>>> origin/master
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

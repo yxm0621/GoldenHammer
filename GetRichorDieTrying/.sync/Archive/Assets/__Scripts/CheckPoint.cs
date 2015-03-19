@@ -31,6 +31,11 @@ public class CheckPoint : MonoBehaviour {
 			//Goal for the level has been met
 			if (gameMain.score >= goal){
 				Debug.Log ("Goals Met. Adding time. Raise goal.");
+<<<<<<< HEAD
+				gameMain.levelTimer = 30; //Adds 30 seconds to the level timer
+				gameMain.levelCount ++;
+				gameMain.levelGoal *= 3; //Increase goal x3
+=======
 				//gameMain.levelTimer = 30; //Adds 30 seconds to the level timer
 				gameMain.levelCount ++;
 				//gameMain.levelGoal *= 3; //Increase goal x3
@@ -51,6 +56,7 @@ public class CheckPoint : MonoBehaviour {
 					gameMain.levelTimer = 30;
 					gameMain.levelGoal = 5000;
 				}
+>>>>>>> origin/master
 			}
 		}
 	}

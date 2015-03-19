@@ -1,0 +1,23 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\__Scripts\birdBehavior.cs">
+    <Files>
+      <File FileName="Assets\__Scripts\characterController.cs" Line="58" Column="45" />
+      <File FileName="Assets\iTween\Plugins\iTween.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\CheckPoint.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\TrafficController.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\CarBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\GameManager.cs" Line="478" Column="1" />
+      <File FileName="Assets\__Scripts\LevelSegments.cs" Line="98" Column="5" />
+      <File FileName="Assets\__Scripts\birdBehavior.cs" Line="38" Column="33" />
+      <File FileName="Assets\__Scripts\Grid.cs" Line="1" Column="1" />
+      <File FileName="Assets\__Scripts\catsBehavior.cs" Line="33" Column="21" />
+      <File FileName="Assets\__Scripts\dogBehavior.cs" Line="15" Column="33" />
+      <File FileName="Assets\__Scripts\ObjectManager.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -46,6 +46,28 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+     <Compile Include="Assets\Pause Menu\PauseMenu.js" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
+     <None Include="Assets\Buildr\XML\none.xml" />
+     <None Include="Assets\Buildr\XML\georgianTextures.xml" />
+     <None Include="Assets\Buildr\XML\hongKongTextures.xml" />
+     <None Include="Assets\Buildr\XML\hongKongStyle.xml" />
+     <None Include="Assets\Buildr\XML\alltextures.xml" />
+     <None Include="Assets\Buildr\versionlog.txt" />
+     <None Include="Assets\Buildr\XML\georgianStyle.xml" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
+     <None Include="Assets\Buildr\readme.txt" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
+     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
+     <None Include="Assets\Buildr\XML\parisstyle.xml" />
+     <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
+     <None Include="Assets\Buildr\Textures\license.txt" />
+     <None Include="Assets\Buildr\XML\paristextures.xml" />
+     <None Include="Assets\Models\Mushroom_Collection\Readme.txt" />
+     <None Include="Assets\Buildr\Textures\textures.xml" />
+     <None Include="Assets\Models\Ornamental Flower Set\Shaders\Transparent-BumpSpecNoCull.shader" />
+=======
      <Compile Include="Assets\Art\KY_effects\Script\ConGUI.js" />
      <Compile Include="Assets\Art\KY_effects\Script\Lighting.js" />
      <Compile Include="Assets\Art\KY_effects\Script\ParticleAction.js" />
@@ -62,16 +84,20 @@
      <None Include="Assets\Art\Fonts\Silkscreen\Kottke Silkscreen License.txt" />
      <None Include="Assets\Art\Skybox\Fantasy Skybox FREE\Readme\Readme.txt" />
      <None Include="Assets\__Scripts\data\sceneObjData.txt" />
+>>>>>>> origin/master
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
+<<<<<<< HEAD
+=======
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{AD6A2E00-3047-3B61-7497-46AD18319C9B}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
       <Project>{A35C407F-8542-CC5E-39AF-91865115F1C6}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
   </ItemGroup>
+>>>>>>> origin/master
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 	   Other similar extension points exist, see Microsoft.Common.targets.

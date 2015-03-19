@@ -4,7 +4,10 @@ using System.Collections;
 public class CheckPoint : MonoBehaviour {
 	public int goal;
 	public GameManager gameMain;
+<<<<<<< HEAD
+=======
 	
+>>>>>>> origin/master
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +20,9 @@ public class CheckPoint : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 		if (goal > 0) {
+<<<<<<< HEAD
+			gameObject.transform.FindChild("check").GetComponent<TextMesh>().text = goal.ToString("Goal $ " + "0");
+=======
 
 			//Checks if goal has been met. If not Display Goal message
 			if(gameMain.score > gameMain.levelGoal){
@@ -25,6 +31,7 @@ public class CheckPoint : MonoBehaviour {
 			}else{
 				gameObject.transform.FindChild("check").GetComponent<TextMesh>().text = goal.ToString("Goal $ " + "0");
 			}
+>>>>>>> origin/master
 		}
 	}
 

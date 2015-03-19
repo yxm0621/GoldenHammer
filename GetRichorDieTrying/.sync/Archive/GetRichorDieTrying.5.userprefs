@@ -1,5 +1,19 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+<<<<<<< HEAD
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/Grid.cs">
+    <Files>
+      <File FileName="Assets/__Scripts/CarBehavior.cs" Line="77" Column="27" />
+      <File FileName="Assets/__Scripts/characterController.cs" Line="19" Column="39" />
+      <File FileName="Assets/__Scripts/ObjectManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/__Scripts/GameManager.cs" Line="259" Column="1" />
+      <File FileName="Assets/__Scripts/catsBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets/__Scripts/HumanBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets/__Scripts/Reset.cs" Line="24" Column="49" />
+      <File FileName="Assets/__Scripts/Grid.cs" Line="54" Column="1" />
+      <File FileName="Assets/__Scripts/SceneManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/__Scripts/LevelSegments.cs" Line="1" Column="1" />
+=======
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/CheckPoint.cs">
     <Files>
       <File FileName="Assets/__Scripts/HumanBehavior.cs" Line="118" Column="68" />
@@ -11,6 +25,7 @@
       <File FileName="Assets/__Scripts/Grid.cs" Line="1" Column="1" />
       <File FileName="Assets/__Scripts/Coins.cs" Line="17" Column="15" />
       <File FileName="Assets/__Scripts/CoinsGroup.cs" Line="1" Column="1" />
+>>>>>>> origin/master
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
