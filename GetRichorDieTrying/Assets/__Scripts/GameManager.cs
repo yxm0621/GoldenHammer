@@ -196,8 +196,8 @@ public class GameManager : MonoBehaviour {
 			traffic = GameObject.Find("Traffic").GetComponent<TrafficController>();
 		}
 		//try space scene
-//		GameObject.Find("GlobalObjects").GetComponent<globalObjects>().sunDown();
-//		GameObject.Find("GlobalObjects").GetComponent<globalObjects>().moonDown();
+        //		GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunDown();
+        //		GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().moonDown();
 		
 		segmentsInitialize ();
 	}
@@ -230,19 +230,22 @@ public class GameManager : MonoBehaviour {
 				sceneManager.reloadScene = false;
 			}
 			if (bgmBeat != null && !bgmBeat.isPlaying && Application.loadedLevelName != "GameOver"
-			    && sceneManager.currentScene == SceneManager.scene.city) {
+                && SceneManager.currentScene == SceneManager.scene.city)
+            {
 //				Debug.Log("cityBGM");
 				bgmBeat.Play();
 				bgmBeat.loop = true;
 			}
-			if (sceneManager.currentScene == SceneManager.scene.city && bgmBeat.clip != cityBGM) {
+            if (SceneManager.currentScene == SceneManager.scene.city && bgmBeat.clip != cityBGM)
+            {
 				bgmBeat.Stop();
 				bgmBeat.clip = cityBGM;
 				bgmBeat.Play();
 				bgmBeat.loop = true;
 				//bgmSmash.clip = citySmashBGM;
 			}
-			if (sceneManager.currentScene == SceneManager.scene.space && bgmBeat.clip != spaceBGM) {
+            if (SceneManager.currentScene == SceneManager.scene.space && bgmBeat.clip != spaceBGM)
+            {
 //				Debug.Log("spaceBGM");
 				bgmBeat.Stop();
 				bgmBeat.clip = spaceBGM;
@@ -251,8 +254,9 @@ public class GameManager : MonoBehaviour {
 				//bgmSmash.Stop();
 				//bgmSmash.clip = null;
 			}
-			if ((score > 1) && (bgmSmash!=null) && (!bgmSmash.isPlaying) 
-			    && (sceneManager.currentScene == SceneManager.scene.city)) {
+			if ((score > 1) && (bgmSmash!=null) && (!bgmSmash.isPlaying)
+                && (SceneManager.currentScene == SceneManager.scene.city))
+            {
 				//bgmSmash.Play();
 				//bgmSmash.loop = true;
 			}
@@ -421,18 +425,18 @@ public class GameManager : MonoBehaviour {
 		if(objectName == "BlackHole"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
-			GameObject.Find("GlobalObjects").GetComponent<globalObjects>().sunUp();
+			GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunUp();
 		}
 		if(objectName == "Sun"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
-			GameObject.Find("GlobalObjects").GetComponent<globalObjects>().sunDown();
+            GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunDown();
 		}
 		if(objectName == "Moon"){
 			//change scene to space
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
-			GameObject.Find("GlobalObjects").GetComponent<globalObjects>().moonDown();
+            GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().moonDown();
 		}
 		if(objectName.Contains("car") || objectName.Contains("Police") || objectName.Contains("Tank")){
 			audioSource.PlayOneShot (finalSmashAudio);

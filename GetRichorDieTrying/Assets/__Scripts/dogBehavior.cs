@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class dogBehavior : MonoBehaviour {
+public class DogBehavior : MonoBehaviour {
 	public GameManager			gameMain; //Singleton Ref to GameManager Script
 	
 	public GameObject character;

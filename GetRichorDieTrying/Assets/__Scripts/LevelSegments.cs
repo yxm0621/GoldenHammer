@@ -12,13 +12,13 @@ public class LevelSegments : MonoBehaviour {
 	public Vector3					currentPos;
 
 //	private float					moveToPos = -10.0f;
-	public float					timeToPos = .2f;
+	float					timeToPos;
 
 	public bool[,]					segEmpty;
 
-	public float					roadInitialSpeed = .2f;
-	public float					sidewalkInitialSpeed = .1f;
-	public float					ComboSpeedBonus = 1f;
+	float					roadInitialSpeed = 1f;
+	float					sidewalkInitialSpeed = .5f;
+	float					ComboSpeedBonus = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -70,43 +70,22 @@ public class LevelSegments : MonoBehaviour {
 			ComboSpeedBonus = (gameMain.bonus - 1)/8f;
 			currentPos = thisSegment.transform.position;
 
-			//		thisSegment.transform.Translate(new Vector3 (0,0, -1) * Time.deltaTime * timeToPos);
-
+            //delete segment and generate new segment
 			if(thisSegment.transform.position.z <= -6f){
 				//Debug.Log("Spawning new Segment & Deleting Old");
 				Destroy (thisSegment);
 				gameMain.NewSegment();
 			}
 
+            //change the moving speed. Slow down when walking on sidewalk
 			if (characterController.onSidewalk){
 				timeToPos = sidewalkInitialSpeed + ComboSpeedBonus;
 			} else {
 				timeToPos = roadInitialSpeed + ComboSpeedBonus;
 			}
 
-//		if (characterController.forward){
-			GameObject[] segs = GameObject.FindGameObjectsWithTag("Segment");
-			GameObject[] obss = GameObject.FindGameObjectsWithTag("Obstacle");
-			foreach (GameObject seg in segs) {
-//				seg.transform.position -= new Vector3(0,0,3f);
-				seg.transform.Translate(new Vector3 (0,0, -1) * Time.deltaTime * timeToPos);
-			}
-			foreach (GameObject obs in obss) {
-//				obs.transform.position -= new Vector3(0,0,3f);
-				if (obs.name.Contains("PoliceCarL") || obs.name.Contains("TankL") ||
-				    obs.name.Contains("Human_")) {
-					obs.transform.Translate(new Vector3 (0,0, 1) * Time.deltaTime * timeToPos);
-				} else if (obs.name.Contains("PoliceCarR") || obs.name.Contains("TankR")) {
-					obs.transform.Translate(new Vector3 (1,0,0) * Time.deltaTime * timeToPos);
-				} else {
-					obs.transform.Translate(new Vector3 (0,0, -1) * Time.deltaTime * timeToPos);
-				}
-				if(obs.transform.position.z <= -6f){
-					Destroy (obs);
-				}
-			}
-//				characterController.forward = false;
-//		}
+            //move segment
+            thisSegment.transform.Translate(new Vector3(0, 0, -1) * Time.deltaTime * timeToPos);
 		}
 		gameMain.moveSpeed = timeToPos;
 	}

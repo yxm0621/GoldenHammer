@@ -5,7 +5,7 @@ public class SceneManager : MonoBehaviour {
 	public enum scene{city, countryside, wilderness, space, ocean, battlefield};
 
 	public scene previousScene;
-	public scene currentScene;
+	public static scene currentScene;
 	public float timePassed;
 
 	//public GameObject	mainCamera; //This script is attached to the main camera
@@ -82,13 +82,19 @@ public class SceneManager : MonoBehaviour {
 			loadBattlefield();
 			break;
 		}
-		GameObject.Find("Grid").GetComponent<Grid> ().setGrid (building, sidewalk, road, buildingData, sidewalkData);
+        if (GameObject.Find("Grid") != null) {
+            GameObject.Find("Grid").GetComponent<Grid>().setGrid(building, sidewalk, road, buildingData, sidewalkData);
+        }
+        if (GameObject.Find("Traffic") != null) {
+            GameObject.Find("Traffic").GetComponent<TrafficObjects>().changeTraffic();
+        }
 
 		if (previousScene == scene.space) {
 			iTweenEvent.GetEvent(Camera.main.gameObject, "loadScene").Play();
 			iTweenEvent.GetEvent(Camera.main.gameObject, "loadScene1").Play();
 			iTweenEvent.GetEvent(Camera.main.gameObject, "loadScene2").Play();
 			reloadScene = true;
+            deleteObstacles();
 		}
 	}
 
@@ -129,17 +135,26 @@ public class SceneManager : MonoBehaviour {
 		sidewalkData = new int[6, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0}};
 		Camera.main.GetComponent<Skybox> ().material = spaceSky;
 		reloadScene = true;
+        deleteObstacles();
 	}
 	void loadOcean(){
 		building = oceanBuilding;
 		sidewalk = oceanSidewalk;
 		road = oceanRoad;
-		
+        deleteObstacles();
 	}
 	void loadBattlefield(){
 		building = battlefieldBuilding;
 		sidewalk = battlefieldSidewalk;
 		road = battlefieldRoad;
-		
+        deleteObstacles();
 	}
+
+    void deleteObstacles() {
+        GameObject[] obss = GameObject.FindGameObjectsWithTag("Obstacle");
+        foreach (GameObject obs in obss)
+        {
+            Destroy(obs);
+        }
+    }
 }

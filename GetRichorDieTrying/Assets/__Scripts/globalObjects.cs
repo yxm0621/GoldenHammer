@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class globalObjects : MonoBehaviour {
+public class GlobalObjects : MonoBehaviour {
 	//sky
 	public GameObject					lightController;
 	public Vector3                      sunPos;

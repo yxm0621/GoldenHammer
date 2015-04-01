@@ -136,13 +136,7 @@ public class CarBehavior : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		
-//		GameObject cam = Camera.main.gameObject;
-		GameObject hammer = GameObject.Find ("Hammer");
-		hammer.transform.position = car.transform.position + new Vector3 (.5f,1,0);
-		//		hammer.transform.localRotation = Quaternion.Euler(0,0,90);
-		hammer.transform.localEulerAngles = new Vector3 (0, 0, 90);
-		iTween.RotateTo(hammer, iTween.Hash ("z", 0, "time", 0.2f));
+		GameObject.Find("Hammer").GetComponent<HammerBehavior>().hammerSmash(car.transform.position);
 		//gameMain.CamKick ();
 		
 		Debug.Log(car + " hit!!");

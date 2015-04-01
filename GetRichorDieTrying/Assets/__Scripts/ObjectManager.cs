@@ -141,7 +141,7 @@ public class ObjectManager : MonoBehaviour {
 				//Destroy
 				Destroy(thisObject);
 			} else {
-				thisObject.GetComponent<catsBehavior>().catAction = catsBehavior.CatState.Smash;
+				thisObject.GetComponent<CatsBehavior>().catAction = CatsBehavior.CatState.Smash;
 				gameMain.killAnimal = true;
 				//tell gamemain pos to Spawn coins
 				gameMain.coinPos = thisObject.transform.position;
@@ -158,13 +158,8 @@ public class ObjectManager : MonoBehaviour {
 	void OnMouseDown(){
 		if (GameManager.gameState == GameManager.State.InGame || thisObject.name == "GameOverStart"
 		    || thisObject.name == "Start") {
-//			GameObject cam = Camera.main.gameObject;
-			GameObject hammer = GameObject.Find ("Hammer");
-			hammer.transform.position = thisObject.transform.position + new Vector3 (.5f,1,0);
-			//		hammer.transform.localRotation = Quaternion.Euler(0,0,90);
-			hammer.transform.localEulerAngles = new Vector3 (0, 0, 90);
-			iTween.RotateTo(hammer, iTween.Hash ("z", 0, "time", 0.2f));
 			//gameMain.CamKick ();
+                GameObject.Find("Hammer").GetComponent<HammerBehavior>().hammerSmash(thisObject.transform.position);
 
 			Debug.Log(thisObject + " hit!!");
 			gameMain.audioSource.PlayOneShot (hitAudio);

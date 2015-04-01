@@ -198,7 +198,8 @@ public class characterController : MonoBehaviour {
 				touching = true;
 			}
 			
-			if(t.phase == TouchPhase.Ended){
+//			if(t.phase == TouchPhase.Ended){
+			if(t.phase == TouchPhase.Moved){
 				secondPressPos = new Vector2(t.position.x, t.position.y);
 				currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
 				

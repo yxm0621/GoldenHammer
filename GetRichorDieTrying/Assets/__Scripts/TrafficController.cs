@@ -5,7 +5,7 @@ public class TrafficController : MonoBehaviour {
 
 	public GameManager					gameMain;
 
-	public GameObject					car;
+	public GameObject[]					car;
 
 	public GameObject					human;
 	public GameObject[]					people;
@@ -108,7 +108,7 @@ public class TrafficController : MonoBehaviour {
 				carSpawnTimer = Random.Range(carTimeLow, carTimeHigh);
 				//spawn normal cars
 				if(spawnCar && !spawnPolice && !spawnTank){
-					Car(car, "car");
+					Car(car[0], "car");
 					spawnCar = false;
 				}
 				//spawn police cars

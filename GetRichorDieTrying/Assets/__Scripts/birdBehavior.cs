@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class birdBehavior : MonoBehaviour {
+public class BirdBehavior : MonoBehaviour {
 	public GameManager			gameMain; //Singleton Ref to GameManager Script
 	
 	public GameObject character;
