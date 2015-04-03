@@ -8,7 +8,7 @@ public class characterController : MonoBehaviour {
 	public bool						canControl = false;
 	public static Swipe				swipeDirection;
 	
-	public float					minSwipeLength = 10f;
+	public float					minSwipeLength = 2f;
 	
 	public Vector2 					firstPressPos; //Position of 1st press
 	public Vector2					continuePressPos; //Position of continue pressing
@@ -42,7 +42,7 @@ public class characterController : MonoBehaviour {
 	public int                    	curPosX;
 	public int                   	curPosZ;
 
-	public bool 					touching = true;
+	public bool 					touching = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -110,7 +110,9 @@ public class characterController : MonoBehaviour {
 //			character.animation.CrossFade("run");
 			switch (swipeDirection) {
 			case Swipe.Up:
-					forceJump();
+                    if (character.transform.position.y <= .515f) {
+                        forceJump();
+                    }
 //					StartCoroutine(jump());
 					/*
 				//moving forward
@@ -184,153 +186,148 @@ public class characterController : MonoBehaviour {
 
 		}
 	}
-	
-	public void SwipeCheck(){
-		
-		#if UNITY_ANDROID || UNITY_IOS || UNITY_EDITOR
-		//		Debug.Log ("Touches Recognized");
-		
-		if(Input.touches.Length > 0){
-			Touch t = Input.GetTouch(0);
-			
-			if (t.phase == TouchPhase.Began){
-				firstPressPos = new Vector2(t.position.x, t.position.y);
-				touching = true;
-			}
-			
-//			if(t.phase == TouchPhase.Ended){
-			if(t.phase == TouchPhase.Moved){
-				secondPressPos = new Vector2(t.position.x, t.position.y);
-				currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
-				
-				//make sure it was a legit swipe not a tap
-				if(currentSwipe.magnitude < minSwipeLength || !touching){
-					swipeDirection = Swipe.None;
-					return;
-				}
-				currentSwipe.Normalize ();
-				
-				//swipe upwards
-				if(currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f){
-					Debug.Log("Up Swipe");
-					swipeDirection = Swipe.Up;
-					touching = false;
-				}
-				
-				//swipe down
-				if(currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f){
-					Debug.Log ("Down Swipe");
-					swipeDirection = Swipe.Down;
-					touching = false;
-				}
-				
-				//swipe left
-				if(currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f){
-					Debug.Log ("Left Swipe");
-					swipeDirection = Swipe.Left;
-					touching = false;
-				}
-				
-				//swipe right
-				if(currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f){
-					Debug.Log ("Right Swipe");
-					swipeDirection = Swipe.Right;
-					touching = false;
-				}
-			}
-		} else{
-			swipeDirection = Swipe.None;
-		}
-		#endif
-		
-		if(Input.GetMouseButtonDown(0)){
-			//save began touch 2d point
-			firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-//            touching = true;
-		}
 
-		if(Input.GetMouseButton(0)){
-			if(!touching) {
-				swipeDirection = Swipe.None;
-				return;
-			}
-			//save ended touch 2d point
-//			continuePressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-			
-			//creat vector from the two points
-//			currentTouch = new Vector2(continuePressPos.x - firstPressPos.x, continuePressPos.y - firstPressPos.y);
-			
-			//normalize the 2d vector
-//			currentTouch.Normalize ();
-			
-			//touch upwards
-//			if(currentTouch.y > 0 && currentTouch.x > -0.5f && currentTouch.x < 0.5f){
-//				Debug.Log("Up Touch");
-//				continueForward = true;
-//			}
-		//}
-		//if(Input.GetMouseButtonUp(0)){
-//			continueForward = false;
+    //calculate direction with 2 points
+    void calculateDir(Vector3 first, Vector3 second) {
+        currentSwipe = new Vector2(second.x - first.x, second.y - first.y);
+        float length = currentSwipe.magnitude;
 
-			//save ended touch 2d point
-			secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-			
-			//creat vector from the two points
-			currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
-			
-			//normalize the 2d vector
-			currentSwipe.Normalize ();
-			
-			//swipe upwards
-			if((currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
-			&&touching){
-				Debug.Log("Up Swipe");
-				swipeDirection = Swipe.Up;
-				touching  = false;
-			}
-			
-			//swipe down
-			if((currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
-			   &&touching){
-				Debug.Log ("Down Swipe");
-				swipeDirection = Swipe.Down;
-				touching = false;
-			}
-			
-			//swipe left
-			if((currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
-			   &&touching){
-				Debug.Log ("Left Swipe");
-				swipeDirection = Swipe.Left;
-				touching = false;
-			}
-			
-			//swipe right
-			if((currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
-			   &&touching){
-				Debug.Log ("Right Swipe");
-				swipeDirection = Swipe.Right;
-				touching = false;
-			}
-		}
-        if (Input.GetMouseButtonUp(0)) {
-            touching = true;
+        //make sure it was a legit swipe not a tap
+        if (currentSwipe.magnitude < minSwipeLength) {
+            swipeDirection = Swipe.None;
+            return;
         }
-	}
+        currentSwipe.Normalize();
 
-	void move(){
-				if(curPosX == 0){
-					iTween.MoveTo(character, iTween.Hash("x", movePos0.x, "easeType", "easeInOutExpo", "time", .2f));
-				}
-				if(curPosX == 1){
-					iTween.MoveTo(character, iTween.Hash("x", movePos1.x, "easeType", "easeInOutExpo", "time", .2f));
-				}
-				if(curPosX == 2){
-					iTween.MoveTo(character, iTween.Hash("x", movePos2.x, "easeType", "easeInOutExpo", "time", .2f));
-				}
-				if(curPosX == 3){
-					iTween.MoveTo(character, iTween.Hash("x", movePos3.x, "easeType", "easeInOutExpo", "time", .2f));
-				}
+        //swipe left
+        if (currentSwipe.x < 0 && currentSwipe.y > (-Mathf.Sqrt(3) / 2f) && currentSwipe.y < (Mathf.Sqrt(3) / 2f))
+        {
+            Debug.Log("Left Swipe" + length);
+            swipeDirection = Swipe.Left;
+            touching = false;
+            return;
+        }
+
+        //swipe right
+        if (currentSwipe.x > 0 && currentSwipe.y > (-Mathf.Sqrt(3) / 2f) && currentSwipe.y < (Mathf.Sqrt(3) / 2f))
+        {
+            Debug.Log("Right Swipe" + length);
+            swipeDirection = Swipe.Right;
+            touching = false;
+            return;
+        }
+
+        //swipe upwards
+        if (currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+        {
+            Debug.Log("Up Swipe" + length);
+            swipeDirection = Swipe.Up;
+            touching = false;
+            return;
+        }
+
+        //swipe down
+        if (currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+        {
+            Debug.Log("Down Swipe" + length);
+            swipeDirection = Swipe.Down;
+            touching = false;
+            return;
+        }
+    }
+
+    //input swipe check
+    public void SwipeCheck() {
+        //only recognize when 1 finger touch
+        if (Input.touchCount == 1) {
+            switch (Input.touches[0].phase) {
+                case TouchPhase.Began:
+                    firstPressPos = new Vector2(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y);
+                    touching = true;
+                    swipeDirection = Swipe.None;
+                    break;
+                case TouchPhase.Moved:
+                    if (!touching) {
+                        //when one direction has already been checked
+                        swipeDirection = Swipe.None;
+                        return;
+                    }
+
+                    secondPressPos = new Vector2(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y);
+                    calculateDir(firstPressPos, secondPressPos);
+
+                    break;
+                case TouchPhase.Ended:
+                    if (touching) {
+                        //when player ups the finger too fast and the "moved" state didn't have time to check the direction
+                        secondPressPos = new Vector2(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y);
+                        calculateDir(firstPressPos, secondPressPos);
+                    } else {
+                        swipeDirection = Swipe.None;
+                        return;
+                    }
+                    break;
+                default:
+                    swipeDirection = Swipe.None;
+                    break;
+            }
+        } else {
+/**************comment from here if test with mouse or
+ * cancel comment from here if test with touch**********************/
+    //        swipeDirection = Swipe.None;
+    //        return;
+    //    }
+    //}
+/**************comment until here if test with mouse or
+ * cancel comment until here if test with touch**********************/
+
+
+
+/**************comment from here if test with touch
+ * or cancel comment from here if test with mouse**********************/
+            
+            if (Input.GetMouseButtonDown(0)) {
+                //save began touch 2d point
+                firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                touching = true;
+            }
+
+            if (Input.GetMouseButton(0)) {
+                if (!touching) {
+                    swipeDirection = Swipe.None;
+                    return;
+                }
+                //save ended touch 2d point
+                secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                calculateDir(firstPressPos, secondPressPos);
+            } else {
+                swipeDirection = Swipe.None;
+                return;
+            }
+        }
+    }
+
+/**************comment until here if test with touch
+ * or cancel comment until here if test with mouse**********************/
+
+
+//#if UNITY_ANDROID || UNITY_IOS || UNITY_EDITOR
+//    //		Debug.Log ("Touches Recognized");
+//#endif
+
+	void move() {
+        if(curPosX == 0) {
+            iTween.MoveTo(character, iTween.Hash("x", movePos0.x, "easeType", "easeOutCubic", "time", .2f));
+        }
+        if (curPosX == 1) {
+            iTween.MoveTo(character, iTween.Hash("x", movePos1.x, "easeType", "easeOutCubic", "time", .2f));
+        }
+        if (curPosX == 2) {
+            iTween.MoveTo(character, iTween.Hash("x", movePos2.x, "easeType", "easeOutCubic", "time", .2f));
+        }
+        if (curPosX == 3) {
+            iTween.MoveTo(character, iTween.Hash("x", movePos3.x, "easeType", "easeOutCubic", "time", .2f));
+        }
 	}
 
 //	void moveForward(){

@@ -7,23 +7,22 @@ public class HammerBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        //mouse = (GameObject)Instantiate(mouse, mouse.transform.position, mouse.transform.rotation);
 	}
 	
 	// Update is called once per frame
     void Update () {
-        Debug.Log(Input.mousePosition);
-        mouse.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        //mouse.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
     }
-    /*
+    
     void OnDrawGizmos()
     {
         //mouse.transform.position = Input.mousePosition;
         //Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+        Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(p, 0.1F);
-	}*/
+        Gizmos.DrawSphere(p, 0.05F);
+	}
 
     public void hammerSmash(Vector3 pos) {
         gameObject.transform.position = pos + new Vector3(.5f, 1, 0);

@@ -16,8 +16,6 @@ public class Grid : MonoBehaviour {
 	public GridController grid;
 	public bool[,] playerMove;
 
-	//public GameObject 			spawnPoint;
-
 	public GameObject			gridObject;
 	public Grid					thisGridScript;
 
@@ -55,6 +53,7 @@ public class Grid : MonoBehaviour {
 		this.width = gridWidth;
 		GameObject newSeg = (GameObject) Instantiate (spawnPoint, pos, Quaternion.identity);
 		newSeg.AddComponent<LevelSegments>();
+        newSeg.name = "spawnPoint";
 		newSeg.tag = "Segment";
 
 		//road
