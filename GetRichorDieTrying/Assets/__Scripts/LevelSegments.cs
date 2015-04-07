@@ -71,12 +71,11 @@ public class LevelSegments : MonoBehaviour {
 			currentPos = thisSegment.transform.position;
 
             //delete segment and generate new segment
-            //if(thisSegment.transform.position.z <= -6f){
-            //    //Debug.Log("Spawning new Segment & Deleting Old");
-            //    Destroy (thisSegment);
-            //    gameMain.NewSegment();
-            //}
-
+            if(thisSegment.transform.position.z <= -6f){
+                //Debug.Log("Spawning new Segment & Deleting Old");
+                Destroy(thisSegment);
+                //gameMain.NewSegment();
+            }
             //change the moving speed. Slow down when walking on sidewalk
 			if (characterController.onSidewalk){
 				timeToPos = sidewalkInitialSpeed + ComboSpeedBonus;
@@ -91,14 +90,22 @@ public class LevelSegments : MonoBehaviour {
 	}
 
     //delete segment and generate new segment
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "SegmentKill")
-        {
-            Debug.Log("Destroy Segment");
-            Destroy(thisSegment);
-            gameMain.NewSegment();
-        }
-    }
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "SegmentKill")
+    //    {
+    //        Debug.Log("Destroy Segment");
+    //        Destroy(thisSegment);
+    //        gameMain.NewSegment();
+    //    }
+    //}
 
+    //generate new segment
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if ((gameObject.name == "spawnPoint") && (other.name == "SpawnTrigger"))
+    //    {
+    //        gameMain.NewSegment();
+    //    }
+    //}
 }

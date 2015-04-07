@@ -3,12 +3,13 @@ using System.Collections;
 
 public class Grid : MonoBehaviour {
 	public int totalLength = 100;
-	int length;
-	int width;
+	int length; //total length of the grid(x axis)
+	int width; // width of each grid(z axis)
 
 	public GameObject[] building;
 	public GameObject[] sidewalk;
 	public GameObject[] road;
+    public GameObject holeObj;
 	
 	public int[,] buildingData;
 	public int[,] sidewalkData;
@@ -57,23 +58,27 @@ public class Grid : MonoBehaviour {
 		newSeg.tag = "Segment";
 
 		//road
-		GameObject newRoad = (GameObject) Instantiate (road[0], new Vector3(pos.x, pos.y, pos.z), Quaternion.identity);
-		newRoad.transform.parent = newSeg.transform;
+        int hole = Random.Range(0, (width * 3));
+        generateRoad(road[0], hole, pos, newSeg);
 		//sidewalk
-		newRoad = (GameObject) Instantiate (road[1], new Vector3(pos.x+1.5f, pos.y, pos.z), Quaternion.identity);
-		newRoad.transform.parent = newSeg.transform;
-		newRoad = (GameObject) Instantiate (road[1], new Vector3(pos.x-1.5f, pos.y, pos.z), Quaternion.identity);
-		newRoad.transform.parent = newSeg.transform;
+        //generateSidewalk(road[1], pos, newSeg);
+        GameObject newRoad;
+        newRoad = (GameObject)Instantiate(road[1], new Vector3(pos.x + 1.5f, pos.y, pos.z), Quaternion.identity);
+        newRoad.transform.parent = newSeg.transform;
+        newRoad = (GameObject)Instantiate(road[1], new Vector3(pos.x - 1.5f, pos.y, pos.z), Quaternion.identity);
+        newRoad.transform.parent = newSeg.transform;
 		//ground
-		newRoad = (GameObject) Instantiate (road[2], new Vector3(pos.x+length/4+1, pos.y, pos.z), Quaternion.identity);
-		newRoad.transform.parent = newSeg.transform;
-		newRoad = (GameObject) Instantiate (road[2], new Vector3(pos.x-length/4-1, pos.y, pos.z), Quaternion.identity);
-		newRoad.transform.parent = newSeg.transform;
+        //generateGround(road[2], pos, newSeg);
+        newRoad = (GameObject)Instantiate(road[2], new Vector3(pos.x + length / 4 + 1, pos.y, pos.z), Quaternion.identity);
+        newRoad.transform.parent = newSeg.transform;
+        newRoad = (GameObject)Instantiate(road[2], new Vector3(pos.x - length / 4 - 1, pos.y, pos.z), Quaternion.identity);
+        newRoad.transform.parent = newSeg.transform;
 		//water
-		newRoad = (GameObject) Instantiate (road[3], new Vector3(pos.x+totalLength/4+length/4, pos.y, pos.z), Quaternion.identity);
-		newRoad.transform.parent = newSeg.transform;
-		newRoad = (GameObject) Instantiate (road[3], new Vector3(pos.x-totalLength/4-length/4, pos.y, pos.z), Quaternion.identity);
-		newRoad.transform.parent = newSeg.transform;
+        //generateWater(road[3], pos, newSeg);
+        newRoad = (GameObject)Instantiate(road[3], new Vector3(pos.x + totalLength / 4 + length / 4, pos.y, pos.z), Quaternion.identity);
+        newRoad.transform.parent = newSeg.transform;
+        newRoad = (GameObject)Instantiate(road[3], new Vector3(pos.x - totalLength / 4 - length / 4, pos.y, pos.z), Quaternion.identity);
+        newRoad.transform.parent = newSeg.transform;
 
 		grid = new GridController(length, width, building, sidewalk, buildingData, sidewalkData);
 		grid.createGrid ();
@@ -120,6 +125,48 @@ public class Grid : MonoBehaviour {
 //		GameManager.manager.addMovement (playerMove);
 //		newSeg.GetComponent<LevelSegments> ().segEmpty = playerMove;
 	}
+
+    //generate road with/without a hole
+    void generateRoad(GameObject road, int hole, Vector3 pos, GameObject newSeg) {
+        GameObject newRoad;
+        for (int i = 0; i < width * 2; i++) {
+            float posX = (i < width) ? (pos.x - .5f) : (pos.x + .5f);
+            float posZ = pos.z - 2.5f + (i % width);
+            
+            if (i == hole) {
+                newRoad = (GameObject)Instantiate(holeObj, new Vector3(posX, pos.y, posZ), Quaternion.identity);
+                newRoad.name = holeObj.name;
+                newRoad.transform.parent = newSeg.transform;
+            //} else {
+            //    newRoad = (GameObject)Instantiate(road, new Vector3(posX, pos.y, posZ), Quaternion.identity);
+            //    newRoad.name = road.name;
+            //    newRoad.transform.parent = newSeg.transform;
+            }
+            newRoad = (GameObject)Instantiate(road, new Vector3(posX, pos.y, posZ), Quaternion.identity);
+            newRoad.name = road.name;
+            newRoad.transform.parent = newSeg.transform;
+        }
+    }
+
+    void generateSidewalk(GameObject road, Vector3 pos, GameObject newSeg)
+    {
+
+        GameObject newRoad = (GameObject)Instantiate(road, new Vector3(pos.x, pos.y, pos.z), Quaternion.identity);
+        newRoad.transform.parent = newSeg.transform;
+    }
+
+    void generateGround(GameObject road, Vector3 pos, GameObject newSeg)
+    {
+
+        GameObject newRoad = (GameObject)Instantiate(road, new Vector3(pos.x, pos.y, pos.z), Quaternion.identity);
+        newRoad.transform.parent = newSeg.transform;
+    }
+    void generateWater(GameObject road, Vector3 pos, GameObject newSeg)
+    {
+
+        GameObject newRoad = (GameObject)Instantiate(road, new Vector3(pos.x, pos.y, pos.z), Quaternion.identity);
+        newRoad.transform.parent = newSeg.transform;
+    }
 }
 
 //the grid object which arranges the items on it

@@ -205,11 +205,11 @@ public class GameManager : MonoBehaviour {
 	void segmentsInitialize(){
 		segmentSpawnPos = new Vector3(0.0f,0.0f, 0.0f);
 		
-		for (int i = 0; i < initialSegNum; ++i) {
+		for (int i = 0; i < initialSegNum-1; ++i) {
 			NewSegment ();
 			segmentSpawnPos.z += segmentOffset;
 		}
-		segmentSpawnPos.z -= segmentOffset;
+        //segmentSpawnPos.z -= segmentOffset;
 	}
 	
 	// Update is called once per frame
@@ -313,7 +313,7 @@ public class GameManager : MonoBehaviour {
 			
 			//kill Animal
 			if (killAnimal) {
-				StartCoroutine(displayFeedback());
+                //StartCoroutine(displayFeedback());
 				killAnimal = false;
 			}
 
@@ -379,13 +379,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	//feesback based on player's behavior
-	IEnumerator displayFeedback() {
-		//feedbackText.text = "How dare you! You just killed a kitty!";
-		yield return new WaitForSeconds (1.5f);
-//		feedbackText.text = "Now you lose 20 dollars!";
-//		yield return new WaitForSeconds (1.5f);
-		//feedbackText.text = "";
-	}
+    //IEnumerator displayFeedback() {
+    //    feedbackText.text = "How dare you! You just killed a kitty!";
+    //    yield return new WaitForSeconds (1.5f);
+    //    feedbackText.text = "Now you lose 20 dollars!";
+    //    yield return new WaitForSeconds(1.5f);
+    //    feedbackText.text = "";
+    //}
 
 	//Spawn coins to the world
 	public void CashOut(int value){
@@ -410,7 +410,7 @@ public class GameManager : MonoBehaviour {
 			buildingType = objectName;
 			spawnHumanPos = coinPos;
 		}
-		if(objectName == "Cat" || objectName == "Dog" || objectName == "Bird"){
+		if(objectName == "Cat" || objectName == "Dog" || objectName == "Bird"|| objectName == "Road"){
 			//audioSource.PlayOneShot ();
 			listItem = 2;
 		}

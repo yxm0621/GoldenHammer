@@ -67,6 +67,11 @@ public class ObjectManager : MonoBehaviour {
 			value = 2;
 			hitPoints = 1;
 		}
+        if (thisObject.name == "Road")
+        {
+            value = 10;
+            hitPoints = 2;
+        }
 
 		//For GameOver and game start
 		if(thisObject.name == "GameOverStart" || thisObject.name == "Start"){
@@ -81,73 +86,84 @@ public class ObjectManager : MonoBehaviour {
 		currentPos = thisObject.transform.position;
 
 		if(hitPoints <= 0){
-
 			gameMain.objectName = thisObject.name;
 
 //			gameMain.score += value * gameMain.bonus; //Add value of item to score
 
-			for (int i = 0; i < objLength ; i++) {
-				for (int j = 0; j < objWidth ; j++) {
-					thisObject.transform.parent.GetComponent<LevelSegments>().segEmpty[objPosX + i, objPosZ + j] = true;
-				}
-			}
+            //tell LevelSegments one space becomes empty so that player can move to that space
+            //for (int i = 0; i < objLength ; i++) {
+            //    for (int j = 0; j < objWidth ; j++) {
+            //        thisObject.transform.parent.GetComponent<LevelSegments>().segEmpty[objPosX + i, objPosZ + j] = true;
+            //    }
+            //}
 
+            //tell gamemain pos to Spawn coins
+            gameMain.coinPos = thisObject.transform.position;
 
-			if (thisObject.name != "Cat" ) {
-				//tell gamemain pos to Spawn coins
-				gameMain.coinPos = thisObject.transform.position;
+            //Spawn Coins Here
+            gameMain.CashOut(value);
 
-				//Spawn Coins Here
-				gameMain.CashOut(value);
+            if (thisObject.name == "Cat")
+            {
+                thisObject.GetComponent<CatsBehavior>().catAction = CatsBehavior.CatState.Smash;
+                //gameMain.killAnimal = true;
+            }
 
-				if(thisObject.tag == "Building"){
-					//Trigger Person falling out of Building
-					gameMain.spawnHumanPos = thisObject.transform.position;
+            if (thisObject.tag == "Building")
+            {
+                //Trigger Person falling out of Building
+                gameMain.spawnHumanPos = thisObject.transform.position;
+                gameMain.buildingDestroyed = true;
+                gameMain.buildingType = thisObject.name;
+            }
 
-					gameMain.buildingDestroyed = true;
+            //bomb explode effect
+            if (thisObject.name == "Bomb")
+            {
+                Debug.Log("explode");
+                GameObject explode = (GameObject)Instantiate(gameMain.explodeEffect, thisObject.transform.position, Quaternion.identity);
+                explode.name = gameMain.explodeEffect.name;
+                gameMain.audioSource.PlayOneShot(gameMain.explodeSFX);
+            }
 
-					gameMain.buildingType = thisObject.name;
-				}
+            //special effect to smash the whole line
+            if (thisObject.name == "Special")
+            {
+                Debug.Log("special");
+                GameObject line = (GameObject)Instantiate(gameMain.lineEffect, thisObject.transform.position, Quaternion.identity);
+                line.name = gameMain.lineEffect.name;
+                gameMain.audioSource.PlayOneShot(gameMain.lineSFX);
+            }
 
-				//bomb explode effect
-				if(thisObject.name == "Bomb") {
-					Debug.Log("explode");
-					GameObject explode = (GameObject)Instantiate(gameMain.explodeEffect, thisObject.transform.position, Quaternion.identity);
-					explode.name = gameMain.explodeEffect.name;
-					gameMain.audioSource.PlayOneShot (gameMain.explodeSFX);
-				}
+            //kill people, polices come
+            if (thisObject.name.Contains("Human"))
+            {
+                gameMain.killPeople++;
+            }
+            //kill police, tanks come
+            if (thisObject.name.Contains("PoliceCar"))
+            {
+                gameMain.killPolice++;
+            }
+            //kill tank, helicopters come
+            if (thisObject.name.Contains("Tank"))
+            {
+                gameMain.killTank++;
+            }
 
-				//special effect to smash the whole line
-				if(thisObject.name == "Special") {
-					Debug.Log("special");
-					GameObject line = (GameObject)Instantiate(gameMain.lineEffect, thisObject.transform.position, Quaternion.identity);
-					line.name = gameMain.lineEffect.name;
-					gameMain.audioSource.PlayOneShot (gameMain.lineSFX);
-				}
-
-				//kill people, polices come
-				if (thisObject.name.Contains("Human")) {
-					GameObject.Find("Traffic").GetComponent<TrafficController>().spawnPolice = true;
-				}
-				//kill police, tanks come
-				if (thisObject.name.Contains("PoliceCar")) {
-					GameObject.Find("Traffic").GetComponent<TrafficController>().spawnTank = true;
-				}
-				//kill tank, helicopters come
-				if (thisObject.name.Contains("Tank")) {
-					GameObject.Find("Traffic").GetComponent<TrafficController>().spawnHelicopter = true;
-				}
-
-				//Destroy
-				Destroy(thisObject);
-			} else {
-				thisObject.GetComponent<CatsBehavior>().catAction = CatsBehavior.CatState.Smash;
-				gameMain.killAnimal = true;
-				//tell gamemain pos to Spawn coins
-				gameMain.coinPos = thisObject.transform.position;
-				//Spawn Coins Here
-				gameMain.CashOut(value);
-			}
+            //if (thisObject.name == "Road")
+            //{
+            //    if (GameObject.Find("Grid") != null)
+            //    {
+            //        GameObject holeObj = GameObject.Find("Grid").GetComponent<Grid>().holeObj;
+            //        GameObject hole = (GameObject)Instantiate(holeObj, thisObject.transform.position, Quaternion.identity);
+            //        hole.name = holeObj.name;
+            //    }
+            //    hitPoints = 1000;
+            //} else {
+                //Destroy
+                Destroy(thisObject);
+            //}
 
 			if(thisObject.name == "GameOverStart"){
 			Application.LoadLevel(gameMain.mainLevel);
@@ -158,14 +174,21 @@ public class ObjectManager : MonoBehaviour {
 	void OnMouseDown(){
 		if (GameManager.gameState == GameManager.State.InGame || thisObject.name == "GameOverStart"
 		    || thisObject.name == "Start") {
-			//gameMain.CamKick ();
+            characterController charaCon = GameObject.Find("Player").GetComponent<characterController>();
+            charaCon.SwipeCheck();
+            if (characterController.swipeDirection == Swipe.None)
+            {
+
+                //gameMain.CamKick ();
                 GameObject.Find("Hammer").GetComponent<HammerBehavior>().hammerSmash(thisObject.transform.position);
 
-			Debug.Log(thisObject + " hit!!");
-			gameMain.audioSource.PlayOneShot (hitAudio);
-			//iTween.MoveFrom (cam, iTween.Hash("z", -0.001f, "time", 0.5f)); //Give the camera a little kick in Z
-			iTween.MoveFrom(thisObject, iTween.Hash ("z", currentPos.z + 0.25f, "y", currentPos.y + -0.25f, "time", 0.5f));
-			hitPoints--;
+                //Debug.Log(thisObject + " hit!!");
+                gameMain.audioSource.PlayOneShot(hitAudio);
+                //iTween.MoveFrom (cam, iTween.Hash("z", -0.001f, "time", 0.5f)); //Give the camera a little kick in Z
+                iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y + -0.25f, "time", 0.5f));
+                hitPoints--;
+
+            }
 		}
 	}
 
