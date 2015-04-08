@@ -62,6 +62,7 @@
      <Compile Include="Assets\__Scripts\HumanBehavior.cs" />
      <Compile Include="Assets\__Scripts\LevelSegments.cs" />
      <Compile Include="Assets\__Scripts\Moving.cs" />
+     <Compile Include="Assets\__Scripts\MyFirstTouch.cs" />
      <Compile Include="Assets\__Scripts\NewSegTrigger.cs" />
      <Compile Include="Assets\__Scripts\ObjectManager.cs" />
      <Compile Include="Assets\__Scripts\PlanetManager.cs" />
@@ -70,7 +71,6 @@
      <Compile Include="Assets\__Scripts\SmashRoad.cs" />
      <Compile Include="Assets\__Scripts\TrafficController.cs" />
      <Compile Include="Assets\__Scripts\TrafficObjects.cs" />
-     <Compile Include="Assets\__Scripts\characterController.cs" />
      <Compile Include="Assets\iTweenEditor\Examples\StartAndStopTween.cs" />
      <Compile Include="Assets\iTweenEditor\Helper Classes\EventParamMappings.cs" />
      <Compile Include="Assets\iTweenEditor\Helper Classes\Vector3OrTransform.cs" />

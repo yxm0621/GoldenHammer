@@ -70,10 +70,12 @@ public class GameManager : MonoBehaviour {
 	public GameObject					car_coin;
 	public GameObject					human_coin;
 	public List<GameObject>				coinGroups = new List<GameObject>();
-	public int							listItem;
+	public int							listItem; //Number for game object in list
 	public string						objectName;
 
 	public Vector3						coinPos; //Position in the world for coins to instantiate
+
+	private float						camShakePower; //Intensity of camera shake.
 
 	//Spawn Human after building Destruction -- Set in CashOut() - Checked in Traffic Controller
 	public bool							buildingDestroyed = false;
@@ -399,10 +401,15 @@ public class GameManager : MonoBehaviour {
 		addScore (value);
 		Debug.Log (objectName + " Monitized");
 
-		//Check which item was destroyed
+		// check which item is 
+
+		//Check which item was destroyed - [TODO] Save value for amount of screenshake
 		if(objectName == "Cube" || objectName == "Cube_1"){
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 0;
+
+			camShakePower = 0.4f;
+
 			//Spawning Humans from building - Data Checked in TrafficController
 			buildingDestroyed = true;
 			buildingType = objectName;
@@ -412,6 +419,9 @@ public class GameManager : MonoBehaviour {
 
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 1;
+
+			camShakePower = 0.5f;
+
 			//Spawning Humans from building - Data Checked in TrafficController
 			buildingDestroyed = true;
 			buildingType = objectName;
@@ -420,42 +430,74 @@ public class GameManager : MonoBehaviour {
 		if(objectName == "Cat" || objectName == "Dog" || objectName == "Bird"|| objectName == "Road"){
 			//audioSource.PlayOneShot ();
 			listItem = 2;
+
+			camShakePower = 0.1f;
+
 		}
 		if(objectName.Contains ("Tree") || objectName.Contains ("obj") || objectName.Contains ("env")){
 			audioSource.PlayOneShot (woodSmash);
 			listItem = 2;
+
+			camShakePower = 0.1f;
+
 		}
 		if(objectName == "Cloud" || objectName.Contains("Planet") || objectName == "Stars"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
+
+			camShakePower = 0.75f;
+
 		}
 		if(objectName == "BlackHole"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
+
+			camShakePower = 0.75f;
+
 			GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunUp();
 		}
 		if(objectName == "Sun"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
+
+			camShakePower = 0.75f;
+
             GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunDown();
 		}
 		if(objectName == "Moon"){
 			//change scene to space
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
+
+			camShakePower = 0.75f;
+
             GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().moonDown();
 		}
 		if(objectName.Contains("car") || objectName.Contains("Police") || objectName.Contains("Tank")){
 			audioSource.PlayOneShot (finalSmashAudio);
+
+			if(objectName.Contains("car") || objectName.Contains("Police")){
+				camShakePower = 0.33f;
+			}
+			if(objectName.Contains("Tank")){
+				camShakePower = 0.4f;
+			}
+
 			listItem = 4;
 		}
 		if(objectName.Contains("Human")){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 5;
+
+			camShakePower = 0.05f;
+
 		}
 		if(objectName == "Start" || objectName == "Special" || objectName == "Bomb"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 2;
+
+			camShakePower = 0.0001f;
+
 		}
 
 		if (objectName != "Special" && objectName != "Bomb") {
@@ -488,9 +530,9 @@ public class GameManager : MonoBehaviour {
 
 	//[X] iTween's camera shake
 	public void CamShake(){
-		float xPos = Random.Range (-.5f, .5f);
+		float xPos = Random.Range (-1 * camShakePower, camShakePower);
 
-		iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "y", 0.5f, "time", duration, "oncompletetarget", this.gameObject,"oncomplete", "CamFix")); //X & Y shake
+		iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "y", camShakePower, "time", duration, "oncompletetarget", this.gameObject,"oncomplete", "CamFix")); //X & Y shake
 		//iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "time", duration)); //X shake only
 	}
 

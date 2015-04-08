@@ -175,9 +175,9 @@ public class ObjectManager : MonoBehaviour {
 		if (GameManager.gameState == GameManager.State.InGame || thisObject.name == "GameOverStart"
 		    || thisObject.name == "Start") {
             characterController charaCon = GameObject.Find("Player").GetComponent<characterController>();
-            charaCon.SwipeCheck();
-            if (characterController.swipeDirection == Swipe.None)
-            {
+           // charaCon.SwipeCheck();
+           // if (characterController.swipeDirection == null)
+           // {
 
                 //gameMain.CamKick ();
                 GameObject.Find("Hammer").GetComponent<HammerBehavior>().hammerSmash(thisObject.transform.position);
@@ -185,10 +185,17 @@ public class ObjectManager : MonoBehaviour {
                 //Debug.Log(thisObject + " hit!!");
                 gameMain.audioSource.PlayOneShot(hitAudio);
                 //iTween.MoveFrom (cam, iTween.Hash("z", -0.001f, "time", 0.5f)); //Give the camera a little kick in Z
-                iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y + -0.25f, "time", 0.5f));
+                if (thisObject.name == "Road")
+                {
+                    //iTween.MoveFrom(thisObject, iTween.Hash("y", currentPos.y - 0.25f, "time", 0.5f));
+                }
+                else
+                {
+                    iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y + -0.25f, "time", 0.5f));
+                }
                 hitPoints--;
 
-            }
+           // }
 		}
 	}
 

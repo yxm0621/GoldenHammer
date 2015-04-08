@@ -1,8 +1,20 @@
 ﻿<Properties>
+<<<<<<< Updated upstream
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/__Scripts/TrafficController.cs">
     <Files>
       <File FileName="Assets/__Scripts/TrafficController.cs" Line="219" Column="1" />
+=======
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/EasyTouchBundle/EasyTouch/Plugins/EasyTouchInput.cs">
+    <Files>
+      <File FileName="Assets/__Scripts/TrafficController.cs" Line="88" Column="26" />
+      <File FileName="Assets/__Scripts/ObjectManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/__Scripts/GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/__Scripts/CarBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets/__Scripts/characterController.cs" Line="1" Column="1" />
+      <File FileName="Assets/EasyTouchBundle/EasyTouch/Plugins/EasyTouchInput.cs" Line="1" Column="1" />
+>>>>>>> Stashed changes
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
