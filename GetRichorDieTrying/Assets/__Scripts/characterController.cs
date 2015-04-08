@@ -70,6 +70,12 @@ public class characterController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (character.transform.position.y > movePos4.y) {
+            character.transform.position = new Vector3(character.transform.position.x,
+                                                       movePos4.y,
+                                                       character.transform.position.z);
+        }
+
 		if (canControl) {
 
 		//move camera when character move left or right

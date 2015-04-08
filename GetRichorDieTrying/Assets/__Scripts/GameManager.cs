@@ -117,6 +117,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject					itweenPath;
 
 	public TrafficController			traffic;
+    GameObject                          spawnTrigger;
+    public GameObject                   underground;
 
 	void Awake(){
 //		DontDestroyOnLoad(camPath);
@@ -198,8 +200,9 @@ public class GameManager : MonoBehaviour {
 		//try space scene
         //		GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunDown();
         //		GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().moonDown();
-		
+        spawnTrigger= GameObject.Find("SpawnTrigger");
 		segmentsInitialize ();
+        underground = GameObject.Find("Underground");
 	}
 
 	void segmentsInitialize(){
@@ -210,6 +213,10 @@ public class GameManager : MonoBehaviour {
 			segmentSpawnPos.z += segmentOffset;
 		}
         //segmentSpawnPos.z -= segmentOffset;
+        if (spawnTrigger != null)
+        {
+            spawnTrigger.SetActive(true);
+        }
 	}
 	
 	// Update is called once per frame
@@ -549,6 +556,7 @@ public class GameManager : MonoBehaviour {
 	} 
 
 	public void loadScene() {
+        spawnTrigger.SetActive(false);
 		GameObject[] segs = GameObject.FindGameObjectsWithTag("Segment");
 		GameObject[] obss = GameObject.FindGameObjectsWithTag("Obstacle");
 		foreach (GameObject seg in segs) {

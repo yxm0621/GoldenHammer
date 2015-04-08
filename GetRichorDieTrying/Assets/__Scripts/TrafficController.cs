@@ -79,15 +79,18 @@ public class TrafficController : MonoBehaviour {
 		flyPos[1] = flyLSpawn.transform.position;
 
 		animalSpawnTimer = Random.Range (2f, 10f);
-		animalNum = animals.Length;
-
 		flySpawnTimer = Random.Range (2f, 10f);
-		flyNum = flying.Length;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		human = people[Random.Range(0,people.Length)];
+        if (people.Length <= 0) {
+            human = null;
+        } else {
+            human = people[Random.Range(0,people.Length)];
+        }
+        animalNum = animals.Length;
+        flyNum = flying.Length;
 		if (GameManager.gameState == GameManager.State.InGame) {
 			humanSpawnTimer -= 1 * Time.deltaTime;
 			carSpawnTimer -= 1 * Time.deltaTime;
@@ -108,7 +111,10 @@ public class TrafficController : MonoBehaviour {
 				carSpawnTimer = Random.Range(carTimeLow, carTimeHigh);
 				//spawn normal cars
 				if(spawnCar && !spawnPolice && !spawnTank){
-					Car(car[0], "car");
+                    if (car.Length > 0)
+                    {
+                        Car(car[0], "car");
+                    }
 					spawnCar = false;
 				}
 				//spawn police cars
@@ -131,7 +137,10 @@ public class TrafficController : MonoBehaviour {
 			if(animalSpawnTimer <= 0){
 				spawnAnimal = true;
 				animalSpawnTimer = Random.Range(3f, 10f);
-				Animal ();
+                if (animalNum > 0)
+                {
+                    Animal();
+                }
 				//Debug.Log ("Animal timer up. Next timer: " + animalSpawnTimer);
 			}
 
@@ -139,7 +148,10 @@ public class TrafficController : MonoBehaviour {
 			if(flySpawnTimer <= 0){
 				spawnFly = true;
 				flySpawnTimer = Random.Range(3f, 10f);
-				Fly ();
+                if (flyNum > 0)
+                {
+                    Fly();
+                }
 			}
 
 			//Spawn Person from Destroyed building

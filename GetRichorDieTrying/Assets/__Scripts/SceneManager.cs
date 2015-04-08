@@ -95,6 +95,7 @@ public class SceneManager : MonoBehaviour {
 			iTweenEvent.GetEvent(Camera.main.gameObject, "loadScene2").Play();
 			reloadScene = true;
             deleteObstacles();
+            GameManager.manager.underground.SetActive(true);
 		}
 	}
 
@@ -136,6 +137,7 @@ public class SceneManager : MonoBehaviour {
 		Camera.main.GetComponent<Skybox> ().material = spaceSky;
 		reloadScene = true;
         deleteObstacles();
+        GameManager.manager.underground.SetActive(false);
 	}
 	void loadOcean(){
 		building = oceanBuilding;

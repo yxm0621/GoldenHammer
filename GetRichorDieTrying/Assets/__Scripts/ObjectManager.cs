@@ -70,7 +70,7 @@ public class ObjectManager : MonoBehaviour {
         if (thisObject.name == "Road")
         {
             value = 10;
-            hitPoints = 2;
+            hitPoints = 5;
         }
 
 		//For GameOver and game start
