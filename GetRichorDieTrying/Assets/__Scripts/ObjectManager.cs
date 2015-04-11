@@ -172,12 +172,12 @@ public class ObjectManager : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		if (GameManager.gameState == GameManager.State.InGame || thisObject.name == "GameOverStart"
+        if (gameMain.gameState == GameManager.State.InGame || thisObject.name == "GameOverStart"
 		    || thisObject.name == "Start") {
-            characterController charaCon = GameObject.Find("Player").GetComponent<characterController>();
-            charaCon.SwipeCheck();
-            if (characterController.swipeDirection == Swipe.None)
-            {
+            //characterController charaCon = GameObject.Find("Player").GetComponent<characterController>();
+           // charaCon.SwipeCheck();
+           // if (characterController.swipeDirection == null)
+           // {
 
                 //gameMain.CamKick ();
                 GameObject.Find("Hammer").GetComponent<HammerBehavior>().hammerSmash(thisObject.transform.position);
@@ -185,10 +185,23 @@ public class ObjectManager : MonoBehaviour {
                 //Debug.Log(thisObject + " hit!!");
                 gameMain.audioSource.PlayOneShot(hitAudio);
                 //iTween.MoveFrom (cam, iTween.Hash("z", -0.001f, "time", 0.5f)); //Give the camera a little kick in Z
-                iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y + -0.25f, "time", 0.5f));
+                //float posZ = currentPos.z;
+                //    posZ -= .5f * gameMain.moveSpeed;
+            Vector3 pos = thisObject.transform.localPosition;
+            Debug.Log(currentPos + ", local" + pos);
+                    thisObject.transform.position = new Vector3(currentPos.x,
+                                                                currentPos.y - 0.25f,
+                                                                currentPos.z + 0.25f);
+                    //currentPos.z = posZ;
+                    //iTween.MoveTo(thisObject, currentPos, 0.5f);
+
+            iTween.MoveTo(thisObject, iTween.Hash("position", pos, "islocal", true, "time", .5f));
+                    //iTween.MoveFrom(thisObject, iTween.Hash("y", currentPos.y - 0.25f, "time", 0.5f));
+                    //iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y - 0.25f, "time", 0.5f));
+                    
                 hitPoints--;
 
-            }
+           // }
 		}
 	}
 
@@ -196,7 +209,7 @@ public class ObjectManager : MonoBehaviour {
 		if(other.gameObject.name == "damage"){
 			hitPoints--;
 		}
-		if(other.gameObject.name == "spinCutters"){
+		if(other.gameObject.name == "spinCutter"){
 			hitPoints--;
 		}
 	}

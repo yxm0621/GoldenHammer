@@ -22,7 +22,7 @@ public class Moving : MonoBehaviour {
         }
 
         //delete obstacles at the end of the road
-        if (gameObject.transform.position.z <= -6f) {
+        if (gameObject.transform.position.z <= -3) {
             Destroy(gameObject);
         }
 	}

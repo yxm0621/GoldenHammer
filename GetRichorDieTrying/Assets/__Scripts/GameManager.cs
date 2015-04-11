@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 //	public Camera						mainCam;
 //	public GameObject					camPath;
 
-	public static State					gameState;
+	public State	    				gameState;
 	public string						currentLevel;
 	public string						mainLevel;
 	public bool							firstRun = true;
@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
 	public TextMesh						goalText;
 	public int							levelCount = 0; //This is changed in CheckPoint
 	public float						moveSpeed;
+    public float                        initialSpeed = .7f;
 
 	public int							bonus = 1;
 
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour {
 	public int							segmentLength = 12; //grid length
 	public int                          segmentOffset = 6; //grid width
 	public int							initialSegNum = 5;
+    public GameObject[]                 segments;
 	public List<bool[,]>				characterMove = new List<bool[,]>();
 
 	//coins
@@ -70,10 +72,12 @@ public class GameManager : MonoBehaviour {
 	public GameObject					car_coin;
 	public GameObject					human_coin;
 	public List<GameObject>				coinGroups = new List<GameObject>();
-	public int							listItem;
+	public int							listItem; //Number for game object in list
 	public string						objectName;
 
 	public Vector3						coinPos; //Position in the world for coins to instantiate
+
+	private float						camShakePower; //Intensity of camera shake.
 
 	//Spawn Human after building Destruction -- Set in CashOut() - Checked in Traffic Controller
 	public bool							buildingDestroyed = false;
@@ -117,7 +121,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject					itweenPath;
 
 	public TrafficController			traffic;
-    GameObject                          spawnTrigger;
+    //GameObject                          spawnTrigger;
     public GameObject                   underground;
 
 	void Awake(){
@@ -143,7 +147,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {
-		gameState = State.Menu;
+		
 //		uiTextObj.SetActive (false);
 
 		currentLevel = Application.loadedLevelName;
@@ -161,6 +165,7 @@ public class GameManager : MonoBehaviour {
 //		Debug.Log (audioSource + " Found");
 
 		if(currentLevel != "GameOver"){
+            gameState = State.Menu;
 			score = 0;
 			comboMax = 0;
 			levelCount = 0;
@@ -200,25 +205,12 @@ public class GameManager : MonoBehaviour {
 		//try space scene
         //		GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunDown();
         //		GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().moonDown();
-        spawnTrigger= GameObject.Find("SpawnTrigger");
+        //spawnTrigger= GameObject.Find("SpawnTrigger");
 		segmentsInitialize ();
         underground = GameObject.Find("Underground");
+        //segments = new GameObject[initialSegNum];
 	}
 
-	void segmentsInitialize(){
-		segmentSpawnPos = new Vector3(0.0f,0.0f, 0.0f);
-		
-		for (int i = 0; i < initialSegNum-1; ++i) {
-			NewSegment ();
-			segmentSpawnPos.z += segmentOffset;
-		}
-        //segmentSpawnPos.z -= segmentOffset;
-        if (spawnTrigger != null)
-        {
-            spawnTrigger.SetActive(true);
-        }
-	}
-	
 	// Update is called once per frame
 	void Update () {
 //		if(currentLevel != "GameOver") {
@@ -232,6 +224,7 @@ public class GameManager : MonoBehaviour {
 //			gameState = State.InGame;
 			break;
 		case State.InGame:
+            SegMove();
 			if (sceneManager.reloadScene) {
 				loadScene();
 				sceneManager.reloadScene = false;
@@ -342,7 +335,11 @@ public class GameManager : MonoBehaviour {
 			GameObject.Find("Player").GetComponent<characterController>().canControl = false;
 			break;
 		case State.Over:
-			GameObject.Find("Player").GetComponent<characterController>().canControl = false;
+            SegMove();
+            if (GameObject.Find("Player") != null)
+            {
+                GameObject.Find("Player").GetComponent<characterController>().canControl = false;
+            }
 			if(comboStarted){
 				ComboEnd ();
 			}
@@ -359,6 +356,60 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+    void segmentsInitialize()
+    {
+        segmentSpawnPos = new Vector3(0.0f, 0.0f, 0.0f);
+
+        for (int i = 0; i < initialSegNum; ++i)
+        {
+            segments[i] = GameObject.Find("Grid").GetComponent<Grid>().generateGrid(spawnPoint, segmentSpawnPos, segmentLength, segmentOffset);
+            segmentSpawnPos.z += segmentOffset;
+        }
+        segmentSpawnPos.z -= segmentOffset;
+        //if (spawnTrigger != null)
+        //{
+        //    spawnTrigger.SetActive(true);
+        //}
+    }
+
+    //Spawn segment
+    public void NewSegment()
+    {
+        //		Debug.Log ("Spawning at " + segmentSpawnPos);
+        GameObject newSeg = GameObject.Find("Grid").GetComponent<Grid>().generateGrid(spawnPoint, segmentSpawnPos, segmentLength, segmentOffset);
+        int i = 0;
+        while(i != (initialSegNum-1)) {
+            segments[i] = segments[++i];
+        }
+        segments[i] = newSeg;
+    }
+
+    //Segment movement
+    public void SegMove() {
+        //change the speed based on the combo
+        if (bonus >= 10) {
+            moveSpeed = initialSpeed * 5;
+        } else if (bonus >= 5) {
+            moveSpeed = initialSpeed * 2.5f;
+        } else {
+            moveSpeed = initialSpeed;
+        }
+
+        //move segments
+        if (segments[0] != null) {
+            segments[0].transform.Translate(new Vector3(0, 0, -1) * Time.deltaTime * moveSpeed);
+            for (int i = 1; i < initialSegNum; i++) {
+                segments[i].transform.position = new Vector3(segments[i].transform.position.x,
+                                                             segments[i].transform.position.y,
+                                                             segments[i - 1].transform.position.z + segmentOffset);
+            }
+
+            if (segments[0].transform.position.z <= -6f) {
+                Destroy(segments[0]);
+                NewSegment();
+            }
+        }
+    }
 	//Add grid info
 	public void addMovement(bool[,] boolGrid){
 		characterMove.Add (boolGrid);
@@ -397,12 +448,15 @@ public class GameManager : MonoBehaviour {
 	//Spawn coins to the world
 	public void CashOut(int value){
 		addScore (value);
-		Debug.Log (objectName + " Monitized");
+        //Debug.Log (objectName + " Monitized");
 
-		//Check which item was destroyed
+		//Check which item was destroyed - [TODO] Save value for amount of screenshake
 		if(objectName == "Cube" || objectName == "Cube_1"){
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 0;
+
+			camShakePower = 0.3f;
+
 			//Spawning Humans from building - Data Checked in TrafficController
 			buildingDestroyed = true;
 			buildingType = objectName;
@@ -412,6 +466,9 @@ public class GameManager : MonoBehaviour {
 
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 1;
+
+			camShakePower = 0.4f;
+
 			//Spawning Humans from building - Data Checked in TrafficController
 			buildingDestroyed = true;
 			buildingType = objectName;
@@ -420,48 +477,75 @@ public class GameManager : MonoBehaviour {
 		if(objectName == "Cat" || objectName == "Dog" || objectName == "Bird"|| objectName == "Road"){
 			//audioSource.PlayOneShot ();
 			listItem = 2;
+
+			camShakePower = 0.05f;
+
 		}
 		if(objectName.Contains ("Tree") || objectName.Contains ("obj") || objectName.Contains ("env")){
 			audioSource.PlayOneShot (woodSmash);
 			listItem = 2;
+
+			camShakePower = 0.05f;
+
 		}
 		if(objectName == "Cloud" || objectName.Contains("Planet") || objectName == "Stars"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
+
+			camShakePower = 0.7f;
+
 		}
 		if(objectName == "BlackHole"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
+
+			camShakePower = 0.75f;
+
 			GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunUp();
 		}
 		if(objectName == "Sun"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
+
+			camShakePower = 0.7f;
+
             GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunDown();
 		}
 		if(objectName == "Moon"){
 			//change scene to space
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
+
+			camShakePower = 0.7f;
+
             GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().moonDown();
 		}
 		if(objectName.Contains("car") || objectName.Contains("Police") || objectName.Contains("Tank")){
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 4;
+            if (objectName.Contains("car") || objectName.Contains("Police")) {
+                camShakePower = 0.3f;
+            }
+            if (objectName.Contains("Tank")) {
+                camShakePower = 0.4f;
+            }
 		}
 		if(objectName.Contains("Human")){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 5;
+
+			camShakePower = 0.05f;
 		}
 		if(objectName == "Start" || objectName == "Special" || objectName == "Bomb"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 2;
-		}
 
-		if (objectName != "Special" && objectName != "Bomb") {
-		//StartCoroutine (Shake ()); //Camera Shake
-			CamShake ();
+			camShakePower = 0.05f;
+
 		}
+        
+        //Camera Shake
+        CamShake ();
 
 		//Spawn Coins
 		GameObject coinsGroup = (GameObject)Instantiate (coinGroups[listItem], coinPos, Quaternion.identity);
@@ -480,46 +564,29 @@ public class GameManager : MonoBehaviour {
 		score += addValue * bonus;
 	}
 
-	//Spawn segment
-	public void NewSegment(){
-//		Debug.Log ("Spawning at " + segmentSpawnPos);
-		GameObject.Find("Grid").GetComponent<Grid> ().generateGrid(spawnPoint, segmentSpawnPos, segmentLength, segmentOffset);
-	}
-
 	//[X] iTween's camera shake
 	public void CamShake(){
-		float xPos = Random.Range (-.5f, .5f);
+		float xPos = Random.Range (-1 * camShakePower, camShakePower);
 
-		iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "y", 0.5f, "time", duration, "oncompletetarget", this.gameObject,"oncomplete", "CamFix")); //X & Y shake
+		iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "y", camShakePower, "time", duration, "oncompletetarget", this.gameObject,"oncomplete", "CamFix")); //X & Y shake
 		//iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "time", duration)); //X shake only
 	}
 
-	//- No longer called as causes camera issues if a new move is started before cam is back to home pos
-	public void CamKick(){ //Kicks cam back in Z 
-
-		iTween.ShakePosition(cam, iTween.Hash("z", -0.25f, "time", duration - 0.2f));
-		CamFix ();
-	} 
-
-	public void CamFix(){ //Make sure cam is in proper X & Y 
-		if(cam.transform.position.y < 1.5 || cam.transform.position.y > 1.5){
-			Debug.Log ("Moving Camera Back");
-			iTween.MoveTo(cam, iTween.Hash("x", camStartPos.x, "y", camStartPos.y, "time", 0));
-		}
-
+    //Make sure cam is in proper X & Y
+	public void CamFix(){
+        Debug.Log ("Moving Camera Back");
+        iTween.MoveTo(cam, iTween.Hash("x", camStartPos.x, "y", camStartPos.y, "time", 0));
 	}
 
 	public void Combo(){
-
 		comboStarted = true;
-		Debug.Log ("Combo Started");
-
+        //Debug.Log ("Combo Started");
 
 		comboAddToTimerCount++;
-		Debug.Log (comboAddToTimerCount);
+        //Debug.Log (comboAddToTimerCount);
 
 		comboCount++;
-		Debug.Log ("Combo" + comboCount);
+        //Debug.Log ("Combo" + comboCount);
 		comboTimer = 1.5f; //Combo time is always this value
 
 		if(comboCount > 10) {
@@ -539,7 +606,7 @@ public class GameManager : MonoBehaviour {
 
 		if(comboAddToTimerCount >= 5){
 			//levelTimer += 5.0f;
-			Debug.Log ("5 Seconds Added to Level Timer");
+            //Debug.Log ("5 Seconds Added to Level Timer");
 			//[TODO] Give players feedback that they have more time
 
 
@@ -550,13 +617,13 @@ public class GameManager : MonoBehaviour {
 
 	public void ComboEnd(){
 		comboStarted = false;
-		Debug.Log ("Combo Over");
+        //Debug.Log ("Combo Over");
 		comboCount = 0;
 		bonus = 1;
 	} 
 
 	public void loadScene() {
-        spawnTrigger.SetActive(false);
+        //spawnTrigger.SetActive(false);
 		GameObject[] segs = GameObject.FindGameObjectsWithTag("Segment");
 		GameObject[] obss = GameObject.FindGameObjectsWithTag("Obstacle");
 		foreach (GameObject seg in segs) {
@@ -582,7 +649,6 @@ public class GameManager : MonoBehaviour {
 		}
 
 		Debug.Log ("Restarting Level " + currentLevel);
-
 		
 		//iTween.MoveTo(cam, iTween.Hash ("x", 0.0f, "y", 1.0f, "z", -10.0f));
 		
@@ -596,11 +662,9 @@ public class GameManager : MonoBehaviour {
 		//Debug.Log ("Rotating Camera");
 		//End level
 		Application.LoadLevel ("GameOver");
-
 	}
 
 	public void ScoreScreen(){
-
 		if(Application.loadedLevelName == "GameOver"){
 			highScoreText = GameObject.Find("Best Score").GetComponent<TextMesh>();
 			//	levelCountText = GameObject.Find("Time Added").GetComponent<TextMesh>();
@@ -630,28 +694,6 @@ public class GameManager : MonoBehaviour {
 		}
 
 	}
-
-	/*
-	public void OnGUI() {
-		GUI.skin.label.normal.background = Color.black;
-		GUI.skin = menuSkin;
-		GUI.Label (new Rect(Screen.width - 110 , 10, 100, 30), "$"+score);
-		if(gameState == State.Menu && currentLevel != "GameOver") {
-			GUI.Label (new Rect(Screen.width/4 , Screen.height/4, Screen.width/2, Screen.height/2), "");
-			if(GUI.Button(new Rect(Screen.width/2-50, Screen.height/2-25, 100, 50), "Start")) {
-			GUI.Label (new Rect(Screen.width/4 , Screen.height/4, Screen.width/2, Screen.height/2), "");
-			if(GUI.Button(new Rect(Screen.width/2 -50, Screen.height/2-25, 100, 50), "Start")) {
-				Vector3 pos = Input.mousePosition;
-				pos.z = 3;
-				pos = Camera.main.ScreenToWorldPoint(pos);
-				Debug.Log(pos);
-				coinPos = pos;
-			    objectName = "Start";
-				CashOut(0);
-				gameState = State.InGame;
-			}
-		}
-	}*/
 
 	/*         -------Bad Camera Shake-----
 	IEnumerator Shake(){

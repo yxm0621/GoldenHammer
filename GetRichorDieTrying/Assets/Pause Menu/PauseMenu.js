@@ -1,7 +1,7 @@
 //*******************************************************************************
 //*																							*
 //*							Written by Grady Featherstone								*
-//										© Copyright 2011										*
+//										?Copyright 2011										*
 //*******************************************************************************
 var mainMenuSceneName : String;
 var pauseMenuFont : Font;

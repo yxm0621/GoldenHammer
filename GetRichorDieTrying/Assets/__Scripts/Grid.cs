@@ -49,11 +49,11 @@ public class Grid : MonoBehaviour {
 	}
 
 	//instanciate the new grid
-	public void generateGrid(GameObject spawnPoint, Vector3 pos, int gridLength, int gridWidth){
+	public GameObject generateGrid(GameObject spawnPoint, Vector3 pos, int gridLength, int gridWidth){
 		this.length = gridLength;
 		this.width = gridWidth;
 		GameObject newSeg = (GameObject) Instantiate (spawnPoint, pos, Quaternion.identity);
-		newSeg.AddComponent<LevelSegments>();
+        //newSeg.AddComponent<LevelSegments>();
         newSeg.name = "spawnPoint";
 		newSeg.tag = "Segment";
 
@@ -124,6 +124,7 @@ public class Grid : MonoBehaviour {
 //		playerMove = grid.canMove;
 //		GameManager.manager.addMovement (playerMove);
 //		newSeg.GetComponent<LevelSegments> ().segEmpty = playerMove;
+        return newSeg;
 	}
 
     //generate road with/without a hole

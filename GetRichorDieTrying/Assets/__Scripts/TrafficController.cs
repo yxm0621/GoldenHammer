@@ -91,7 +91,8 @@ public class TrafficController : MonoBehaviour {
         }
         animalNum = animals.Length;
         flyNum = flying.Length;
-		if (GameManager.gameState == GameManager.State.InGame) {
+        if (gameMain.gameState == GameManager.State.InGame)
+        {
 			humanSpawnTimer -= 1 * Time.deltaTime;
 			carSpawnTimer -= 1 * Time.deltaTime;
 			animalSpawnTimer -= 1 * Time.deltaTime;
@@ -188,7 +189,7 @@ public class TrafficController : MonoBehaviour {
 			}
 			if(gameMain.levelCount == 3){
 				humanSpawnTimer = humanSpawnTimer * 0.21f;
-				carSpawnTimer = carSpawnTimer * 0.25f;
+				carSpawnTimer = carSpawnTimer * 0.22f;
 				animalSpawnTimer = animalSpawnTimer * 0.21f;
 				flySpawnTimer = flySpawnTimer * 0.21f;
 			}

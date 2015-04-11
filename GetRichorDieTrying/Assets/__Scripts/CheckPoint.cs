@@ -2,19 +2,19 @@
 using System.Collections;
 
 public class CheckPoint : MonoBehaviour {
-	public int goal;
-	public GameManager gameMain;
-	
-	public GameObject 			barColor;		
-
+	public int                  goal;
+	public GameManager          gameMain;
+	public GameObject 			barColor;
+    public bool                 isFlicker;
+    public bool                 isCheck;
 
 	// Use this for initialization
 	void Start () {
 		gameMain = GameManager.manager;
-
 		barColor = GameObject.Find("CheckPointLine");
 		Debug.Log ("Found CheckPointLine");
-
+        isCheck = false;
+        isFlicker = false;
 	}
 	
 	// Update is called once per frame
@@ -23,7 +23,6 @@ public class CheckPoint : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 		if (goal > 0) {
-
 			//Checks if goal has been met. If not Display Goal message
 			if(gameMain.score > gameMain.levelGoal){
 				gameObject.transform.FindChild("check").GetComponent<TextMesh>().text = "Good Job!";
@@ -35,41 +34,74 @@ public class CheckPoint : MonoBehaviour {
 				gameObject.transform.FindChild("check").GetComponent<TextMesh>().text = goal.ToString("Goal $ " + "0");
 			}
 		}
+        if ((gameObject.transform.position.z <= 0f) && (gameMain.score < goal))
+        {
+            if (!isFlicker)
+            {
+                StartCoroutine(Flickering());
+                isFlicker = true;
+            }
+        }
+        if (gameObject.transform.position.z <= -.9f)
+        {
+            if (!isCheck)
+            {
+                CheckGoal();
+                isCheck = true;
+            }
+        }
 	}
 
-	void OnTriggerEnter(Collider other) {
-		if(other.tag == "Character"){
-			if(gameMain.score < goal){
-				Debug.Log("Goals not met. Time Up");
-				gameMain.GameOver ();
-				Destroy(this.gameObject);
-			}
-			
-			//Goal for the level has been met
-			if (gameMain.score >= goal){
-				Debug.Log ("Goals Met. Adding time. Raise goal.");
-				//gameMain.levelTimer = 30; //Adds 30 seconds to the level timer
-				gameMain.levelCount ++;
-				//gameMain.levelGoal *= 3; //Increase goal x3
+    //flicker to warn player
+    IEnumerator Flickering()
+    {
+        gameObject.transform.FindChild("CheckPointLine").gameObject.SetActive(false);
+        yield return new WaitForSeconds(.1f);
+        gameObject.transform.FindChild("CheckPointLine").gameObject.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        gameObject.transform.FindChild("CheckPointLine").gameObject.SetActive(false);
+        yield return new WaitForSeconds(.1f);
+        gameObject.transform.FindChild("CheckPointLine").gameObject.SetActive(true);
+    }
 
-				if(gameMain.levelCount == 1){
-					gameMain.levelTimer = 30;
-					gameMain.levelGoal = 1000;
-				}
-				if(gameMain.levelCount == 2){
-					gameMain.levelTimer = 30;
-					gameMain.levelGoal = 2000;
-				}
-				if(gameMain.levelCount == 3){
-					gameMain.levelTimer = 30;
-					gameMain.levelGoal = 3500;
-				}
-				if(gameMain.levelCount == 4){
-					gameMain.levelTimer = 30;
-					gameMain.levelGoal = 5000;
-				}
-			}
-		}
-	}
-	
+    //check whether the player meet the goal
+    void CheckGoal() {
+        //Goal for the level hasn't been met
+        if (gameMain.score < goal)
+        {
+            Debug.Log("Goals not met. Time Up");
+            gameMain.GameOver();
+            Destroy(this.gameObject);
+        }
+
+        //Goal for the level has been met
+        if (gameMain.score >= goal)
+        {
+            Debug.Log("Goals Met. Adding time. Raise goal.");
+            //gameMain.levelTimer = 30; //Adds 30 seconds to the level timer
+            gameMain.levelCount++;
+            //gameMain.levelGoal *= 3; //Increase goal x3
+
+            if (gameMain.levelCount == 1)
+            {
+                gameMain.levelTimer = 30;
+                gameMain.levelGoal = 1000;
+            }
+            if (gameMain.levelCount == 2)
+            {
+                gameMain.levelTimer = 30;
+                gameMain.levelGoal = 2000;
+            }
+            if (gameMain.levelCount == 3)
+            {
+                gameMain.levelTimer = 30;
+                gameMain.levelGoal = 3500;
+            }
+            if (gameMain.levelCount == 4)
+            {
+                gameMain.levelTimer = 30;
+                gameMain.levelGoal = 5000;
+            }
+        }
+    }
 }

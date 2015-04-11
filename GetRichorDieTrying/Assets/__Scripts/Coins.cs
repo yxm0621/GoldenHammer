@@ -30,7 +30,7 @@ public class Coins : MonoBehaviour {
 		}
 		//destroy coins
 		if(timer <= 0){
-			Debug.Log ("coin destroyed");
+            //Debug.Log ("coin destroyed");
 			Destroy (coin);
 		}
 	}

@@ -60,7 +60,6 @@
      <Compile Include="Assets\__Scripts\Grid.cs" />
      <Compile Include="Assets\__Scripts\HammerBehavior.cs" />
      <Compile Include="Assets\__Scripts\HumanBehavior.cs" />
-     <Compile Include="Assets\__Scripts\LevelSegments.cs" />
      <Compile Include="Assets\__Scripts\Moving.cs" />
      <Compile Include="Assets\__Scripts\NewSegTrigger.cs" />
      <Compile Include="Assets\__Scripts\ObjectManager.cs" />
