@@ -49,7 +49,7 @@ public class Grid : MonoBehaviour {
 	}
 
 	//instanciate the new grid
-	public GameObject generateGrid(GameObject spawnPoint, Vector3 pos, int gridLength, int gridWidth){
+	public GameObject generateGrid(GameObject spawnPoint, Vector3 pos, int gridLength, int gridWidth) {
 		this.length = gridLength;
 		this.width = gridWidth;
 		GameObject newSeg = (GameObject) Instantiate (spawnPoint, pos, Quaternion.identity);
@@ -58,8 +58,9 @@ public class Grid : MonoBehaviour {
 		newSeg.tag = "Segment";
 
 		//road
-        int hole = Random.Range(0, (width * 3));
+        int hole = Random.Range((width * 2)+1, (width * 3)); //cancel the hole for now
         generateRoad(road[0], hole, pos, newSeg);
+
 		//sidewalk
         //generateSidewalk(road[1], pos, newSeg);
         GameObject newRoad;
@@ -67,12 +68,14 @@ public class Grid : MonoBehaviour {
         newRoad.transform.parent = newSeg.transform;
         newRoad = (GameObject)Instantiate(road[1], new Vector3(pos.x - 1.5f, pos.y, pos.z), Quaternion.identity);
         newRoad.transform.parent = newSeg.transform;
+
 		//ground
         //generateGround(road[2], pos, newSeg);
         newRoad = (GameObject)Instantiate(road[2], new Vector3(pos.x + length / 4 + 1, pos.y, pos.z), Quaternion.identity);
         newRoad.transform.parent = newSeg.transform;
         newRoad = (GameObject)Instantiate(road[2], new Vector3(pos.x - length / 4 - 1, pos.y, pos.z), Quaternion.identity);
         newRoad.transform.parent = newSeg.transform;
+
 		//water
         //generateWater(road[3], pos, newSeg);
         newRoad = (GameObject)Instantiate(road[3], new Vector3(pos.x + totalLength / 4 + length / 4, pos.y, pos.z), Quaternion.identity);
@@ -90,9 +93,16 @@ public class Grid : MonoBehaviour {
 					GameObject newObj;
 					if(grid.items[x ,z].obj.name.Contains("env")
 //					   || grid.items[x ,z].obj.name.Contains("Tree")
-//					   || grid.items[x ,z].obj.name.Contains("Cube")
+                       || grid.items[x, z].obj.name == ("Cube 1")
 					   ) {
 						newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.5f, pos.y + .5f, pos.z-width/2+z +.5f), Quaternion.identity);
+                        if (grid.items[x, z].obj.name == ("Cube 1")) {
+                            if (pos.x - length / 2 + x > 0) {
+                                newObj.transform.localEulerAngles = new Vector3(0,90,0);
+                            } else {
+                                newObj.transform.localEulerAngles = new Vector3(0, -90, 0);
+                            }
+                        }
 					} else if (grid.items[x ,z].obj.name.Contains("Bomb")
 					           || grid.items[x ,z].obj.name.Contains("Special")){
 						newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.5f, pos.y + 1, pos.z-width/2+z +.5f), Quaternion.identity);
@@ -106,18 +116,6 @@ public class Grid : MonoBehaviour {
 //					GameObject newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(pos.x-length/2+x +.5f, pos.y, pos.z-width/2+z +.5f), Quaternion.identity);
 					newObj.transform.parent = newSeg.transform;
 					newObj.name = grid.items[x, z].obj.name;
-//					if (newObj.name == "Mshr1Prefab" || 
-//					    newObj.name == "Mshr2Prefab" ||
-//					    newObj.name == "Mshr3Prefab" ||
-//					    newObj.name == "Mshr4Prefab" ||
-//					    newObj.name == "Mshr5Prefab") {
-//						newObj.transform.localEulerAngles = new Vector3 (270, 0, 0);
-//						newObj.transform.position -= new Vector3(0,.5f,0);
-//					}
-//					newObj.GetComponent<ObjectManager>().objPosX = x;
-//					newObj.GetComponent<ObjectManager>().objPosZ = z;
-//					newObj.GetComponent<ObjectManager>().objLength = grid.items[x ,z].length;
-//					newObj.GetComponent<ObjectManager>().objWidth = grid.items[x ,z].width;
 				}
 			}
 		}
@@ -149,21 +147,18 @@ public class Grid : MonoBehaviour {
         }
     }
 
-    void generateSidewalk(GameObject road, Vector3 pos, GameObject newSeg)
-    {
+    void generateSidewalk(GameObject road, Vector3 pos, GameObject newSeg) {
 
         GameObject newRoad = (GameObject)Instantiate(road, new Vector3(pos.x, pos.y, pos.z), Quaternion.identity);
         newRoad.transform.parent = newSeg.transform;
     }
 
-    void generateGround(GameObject road, Vector3 pos, GameObject newSeg)
-    {
+    void generateGround(GameObject road, Vector3 pos, GameObject newSeg) {
 
         GameObject newRoad = (GameObject)Instantiate(road, new Vector3(pos.x, pos.y, pos.z), Quaternion.identity);
         newRoad.transform.parent = newSeg.transform;
     }
-    void generateWater(GameObject road, Vector3 pos, GameObject newSeg)
-    {
+    void generateWater(GameObject road, Vector3 pos, GameObject newSeg) {
 
         GameObject newRoad = (GameObject)Instantiate(road, new Vector3(pos.x, pos.y, pos.z), Quaternion.identity);
         newRoad.transform.parent = newSeg.transform;

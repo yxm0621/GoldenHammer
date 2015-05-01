@@ -88,7 +88,7 @@ public class TrafficObjects : MonoBehaviour {
             default:
                 break;
         }
-        gameObject.GetComponent<TrafficController>().car = lengthways;
+        gameObject.GetComponent<TrafficController>().cars = lengthways;
         gameObject.GetComponent<TrafficController>().people = creature;
         gameObject.GetComponent<TrafficController>().animals = crosswise;
         gameObject.GetComponent<TrafficController>().flying = crossfly;

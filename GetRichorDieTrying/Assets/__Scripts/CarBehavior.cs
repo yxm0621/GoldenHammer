@@ -4,10 +4,15 @@ using System.Collections;
 public class CarBehavior : MonoBehaviour {
 
 	public GameManager				gameMain;
-	
 	public GameObject				car;
-
 	public GameObject				human;
+    public ObjectManager            objManager;
+
+    public float                    runTime = 1f;
+    public float                    runDistance;
+    public float                    destination = -1f;
+    public Vector3                  carPos;
+    public float                    runSpeed;
 	
 //	public float					movementSpeed = 100.0f; //Seconds from end to end
 	
@@ -23,20 +28,21 @@ public class CarBehavior : MonoBehaviour {
 	
 //	public bool						rightLane;
 //	public bool						leftLane;
-
-	public int						value; //Value of object
-	public int						hitPoints; //Hits to break object
-	
-	public AudioClip				hitAudio;
 	
 	// Use this for initialization
 	void Start () {
-		
 		gameMain = GameManager.manager;
-		
 		car = this.gameObject;
-//		iTween.Init (car);
-//		
+        carPos = car.transform.position;
+        objManager = car.GetComponent<ObjectManager>();
+
+        objManager.value = 10;
+        objManager.hitPoints = 7;
+
+
+        //iTween.Init(car);
+        //iTween.MoveBy(car, iTween.Hash("z", -30, "time", 10, "easetype", "linear"));
+
 //		if(car.transform.position.x < 0){
 //			leftLane = true;
 //			Debug.Log ("Left Lane");
@@ -53,14 +59,22 @@ public class CarBehavior : MonoBehaviour {
 		
 		
 		//if(thisObject.name == "car" || thisObject.name == "car(Clone)"){
-			value = 10;
-			hitPoints = 7;
+            //value = 10;
+            //hitPoints = 7;
 		//}
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//cars move
+        //runSpeed = (carPos.z - destination) / runTime;
+        //runSpeed = runSpeed - gameMain.moveSpeed;
+        runSpeed = runDistance / runTime;
+        if (gameMain.gameState == GameManager.State.InGame)
+        {
+            //cars move
+            car.transform.Translate(Vector3.back * Time.deltaTime * runSpeed);
+        }
 		/*
 		if (rightLane) {
 			car.transform.Translate(Vector3.back * Time.deltaTime * .7f);
@@ -81,37 +95,26 @@ public class CarBehavior : MonoBehaviour {
 		}
 		
 
-		if(hitPoints <= 0){
-			
-			gameMain.objectName = car.name;
-			
-			//gameMain.score += value * gameMain.bonus; //Add value of item to score
-
-			//tell gamemain pos to Spawn coins
-			gameMain.coinPos = car.transform.position;
-			//Spawn Coins Here
-			gameMain.CashOut(10);
-
-			if (car.name.Contains("Police")) {
-				gameMain.killPolice++;
-			}
-			if (car.name.Contains("Tank")) {
-				gameMain.killTank++;
-			}
-
+		if(objManager.hitPoints <= 0) {
 			//Person falls out of car
-			Instantiate (human, car.transform.position, Quaternion.identity);
+            Vector3 humanPos = new Vector3(car.transform.position.x,
+                                           car.transform.position.y + .5f,
+                                           car.transform.position.z);
+            GameObject newHuman = (GameObject)Instantiate(human, humanPos, Quaternion.identity);
+            newHuman.transform.parent = gameMain.obstacleGroup.transform;
 
-			//Destroy
-			Destroy(car);
 		}
 	}
 
+    public void SetCar(float timer, float dis) {
+        runTime = timer;
+        runDistance = dis;
+    }
+
 	void OnCollisionEnter(Collision other) {
 		if(other.collider.tag == "Character"){
-			
-			Debug.Log("hit by Car!");
-			gameMain.audioSource.PlayOneShot (hitAudio);
+            //Debug.Log("hit by Car!");
+            gameMain.audioSource.PlayOneShot(objManager.hitAudio);
 			
 			//TODO end game when obstacle hit
 			gameMain.GameOver ();
@@ -119,8 +122,6 @@ public class CarBehavior : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		
-		
 		if(other.collider.tag == "Car"){
 //			if(leftLane){ //Checks which side game object started from and destroys it at end
 				
@@ -133,16 +134,5 @@ public class CarBehavior : MonoBehaviour {
 //			}
 		}
 
-	}
-
-	void OnMouseDown(){
-		GameObject.Find("Hammer").GetComponent<HammerBehavior>().hammerSmash(car.transform.position);
-		//gameMain.CamKick ();
-		
-		Debug.Log(car + " hit!!");
-		gameMain.audioSource.PlayOneShot (hitAudio);
-		//iTween.MoveFrom (cam, iTween.Hash("z", -0.001f, "time", 0.5f)); //Give the camera a little kick in Z
-		//iTween.MoveFrom(car, iTween.Hash ("z", currentPos.z + 0.25f, "y", currentPos.y + -0.25f, "time", 0.5f));
-		hitPoints--;
 	}
 }

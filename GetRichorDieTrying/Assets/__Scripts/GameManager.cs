@@ -16,6 +16,29 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject					cam;
 	public Vector3						camStartPos;
+    public GameObject                   characterObj;
+    public GameObject                   startMenuScene;
+    public GameObject                   startMenu;
+    public GameObject                   underground;
+    public GameObject                   obstacleGroup;
+    public GameObject                   itweenPath;
+
+    //characterController controls the main character
+    public characterController          character;
+
+    //TrafficController controls obstacles
+    public TrafficController            traffic;
+
+    //GlobalObjects controls the light and global objects 
+    public GlobalObjects                globalObj;
+
+    //scene manager controls the scene change and load new assets
+    public SceneManager                 sceneManager;
+
+    //2D UI for buttons and texts
+    public GUISkin                      menuSkin;
+    public bool                         isItemShow = false;
+    public bool                         isButtonClick = false;
 
 //	public GameObject					uiTextObj;
 //	public GameObject					goalTextObj;
@@ -30,7 +53,9 @@ public class GameManager : MonoBehaviour {
 	public TextMesh						goalText;
 	public int							levelCount = 0; //This is changed in CheckPoint
 	public float						moveSpeed;
-    public float                        initialSpeed = .7f;
+    public float                        initialSpeed = 1;
+    public int							distance = 0;
+	public TextMesh						distanceText;
 
 	public int							bonus = 1;
 
@@ -39,7 +64,8 @@ public class GameManager : MonoBehaviour {
 
 	public float						levelTimer = 30.0f;
 	public TextMesh						timerText;
-	public GameObject					checkPoint;
+	public GameObject					checkPoint; //Check Point in the scene
+    public GameObject                   checkPointObj; //Check Point prefab
 	public float						timerAdd = 1.0f;
 	//public TextMesh						levelCountText;
 
@@ -63,6 +89,8 @@ public class GameManager : MonoBehaviour {
 	public int							initialSegNum = 5;
     public GameObject[]                 segments;
 	public List<bool[,]>				characterMove = new List<bool[,]>();
+    //GameObject                          spawnTrigger;
+    public int                          segNum = 0;
 
 	//coins
 	public GameObject					cube_coin;
@@ -84,6 +112,14 @@ public class GameManager : MonoBehaviour {
 	public Vector3						spawnHumanPos;
 	public string						buildingType;
 
+    //feedback based on player's behavior
+    public bool                         killAnimal = false;
+    public int                          killPeople;
+    public int                          killPolice;
+    public int                          killTank;
+    public int                          killHelicopter;
+    //public TextMesh						feedbackText;
+
 	//audio sources
 	public AudioSource					audioSource;
 	public AudioClip					finalSmashAudio;
@@ -95,34 +131,15 @@ public class GameManager : MonoBehaviour {
 	public AudioSource					bgmSmash;
 	public AudioSource					bgmCombo;
 
-	//feedback based on player's behavior
-	public bool                         killAnimal = false;
-	public int							killPeople;
-	public int 							killPolice;
-	public int							killTank;
-	public int							killHelicopter;
-	//public TextMesh						feedbackText;
-
-	//scene manager to control the scene change and load new assets
-	public SceneManager                 sceneManager;
-
 	public AudioClip					cityBGM;
 	//public AudioClip					citySmashBGM; //Sounds more annoying than helpful so turned off
 	public AudioClip					spaceBGM;
-	
-	public GUISkin						menuSkin;
 
 	//special effect data
 	public GameObject					explodeEffect;
 	public GameObject					lineEffect;
 	public AudioClip					explodeSFX;
 	public AudioClip					lineSFX;
-
-	public GameObject					itweenPath;
-
-	public TrafficController			traffic;
-    //GameObject                          spawnTrigger;
-    public GameObject                   underground;
 
 	void Awake(){
 //		DontDestroyOnLoad(camPath);
@@ -132,6 +149,7 @@ public class GameManager : MonoBehaviour {
 			DontDestroyOnLoad(this.gameObject);
 			manager = this;
 			Instantiate (itweenPath, new Vector3(0,0,0), Quaternion.identity);
+            mainLevel = Application.loadedLevelName;
 		} else if(manager != this){ //If there is another Game Manager destroy's this one
 			Destroy(gameObject);
 		}
@@ -147,14 +165,12 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {
-		
 //		uiTextObj.SetActive (false);
 
 		currentLevel = Application.loadedLevelName;
 
 		cam = Camera.main.gameObject;
 		iTween.Init (cam);
-
 		camStartPos = cam.transform.position;
 
 		audioSource = GameObject.Find ("Audio Source").GetComponent<AudioSource>();
@@ -164,24 +180,27 @@ public class GameManager : MonoBehaviour {
 		bgmCombo = GameObject.Find ("GH-BGM-Combo").GetComponent<AudioSource>();
 //		Debug.Log (audioSource + " Found");
 
-		if(currentLevel != "GameOver"){
+		if((currentLevel != "GameOver") && (currentLevel != "Menu")){
+            startMenu = (GameObject)Instantiate(startMenuScene, startMenuScene.transform.position, startMenuScene.transform.rotation);
+
             gameState = State.Menu;
 			score = 0;
 			comboMax = 0;
-			levelCount = 0;
+			levelCount = 1;
 			
 			levelGoal = 500;
 			
 			levelTimer = 30;
 		}
 
-
-		scoreText = GameObject.Find("Score").GetComponent<TextMesh>();
-		timerText = GameObject.Find("Timer").GetComponent<TextMesh>();
-		comboText = GameObject.Find("Combo").GetComponent<TextMesh>();
-		comboTimerText = GameObject.Find("ComboTimer").GetComponent<TextMesh>();
-		goalText = GameObject.Find ("Goal").GetComponent<TextMesh>();
-
+        if (currentLevel != "Menu") {
+            scoreText = GameObject.Find("Score").GetComponent<TextMesh>();
+            timerText = GameObject.Find("Timer").GetComponent<TextMesh>();
+            comboText = GameObject.Find("Combo").GetComponent<TextMesh>();
+            comboTimerText = GameObject.Find("ComboTimer").GetComponent<TextMesh>();
+            goalText = GameObject.Find("Goal").GetComponent<TextMesh>();
+            distanceText = GameObject.Find("Distance").GetComponent<TextMesh>();
+        }
 		//feedback for killing!
 		killPeople = 0;
 		killPolice = 0;
@@ -197,31 +216,55 @@ public class GameManager : MonoBehaviour {
 		coinGroups.Add (car_coin);
 		coinGroups.Add (human_coin);
 
-		sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
-		sceneManager.changeScene(SceneManager.scene.city);
+        if (GameObject.Find("SceneManager") != null) {
+            sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+            sceneManager.changeScene(SceneManager.scene.city);
+        }
 		if (GameObject.Find("Traffic") != null) {
 			traffic = GameObject.Find("Traffic").GetComponent<TrafficController>();
 		}
+        if (GameObject.Find("GlobalObjects") != null) {
+            globalObj = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>();
+        }
+        if (GameObject.Find("Player") != null) {
+            characterObj = GameObject.Find("Player");
+            character = characterObj.GetComponent<characterController>();
+            characterObj.transform.position = new Vector3(1.2f, .5f, -5.5f);
+            characterObj.transform.eulerAngles = new Vector3(0f, 180f, 0f);
+            Debug.Log(characterObj.animation.clip.name);
+            characterObj.animation.Play("idle");
+        }
+
 		//try space scene
-        //		GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunDown();
-        //		GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().moonDown();
+        //		globalObj.sunDown();
+        //		globalObj.moonDown();
         //spawnTrigger= GameObject.Find("SpawnTrigger");
-		segmentsInitialize ();
-        underground = GameObject.Find("Underground");
-        //segments = new GameObject[initialSegNum];
+        if (currentLevel != "Menu")
+        {
+            segmentsInitialize();
+            underground = GameObject.Find("Underground");
+            //segments = new GameObject[initialSegNum];
+        }
 	}
 
 	// Update is called once per frame
 	void Update () {
+        //int i = Random.Range(0, 100);
+        //Debug.Log(i);
 //		if(currentLevel != "GameOver") {
 		switch(gameState) {
 		case State.Menu:
-			GameObject.Find("Player").GetComponent<characterController>().canControl = false;
-			if(comboStarted){
+            if (characterObj != null) {
+                character.canControl = false;
+            }
+			if(comboStarted) {
 				ComboEnd ();
 			}
 			//temp trigger
-//			gameState = State.InGame;
+            if (characterObj != null && characterObj.transform.position.z >= -1.4f) {
+                gameState = State.InGame;
+                Destroy(startMenu);
+            }
 			break;
 		case State.InGame:
             SegMove();
@@ -269,19 +312,23 @@ public class GameManager : MonoBehaviour {
 //				Debug.Log("comboStop");
 				bgmCombo.Stop();
 			}
-			GameObject.Find("Player").GetComponent<characterController>().canControl = true;
+			character.canControl = true;
 //			uiTextObj.SetActive(true);
 
 			levelTimer -= 1 * Time.deltaTime;
 			comboTimer -= 1 * Time.deltaTime;
-
-			comboText.text = comboCount.ToString("Combo " + "0");
-			goalText.text = levelGoal.ToString("Goal " + "$0");
-
-			if(comboTimer <= 0 && comboStarted){
+            if(comboTimer <= 0 && comboStarted) {
 				ComboEnd ();
 			}
-			
+            
+			goalText.text = levelGoal.ToString("Goal " + "$0");
+			//update distance text
+			if(distance < 1000){
+                distanceText.text = distance.ToString("0");
+			} else{
+                distanceText.text = distance.ToString("0,000");
+			}
+
 			//update score text
 			if(score < 1000){
 				scoreText.text = score.ToString ("$ " + "0");
@@ -295,21 +342,23 @@ public class GameManager : MonoBehaviour {
 			timerText.text = "";
 
 			//update combo timer
-			if (comboTimer > 0) {
-				comboTimerText.text = comboTimer.ToString("n2");
-			} else {
-				comboTimerText.text = "";
-			}
+            if (comboCount > 0) {
+                comboText.text = comboCount.ToString("0" + " Combo");
+                comboTimerText.text = comboTimer.ToString("n2");
+            } else {
+                comboText.text = "";
+                comboTimerText.text = "";
+            }
 			
 			if(score > highScore){ //Set HighScore
 				highScore = score;
 			}
 
-			if(levelTimer <= 10){
-				GameObject checkGoal = (GameObject) Instantiate(checkPoint, checkPoint.transform.position, Quaternion.identity);
-				checkGoal.GetComponent<CheckPoint>().goal = levelGoal;
-				levelTimer  = 300; //Ensures that more checkpoints are not put into the ground until actually ready
-			}
+            //if(levelTimer <= 10){
+            //    checkPoint = (GameObject)Instantiate(checkPointObj, checkPointObj.transform.position, Quaternion.identity);
+            //    checkPoint.GetComponent<CheckPoint>().goal = levelGoal;
+            //    levelTimer  = 300; //Ensures that more checkpoints are not put into the ground until actually ready
+            //}
 			
 			//kill Animal
 			if (killAnimal) {
@@ -332,13 +381,17 @@ public class GameManager : MonoBehaviour {
 
 			break;
 		case State.Pause:
-			GameObject.Find("Player").GetComponent<characterController>().canControl = false;
+			character.canControl = false;
 			break;
 		case State.Over:
+            //cam = Camera.main.gameObject;
+            //cam.transform.position = new Vector3(-1f, 1.5f, -7f);
+            //cam.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
+
             SegMove();
             if (GameObject.Find("Player") != null)
             {
-                GameObject.Find("Player").GetComponent<characterController>().canControl = false;
+                character.canControl = false;
             }
 			if(comboStarted){
 				ComboEnd ();
@@ -356,13 +409,38 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+    IEnumerator GameStart() {
+        //cam.transform.position = new Vector3(-1f, 1.5f, -7f);
+        //cam.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
+        //characterObj.transform.position -= new Vector3(.4f, 0f, 0f);
+        //characterObj.rigidbody.AddForce(Vector3.up * 1000);
+        iTween.MoveTo(characterObj, iTween.Hash("x", .8f, "y", 1.4f, "z", -6.3f, "time", .5f, "easetype", iTween.EaseType.easeInCubic));
+        characterObj.animation.Play("run");
+
+        yield return new WaitForSeconds(.5f);
+        iTween.MoveTo(cam, iTween.Hash("x", .5f, "y", 1.5f, "z", -2f, "time", 2f, "easetype", iTween.EaseType.easeInCubic));
+        iTween.RotateTo(cam, iTween.Hash("x", 20f, "y", 0f, "z", 0f, "time", 2f, "easetype", iTween.EaseType.easeInCubic));
+        iTween.MoveTo(characterObj, iTween.Hash("x", .5f, "y", .5f, "z", -1.4f, "time", 2f, "easetype", iTween.EaseType.easeInQuad));
+        iTween.RotateTo(characterObj, new Vector3(0f, 0f, 0f), 1f);
+        characterObj.animation.Play("run");
+
+        iTween.RotateTo(globalObj.lightController, iTween.Hash("x", 50f, "y", 330f, "z", 0f, "time", 2f, "easetype", iTween.EaseType.easeInCubic));
+        //globalObj.lightController.transform.eulerAngles = new Vector3(50, 330, 0);
+
+        camStartPos = new Vector3(.5f, 1.5f, -2f);
+        //GameObject light = GameObject.Find("Light");
+        //if (light != null) {
+        //    light.transform.localEulerAngles = new Vector3(60f, 70f, 0f);
+        //}
+    }
+
     void segmentsInitialize()
     {
         segmentSpawnPos = new Vector3(0.0f, 0.0f, 0.0f);
 
-        for (int i = 0; i < initialSegNum; ++i)
-        {
+        for (int i = 0; i < initialSegNum; ++i){
             segments[i] = GameObject.Find("Grid").GetComponent<Grid>().generateGrid(spawnPoint, segmentSpawnPos, segmentLength, segmentOffset);
+            segNum++;
             segmentSpawnPos.z += segmentOffset;
         }
         segmentSpawnPos.z -= segmentOffset;
@@ -377,6 +455,12 @@ public class GameManager : MonoBehaviour {
     {
         //		Debug.Log ("Spawning at " + segmentSpawnPos);
         GameObject newSeg = GameObject.Find("Grid").GetComponent<Grid>().generateGrid(spawnPoint, segmentSpawnPos, segmentLength, segmentOffset);
+        segNum++;
+        if ((segNum - 1) % 5 == 0) {
+            checkPoint = (GameObject)Instantiate(checkPointObj, checkPointObj.transform.position, Quaternion.identity);
+            //checkPoint.GetComponent<CheckPoint>().goal = levelGoal;
+            checkPoint.transform.parent = newSeg.transform;
+        }
         int i = 0;
         while(i != (initialSegNum-1)) {
             segments[i] = segments[++i];
@@ -388,16 +472,26 @@ public class GameManager : MonoBehaviour {
     public void SegMove() {
         //change the speed based on the combo
         if (bonus >= 10) {
-            moveSpeed = initialSpeed * 5;
+            moveSpeed = initialSpeed * 4;
+            if (gameState == State.InGame) {
+                distance += 8;
+            }
         } else if (bonus >= 5) {
-            moveSpeed = initialSpeed * 2.5f;
+            moveSpeed = initialSpeed * 2;
+            if (gameState == State.InGame) {
+                distance += 2;
+            }
         } else {
             moveSpeed = initialSpeed;
+            if (gameState == State.InGame) {
+                distance ++;
+            }
         }
 
         //move segments
         if (segments[0] != null) {
             segments[0].transform.Translate(new Vector3(0, 0, -1) * Time.deltaTime * moveSpeed);
+            
             for (int i = 1; i < initialSegNum; i++) {
                 segments[i].transform.position = new Vector3(segments[i].transform.position.x,
                                                              segments[i].transform.position.y,
@@ -408,6 +502,11 @@ public class GameManager : MonoBehaviour {
                 Destroy(segments[0]);
                 NewSegment();
             }
+        }
+
+        //move obstacles
+        if (obstacleGroup != null) {
+            obstacleGroup.transform.Translate(new Vector3(0, 0, -1) * Time.deltaTime * moveSpeed);
         }
     }
 	//Add grid info
@@ -451,7 +550,7 @@ public class GameManager : MonoBehaviour {
         //Debug.Log (objectName + " Monitized");
 
 		//Check which item was destroyed - [TODO] Save value for amount of screenshake
-		if(objectName == "Cube" || objectName == "Cube_1"){
+		if((objectName.Contains("Cube")) && (objectName != "Cube_2")){
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 0;
 
@@ -501,7 +600,7 @@ public class GameManager : MonoBehaviour {
 
 			camShakePower = 0.75f;
 
-			GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunUp();
+            globalObj.sunUp();
 		}
 		if(objectName == "Sun"){
 			audioSource.PlayOneShot (cloudSmash);
@@ -509,7 +608,7 @@ public class GameManager : MonoBehaviour {
 
 			camShakePower = 0.7f;
 
-            GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunDown();
+            globalObj.sunDown();
 		}
 		if(objectName == "Moon"){
 			//change scene to space
@@ -518,7 +617,7 @@ public class GameManager : MonoBehaviour {
 
 			camShakePower = 0.7f;
 
-            GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().moonDown();
+            globalObj.moonDown();
 		}
 		if(objectName.Contains("car") || objectName.Contains("Police") || objectName.Contains("Tank")){
 			audioSource.PlayOneShot (finalSmashAudio);
@@ -545,16 +644,24 @@ public class GameManager : MonoBehaviour {
 		}
         
         //Camera Shake
-        CamShake ();
+        if(objectName == "Start"){
+            StartCoroutine(GameStart());
+		} else if ((objectName == "Encyclopedia")
+                ||(objectName == "Achievement")
+                ||(objectName == "Inventory")
+                ||(objectName == "Store")
+                ||(objectName == "Setting")
+                ||(objectName == "Credits")
+                ||(objectName == "BackToMenu")) {
+            //menu items
+        } else{
+            CamShake ();
+        }
 
 		//Spawn Coins
 		GameObject coinsGroup = (GameObject)Instantiate (coinGroups[listItem], coinPos, Quaternion.identity);
 		coinsGroup.GetComponent<CoinsGroup> ().value = value;
 		audioSource.PlayOneShot (coinDropAudio);
-
-		if(objectName == "Start"){
-			gameState = State.InGame;
-		}
 
 		//Combo Count
 		Combo ();
@@ -695,6 +802,32 @@ public class GameManager : MonoBehaviour {
 
 	}
 
+    public void OnGUI() {
+        //GUI.skin.label.normal.background = Color.black;
+		GUI.skin = menuSkin;
+        //GUI.Label (new Rect(Screen.width - 110 , 10, 100, 30), "$"+score);
+		if(gameState == State.InGame) {
+            //GUI.Label (new Rect(Screen.width/4 , Screen.height/4, Screen.width/2, Screen.height/2), "");
+            if (isItemShow) {
+                GUI.Label(new Rect(Screen.width - 70, 0, 70, Screen.height), "items");
+                if (GUI.Button(new Rect(Screen.width - 60, 100, 50, 50), "1")) {
+                    GameObject line = (GameObject)Instantiate(lineEffect, characterObj.transform.position, Quaternion.identity);
+                    line.transform.eulerAngles = new Vector3(0,1,0);
+                    line.name = lineEffect.name;
+                    audioSource.PlayOneShot(lineSFX);
+                }
+                if (GUI.Button(new Rect(Screen.width - 60, 170, 50, 50), "2")) {
+                }
+                if (GUI.Button(new Rect(Screen.width - 60, 240, 50, 50), "3")) {
+                }
+                if (GUI.Button(new Rect(Screen.width - 60, 310, 50, 50), "4")) {
+                }
+            }
+			if(GUI.Button(new Rect(Screen.width-60, 10, 50, 50), "=")) {
+                isItemShow = !isItemShow;
+            }
+		}
+	}
 	/*         -------Bad Camera Shake-----
 	IEnumerator Shake(){
 		Debug.Log ("Begin Camera Shake");

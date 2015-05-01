@@ -1,20 +1,14 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-<<<<<<< HEAD
-=======
 Project("{48D3DD98-D494-5930-1BF3-EA9984E79101}") = "GetRichorDieTrying", "Assembly-CSharp-firstpass.csproj", "{AD6A2E00-3047-3B61-7497-46AD18319C9B}"
 EndProject
->>>>>>> origin/master
 Project("{48D3DD98-D494-5930-1BF3-EA9984E79101}") = "GetRichorDieTrying", "Assembly-CSharp.csproj", "{7B77C310-A7A3-7D09-29C4-9D7E4AF2DED3}"
 EndProject
 Project("{48D3DD98-D494-5930-1BF3-EA9984E79101}") = "GetRichorDieTrying", "Assembly-CSharp-Editor.csproj", "{5010A273-EF07-8FCC-B7F2-80E533019C2E}"
 EndProject
-<<<<<<< HEAD
-=======
 Project("{48D3DD98-D494-5930-1BF3-EA9984E79101}") = "GetRichorDieTrying", "Assembly-UnityScript-firstpass.unityproj", "{A35C407F-8542-CC5E-39AF-91865115F1C6}"
 EndProject
->>>>>>> origin/master
 Project("{48D3DD98-D494-5930-1BF3-EA9984E79101}") = "GetRichorDieTrying", "Assembly-UnityScript.unityproj", "{D55677D8-6B2D-D287-EEEF-88371F5C48F4}"
 EndProject
 Global
@@ -23,13 +17,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-<<<<<<< HEAD
-=======
 		{AD6A2E00-3047-3B61-7497-46AD18319C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD6A2E00-3047-3B61-7497-46AD18319C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD6A2E00-3047-3B61-7497-46AD18319C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD6A2E00-3047-3B61-7497-46AD18319C9B}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> origin/master
 		{7B77C310-A7A3-7D09-29C4-9D7E4AF2DED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B77C310-A7A3-7D09-29C4-9D7E4AF2DED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B77C310-A7A3-7D09-29C4-9D7E4AF2DED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,13 +29,10 @@ Global
 		{5010A273-EF07-8FCC-B7F2-80E533019C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5010A273-EF07-8FCC-B7F2-80E533019C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5010A273-EF07-8FCC-B7F2-80E533019C2E}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
-=======
 		{A35C407F-8542-CC5E-39AF-91865115F1C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A35C407F-8542-CC5E-39AF-91865115F1C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A35C407F-8542-CC5E-39AF-91865115F1C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A35C407F-8542-CC5E-39AF-91865115F1C6}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> origin/master
 		{D55677D8-6B2D-D287-EEEF-88371F5C48F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D55677D8-6B2D-D287-EEEF-88371F5C48F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D55677D8-6B2D-D287-EEEF-88371F5C48F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,57 +41,19 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-<<<<<<< HEAD
-																																																																																																												GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																GlobalSection(MonoDevelopProperties) = preSolution
 =======
-																																																																																																																																																																																																																																																																																							GlobalSection(MonoDevelopProperties) = preSolution
->>>>>>> origin/master
-=======
-																																																																											GlobalSection(MonoDevelopProperties) = preSolution
->>>>>>> Stashed changes
-=======
-																																																						GlobalSection(MonoDevelopProperties) = preSolution
->>>>>>> FETCH_HEAD
-=======
-<<<<<<< Updated upstream
-																																													GlobalSection(MonoDevelopProperties) = preSolution
-=======
-																																												GlobalSection(MonoDevelopProperties) = preSolution
-=======
-																																			GlobalSection(MonoDevelopProperties) = preSolution
->>>>>>> Stashed changes
->>>>>>> Stashed changes
->>>>>>> Stashed changes
-=======
-																																				GlobalSection(MonoDevelopProperties) = preSolution
->>>>>>> FETCH_HEAD
-=======
-																																	GlobalSection(MonoDevelopProperties) = preSolution
->>>>>>> FETCH_HEAD
-=======
-<<<<<<< HEAD
-																																			GlobalSection(MonoDevelopProperties) = preSolution
-=======
-<<<<<<< HEAD
-																											GlobalSection(MonoDevelopProperties) = preSolution
-=======
-																																	GlobalSection(MonoDevelopProperties) = preSolution
->>>>>>> FETCH_HEAD
->>>>>>> origin/master
->>>>>>> FETCH_HEAD
-=======
-																							GlobalSection(MonoDevelopProperties) = preSolution
+																																																																		GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> Stashed changes
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
-		$0.TextStylePolicy = $1
+		$0.TextStylePolicy = $3
 		$1.inheritsSet = null
 		$1.scope = text/x-csharp
 		$0.CSharpFormattingPolicy = $2
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
-		$0.TextStylePolicy = $3
 		$3.FileWidth = 120
 		$3.TabWidth = 4
 		$3.EolMarker = Unix

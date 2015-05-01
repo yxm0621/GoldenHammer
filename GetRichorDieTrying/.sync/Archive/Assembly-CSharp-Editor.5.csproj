@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_DUCK_TYPING</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -46,79 +46,246 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-     <Compile Include="Assets\Buildr\Editor\BuildrBuiltInTextureEditor.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeBuilding.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeDetails.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeEditor.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeExport.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeFacades.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeFloorplan.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeHUD.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeOptions.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeRoofs.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeTextures.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditorData.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrGenerateModeEditor.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrImporter.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrMenu.cs" />
-     <Compile Include="Assets\Buildr\Scripts\Utils\Editor\BuildrXMLExporter.cs" />
-     <Compile Include="Assets\Buildr\Scripts\Utils\Editor\BuildrXMLImporter.cs" />
-     <Compile Include="Assets\Buildr\Scripts\Utils\Editor\FBXExporter.cs" />
-     <Compile Include="Assets\Buildr\Scripts\Utils\Editor\OBJExporter.cs" />
      <Compile Include="Assets\Editor\SetPivot.cs" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
-     <None Include="Assets\Buildr\XML\none.xml" />
-     <None Include="Assets\Buildr\XML\georgianTextures.xml" />
-     <None Include="Assets\Buildr\XML\hongKongTextures.xml" />
-     <None Include="Assets\Buildr\XML\hongKongStyle.xml" />
-     <None Include="Assets\Buildr\XML\alltextures.xml" />
-     <None Include="Assets\Buildr\versionlog.txt" />
-     <None Include="Assets\Buildr\XML\georgianStyle.xml" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
-     <None Include="Assets\Buildr\readme.txt" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
-     <None Include="Assets\Buildr\XML\parisstyle.xml" />
-     <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
-     <None Include="Assets\Buildr\Textures\license.txt" />
-     <None Include="Assets\Buildr\XML\paristextures.xml" />
-     <None Include="Assets\Models\Mushroom_Collection\Readme.txt" />
-     <None Include="Assets\Buildr\Textures\textures.xml" />
-     <None Include="Assets\Models\Ornamental Flower Set\Shaders\Transparent-BumpSpecNoCull.shader" />
-=======
-     <Compile Include="Assets\Editor\SetPivot.cs" />
+     <Compile Include="Assets\GoogleFu\Editor\GoogleFu.cs" />
+     <Compile Include="Assets\GoogleFu\Editor\GoogleFuClasses.cs" />
+     <Compile Include="Assets\GoogleFu\Editor\GoogleFuEditor.cs" />
+     <Compile Include="Assets\GoogleFu\Editor\GoogleFuLanguages.cs" />
+     <Compile Include="Assets\GoogleFu\Editor\GoogleFuMimeType.cs" />
+     <Compile Include="Assets\GoogleFu\Editor\Localization.cs" />
+     <Compile Include="Assets\GoogleFu\Samples\Scripts\Editor\CharacterStatsSampleEditor.cs" />
+     <Compile Include="Assets\VoxelBusters\NativePlugins\Editor\Menu\Menu.cs" />
+     <Compile Include="Assets\VoxelBusters\NativePlugins\Editor\PostProcess\PostProcessBuild.cs" />
+     <Compile Include="Assets\VoxelBusters\NativePlugins\Editor\WelcomeTour\WelcomeTourWindow.cs" />
+     <Compile Include="Assets\VoxelBusters\NativePlugins\Plugins\Features\Billing\DataTypes\Product\Editor\BillingProductDrawer.cs" />
+     <Compile Include="Assets\VoxelBusters\NativePlugins\Scripts\AddressBook\Editor\EditorAddressBookInspector.cs" />
+     <Compile Include="Assets\VoxelBusters\NativePlugins\Scripts\NP\Settings\Editor\NPSettingsInspector.cs" />
+     <Compile Include="Assets\VoxelBusters\NativePlugins\Scripts\Notification\Editor\EditorNotificationCenterInspector.cs" />
+     <Compile Include="Assets\VoxelBusters\NativePlugins\Scripts\Notification\Editor\EditorPushNotificationService.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\Product\Dashboard\Editor\ProductDashboardInspector.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\MiniJSON\MiniJSON.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXBuildFile.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXBuildPhase.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXDictionary.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXFileReference.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXGroup.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXList.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXObject.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXParser.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXProject.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXSortedDictionary.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXVariantGroup.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\XCBuildConfiguration.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\XCConfigurationList.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\XCMod.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\XCProject.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\XCodePostProcess.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\CustomProperty\ArrayDrawer\Editor\ArrayDrawer.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\CustomProperty\EnumMask\Editor\EnumMaskFieldDrawer.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\CustomProperty\OnValueChange\Editor\ExecuteOnValueChangeDrawer.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\CustomProperty\Regex\Editor\RegexDrawer.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\Editor\Helper\ArrayInspector.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\Editor\UnityEditorUtility.cs" />
+     <Compile Include="Assets\VoxelBusters\Utility\Web\Demo\Scripts\DownloadTexture\Editor\DownloadTextureDemoInspector.cs" />
      <Compile Include="Assets\iTweenEditor\Editor\iTweenEventDataEditor.cs" />
      <Compile Include="Assets\iTweenEditor\Editor\iTweenPathEditor.cs" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-it\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\color\common_signin_btn_text_light.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-mr-rIN\common_strings.xml" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ar\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\README.txt" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-zh-rTW\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\native-plugins_lib\res\layout\np_webview_layout.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-zh-rCN\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-en-rIN\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\maps_attrs.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-my-rMM\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ru\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\drawable\common_signin_btn_icon_dark.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-it\values.xml" />
+     <None Include="Assets\VoxelBusters\NativePlugins\Readme.txt" />
+     <None Include="Assets\Plugins\Android\AndroidManifest_root_activity_settings_sample.txt" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-fr\values.xml" />
+     <None Include="Assets\Plugins\Android\native-plugins_lib\res\values\np_colors.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-si-rLK\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-sw\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-en-rGB\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-xhdpi-v4\values.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-lv\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-uk\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-tl\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ja\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-cs\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-nb\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-sl\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ko\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-fi\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-bn-rBD\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-mn-rMN\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values\values.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\wallet_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-es\wallet_strings.xml" />
      <None Include="Assets\Art\KY_effects\FX_free_pack\ReadMe.txt" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\drawable\tw__login_btn_pressed.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\version.xml" />
+     <None Include="Assets\Plugins\Android\native-plugins_lib\res\values\np_styles.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\drawable\common_signin_btn_icon_light.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-nl\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\drawable\tw__login_btn.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\wallet_styles.xml" />
+     <None Include="Assets\Plugins\Android\native-plugins_lib\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-uz-rUZ\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\common_attrs.xml" />
+     <None Include="Assets\Plugins\Android\native-plugins_lib\res\values-v11\styles.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-el\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ms-rMY\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\youtube_lib\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ur-rPK\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-gl-rES\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-is-rIS\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-sr\common_strings.xml" />
      <None Include="Assets\iTweenEditor\README.txt" />
+     <None Include="Assets\VoxelBusters\Utility\ThirdParty\ExifLib\License.txt" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-fr\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\drawable\common_signin_btn_text_light.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-pt\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\drawable\tw__login_btn_default.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-ko\values.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\admob_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-ru\values.xml" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-hr\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\drawable\common_signin_btn_text_dark.xml" />
      <None Include="Assets\Models\PrimitivePlus\Documentation\ReadMe.txt" />
+     <None Include="Assets\__Scripts\data\Obstacles.txt" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-kn-rIN\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-zu\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\support_lib\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ta-rIN\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-en-rSS\values.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-bg\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-es\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-pt\values.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-hi\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-te-rIN\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\native-plugins_lib\res\values-v14\styles.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\drawable\tw__transparent.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-fa\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-de\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\NativePluginsAndroidReadMe.txt" />
+     <None Include="Assets\Plugins\Android\native-plugins_lib\res\values\com_crashlytics_export_strings.xml" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-pl\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-en-rXX\values.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-vi\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-hu\common_strings.xml" />
      <None Include="Assets\Art\Fonts\Silkscreen\Kottke Silkscreen License.txt" />
      <None Include="Assets\Art\Skybox\Fantasy Skybox FREE\Readme\Readme.txt" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\admob_iap_style.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-sk\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-de\values.xml" />
+     <None Include="Assets\Plugins\Android\voxelbusters_utility_lib\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-zh-rHK\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-hdpi-v4\values.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-kk-rKZ\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ro\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\color\wallet_primary_text_holo_light.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\common_colors.xml" />
+     <None Include="Assets\Plugins\Android\native-plugins_lib\res\layout\np_progressbar_layout.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-lt\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-nl\values.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ml-rIN\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ky-rKG\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-da\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\drawable\tw__login_btn_disabled.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-sv\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-in\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-km-rKH\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\native-plugins_lib\proguard.txt" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-pt-rPT\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-ja\values.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\drawable\tw__login_btn_text_color_light.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ka-rGE\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\native-plugins_lib\res\values\np_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\color\wallet_secondary_text_holo_dark.xml" />
      <None Include="Assets\__Scripts\data\sceneObjData.txt" />
->>>>>>> origin/master
+     <None Include="Assets\Plugins\Android\twitter_lib\proguard.txt" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-iw\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-pt-rBR\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-es\values.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\layout\tw__activity_share_email.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-lo-rLA\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-tr\values.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-mk-rMK\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-fr-rCA\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\drawable\tw__login_btn_pressed_light.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\admob_ads_attrs.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\wallet_colors.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-am\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\proguard.txt" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\drawable\tw__login_btn_light.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-es-rUS\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\wallet_attrs.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-af\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-tr\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-et-rEE\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-xxhdpi-v4\values.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-hy-rAM\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-th\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-sw720dp-v13\values.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ca\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\native-plugins_lib\res\xml\nativeplugins_file_paths.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-ar\values.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\layout\tw__activity_oauth.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\color\common_signin_btn_text_dark.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\values-in\values.xml" />
+     <None Include="Assets\Plugins\Android\twitter_lib\res\drawable\tw__login_btn_default_light.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ne-rNP\common_strings.xml" />
+     <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-eu-rES\common_strings.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
+ <Reference Include="Google.GData.AccessControl">
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Assets/GoogleFu/Editor/Google.GData.AccessControl.DLL</HintPath>
+ </Reference>
+ <Reference Include="Google.GData.Client">
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Assets/GoogleFu/Editor/Google.GData.Client.dll</HintPath>
+ </Reference>
+ <Reference Include="Google.GData.Documents">
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Assets/GoogleFu/Editor/Google.GData.Documents.dll</HintPath>
+ </Reference>
+ <Reference Include="Google.GData.Extensions">
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Assets/GoogleFu/Editor/Google.GData.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="Google.GData.Spreadsheets">
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Assets/GoogleFu/Editor/Google.GData.Spreadsheets.dll</HintPath>
+ </Reference>
+ <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+ </Reference>
+ <Reference Include="SyntaxTree.VisualStudio.Unity.Messaging">
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Messaging.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityVS.VersionSpecific">
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{AD6A2E00-3047-3B61-7497-46AD18319C9B}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
       <Project>{A35C407F-8542-CC5E-39AF-91865115F1C6}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
->>>>>>> origin/master
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{7B77C310-A7A3-7D09-29C4-9D7E4AF2DED3}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript.unityproj">

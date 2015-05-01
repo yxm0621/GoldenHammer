@@ -30,7 +30,7 @@ public class ObjectManager : MonoBehaviour {
 
 		gameMain = GameManager.manager; //Set Ref to GameManager Script
 
-		if(thisObject.name == "Cube"){
+		if(thisObject.name.Contains("Cube")){
 			value = 5;
 			hitPoints = 4;
 		}
@@ -46,7 +46,7 @@ public class ObjectManager : MonoBehaviour {
 			hitPoints = 1;
 		}
 
-		if(thisObject.name == "Cloud"){
+		if(thisObject.name.Contains("Cloud")){
 			value = 100;
 			hitPoints = 10;
 		}
@@ -97,15 +97,21 @@ public class ObjectManager : MonoBehaviour {
             //    }
             //}
 
-            //tell gamemain pos to Spawn coins
-            gameMain.coinPos = thisObject.transform.position;
-
-            //Spawn Coins Here
-            gameMain.CashOut(value);
-
-            if (thisObject.name == "Cat")
+            if (!thisObject.name.Contains("Gray"))
             {
-                thisObject.GetComponent<CatsBehavior>().catAction = CatsBehavior.CatState.Smash;
+
+                //tell gamemain pos to Spawn coins
+                gameMain.coinPos = thisObject.transform.position;
+
+                //Spawn Coins Here
+                gameMain.CashOut(value);
+
+            }
+
+            if (thisObject.name.Contains("Cat") ||
+                thisObject.name.Contains("Dog"))
+            {
+                thisObject.GetComponent<AnimalBehavior>().AnimalDead();
                 //gameMain.killAnimal = true;
             }
 
@@ -151,6 +157,20 @@ public class ObjectManager : MonoBehaviour {
                 gameMain.killTank++;
             }
 
+            //smash gray cloud, it'll rain
+            if (thisObject.name.Contains("Gray")) {
+                GameObject rain = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().rain;
+                Instantiate(rain, thisObject.transform.position, Quaternion.identity);
+            }
+
+            if ((thisObject.name != "BackToMenu")
+                &&(thisObject.name != "Encyclopedia")
+                && (thisObject.name != "Achievement")
+                && (thisObject.name != "Inventory")
+                && (thisObject.name != "Store")
+                && (thisObject.name != "Setting")
+                && (thisObject.name != "Credits")
+                && (thisObject.name != "Start")) {
             //if (thisObject.name == "Road")
             //{
             //    if (GameObject.Find("Grid") != null)
@@ -164,44 +184,72 @@ public class ObjectManager : MonoBehaviour {
                 //Destroy
                 Destroy(thisObject);
             //}
+            }
 
-			if(thisObject.name == "GameOverStart"){
-			Application.LoadLevel(gameMain.mainLevel);
+			if ((thisObject.name == "GameOverStart")||(thisObject.name == "Back")){
+                Application.LoadLevel(gameMain.mainLevel);
 			}
+
+            if ((thisObject.name == "Encyclopedia")
+                ||(thisObject.name == "Achievement")
+                ||(thisObject.name == "Inventory")
+                ||(thisObject.name == "Store")
+                ||(thisObject.name == "Setting")
+                ||(thisObject.name == "Credits")){
+                    //Camera.main.gameObject.transform.position += new Vector3(10.5f, 0f, 0f);
+                    iTween.MoveTo(Camera.main.gameObject, new Vector3(10.5f, 1f, -10f), .5f);
+                    hitPoints++;
+			}
+
+            if (thisObject.name == "BackToMenu"){
+                iTween.MoveTo(Camera.main.gameObject, new Vector3(0f, 1f, -10f), .5f);
+                hitPoints++;
+                    //Camera.main.transform.position -= new Vector3(10.5f, 0f, 0f);
+                //Application.LoadLevel("Menu");
+			}
+
+            if (thisObject.name == "Start"){
+                hitPoints++;
+			}
+
+            if (thisObject.name == "TreasureBox") {
+                Debug.Log("menu");
+                Application.LoadLevel ("Menu");
+            }
 		}
 	}
 
 	void OnMouseDown(){
-        if (gameMain.gameState == GameManager.State.InGame || thisObject.name == "GameOverStart"
-		    || thisObject.name == "Start") {
-            //characterController charaCon = GameObject.Find("Player").GetComponent<characterController>();
-           // charaCon.SwipeCheck();
-           // if (characterController.swipeDirection == null)
-           // {
-
-                //gameMain.CamKick ();
-                GameObject.Find("Hammer").GetComponent<HammerBehavior>().hammerSmash(thisObject.transform.position);
-
-                //Debug.Log(thisObject + " hit!!");
-                gameMain.audioSource.PlayOneShot(hitAudio);
-                //iTween.MoveFrom (cam, iTween.Hash("z", -0.001f, "time", 0.5f)); //Give the camera a little kick in Z
-                //float posZ = currentPos.z;
-                //    posZ -= .5f * gameMain.moveSpeed;
+        //if (gameMain.gameState == GameManager.State.InGame
+        //    || thisObject.name == "GameOverStart"
+        //    || thisObject.name == "Start") {
+        if (gameMain.gameState != GameManager.State.Over
+            || thisObject.name == "GameOverStart") {
+            GameObject.Find("Hammer").GetComponent<HammerBehavior>().hammerSmash(thisObject.transform.position);
+            //Debug.Log(thisObject + " hit!!");
+            gameMain.audioSource.PlayOneShot(hitAudio);
+            //iTween.MoveFrom (cam, iTween.Hash("z", -0.001f, "time", 0.5f)); //Give the camera a little kick in Z
+            
             Vector3 pos = thisObject.transform.localPosition;
             Debug.Log(currentPos + ", local" + pos);
-                    thisObject.transform.position = new Vector3(currentPos.x,
-                                                                currentPos.y - 0.25f,
-                                                                currentPos.z + 0.25f);
-                    //currentPos.z = posZ;
-                    //iTween.MoveTo(thisObject, currentPos, 0.5f);
-
-            iTween.MoveTo(thisObject, iTween.Hash("position", pos, "islocal", true, "time", .5f));
-                    //iTween.MoveFrom(thisObject, iTween.Hash("y", currentPos.y - 0.25f, "time", 0.5f));
-                    //iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y - 0.25f, "time", 0.5f));
-                    
-                hitPoints--;
-
-           // }
+            if (!thisObject.name.Contains("car")) {
+                thisObject.transform.position = new Vector3(currentPos.x,
+                                                            currentPos.y - 0.25f,
+                                                            currentPos.z + 0.25f);
+                iTween.MoveTo(thisObject, iTween.Hash("position", pos, "islocal", true, "time", .5f));
+            } else {
+                //thisObject.transform.position = new Vector3(currentPos.x,
+                //                                            currentPos.y - 0.25f,
+                //                                            currentPos.z);
+            //    float posZ = pos.z;
+            //    float carSpeed = gameObject.GetComponent<CarBehavior>().runSpeed;
+            //    posZ -= Time.deltaTime * carSpeed;
+            //    pos.z = posZ;
+                //iTween.MoveTo(thisObject, iTween.Hash("y", pos.y, "islocal", true, "time", .5f));
+            }
+            //iTween.MoveFrom(thisObject, iTween.Hash("y", currentPos.y - 0.25f, "time", 0.5f));
+            //iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y - 0.25f, "time", 0.5f));
+            hitPoints--;
 		}
 	}
 

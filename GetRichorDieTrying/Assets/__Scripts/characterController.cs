@@ -50,15 +50,15 @@ public class characterController : MonoBehaviour {
         movePos[4] = GameObject.Find("PlayerLanes/Pos4").transform.position;
 
 		characterPos = new Vector3 (.5f, .5f, -1.4f);
-		character = GameObject.FindGameObjectWithTag("Character");
-		character.transform.position = characterPos;
+        character = this.gameObject;
+        //character.transform.position = characterPos;
 		curPosX = Mathf.Clamp (2,-1,4); //(Current Value, Min, Max)
 
         //fix Camera position problem
-        Camera.main.gameObject.transform.position = new Vector3(character.transform.position.x,
-                                                                Camera.main.gameObject.transform.position.y,
-                                                                Camera.main.gameObject.transform.position.z);
-        gameMain.camStartPos.x = character.transform.position.x;
+        //Camera.main.gameObject.transform.position = new Vector3(character.transform.position.x,
+        //                                                        Camera.main.gameObject.transform.position.y,
+        //                                                        Camera.main.gameObject.transform.position.z);
+        //gameMain.camStartPos.x = character.transform.position.x;
 	}
 	
 	// Update is called once per frame

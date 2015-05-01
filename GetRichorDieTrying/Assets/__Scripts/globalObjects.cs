@@ -7,6 +7,9 @@ public class GlobalObjects : MonoBehaviour {
 	public Vector3                      sunPos;
 	public GameObject					sun;
 	public GameObject					moon;
+    public GameObject[]                 cloud;
+    public GameObject                   cloudGray;
+    public GameObject                   rain;
 	Color                               bgColor;
 	public SceneManager					sceneMain;
 
@@ -16,7 +19,7 @@ public class GlobalObjects : MonoBehaviour {
 		lightController.AddComponent<Light>();
 		
 		lightController.transform.position = new Vector3(0, 5, 0);
-		lightController.transform.eulerAngles = new Vector3 (50, 330, 0);
+        lightController.transform.eulerAngles = new Vector3(60f, 70f, 0f);
 		
 		lightController.light.type = LightType.Directional;
 		lightController.light.color = Color.white;
@@ -33,7 +36,6 @@ public class GlobalObjects : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
 	public void sunDown(){

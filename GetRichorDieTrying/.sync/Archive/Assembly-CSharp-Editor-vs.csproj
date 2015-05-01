@@ -19,11 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-<<<<<<< HEAD
-	<DefineConstants>DEBUG;TRACE;UNITY_4_6_0;UNITY_4_6;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_DUCK_TYPING</DefineConstants>
-=======
-	<DefineConstants>DEBUG;TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
->>>>>>> origin/master
+	<DefineConstants>DEBUG;TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_DUCK_TYPING</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -43,68 +39,6 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-<<<<<<< HEAD
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
-	</Reference>
-	<Reference Include="UnityEditor">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
-	</Reference>
-  </ItemGroup>
-  <ItemGroup>
-     <Compile Include="Assets\Buildr\Editor\BuildrBuiltInTextureEditor.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeBuilding.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeDetails.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeEditor.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeExport.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeFacades.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeFloorplan.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeHUD.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeOptions.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeRoofs.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditModeTextures.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrEditorData.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrGenerateModeEditor.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrImporter.cs" />
-     <Compile Include="Assets\Buildr\Editor\BuildrMenu.cs" />
-     <Compile Include="Assets\Buildr\Scripts\Utils\Editor\BuildrXMLExporter.cs" />
-     <Compile Include="Assets\Buildr\Scripts\Utils\Editor\BuildrXMLImporter.cs" />
-     <Compile Include="Assets\Buildr\Scripts\Utils\Editor\FBXExporter.cs" />
-     <Compile Include="Assets\Buildr\Scripts\Utils\Editor\OBJExporter.cs" />
-     <Compile Include="Assets\Editor\SetPivot.cs" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
-     <None Include="Assets\Buildr\XML\none.xml" />
-     <None Include="Assets\Buildr\XML\georgianTextures.xml" />
-     <None Include="Assets\Buildr\XML\hongKongTextures.xml" />
-     <None Include="Assets\Buildr\XML\hongKongStyle.xml" />
-     <None Include="Assets\Buildr\XML\alltextures.xml" />
-     <None Include="Assets\Buildr\versionlog.txt" />
-     <None Include="Assets\Buildr\XML\georgianStyle.xml" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
-     <None Include="Assets\Buildr\readme.txt" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
-     <None Include="Assets\Buildr\XML\parisstyle.xml" />
-     <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
-     <None Include="Assets\Buildr\Textures\license.txt" />
-     <None Include="Assets\Buildr\XML\paristextures.xml" />
-     <None Include="Assets\Models\Mushroom_Collection\Readme.txt" />
-     <None Include="Assets\Buildr\Textures\textures.xml" />
-     <None Include="Assets\Models\Ornamental Flower Set\Shaders\Transparent-BumpSpecNoCull.shader" />
- <Reference Include="Assembly-UnityScript">
- <HintPath>D:/GitHub/GetRichorDieTrying/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.0/Editor/UnityEditor.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Graphs">
- <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
- </Reference>
-  </ItemGroup>
-  <ItemGroup>
-=======
 	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
@@ -120,21 +54,32 @@
      <None Include="Assets\iTweenEditor\README.txt" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
      <None Include="Assets\Models\PrimitivePlus\Documentation\ReadMe.txt" />
+     <None Include="Assets\__Scripts\data\Obstacles.txt" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
+     <None Include="Assets\Art\Fonts\Silkscreen\Kottke Silkscreen License.txt" />
      <None Include="Assets\Art\Skybox\Fantasy Skybox FREE\Readme\Readme.txt" />
      <None Include="Assets\__Scripts\data\sceneObjData.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>D:/Group6/GetRichorDieTrying/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
  <Reference Include="Assembly-UnityScript">
- <HintPath>D:/Group6/GetRichorDieTrying/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/Editor/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+ </Reference>
+ <Reference Include="SyntaxTree.VisualStudio.Unity.Messaging">
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Messaging.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityVS.VersionSpecific">
+ <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
@@ -143,7 +88,6 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
       <Project>{AD6A2E00-3047-3B61-7497-46AD18319C9B}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
->>>>>>> origin/master
     <ProjectReference Include="Assembly-CSharp-vs.csproj">
       <Project>{7B77C310-A7A3-7D09-29C4-9D7E4AF2DED3}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
   </ItemGroup>
