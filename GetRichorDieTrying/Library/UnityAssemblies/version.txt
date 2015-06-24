@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 5.1.1f1:1.9.8.0
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
@@ -16,3 +17,9 @@ C:\Program Files\Unity\Editor\Data\PlaybackEngines\webglsupport/UnityEditor.WebG
 C:\Program Files\Unity\Editor\Data\PlaybackEngines\linuxstandalonesupport/UnityEditor.LinuxStandalone.Extensions.dll
 C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll
 C:\Program Files\Unity\Editor\Data\PlaybackEngines\macstandalonesupport/UnityEditor.OSXStandalone.Extensions.dll
+=======
+4.6.4f1:1.9.8.0
+/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.4/UnityEngine.UI.dll
+/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.4/Editor/UnityEditor.UI.dll
+/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll
+>>>>>>> 3ad7c5732b3f96a67553f63bfb3733fd1a1086f3

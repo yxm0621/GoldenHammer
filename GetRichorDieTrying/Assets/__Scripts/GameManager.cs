@@ -705,6 +705,7 @@ public class GameManager : MonoBehaviour {
 		addScore (value);
         //Debug.Log (objectName + " Monitized");
 
+<<<<<<< HEAD
 		//Check which item was destroyed - [TODO] Save value for amount of screenshake
         //Default Value
         listItem = 2;
@@ -716,6 +717,16 @@ public class GameManager : MonoBehaviour {
 			listItem = 0;
 
 			camShakePower = 0.3f;
+=======
+		// check which item is 
+
+		//Check which item was destroyed - [TODO] Save value for amount of screenshake
+		if(objectName == "Cube" || objectName == "Cube_1"){
+			audioSource.PlayOneShot (finalSmashAudio);
+			listItem = 0;
+
+			camShakePower = 0.4f;
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 			//Spawning Humans from building - Data Checked in TrafficController
 			buildingDestroyed = true;
@@ -727,7 +738,11 @@ public class GameManager : MonoBehaviour {
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 1;
 
+<<<<<<< HEAD
 			camShakePower = 0.4f;
+=======
+			camShakePower = 0.5f;
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 			//Spawning Humans from building - Data Checked in TrafficController
 			buildingDestroyed = true;
@@ -738,21 +753,33 @@ public class GameManager : MonoBehaviour {
 			//audioSource.PlayOneShot ();
 			listItem = 2;
 
+<<<<<<< HEAD
 			camShakePower = 0.05f;
+=======
+			camShakePower = 0.1f;
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 		}
 		if(objectName.Contains ("Tree") || objectName.Contains ("obj") || objectName.Contains ("env")){
 			audioSource.PlayOneShot (woodSmash);
 			listItem = 2;
 
+<<<<<<< HEAD
 			camShakePower = 0.05f;
+=======
+			camShakePower = 0.1f;
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 		}
 		if(objectName.Contains ("Cloud") || objectName.Contains("Planet") || objectName == "Stars"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
 
+<<<<<<< HEAD
 			camShakePower = 0.7f;
+=======
+			camShakePower = 0.75f;
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 		}
 		if(objectName == "BlackHole"){
@@ -761,27 +788,51 @@ public class GameManager : MonoBehaviour {
 
 			camShakePower = 0.75f;
 
+<<<<<<< HEAD
             globalObj.sunUp();
+=======
+			GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunUp();
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 		}
 		if(objectName == "Sun"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
 
+<<<<<<< HEAD
 			camShakePower = 0.7f;
 
             globalObj.sunDown();
+=======
+			camShakePower = 0.75f;
+
+            GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunDown();
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 		}
 		if(objectName == "Moon"){
 			//change scene to space
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
 
+<<<<<<< HEAD
 			camShakePower = 0.7f;
 
             globalObj.moonDown();
+=======
+			camShakePower = 0.75f;
+
+            GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().moonDown();
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 		}
 		if(objectName.Contains("Car") || objectName.Contains("Tank")){
 			audioSource.PlayOneShot (finalSmashAudio);
+
+			if(objectName.Contains("car") || objectName.Contains("Police")){
+				camShakePower = 0.33f;
+			}
+			if(objectName.Contains("Tank")){
+				camShakePower = 0.4f;
+			}
+
 			listItem = 4;
             if (objectName.Contains("Car")) {
                 camShakePower = 0.3f;
@@ -795,10 +846,21 @@ public class GameManager : MonoBehaviour {
 			listItem = 5;
 
 			camShakePower = 0.05f;
+<<<<<<< HEAD
+=======
+
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 		}
 		if(objectName == "Start" || objectName.Contains("PowerUp")){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 2;
+<<<<<<< HEAD
+=======
+
+			camShakePower = 0.0001f;
+
+		}
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 			camShakePower = 0.05f;
 
