@@ -11,7 +11,9 @@ public class CoinsGroup : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (gameObject.transform.childCount == 0) {
+            Destroy(gameObject);
+        }
 	}
 
 	public void PickUp () {

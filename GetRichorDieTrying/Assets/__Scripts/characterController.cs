@@ -31,6 +31,7 @@ public class characterController : MonoBehaviour {
 	public int                    	curPosX;
 
 	public bool 					touching = false;
+    public bool                     onTheGround = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -49,7 +50,7 @@ public class characterController : MonoBehaviour {
         movePos[3] = GameObject.Find("PlayerLanes/Pos3").transform.position;
         movePos[4] = GameObject.Find("PlayerLanes/Pos4").transform.position;
 
-		characterPos = new Vector3 (.5f, .5f, -1.4f);
+		characterPos = new Vector3 (.5f, 0f, 0f);
         character = this.gameObject;
         //character.transform.position = characterPos;
 		curPosX = Mathf.Clamp (2,-1,4); //(Current Value, Min, Max)
@@ -70,6 +71,21 @@ public class characterController : MonoBehaviour {
         }
 
 		if (canControl) {
+
+            //When player is not collidinng with ground, fall down. Otherwise keep y == 0
+            if (!onTheGround) {
+                //character.transform.Translate(Vector3.down * Time.deltaTime * .98f);
+                character.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            } else {
+                character.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                character.transform.position = new Vector3(character.transform.position.x,
+                                                           0f,
+                                                           character.transform.position.z);
+                onTheGround = false;
+            }
+
+
+
             SwipeCheck();
 
 		//moving step by step
@@ -106,6 +122,11 @@ public class characterController : MonoBehaviour {
 			}
 		} else {
 //			character.animation.CrossFade("idle");
+            if (character.transform.position.x != movePos[curPosX].x) {
+                character.transform.position = new Vector3(movePos[curPosX].x,
+                                                           character.transform.position.y,
+                                                           character.transform.position.z);
+            }
 		}
 
 //		Animation anim = character.GetComponent<Animation>();
@@ -214,10 +235,10 @@ public class characterController : MonoBehaviour {
         } else {
 /* --------comment from here if test with mouse or
  * cancel comment from here if test with touch-------- */
-            swipeDirection = Swipe.None;
-            return;
-        }
-    }
+    //        swipeDirection = Swipe.None;
+    //        return;
+    //    }
+    //}
 /* --------comment until here if test with mouse or
  * cancel comment until here if test with touch-------- */
 
@@ -225,27 +246,32 @@ public class characterController : MonoBehaviour {
 
 /* --------comment from here if test with touch
  * or cancel comment from here if test with mouse-------- */
-            
-    //        if (Input.GetMouseButtonDown(0)) {
-    //            //save began touch 2d point
-    //            firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-    //            touching = true;
-    //        }
 
-    //        if (Input.GetMouseButton(0)) {
-    //            if (!touching) {
-    //                swipeDirection = Swipe.None;
-    //                return;
-    //            }
-    //            //save ended touch 2d point
-    //            secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-    //            CalculateDir(firstPressPos, secondPressPos);
-    //        } else {
-    //            swipeDirection = Swipe.None;
-    //            return;
-    //        }
-    //    }
-    //}
+            if (Input.GetMouseButtonDown(0))
+            {
+                //save began touch 2d point
+                firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                touching = true;
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                if (!touching)
+                {
+                    swipeDirection = Swipe.None;
+                    return;
+                }
+                //save ended touch 2d point
+                secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                CalculateDir(firstPressPos, secondPressPos);
+            }
+            else
+            {
+                swipeDirection = Swipe.None;
+                return;
+            }
+        }
+    }
 
 /* --------comment until here if test with touch
  * or cancel comment until here if test with mouse-------- */
@@ -253,12 +279,13 @@ public class characterController : MonoBehaviour {
 	void Move() {
         iTween.MoveTo(character, iTween.Hash("x", movePos[curPosX].x, "easeType", "easeOutCubic", "time", .1f));
         iTween.MoveTo(Camera.main.gameObject, iTween.Hash("x", movePos[curPosX].x, "easeType", "linear", "time", .12f));
-        gameMain.camStartPos.x = movePos[curPosX].x;
+        gameMain.camCurrentPos.x = movePos[curPosX].x;
+        gameMain.playerSwipe();
 	}
 
 	void forceJump(){
 //		rigidbody.velocity = new Vector3(0, 10, 0);
-		rigidbody.AddForce(Vector3.up * jumpForce);
+		GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
 	}
 	
 //		IEnumerator jump(){
@@ -279,8 +306,15 @@ public class characterController : MonoBehaviour {
 		character.transform.localScale += new Vector3 (0, .3f, 0);
     }
 
+    //When the floor has smashed, player fall down
+    void OnCollisionStay(Collision other) {
+        if ((other.collider.name.Contains("Road")) || (other.collider.name.Contains("Sidewalk"))) {
+            onTheGround = true;
+        }
+    }
+
 	void OnTriggerEnter(Collider other){
-		if(other.tag == "SegmentKill"){
+		if(other.CompareTag("SegmentKill")){
 			Destroy (gameObject);
 			gameMain.GameOver();
 		}

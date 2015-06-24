@@ -5,34 +5,34 @@ public class Coins : MonoBehaviour {
 
 	public GameObject				coin;
 
-	public float					timer = 99;
+	public float					timer = 1.5f;
 
 	// Use this for initialization
 	void Start () {
 		coin = this.gameObject;
-
 		iTween.Init (coin);
-
-
-		timer = 1.5f;
+		timer = Random.Range(.1f, 1.5f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
 		timer -= 1 * Time.deltaTime;
 
-		if(timer <= 1){
-			//Flashing coins
+        //Flashing coins
+        //if(timer <= 1){
 //			iTween.ColorFrom (coin, iTween.Hash ("a", 0, "time", 3));
-
 			//Debug.Log ("changing coin alpha");
-		}
+        //}
+
 		//destroy coins
 		if(timer <= 0){
             //Debug.Log ("coin destroyed");
-			Destroy (coin);
+            Destroy(gameObject);
 		}
+
+        if (gameObject.transform.position.z < GameManager.manager.characterPos.z) {
+            Destroy(gameObject);
+        }
 	}
 
 //	void OnCollisionEnter(Collision other) {

@@ -45,7 +45,7 @@ public class FlockController : MonoBehaviour
         foreach (Flock flock in flockList)
 		{
             center += flock.transform.localPosition;
-            velocity += flock.rigidbody.velocity;
+            velocity += flock.GetComponent<Rigidbody>().velocity;
 		}
 
 		flockCenter = center / flockSize;

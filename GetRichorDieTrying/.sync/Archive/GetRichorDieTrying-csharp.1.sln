@@ -1,8 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{48D3DD98-D494-5930-1BF3-EA9984E79101}") = "GetRichorDieTrying", "Assembly-CSharp-firstpass-vs.csproj", "{AD6A2E00-3047-3B61-7497-46AD18319C9B}"
-EndProject
 Project("{48D3DD98-D494-5930-1BF3-EA9984E79101}") = "GetRichorDieTrying", "Assembly-CSharp-vs.csproj", "{7B77C310-A7A3-7D09-29C4-9D7E4AF2DED3}"
 EndProject
 Project("{48D3DD98-D494-5930-1BF3-EA9984E79101}") = "GetRichorDieTrying", "Assembly-CSharp-Editor-vs.csproj", "{5010A273-EF07-8FCC-B7F2-80E533019C2E}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AD6A2E00-3047-3B61-7497-46AD18319C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD6A2E00-3047-3B61-7497-46AD18319C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD6A2E00-3047-3B61-7497-46AD18319C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD6A2E00-3047-3B61-7497-46AD18319C9B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B77C310-A7A3-7D09-29C4-9D7E4AF2DED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B77C310-A7A3-7D09-29C4-9D7E4AF2DED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B77C310-A7A3-7D09-29C4-9D7E4AF2DED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,7 +23,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																																	GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																																																																																																																																																																																																																																									GlobalSection(MonoDevelopProperties) = preSolution
 =======
 																																																																		GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> Stashed changes

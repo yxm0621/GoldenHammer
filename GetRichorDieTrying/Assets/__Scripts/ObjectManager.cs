@@ -1,19 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Google2u;
 
 public class ObjectManager : MonoBehaviour {
-
 	public GameObject			thisObject;
 
 	public GameManager			gameMain; //Singleton Ref to GameManager Script
 
-
 	public Vector3				currentPos;
-	public int					objPosX;
-	public int					objPosZ;
-	public int 					objLength;
-	public int 					objWidth;
+    public Vector3              localPos;
 
+    public Google2u.ObjList_G2U objData;
 	public int					value; //Value of object
 	public int					hitPoints; //Hits to break object
 
@@ -24,20 +21,40 @@ public class ObjectManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		thisObject = this.gameObject;
+        gameMain = GameManager.manager; //Set Ref to GameManager Script
 
+		thisObject = this.gameObject;
 		iTween.Init (thisObject);
 
-		gameMain = GameManager.manager; //Set Ref to GameManager Script
+        localPos = thisObject.transform.localPosition;
 
-		if(thisObject.name.Contains("Cube")){
-			value = 5;
-			hitPoints = 4;
+        objData = Google2u.ObjList_G2U.Instance;
+        if (objData != null) {
+            for (int i = 0; i < objData.Rows.Count; i++) {
+                if(thisObject.name == objData.Rows[i]._Name){
+                    if (objData.Rows[i]._Name == "Raijin"){
+                        if (gameMain.raijinHP == -1) {
+                            hitPoints = objData.Rows[i]._HitPoints;
+                            gameMain.raijinHP = hitPoints;
+                        } else {
+                            hitPoints = gameMain.raijinHP;
+                        }
+                    } else {
+                        hitPoints = objData.Rows[i]._HitPoints;
+                    }
+                    value = objData.Rows[i]._Gold;
+                }
+            }
+        }
+
+		if(thisObject.name.Contains("Building")){
+			value = 20;
+			hitPoints = 2;
 		}
 
-		if(thisObject.name == "Cube_2"){
-			value = 10;
-			hitPoints = 8;
+		if(thisObject.name == "Building_3"){
+			value = 25;
+			hitPoints = 3;
 		}
 
 		if((thisObject.name == "Tree") || (thisObject.name.Contains("tree")) || 
@@ -46,10 +63,6 @@ public class ObjectManager : MonoBehaviour {
 			hitPoints = 1;
 		}
 
-		if(thisObject.name.Contains("Cloud")){
-			value = 100;
-			hitPoints = 10;
-		}
 		if(thisObject.name.Contains("Planet")){
 			value = 500;
 			hitPoints = 5;
@@ -59,19 +72,9 @@ public class ObjectManager : MonoBehaviour {
 			hitPoints = 5;
 		}
 		if((thisObject.name == "Sun") || (thisObject.name == "Moon")){
-			value = 1000;
+			value = 200;
 			hitPoints = 5;
 		}
-
-		if((thisObject.name == "Cat")||(thisObject.name == "Dog")||(thisObject.name == "Bird")){
-			value = 2;
-			hitPoints = 1;
-		}
-        if (thisObject.name == "Road")
-        {
-            value = 10;
-            hitPoints = 5;
-        }
 
 		//For GameOver and game start
 		if(thisObject.name == "GameOverStart" || thisObject.name == "Start"){
@@ -88,20 +91,13 @@ public class ObjectManager : MonoBehaviour {
 		if(hitPoints <= 0){
 			gameMain.objectName = thisObject.name;
 
-//			gameMain.score += value * gameMain.bonus; //Add value of item to score
-
-            //tell LevelSegments one space becomes empty so that player can move to that space
-            //for (int i = 0; i < objLength ; i++) {
-            //    for (int j = 0; j < objWidth ; j++) {
-            //        thisObject.transform.parent.GetComponent<LevelSegments>().segEmpty[objPosX + i, objPosZ + j] = true;
-            //    }
-            //}
-
-            if (!thisObject.name.Contains("Gray"))
-            {
-
+            if (!thisObject.name.Contains("Gray")) {
                 //tell gamemain pos to Spawn coins
-                gameMain.coinPos = thisObject.transform.position;
+                if (thisObject.name.Contains("checkPoint")) {
+                    gameMain.coinPos = thisObject.transform.position + new Vector3(2f, .5f, 0f);
+                } else {
+                    gameMain.coinPos = thisObject.transform.position;
+                }
 
                 //Spawn Coins Here
                 gameMain.CashOut(value);
@@ -109,58 +105,41 @@ public class ObjectManager : MonoBehaviour {
             }
 
             if (thisObject.name.Contains("Cat") ||
-                thisObject.name.Contains("Dog"))
-            {
+                thisObject.name.Contains("Dog")) {
                 thisObject.GetComponent<AnimalBehavior>().AnimalDead();
                 //gameMain.killAnimal = true;
             }
 
-            if (thisObject.tag == "Building")
-            {
+            if (thisObject.tag == "Building") {
                 //Trigger Person falling out of Building
                 gameMain.spawnHumanPos = thisObject.transform.position;
                 gameMain.buildingDestroyed = true;
                 gameMain.buildingType = thisObject.name;
             }
 
-            //bomb explode effect
-            if (thisObject.name == "Bomb")
-            {
-                Debug.Log("explode");
-                GameObject explode = (GameObject)Instantiate(gameMain.explodeEffect, thisObject.transform.position, Quaternion.identity);
-                explode.name = gameMain.explodeEffect.name;
-                gameMain.audioSource.PlayOneShot(gameMain.explodeSFX);
-            }
-
-            //special effect to smash the whole line
-            if (thisObject.name == "Special")
-            {
-                Debug.Log("special");
-                GameObject line = (GameObject)Instantiate(gameMain.lineEffect, thisObject.transform.position, Quaternion.identity);
-                line.name = gameMain.lineEffect.name;
-                gameMain.audioSource.PlayOneShot(gameMain.lineSFX);
-            }
-
             //kill people, polices come
-            if (thisObject.name.Contains("Human"))
-            {
+            if (thisObject.name.Contains("Person")) {
                 gameMain.killPeople++;
             }
             //kill police, tanks come
-            if (thisObject.name.Contains("PoliceCar"))
-            {
+            if (thisObject.name.Contains("PoliceCar")) {
                 gameMain.killPolice++;
             }
             //kill tank, helicopters come
-            if (thisObject.name.Contains("Tank"))
-            {
+            if (thisObject.name.Contains("Tank")) {
                 gameMain.killTank++;
             }
 
             //smash gray cloud, it'll rain
-            if (thisObject.name.Contains("Gray")) {
-                GameObject rain = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().rain;
-                Instantiate(rain, thisObject.transform.position, Quaternion.identity);
+            if (thisObject.name.Contains("RainClouds")) {
+                if ((gameMain.globalObj != null)&&(gameMain.globalObj.isRaining == false)) {
+                    gameMain.globalObj.Rain(thisObject.transform.position);
+                }
+            }
+            
+            //Raijin has dead, rain will stop
+            if (thisObject.name.Contains("Raijin")) {
+                gameMain.globalObj.isRaining = false;
             }
 
             if ((thisObject.name != "BackToMenu")
@@ -170,8 +149,9 @@ public class ObjectManager : MonoBehaviour {
                 && (thisObject.name != "Store")
                 && (thisObject.name != "Setting")
                 && (thisObject.name != "Credits")
-                && (thisObject.name != "Start")) {
-            //if (thisObject.name == "Road")
+                //&& (thisObject.name != "Start")
+                ) {
+            //if (thisObject.name == "City_Road")
             //{
             //    if (GameObject.Find("Grid") != null)
             //    {
@@ -186,7 +166,7 @@ public class ObjectManager : MonoBehaviour {
             //}
             }
 
-			if ((thisObject.name == "GameOverStart")||(thisObject.name == "Back")){
+			if ((thisObject.name == "GameOverStart")||(thisObject.name == "Back")) {
                 Application.LoadLevel(gameMain.mainLevel);
 			}
 
@@ -196,13 +176,49 @@ public class ObjectManager : MonoBehaviour {
                 ||(thisObject.name == "Store")
                 ||(thisObject.name == "Setting")
                 ||(thisObject.name == "Credits")){
-                    //Camera.main.gameObject.transform.position += new Vector3(10.5f, 0f, 0f);
-                    iTween.MoveTo(Camera.main.gameObject, new Vector3(10.5f, 1f, -10f), .5f);
-                    hitPoints++;
+
+                //Camera.main.gameObject.transform.position += new Vector3(10.5f, 0f, 0f);
+                iTween.MoveTo(Camera.main.gameObject, new Vector3(6.5f, 1f, -10f), .5f);
+                hitPoints++;
+                if (gameMain.itemPage == null) {
+                    gameMain.itemPage = GameObject.Find("Menu");
+                }
+                gameMain.itemPage.transform.FindChild("Title").GetComponent<TextMesh>().text = thisObject.name;
+                switch (thisObject.name) {
+                    case "Encyclopedia":
+                        gameMain.currentMenu = GameManager.MenuPage.Encyclopedia;
+                        break;
+                    case "Achievement":
+                        gameMain.currentMenu = GameManager.MenuPage.Achievement;
+                        break;
+                    case "Inventory":
+                        gameMain.currentMenu = GameManager.MenuPage.Inventory;
+                        break;
+                    case "Store":
+                        gameMain.currentMenu = GameManager.MenuPage.Store;
+                        gameMain.storeItems = Instantiate(gameMain.storeItemsObj, gameMain.storeItemsObj.transform.position, Quaternion.identity) as GameObject;
+                        gameMain.storeItems.name = gameMain.storeItemsObj.name;
+                        gameMain.storeItems.transform.parent = gameMain.itemPage.transform;
+                        break;
+                    case "Setting":
+                        gameMain.currentMenu = GameManager.MenuPage.Setting;
+                        break;
+                    case "Credits":
+                        gameMain.currentMenu = GameManager.MenuPage.Credits;
+                        break;
+                    default:
+                        break;
+
+                }
 			}
 
             if (thisObject.name == "BackToMenu"){
-                iTween.MoveTo(Camera.main.gameObject, new Vector3(0f, 1f, -10f), .5f);
+                    iTween.MoveTo(Camera.main.gameObject, new Vector3(0f, 1f, -10f), .5f);
+                    Destroy(gameMain.storeItems);
+                    if (gameMain.itemDetails != null) {
+                        Destroy(gameMain.itemDetails);
+                    }
+                    gameMain.currentMenu = GameManager.MenuPage.Main;
                 hitPoints++;
                     //Camera.main.transform.position -= new Vector3(10.5f, 0f, 0f);
                 //Application.LoadLevel("Menu");
@@ -214,7 +230,10 @@ public class ObjectManager : MonoBehaviour {
 
             if (thisObject.name == "TreasureBox") {
                 Debug.Log("menu");
-                Application.LoadLevel ("Menu");
+                if (GameObject.Find("Start") != null) {
+                    Application.LoadLevel("Menu");
+                    gameMain.currentMenu = GameManager.MenuPage.Main;
+                }
             }
 		}
 	}
@@ -223,20 +242,24 @@ public class ObjectManager : MonoBehaviour {
         //if (gameMain.gameState == GameManager.State.InGame
         //    || thisObject.name == "GameOverStart"
         //    || thisObject.name == "Start") {
-        if (gameMain.gameState != GameManager.State.Over
-            || thisObject.name == "GameOverStart") {
-            GameObject.Find("Hammer").GetComponent<HammerBehavior>().hammerSmash(thisObject.transform.position);
+        if (gameMain.gameState != GameManager.State.Over || thisObject.name == "GameOverStart") {
+            if (thisObject.name.Contains("checkPoint")) {
+                gameMain.HammerSmash(thisObject.transform.position + new Vector3(2f, .5f, 0f));
+            } else {
+                gameMain.HammerSmash(thisObject.transform.position);
+            }
+            
             //Debug.Log(thisObject + " hit!!");
             gameMain.audioSource.PlayOneShot(hitAudio);
             //iTween.MoveFrom (cam, iTween.Hash("z", -0.001f, "time", 0.5f)); //Give the camera a little kick in Z
             
-            Vector3 pos = thisObject.transform.localPosition;
-            Debug.Log(currentPos + ", local" + pos);
-            if (!thisObject.name.Contains("car")) {
+            //Vector3 pos = thisObject.transform.localPosition;
+            Debug.Log(currentPos + ", local" + localPos);
+            if (!thisObject.name.Contains("Car")) {
                 thisObject.transform.position = new Vector3(currentPos.x,
                                                             currentPos.y - 0.25f,
                                                             currentPos.z + 0.25f);
-                iTween.MoveTo(thisObject, iTween.Hash("position", pos, "islocal", true, "time", .5f));
+                iTween.MoveTo(thisObject, iTween.Hash("position", localPos, "islocal", true, "time", .5f));
             } else {
                 //thisObject.transform.position = new Vector3(currentPos.x,
                 //                                            currentPos.y - 0.25f,
@@ -249,16 +272,35 @@ public class ObjectManager : MonoBehaviour {
             }
             //iTween.MoveFrom(thisObject, iTween.Hash("y", currentPos.y - 0.25f, "time", 0.5f));
             //iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y - 0.25f, "time", 0.5f));
-            hitPoints--;
+
+            if ((thisObject.name == "TreasureBox") && (GameObject.Find("Start") == null)) {
+                //Player is stealing the hammer
+            } else {
+                if (gameMain.isPowerhammer) {
+                    hitPoints -= 5;
+                } else {
+                    hitPoints--;
+                }
+            }
+            if (thisObject.name == "Raijin") {
+                if (gameMain.isPowerhammer) {
+                    gameMain.raijinHP -= 3;
+                } else {
+                    gameMain.raijinHP--;
+                }
+            }
 		}
 	}
 
 	void OnCollisionEnter(Collision other){
-		if(other.gameObject.name == "damage"){
+		if((other.gameObject.name.Contains("damage")) || (other.gameObject.name.Contains("spinCutter"))) {
 			hitPoints--;
 		}
-		if(other.gameObject.name == "spinCutter"){
+	}
+    void OnTriggerEnter(Collider other){
+		if(other.gameObject.name == "Lightning") {
 			hitPoints--;
+            Destroy(other.gameObject);
 		}
 	}
 }

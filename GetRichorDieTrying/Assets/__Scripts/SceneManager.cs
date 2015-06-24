@@ -95,7 +95,7 @@ public class SceneManager : MonoBehaviour {
 			iTweenEvent.GetEvent(Camera.main.gameObject, "loadScene2").Play();
 			reloadScene = true;
             deleteObstacles();
-            GameManager.manager.underground.SetActive(true);
+            //GameManager.manager.underground.SetActive(true);
 		}
 	}
 
@@ -104,13 +104,12 @@ public class SceneManager : MonoBehaviour {
 		building = cityBuilding;
 		sidewalk = citySidewalk;
 		road = cityRoad;
-		buildingData = new int[10, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
-			{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0}};
-		sidewalkData = new int[21, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
+		buildingData = new int[15, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
 			{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
+            {1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,2,0,0}};
+        sidewalkData = new int[15, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
 			{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
-			{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
-			{1,1,0,0}};
+            {1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0}};
 	}
 
 	void loadCountryside(){
@@ -131,13 +130,15 @@ public class SceneManager : MonoBehaviour {
 		building = spaceBuilding;
 		sidewalk = spaceSidewalk;
 		road = spaceRoad;
-		buildingData = new int[9, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
-			{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0}};
-		sidewalkData = new int[6, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0}};
+		buildingData = new int[15, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
+			{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
+            {1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0}};
+		sidewalkData = new int[7, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
+            {1,1,0,0},{1,1,0,0}};
 		Camera.main.GetComponent<Skybox> ().material = spaceSky;
 		reloadScene = true;
         deleteObstacles();
-        GameManager.manager.underground.SetActive(false);
+        //GameManager.manager.underground.SetActive(false);
 	}
 	void loadOcean(){
 		building = oceanBuilding;

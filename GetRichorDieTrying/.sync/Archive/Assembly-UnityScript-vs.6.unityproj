@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_5_0_1;UNITY_5_0;UNITY_5;ENABLE_LICENSE_RENAME;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_NEW_HIERARCHY;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_NONPRO;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +53,7 @@
      <Compile Include="Assets\Art\KY_effects\Script\ThisDestroy.js" />
      <Compile Include="Assets\Pause Menu\PauseMenu.js" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-it\common_strings.xml" />
+     <None Include="Assets\Aubergines Toon Shaders\Shaders\Includes\Aubergine_Lights.cginc" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\color\common_signin_btn_text_light.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-mr-rIN\common_strings.xml" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
@@ -69,16 +70,17 @@
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\drawable\common_signin_btn_icon_dark.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\twitter_lib\res\values-it\values.xml" />
-     <None Include="Assets\VoxelBusters\NativePlugins\Readme.txt" />
      <None Include="Assets\Plugins\Android\AndroidManifest_root_activity_settings_sample.txt" />
      <None Include="Assets\Plugins\Android\twitter_lib\res\values-fr\values.xml" />
      <None Include="Assets\Plugins\Android\native-plugins_lib\res\values\np_colors.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-si-rLK\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-sw\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-en-rGB\common_strings.xml" />
+     <None Include="Assets\Aubergines Toon Shaders\Shaders\Toony\Diffuse-Edges.shader" />
      <None Include="Assets\Plugins\Android\twitter_lib\res\values-xhdpi-v4\values.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-lv\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-uk\common_strings.xml" />
+     <None Include="Assets\SimplePhysicalShader\SimplePhysicalShaderRetro.shader" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-tl\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ja\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-cs\common_strings.xml" />
@@ -93,6 +95,7 @@
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\wallet_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-es\wallet_strings.xml" />
      <None Include="Assets\Art\KY_effects\FX_free_pack\ReadMe.txt" />
+     <None Include="Assets\Aubergines Toon Shaders\Readme.txt" />
      <None Include="Assets\Plugins\Android\twitter_lib\res\drawable\tw__login_btn_pressed.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\version.xml" />
      <None Include="Assets\Plugins\Android\native-plugins_lib\res\values\np_styles.xml" />
@@ -103,6 +106,7 @@
      <None Include="Assets\Plugins\Android\native-plugins_lib\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-uz-rUZ\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values\common_attrs.xml" />
+     <None Include="Assets\SimplePhysicalShader\SimplePhysicalShader.shader" />
      <None Include="Assets\Plugins\Android\native-plugins_lib\res\values-v11\styles.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-el\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ms-rMY\common_strings.xml" />
@@ -112,7 +116,6 @@
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-is-rIS\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-sr\common_strings.xml" />
      <None Include="Assets\iTweenEditor\README.txt" />
-     <None Include="Assets\VoxelBusters\Utility\ThirdParty\ExifLib\License.txt" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-fr\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\drawable\common_signin_btn_text_light.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-pt\common_strings.xml" />
@@ -129,6 +132,7 @@
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-zu\common_strings.xml" />
      <None Include="Assets\Plugins\Android\support_lib\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-ta-rIN\common_strings.xml" />
+     <None Include="Assets\Aubergines Toon Shaders\Shaders\Toony\Diffuse.shader" />
      <None Include="Assets\Plugins\Android\twitter_lib\res\values-en-rSS\values.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-bg\common_strings.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-es\common_strings.xml" />
@@ -153,6 +157,7 @@
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-sk\common_strings.xml" />
      <None Include="Assets\Plugins\Android\twitter_lib\res\values-de\values.xml" />
      <None Include="Assets\Plugins\Android\voxelbusters_utility_lib\AndroidManifest.xml" />
+     <None Include="Assets\SimplePhysicalShader\SimplePhysicalShaderCoat.shader" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-zh-rHK\common_strings.xml" />
      <None Include="Assets\Plugins\Android\twitter_lib\res\values-hdpi-v4\values.xml" />
      <None Include="Assets\Plugins\Android\google-play-services_lib\res\values-kk-rKZ\common_strings.xml" />
@@ -214,7 +219,10 @@
  <HintPath>D:/GitHub/GoldenHammer/GetRichorDieTrying/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+ <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iossupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

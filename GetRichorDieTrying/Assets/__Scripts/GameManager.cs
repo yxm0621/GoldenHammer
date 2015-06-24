@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManager : MonoBehaviour {
 	public enum State {Menu, InGame, Pause, Over};
+    public enum MenuPage {Main, Store, Inventory, Encyclopedia, Achievement, Setting, Credits};
 
 	public static GameManager			manager;
 //	public Camera						mainCam;
@@ -16,15 +20,24 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject					cam;
 	public Vector3						camStartPos;
-    public GameObject                   characterObj;
-    public GameObject                   startMenuScene;
-    public GameObject                   startMenu;
-    public GameObject                   underground;
+    public Vector3						camStartRot;
+    public Vector3						camCurrentPos;
+    public Vector3                      camCurrentRot;
+    //public GameObject                   startMenuScene;
+    //public GameObject                   startMenu;
     public GameObject                   obstacleGroup;
     public GameObject                   itweenPath;
 
+    //Daikokuten data
+    //public GameObject                   daikokutenObj;
+    //public GameObject                   daikokuten;
+    public int                          daikokutenState;
+
+    //Character and its data
+    public GameObject                   character;
+    public Vector3                      characterPos;
     //characterController controls the main character
-    public characterController          character;
+    public characterController          characterCon;
 
     //TrafficController controls obstacles
     public TrafficController            traffic;
@@ -34,6 +47,12 @@ public class GameManager : MonoBehaviour {
 
     //scene manager controls the scene change and load new assets
     public SceneManager                 sceneManager;
+
+    //Hammer
+    public GameObject                   hammerObj;
+    public GameObject                   hammer;
+    public float                        smashAngle = 75;
+    public Vector3                      hammerPos = new Vector3(0f, 4f, -2f);
 
     //2D UI for buttons and texts
     public GUISkin                      menuSkin;
@@ -45,9 +64,11 @@ public class GameManager : MonoBehaviour {
 
 	public int							score = 0;
 	public TextMesh						scoreText;
+    public TextMesh						valueText;
 	public TextMesh						scoreRecap;
 	public TextMesh						highScoreText;
 	public int							highScore;
+    public float                        valueShowTimer = .5f;
 
 	public int							levelGoal = 0;
 	public TextMesh						goalText;
@@ -66,6 +87,7 @@ public class GameManager : MonoBehaviour {
 	public TextMesh						timerText;
 	public GameObject					checkPoint; //Check Point in the scene
     public GameObject                   checkPointObj; //Check Point prefab
+    public Vector3                      checkPointPos;
 	public float						timerAdd = 1.0f;
 	//public TextMesh						levelCountText;
 
@@ -81,6 +103,8 @@ public class GameManager : MonoBehaviour {
 
 	public int							hitPointAdd = 0;
 
+    public int                          raijinHP = -1;
+
 	//parameters to spawn segments
 	public GameObject					spawnPoint;
 	public Vector3						segmentSpawnPos;
@@ -88,13 +112,12 @@ public class GameManager : MonoBehaviour {
 	public int                          segmentOffset = 6; //grid width
 	public int							initialSegNum = 5;
     public GameObject[]                 segments;
-	public List<bool[,]>				characterMove = new List<bool[,]>();
-    //GameObject                          spawnTrigger;
+    //public List<bool[,]>				characterMove = new List<bool[,]>(); //the grid info for which space character can go
     public int                          segNum = 0;
 
 	//coins
-	public GameObject					cube_coin;
-	public GameObject					cube2_coin;
+	public GameObject					building_coin;
+	public GameObject					building2_coin;
 	public GameObject					tree_coin;
 	public GameObject					cloud_coin;
 	public GameObject					car_coin;
@@ -120,13 +143,31 @@ public class GameManager : MonoBehaviour {
     public int                          killHelicopter;
     //public TextMesh						feedbackText;
 
+    //Menu data
+    public MenuPage                     currentMenu = MenuPage.Main;
+    public GameObject                   itemPage;
+    public GameObject                   storeItemsObj;
+    public GameObject                   storeItems;
+    public GameObject                   itemDetailsObj;
+    public GameObject                   itemDetails;
+
+    //Items in game
+    public int                          menuItem = 0;
+    public bool                         isPowerhammer = false;
+    public bool                         isShield = false;
+    public bool                         isClock = false;
+    public float                        itemTimer = 5f;
+    public GameObject                   powerHammer;
+    public GameObject                   shield;
+
 	//audio sources
 	public AudioSource					audioSource;
 	public AudioClip					finalSmashAudio;
-	public AudioClip					coinDropAudio;
+	public AudioClip[]					coinDropAudio;
 	public AudioClip					woodSmash;
 	public AudioClip					cloudSmash;
 	public AudioClip					bump;
+    public AudioClip[]					swipe;
 	public AudioSource					bgmBeat;
 	public AudioSource					bgmSmash;
 	public AudioSource					bgmCombo;
@@ -150,6 +191,7 @@ public class GameManager : MonoBehaviour {
 			manager = this;
 			Instantiate (itweenPath, new Vector3(0,0,0), Quaternion.identity);
             mainLevel = Application.loadedLevelName;
+            LoadData();
 		} else if(manager != this){ //If there is another Game Manager destroy's this one
 			Destroy(gameObject);
 		}
@@ -166,12 +208,15 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	public void Start () {
 //		uiTextObj.SetActive (false);
-
 		currentLevel = Application.loadedLevelName;
+        Time.timeScale = 1.0F;
 
-		cam = Camera.main.gameObject;
+        cam = Camera.main.gameObject;
+        camStartPos = cam.transform.position;
+        camCurrentPos = camStartPos;
+        camStartRot = cam.transform.eulerAngles;
+        camCurrentRot = camStartRot;
 		iTween.Init (cam);
-		camStartPos = cam.transform.position;
 
 		audioSource = GameObject.Find ("Audio Source").GetComponent<AudioSource>();
 //		bgmBeat = GameObject.Find ("GH-BGM-Beat").GetComponent<AudioSource>();
@@ -180,27 +225,36 @@ public class GameManager : MonoBehaviour {
 		bgmCombo = GameObject.Find ("GH-BGM-Combo").GetComponent<AudioSource>();
 //		Debug.Log (audioSource + " Found");
 
-		if((currentLevel != "GameOver") && (currentLevel != "Menu")){
-            startMenu = (GameObject)Instantiate(startMenuScene, startMenuScene.transform.position, startMenuScene.transform.rotation);
-
-            gameState = State.Menu;
-			score = 0;
-			comboMax = 0;
-			levelCount = 1;
-			
-			levelGoal = 500;
-			
-			levelTimer = 30;
-		}
-
         if (currentLevel != "Menu") {
             scoreText = GameObject.Find("Score").GetComponent<TextMesh>();
+            valueText = GameObject.Find("Value").GetComponent<TextMesh>();
             timerText = GameObject.Find("Timer").GetComponent<TextMesh>();
             comboText = GameObject.Find("Combo").GetComponent<TextMesh>();
             comboTimerText = GameObject.Find("ComboTimer").GetComponent<TextMesh>();
             goalText = GameObject.Find("Goal").GetComponent<TextMesh>();
             distanceText = GameObject.Find("Distance").GetComponent<TextMesh>();
+
+            if (currentLevel != "GameOver") {
+                //startMenu = (GameObject)Instantiate(startMenuScene, startMenuScene.transform.position, startMenuScene.transform.rotation);
+
+                gameState = State.Menu;
+                score = 0;
+                comboMax = 0;
+                levelCount = 1;
+                levelGoal = 500;
+
+                levelTimer = 30;
+
+                scoreText.text = "";
+                valueText.text = "";
+                timerText.text = "";
+                comboText.text = "";
+                comboTimerText.text = "";
+                goalText.text = "";
+                distanceText.text = "";
+            }
         }
+
 		//feedback for killing!
 		killPeople = 0;
 		killPolice = 0;
@@ -209,8 +263,8 @@ public class GameManager : MonoBehaviour {
 		//feedbackText = GameObject.Find("Feedback").GetComponent<TextMesh>();
 
 		//Add coin groups to list
-		coinGroups.Add (cube_coin);
-		coinGroups.Add (cube2_coin);
+		coinGroups.Add (building_coin);
+		coinGroups.Add (building2_coin);
 		coinGroups.Add (tree_coin);
 		coinGroups.Add (cloud_coin);
 		coinGroups.Add (car_coin);
@@ -227,68 +281,78 @@ public class GameManager : MonoBehaviour {
             globalObj = GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>();
         }
         if (GameObject.Find("Player") != null) {
-            characterObj = GameObject.Find("Player");
-            character = characterObj.GetComponent<characterController>();
-            characterObj.transform.position = new Vector3(1.2f, .5f, -5.5f);
-            characterObj.transform.eulerAngles = new Vector3(0f, 180f, 0f);
-            Debug.Log(characterObj.animation.clip.name);
-            characterObj.animation.Play("idle");
+            character = GameObject.Find("Player");
+            characterCon = character.GetComponent<characterController>();
+            //characterPos = character.transform.position;
+            characterPos = new Vector3(.5f, 0f, 0f);
+            character.GetComponent<Animation>().Play("idle");
+            iTween.Init(character);
+
+            shield = character.transform.FindChild("Shield").gameObject;
+            shield.SetActive(false);
         }
 
 		//try space scene
         //		globalObj.sunDown();
         //		globalObj.moonDown();
-        //spawnTrigger= GameObject.Find("SpawnTrigger");
-        if (currentLevel != "Menu")
-        {
+
+        if (currentLevel != "Menu") {
             segmentsInitialize();
-            underground = GameObject.Find("Underground");
             //segments = new GameObject[initialSegNum];
         }
 	}
 
 	// Update is called once per frame
 	void Update () {
-        //int i = Random.Range(0, 100);
-        //Debug.Log(i);
-//		if(currentLevel != "GameOver") {
+        //If hammer doesn't exist, create a hammer
+        if (hammer == null) {
+            HammerInit();
+        }
+
 		switch(gameState) {
 		case State.Menu:
-            if (characterObj != null) {
-                character.canControl = false;
+            if (currentMenu != MenuPage.Main) {
+                if (gameObject.GetComponent<SwipeCheck>() == null)
+                {
+                    gameObject.AddComponent<SwipeCheck>();
+                }
+            } else {
+                Destroy(gameObject.GetComponent<SwipeCheck>());
             }
+
+            //Reset data
 			if(comboStarted) {
 				ComboEnd ();
 			}
+            //set player data
+            if (character != null) {
+                characterCon.canControl = false;
+            }
 			//temp trigger
-            if (characterObj != null && characterObj.transform.position.z >= -1.4f) {
+            if (character != null && character.transform.position.z >= 0f) {
                 gameState = State.InGame;
-                Destroy(startMenu);
+                //Destroy(startMenu);
             }
 			break;
 		case State.InGame:
-            SegMove();
 			if (sceneManager.reloadScene) {
 				loadScene();
 				sceneManager.reloadScene = false;
 			}
 			if (bgmBeat != null && !bgmBeat.isPlaying && Application.loadedLevelName != "GameOver"
-                && SceneManager.currentScene == SceneManager.scene.city)
-            {
+                && SceneManager.currentScene == SceneManager.scene.city) {
 //				Debug.Log("cityBGM");
 				bgmBeat.Play();
 				bgmBeat.loop = true;
 			}
-            if (SceneManager.currentScene == SceneManager.scene.city && bgmBeat.clip != cityBGM)
-            {
+            if (SceneManager.currentScene == SceneManager.scene.city && bgmBeat.clip != cityBGM) {
 				bgmBeat.Stop();
 				bgmBeat.clip = cityBGM;
 				bgmBeat.Play();
 				bgmBeat.loop = true;
 				//bgmSmash.clip = citySmashBGM;
 			}
-            if (SceneManager.currentScene == SceneManager.scene.space && bgmBeat.clip != spaceBGM)
-            {
+            if (SceneManager.currentScene == SceneManager.scene.space && bgmBeat.clip != spaceBGM) {
 //				Debug.Log("spaceBGM");
 				bgmBeat.Stop();
 				bgmBeat.clip = spaceBGM;
@@ -298,8 +362,7 @@ public class GameManager : MonoBehaviour {
 				//bgmSmash.clip = null;
 			}
 			if ((score > 1) && (bgmSmash!=null) && (!bgmSmash.isPlaying)
-                && (SceneManager.currentScene == SceneManager.scene.city))
-            {
+                && (SceneManager.currentScene == SceneManager.scene.city)) {
 				//bgmSmash.Play();
 				//bgmSmash.loop = true;
 			}
@@ -312,34 +375,56 @@ public class GameManager : MonoBehaviour {
 //				Debug.Log("comboStop");
 				bgmCombo.Stop();
 			}
-			character.canControl = true;
+			characterCon.canControl = true;
 //			uiTextObj.SetActive(true);
 
-			levelTimer -= 1 * Time.deltaTime;
-			comboTimer -= 1 * Time.deltaTime;
+            levelTimer -= 1 / (Mathf.Pow(2, daikokutenState)) * Time.deltaTime;
+            comboTimer -= 1 / (Mathf.Pow(2, daikokutenState)) * Time.deltaTime;
+            
+            if (isPowerhammer || isShield || isClock) {
+                itemTimer -= 1 / (Mathf.Pow(2, daikokutenState)) * Time.deltaTime;
+                timerText.text = itemTimer.ToString("n2");
+            } else {
+                itemTimer = 5f;
+                timerText.text = "";
+            }
+            if (itemTimer <= 0) {
+                isPowerhammer = false;
+                isShield = false;
+                isClock = false;
+                itemTimer = 5f;
+                shield.SetActive(false);
+                traffic.trafficStop = false;
+            }
+            
             if(comboTimer <= 0 && comboStarted) {
 				ComboEnd ();
 			}
             
+            if (valueShowTimer > 0) {
+                valueShowTimer -= 1 / (Mathf.Pow(2, daikokutenState)) * Time.deltaTime;
+            } else {
+                valueText.text = "";
+            }
+
 			goalText.text = levelGoal.ToString("Goal " + "$0");
 			//update distance text
-			if(distance < 1000){
+			if(distance < 1000) {
                 distanceText.text = distance.ToString("0");
 			} else{
                 distanceText.text = distance.ToString("0,000");
 			}
 
 			//update score text
-			if(score < 1000){
+			if(score < 1000) {
 				scoreText.text = score.ToString ("$ " + "0");
 			} else{
 				scoreText.text = score.ToString ("$ " + "0,000");
 			}
 
-			
 			//update level timer
 //			timerText.text = levelTimer.ToString ("n2");
-			timerText.text = "";
+            //timerText.text = "";
 
 			//update combo timer
             if (comboCount > 0) {
@@ -350,11 +435,11 @@ public class GameManager : MonoBehaviour {
                 comboTimerText.text = "";
             }
 			
-			if(score > highScore){ //Set HighScore
+			if(score > highScore) { //Set HighScore
 				highScore = score;
 			}
 
-            //if(levelTimer <= 10){
+            //if(levelTimer <= 10) {
             //    checkPoint = (GameObject)Instantiate(checkPointObj, checkPointObj.transform.position, Quaternion.identity);
             //    checkPoint.GetComponent<CheckPoint>().goal = levelGoal;
             //    levelTimer  = 300; //Ensures that more checkpoints are not put into the ground until actually ready
@@ -378,89 +463,96 @@ public class GameManager : MonoBehaviour {
 				traffic.spawnHelicopter = true;
 				killTank = 0;
 			}
-
 			break;
 		case State.Pause:
-			character.canControl = false;
+			characterCon.canControl = false;
 			break;
 		case State.Over:
             //cam = Camera.main.gameObject;
             //cam.transform.position = new Vector3(-1f, 1.5f, -7f);
             //cam.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
 
-            SegMove();
-            if (GameObject.Find("Player") != null)
-            {
-                character.canControl = false;
+            if (GameObject.Find("Player") != null) {
+                characterCon.canControl = false;
             }
-			if(comboStarted){
+			if(comboStarted) {
 				ComboEnd ();
 			}
 			break;
 		}
 
-		if(Application.loadedLevelName == "GameOver"){
+		if(Application.loadedLevelName == "GameOver") {
 			ScoreScreen ();
 		}
 
-
-		if(cam == null){
+		if(cam == null) {
 			Start ();
 		}
 	}
 
-    IEnumerator GameStart() {
-        //cam.transform.position = new Vector3(-1f, 1.5f, -7f);
-        //cam.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
-        //characterObj.transform.position -= new Vector3(.4f, 0f, 0f);
-        //characterObj.rigidbody.AddForce(Vector3.up * 1000);
-        iTween.MoveTo(characterObj, iTween.Hash("x", .8f, "y", 1.4f, "z", -6.3f, "time", .5f, "easetype", iTween.EaseType.easeInCubic));
-        characterObj.animation.Play("run");
-
-        yield return new WaitForSeconds(.5f);
-        iTween.MoveTo(cam, iTween.Hash("x", .5f, "y", 1.5f, "z", -2f, "time", 2f, "easetype", iTween.EaseType.easeInCubic));
-        iTween.RotateTo(cam, iTween.Hash("x", 20f, "y", 0f, "z", 0f, "time", 2f, "easetype", iTween.EaseType.easeInCubic));
-        iTween.MoveTo(characterObj, iTween.Hash("x", .5f, "y", .5f, "z", -1.4f, "time", 2f, "easetype", iTween.EaseType.easeInQuad));
-        iTween.RotateTo(characterObj, new Vector3(0f, 0f, 0f), 1f);
-        characterObj.animation.Play("run");
-
-        iTween.RotateTo(globalObj.lightController, iTween.Hash("x", 50f, "y", 330f, "z", 0f, "time", 2f, "easetype", iTween.EaseType.easeInCubic));
-        //globalObj.lightController.transform.eulerAngles = new Vector3(50, 330, 0);
-
-        camStartPos = new Vector3(.5f, 1.5f, -2f);
-        //GameObject light = GameObject.Find("Light");
-        //if (light != null) {
-        //    light.transform.localEulerAngles = new Vector3(60f, 70f, 0f);
-        //}
+    //Fixed timestep == 0.02
+    public void FixedUpdate() {
+        //Incase gap appears between 2 segments
+        if (gameState == State.InGame) {
+            PlayerMove();
+        }
+        if (gameState == State.Over) {
+            //SegMove();
+        }
     }
 
-    void segmentsInitialize()
-    {
+    IEnumerator GameStart() {
+        //Change camera data
+        camStartPos = new Vector3(.5f, 1.5f, -.7f);
+        camCurrentPos = camStartPos;
+        camStartRot = new Vector3(30, 0, 0);
+        camCurrentRot = camStartRot;
+
+        //Steal hammer
+        iTween.MoveTo(character, iTween.Hash("position", new Vector3(.8f, .5f, -7f), "time", .3f, "easetype", iTween.EaseType.easeInCubic));
+        character.GetComponent<Animation>().Play("run");
+        yield return new WaitForSeconds(.3f);
+
+        //Camera's movement when character escapes
+        iTween.MoveTo(cam, iTween.Hash("position", camStartPos, "time", 2f, "easetype", iTween.EaseType.easeInCubic));
+        iTween.RotateTo(cam, iTween.Hash("x", camStartRot.x, "y", camStartRot.y, "z", camStartRot.z, "time", 2f, "easetype", iTween.EaseType.easeInCubic));
+
+        //Character's movement when character escapes
+        characterPos = new Vector3(.5f, 0f, 0f);
+        iTween.MoveTo(character, iTween.Hash("position", characterPos, "time", 2f, "easetype", iTween.EaseType.easeInQuad));
+        iTween.RotateTo(character, new Vector3(0f, 0f, 0f), 1f);
+
+        //Rotate light
+        iTween.RotateTo(globalObj.lightController, iTween.Hash("x", 25f, "y", 180f, "z", 180f, "time", 2f, "easetype", iTween.EaseType.easeInCubic));
+        //globalObj.lightController.transform.eulerAngles = new Vector3(50, 330, 0);
+        globalObj.lightController.GetComponent<Light>().intensity = 0.4f;
+    }
+
+    void segmentsInitialize() {
         segmentSpawnPos = new Vector3(0.0f, 0.0f, 0.0f);
 
-        for (int i = 0; i < initialSegNum; ++i){
+        for (int i = 0; i < initialSegNum; ++i) {
             segments[i] = GameObject.Find("Grid").GetComponent<Grid>().generateGrid(spawnPoint, segmentSpawnPos, segmentLength, segmentOffset);
             segNum++;
             segmentSpawnPos.z += segmentOffset;
         }
-        segmentSpawnPos.z -= segmentOffset;
-        //if (spawnTrigger != null)
-        //{
-        //    spawnTrigger.SetActive(true);
-        //}
     }
 
     //Spawn segment
-    public void NewSegment()
-    {
+    public void NewSegment() {
         //		Debug.Log ("Spawning at " + segmentSpawnPos);
         GameObject newSeg = GameObject.Find("Grid").GetComponent<Grid>().generateGrid(spawnPoint, segmentSpawnPos, segmentLength, segmentOffset);
         segNum++;
         if ((segNum - 1) % 5 == 0) {
-            checkPoint = (GameObject)Instantiate(checkPointObj, checkPointObj.transform.position, Quaternion.identity);
-            //checkPoint.GetComponent<CheckPoint>().goal = levelGoal;
+            checkPointPos = new Vector3(checkPointObj.transform.position.x, 
+                                        checkPointObj.transform.position.y,
+                                        segmentSpawnPos.z + 1);
+            checkPoint = (GameObject)Instantiate(checkPointObj, checkPointPos, Quaternion.identity);
+            checkPoint.name = checkPointObj.name;
+            checkPoint.GetComponent<CheckPoint>().goal = levelGoal;
             checkPoint.transform.parent = newSeg.transform;
         }
+        segmentSpawnPos.z += segmentOffset;
         int i = 0;
         while(i != (initialSegNum-1)) {
             segments[i] = segments[++i];
@@ -471,26 +563,33 @@ public class GameManager : MonoBehaviour {
     //Segment movement
     public void SegMove() {
         //change the speed based on the combo
-        if (bonus >= 10) {
-            moveSpeed = initialSpeed * 4;
-            if (gameState == State.InGame) {
-                distance += 8;
-            }
-        } else if (bonus >= 5) {
-            moveSpeed = initialSpeed * 2;
-            if (gameState == State.InGame) {
-                distance += 2;
-            }
-        } else {
-            moveSpeed = initialSpeed;
-            if (gameState == State.InGame) {
-                distance ++;
-            }
+        //if (bonus >= 10) {
+        //    moveSpeed = initialSpeed * 4;
+        //    if (gameState == State.InGame) {
+        //        distance += 4;
+        //    }
+        //} else if (bonus >= 5) {
+        //    moveSpeed = initialSpeed * 2;
+        //    if (gameState == State.InGame) {
+        //        distance += 2;
+        //    }
+        //} else {
+        //    moveSpeed = initialSpeed;
+        //    if (gameState == State.InGame) {
+        //        distance ++;
+        //    }
+        //}
+
+        moveSpeed = initialSpeed;
+        if (gameState == State.InGame) {
+            distance ++;
         }
+
 
         //move segments
         if (segments[0] != null) {
-            segments[0].transform.Translate(new Vector3(0, 0, -1) * Time.deltaTime * moveSpeed);
+            segments[0].transform.position += new Vector3(0, 0, -1) * Time.deltaTime * moveSpeed;
+            //segments[0].transform.Translate(new Vector3(0, 0, -1) * Time.deltaTime * moveSpeed);
             
             for (int i = 1; i < initialSegNum; i++) {
                 segments[i].transform.position = new Vector3(segments[i].transform.position.x,
@@ -506,43 +605,100 @@ public class GameManager : MonoBehaviour {
 
         //move obstacles
         if (obstacleGroup != null) {
-            obstacleGroup.transform.Translate(new Vector3(0, 0, -1) * Time.deltaTime * moveSpeed);
+            obstacleGroup.transform.position += new Vector3(0, 0, -1) * Time.deltaTime * moveSpeed;
+
+            //obstacleGroup.transform.Translate(new Vector3(0, 0, -1) * Time.deltaTime * moveSpeed);
         }
     }
-	//Add grid info
-	public void addMovement(bool[,] boolGrid){
-		characterMove.Add (boolGrid);
-		Debug.Log ("add grid. Now: "+characterMove.Count);
-	}
-	//delete grid info
-	public void removeMovement(){
-		characterMove.RemoveAt (0);
-		Debug.Log ("delete grid. Now: "+characterMove.Count);
-	}
 
-	//get grid info -- whether the character can move towards
-	public bool getMovement(int posX, int posZ){
-		if (gameState == State.Over)
-			return false;
-		if (posX < 0 || posX >= segmentLength || posZ < 0 || posZ > segmentOffset) {
-			return false;
-		} else if(posZ == segmentOffset){
-			return characterMove[1][posX, 0];
-		} else if(posZ < segmentOffset/2){
-			return characterMove[1][posX, posZ];
-		} else {
-			return characterMove[0][posX, posZ];
-		}
-	}
+    //Player movement
+    public void PlayerMove() {
+        if (!isClock) {
+            //change the speed based on the combo
+            if (bonus >= 10) {
+                //moveSpeed = initialSpeed * 4;
+                daikokutenState = 2;
+                //distance += 4;
+                Time.timeScale = 4.0F;
+            } else if (bonus >= 5) {
+                //moveSpeed = initialSpeed * 2;
+                daikokutenState = 1;
+                //distance += 2;
+                Time.timeScale = 2.0F;
+            } else {
+                //moveSpeed = initialSpeed;
+                daikokutenState = 0;
+                //distance ++;
+                Time.timeScale = 1.0F;
+            }
+            moveSpeed = initialSpeed;
+            distance++;
+        } else {
+            Time.timeScale = 1.0F;
+            moveSpeed = 0f;
+        }
+        //Character position adjustment
+        characterPos.x = character.transform.position.x;
+        characterPos.y = character.transform.position.y;
+        characterPos.z += (Time.deltaTime * moveSpeed);
+        character.transform.position = characterPos;
+        //character.transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
 
-	//feesback based on player's behavior
-    //IEnumerator displayFeedback() {
-    //    feedbackText.text = "How dare you! You just killed a kitty!";
-    //    yield return new WaitForSeconds (1.5f);
-    //    feedbackText.text = "Now you lose 20 dollars!";
-    //    yield return new WaitForSeconds(1.5f);
-    //    feedbackText.text = "";
-    //}
+        //float angle = Mathf.Tan(20*(3.14f/180));
+        //cam.transform.Translate(new Vector3(0, angle, 1) * Time.deltaTime);
+
+        //Camare positon adjustment
+        camCurrentPos.x = cam.transform.position.x;
+        camCurrentPos.y = cam.transform.position.y;
+        camCurrentPos.z += (Time.deltaTime * moveSpeed);
+        cam.transform.position = camCurrentPos;
+
+        //GlobalObjects position adjustment
+        GameObject.Find("GlobalObjects").transform.position += new Vector3(0, 0, Time.deltaTime * moveSpeed);
+
+        //Daikoukuten's behavior
+        /*
+        if ((daikokutenState > 0) && (daikokuten == null)) {
+            //Daikoukuten finds out the character
+            daikokuten = Instantiate(daikokutenObj, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+            daikokuten.transform.parent = character.transform;
+            daikokuten.transform.localPosition = new Vector3(0, 0f, ((daikokutenState == 1) ? -.9f : -.5f));
+            //daikokuten.transform.localScale = new Vector3(.2f, .2f, .2f);
+        } else if ((daikokutenState > 0) && (daikokuten != null)){
+            //When player has more combos, daikokuten will be closer to the character
+            daikokuten.transform.localPosition = new Vector3(0, 0f, ((daikokutenState == 1) ? -.9f : -.5f));
+        } else if ((daikokutenState == 0) && (daikokuten != null)){
+            //When combo ends, daikokuten will leave the character
+            Destroy(daikokuten);
+        }
+        */
+
+        //Destroy segment and generate new segment
+        if (segments[0] == null) {
+            NewSegment();
+        }
+    }
+
+    public void playerSwipe() {
+        int i = UnityEngine.Random.Range(0, swipe.Length);
+        audioSource.PlayOneShot(swipe[i]);
+    }
+    
+    //Hammer initialization
+    public void HammerInit() {
+        hammer = (GameObject)Instantiate(hammerObj, hammerPos, Quaternion.identity);
+        hammer.transform.localEulerAngles = new Vector3(0, smashAngle, 0);
+        hammer.name = hammerObj.name;
+        DontDestroyOnLoad(hammer);
+    }
+
+    //Hammer smash
+    public void HammerSmash(Vector3 pos) {
+        if (hammer == null) {
+            HammerInit();
+        }
+        StartCoroutine(hammer.GetComponent<HammerBehavior>().Movement(pos));
+    }
 
 	//Spawn coins to the world
 	public void CashOut(int value){
@@ -550,7 +706,12 @@ public class GameManager : MonoBehaviour {
         //Debug.Log (objectName + " Monitized");
 
 		//Check which item was destroyed - [TODO] Save value for amount of screenshake
-		if((objectName.Contains("Cube")) && (objectName != "Cube_2")){
+        //Default Value
+        listItem = 2;
+        camShakePower = 0.05f;
+
+        //Different Objects
+		if((objectName.Contains("Building")) && (objectName != "Building_3")){
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 0;
 
@@ -561,7 +722,7 @@ public class GameManager : MonoBehaviour {
 			buildingType = objectName;
 			spawnHumanPos = coinPos;
 		}
-		if(objectName == "Cube_2"){
+		if(objectName == "Building_3"){
 
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 1;
@@ -573,7 +734,7 @@ public class GameManager : MonoBehaviour {
 			buildingType = objectName;
 			spawnHumanPos = coinPos;
 		}
-		if(objectName == "Cat" || objectName == "Dog" || objectName == "Bird"|| objectName == "Road"){
+		if(objectName.Contains ("Cat") || objectName.Contains ("Dog") || objectName.Contains ("Bird") || objectName.Contains ("City_Road")){
 			//audioSource.PlayOneShot ();
 			listItem = 2;
 
@@ -587,7 +748,7 @@ public class GameManager : MonoBehaviour {
 			camShakePower = 0.05f;
 
 		}
-		if(objectName == "Cloud" || objectName.Contains("Planet") || objectName == "Stars"){
+		if(objectName.Contains ("Cloud") || objectName.Contains("Planet") || objectName == "Stars"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
 
@@ -619,10 +780,10 @@ public class GameManager : MonoBehaviour {
 
             globalObj.moonDown();
 		}
-		if(objectName.Contains("car") || objectName.Contains("Police") || objectName.Contains("Tank")){
+		if(objectName.Contains("Car") || objectName.Contains("Tank")){
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 4;
-            if (objectName.Contains("car") || objectName.Contains("Police")) {
+            if (objectName.Contains("Car")) {
                 camShakePower = 0.3f;
             }
             if (objectName.Contains("Tank")) {
@@ -635,7 +796,7 @@ public class GameManager : MonoBehaviour {
 
 			camShakePower = 0.05f;
 		}
-		if(objectName == "Start" || objectName == "Special" || objectName == "Bomb"){
+		if(objectName == "Start" || objectName.Contains("PowerUp")){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 2;
 
@@ -646,43 +807,49 @@ public class GameManager : MonoBehaviour {
         //Camera Shake
         if(objectName == "Start"){
             StartCoroutine(GameStart());
-		} else if ((objectName == "Encyclopedia")
-                ||(objectName == "Achievement")
-                ||(objectName == "Inventory")
-                ||(objectName == "Store")
-                ||(objectName == "Setting")
-                ||(objectName == "Credits")
-                ||(objectName == "BackToMenu")) {
-            //menu items
-        } else{
+		} else if (gameState == State.InGame) {
             CamShake ();
         }
 
 		//Spawn Coins
-		GameObject coinsGroup = (GameObject)Instantiate (coinGroups[listItem], coinPos, Quaternion.identity);
-		coinsGroup.GetComponent<CoinsGroup> ().value = value;
-		audioSource.PlayOneShot (coinDropAudio);
+        //GameObject coinsGroup = (GameObject)Instantiate (coinGroups[listItem], coinPos, Quaternion.identity);
+        //coinsGroup.GetComponent<CoinsGroup> ().value = value;
+        Instantiate(coinGroups[listItem], coinPos, Quaternion.identity);
+		audioSource.PlayOneShot (coinDropAudio[(listItem <= 1) ? 0 : 1]);
 
 		//Combo Count
 		Combo ();
 	}
 
 	public void addScore(int addValue) {
-		score += addValue * bonus;
+        int collectCoin = addValue * bonus;
+        score += collectCoin;
+        if (gameState == State.InGame) {
+            valueText.text = collectCoin.ToString("+$" + "0");
+            valueShowTimer = .5f;
+        } else if (valueText != null){
+            valueText.text = "";
+        }
 	}
 
 	//[X] iTween's camera shake
 	public void CamShake(){
-		float xPos = Random.Range (-1 * camShakePower, camShakePower);
-
-		iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "y", camShakePower, "time", duration, "oncompletetarget", this.gameObject,"oncomplete", "CamFix")); //X & Y shake
+        camShakePower = camShakePower * 20;
+		float xPos = UnityEngine.Random.Range (-1 * camShakePower, camShakePower);
+        iTween.ShakeRotation(cam, iTween.Hash("x", xPos, "y", camShakePower, "time", duration, "oncompletetarget", this.gameObject, "oncomplete", "CamFix")); //X & Y shake
+        //iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "y", camShakePower, "time", duration, "oncompletetarget", this.gameObject,"oncomplete", "CamFix")); //X & Y shake
 		//iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "time", duration)); //X shake only
 	}
 
     //Make sure cam is in proper X & Y
 	public void CamFix(){
-        Debug.Log ("Moving Camera Back");
-        iTween.MoveTo(cam, iTween.Hash("x", camStartPos.x, "y", camStartPos.y, "time", 0));
+        //Debug.Log ("Moving Camera Back");
+        //iTween.MoveTo(cam, iTween.Hash("x", camCurrentPos.x, "y", camCurrentPos.y, "time", 0));
+        
+        cam.transform.eulerAngles = camCurrentRot;
+        if (gameState == State.InGame) {
+            cam.transform.eulerAngles = camCurrentRot;
+        }
 	}
 
 	public void Combo(){
@@ -730,7 +897,6 @@ public class GameManager : MonoBehaviour {
 	} 
 
 	public void loadScene() {
-        //spawnTrigger.SetActive(false);
 		GameObject[] segs = GameObject.FindGameObjectsWithTag("Segment");
 		GameObject[] obss = GameObject.FindGameObjectsWithTag("Obstacle");
 		foreach (GameObject seg in segs) {
@@ -749,7 +915,7 @@ public class GameManager : MonoBehaviour {
 		firstRun = false;
 		hitPointAdd = 0;
 
-		characterMove.Clear ();
+        //characterMove.Clear ();
 
 		if(comboStarted){
 			ComboEnd ();
@@ -767,6 +933,8 @@ public class GameManager : MonoBehaviour {
 	
 		//iTween.RotateTo(cam, iTween.Hash ("x", -90.0f, "time", 1));
 		//Debug.Log ("Rotating Camera");
+
+        SaveData();
 		//End level
 		Application.LoadLevel ("GameOver");
 	}
@@ -802,32 +970,121 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-    public void OnGUI() {
-        //GUI.skin.label.normal.background = Color.black;
-		GUI.skin = menuSkin;
-        //GUI.Label (new Rect(Screen.width - 110 , 10, 100, 30), "$"+score);
-		if(gameState == State.InGame) {
-            //GUI.Label (new Rect(Screen.width/4 , Screen.height/4, Screen.width/2, Screen.height/2), "");
-            if (isItemShow) {
-                GUI.Label(new Rect(Screen.width - 70, 0, 70, Screen.height), "items");
-                if (GUI.Button(new Rect(Screen.width - 60, 100, 50, 50), "1")) {
-                    GameObject line = (GameObject)Instantiate(lineEffect, characterObj.transform.position, Quaternion.identity);
-                    line.transform.eulerAngles = new Vector3(0,1,0);
-                    line.name = lineEffect.name;
-                    audioSource.PlayOneShot(lineSFX);
-                }
-                if (GUI.Button(new Rect(Screen.width - 60, 170, 50, 50), "2")) {
-                }
-                if (GUI.Button(new Rect(Screen.width - 60, 240, 50, 50), "3")) {
-                }
-                if (GUI.Button(new Rect(Screen.width - 60, 310, 50, 50), "4")) {
-                }
-            }
-			if(GUI.Button(new Rect(Screen.width-60, 10, 50, 50), "=")) {
-                isItemShow = !isItemShow;
-            }
-		}
+    //Save persistent data
+    public void SaveData() {
+        //Create file, serialize data and save date as a binary format file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
+        
+        PlayerData data = new PlayerData();
+        data.raijinHP = raijinHP;
+        data.highScore = highScore;
+
+        bf.Serialize(file, data);
+        file.Close();
+        Debug.Log("Save data to: " + Application.persistentDataPath);
+    }
+
+    //Load persistent data
+    public void LoadData() {
+        //Check whether the file exists
+        if (File.Exists(Application.persistentDataPath + "/playerInfo.dat")) {
+            //Open file and deserialize binary format file
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
+            
+            PlayerData data = (PlayerData)bf.Deserialize(file);
+            file.Close();
+            Debug.Log("Load data from: " + Application.persistentDataPath);
+
+            //Load data from file
+            raijinHP = data.raijinHP;
+            highScore = data.highScore;
+        }
+    }
+
+    public void UseSaw() {
+        Vector3 sawPos = character.transform.position + new Vector3(0, 0, .5f);
+        GameObject line = (GameObject)Instantiate(lineEffect, sawPos, Quaternion.identity);
+        line.transform.eulerAngles = new Vector3(0, 1, 0);
+        line.name = lineEffect.name;
+        audioSource.PlayOneShot(lineSFX);
+    }
+
+    public void UseBomb() {
+        Vector3 bombPos = character.transform.position + new Vector3(0, 0, .5f);
+        GameObject explode = (GameObject)Instantiate(explodeEffect, bombPos, Quaternion.identity);
+        explode.name = explodeEffect.name;
+        audioSource.PlayOneShot(explodeSFX);
+    }
+
+    //public void OnGUI() {
+    //    //GUI.skin.label.normal.background = Color.black;
+    //    GUI.skin = menuSkin;
+    //    //GUI.Label (new Rect(Screen.width - 110 , 10, 100, 30), "$"+score);
+    //    if(gameState == State.InGame) {
+    //        //GUI.Label (new Rect(Screen.width/4 , Screen.height/4, Screen.width/2, Screen.height/2), "");
+    //        if (isItemShow) {
+    //            GUI.Label(new Rect(Screen.width - 70, 0, 70, Screen.height), "items");
+    //            if (GUI.Button(new Rect(Screen.width - 60, 100, 50, 50), "1")) {
+    //                UseSaw();
+    //            }
+    //            if (GUI.Button(new Rect(Screen.width - 60, 170, 50, 50), "2")) {
+    //            }
+    //            if (GUI.Button(new Rect(Screen.width - 60, 240, 50, 50), "3")) {
+    //            }
+    //            if (GUI.Button(new Rect(Screen.width - 60, 310, 50, 50), "4")) {
+    //            }
+    //        }
+    //        if(GUI.Button(new Rect(Screen.width-60, 10, 50, 50), "=")) {
+    //            isItemShow = !isItemShow;
+    //        }
+    //    }
+    //}
+
+    //Draw mouse position with gizmoz
+    void OnDrawGizmos() {
+        Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(p, 0.05F);
 	}
+
+    /*
+    //Add grid info
+    public void addMovement(bool[,] boolGrid){
+        characterMove.Add (boolGrid);
+        Debug.Log ("add grid. Now: "+characterMove.Count);
+    }
+    //delete grid info
+    public void removeMovement(){
+        characterMove.RemoveAt (0);
+        Debug.Log ("delete grid. Now: "+characterMove.Count);
+    }
+
+    //get grid info -- whether the character can move towards
+    public bool getMovement(int posX, int posZ){
+        if (gameState == State.Over)
+            return false;
+        if (posX < 0 || posX >= segmentLength || posZ < 0 || posZ > segmentOffset) {
+            return false;
+        } else if(posZ == segmentOffset){
+            return characterMove[1][posX, 0];
+        } else if(posZ < segmentOffset/2){
+            return characterMove[1][posX, posZ];
+        } else {
+            return characterMove[0][posX, posZ];
+        }
+    }
+    */
+    //feesback based on player's behavior
+    //IEnumerator displayFeedback() {
+    //    feedbackText.text = "How dare you! You just killed a kitty!";
+    //    yield return new WaitForSeconds (1.5f);
+    //    feedbackText.text = "Now you lose 20 dollars!";
+    //    yield return new WaitForSeconds(1.5f);
+    //    feedbackText.text = "";
+    //}
+
 	/*         -------Bad Camera Shake-----
 	IEnumerator Shake(){
 		Debug.Log ("Begin Camera Shake");
@@ -858,4 +1115,10 @@ public class GameManager : MonoBehaviour {
 
 		Camera.main.transform.position = startCamPos;
 	} */
+}
+
+[System.Serializable]
+class PlayerData {
+    public int raijinHP;
+    public int highScore;
 }

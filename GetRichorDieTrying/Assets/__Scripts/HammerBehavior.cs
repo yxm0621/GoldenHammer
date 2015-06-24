@@ -2,31 +2,26 @@
 using System.Collections;
 
 public class HammerBehavior : MonoBehaviour {
-    public float smashAngle = 75;
-    public GameObject mouse;
+    public GameManager gameMain;
 
 	// Use this for initialization
 	void Start () {
-        //mouse = (GameObject)Instantiate(mouse, mouse.transform.position, mouse.transform.rotation);
+        gameMain = GameManager.manager;
 	}
 	
 	// Update is called once per frame
-    void Update () {
-        //mouse.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
-    }
-    
-    void OnDrawGizmos()
-    {
-        //mouse.transform.position = Input.mousePosition;
-        //Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(p, 0.05F);
+	void Update () {
+        if ((gameObject.transform.eulerAngles.z == 0)&&(gameObject.transform.position != gameMain.hammerPos)) {
+            iTween.MoveTo(gameObject, gameMain.hammerPos, .1f);
+        }
 	}
 
-    public void hammerSmash(Vector3 pos) {
-        gameObject.transform.position = pos + new Vector3(.5f, 1, 0);
-        gameObject.transform.localEulerAngles = new Vector3(0, smashAngle, 90);
+    //Hammer smash
+    public IEnumerator Movement(Vector3 pos) {
+        iTween.MoveTo(gameObject, pos + new Vector3(.5f, 1, 0), .01f);
+        gameObject.transform.localEulerAngles = new Vector3(0, gameMain.smashAngle, 90);
         iTween.RotateTo(gameObject, iTween.Hash("z", 0, "time", 0.2f));
+        yield return new WaitForSeconds(.2f);
+        iTween.MoveTo(gameObject, gameMain.hammerPos, .01f);
     }
 }

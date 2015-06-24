@@ -17,7 +17,7 @@
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
-    <UnityVersion>4.6.1f1</UnityVersion>
+    <UnityVersion>5.1.1f1</UnityVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -25,7 +25,7 @@
     <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>DEBUG;TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_1_1;UNITY_5_1;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_LICENSE;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_EDITOR_METRICS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,7 +33,7 @@
     <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+    <DefineConstants>TRACE;UNITY_5_1_1;UNITY_5_1;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_LICENSE;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_EDITOR_METRICS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -55,23 +55,77 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\UnityAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>Library\UnityAssemblies\UnityEditor.Graphs.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Android.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WP8.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.WP8.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Metro.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Metro.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.BB10.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.BB10.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.SamsungTV.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.SamsungTV.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.WebGL.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.OSXStandalone.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.OSXStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\UnityAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
     <Reference Include="Google.GData.AccessControl">
-      <HintPath>Assets\GoogleFu\Editor\Google.GData.AccessControl.DLL</HintPath>
+      <HintPath>Assets\Google2u\Editor\Google.GData.AccessControl.DLL</HintPath>
     </Reference>
     <Reference Include="Google.GData.Client">
-      <HintPath>Assets\GoogleFu\Editor\Google.GData.Client.dll</HintPath>
+      <HintPath>Assets\Google2u\Editor\Google.GData.Client.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.Documents">
-      <HintPath>Assets\GoogleFu\Editor\Google.GData.Documents.dll</HintPath>
+      <HintPath>Assets\Google2u\Editor\Google.GData.Documents.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.Extensions">
-      <HintPath>Assets\GoogleFu\Editor\Google.GData.Extensions.dll</HintPath>
+      <HintPath>Assets\Google2u\Editor\Google.GData.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.Spreadsheets">
-      <HintPath>Assets\GoogleFu\Editor\Google.GData.Spreadsheets.dll</HintPath>
+      <HintPath>Assets\Google2u\Editor\Google.GData.Spreadsheets.dll</HintPath>
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Assets\UnityVS\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
@@ -101,46 +155,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\SetPivot.cs" />
-    <Compile Include="Assets\GoogleFu\Editor\GoogleFu.cs" />
-    <Compile Include="Assets\GoogleFu\Editor\GoogleFuClasses.cs" />
-    <Compile Include="Assets\GoogleFu\Editor\GoogleFuEditor.cs" />
-    <Compile Include="Assets\GoogleFu\Editor\GoogleFuLanguages.cs" />
-    <Compile Include="Assets\GoogleFu\Editor\GoogleFuMimeType.cs" />
-    <Compile Include="Assets\GoogleFu\Editor\Localization.cs" />
-    <Compile Include="Assets\GoogleFu\Samples\Scripts\Editor\CharacterStatsSampleEditor.cs" />
-    <Compile Include="Assets\VoxelBusters\NativePlugins\Editor\Menu\Menu.cs" />
-    <Compile Include="Assets\VoxelBusters\NativePlugins\Editor\PostProcess\PostProcessBuild.cs" />
-    <Compile Include="Assets\VoxelBusters\NativePlugins\Editor\WelcomeTour\WelcomeTourWindow.cs" />
-    <Compile Include="Assets\VoxelBusters\NativePlugins\Plugins\Features\Billing\DataTypes\Product\Editor\BillingProductDrawer.cs" />
-    <Compile Include="Assets\VoxelBusters\NativePlugins\Scripts\AddressBook\Editor\EditorAddressBookInspector.cs" />
-    <Compile Include="Assets\VoxelBusters\NativePlugins\Scripts\NP\Settings\Editor\NPSettingsInspector.cs" />
-    <Compile Include="Assets\VoxelBusters\NativePlugins\Scripts\Notification\Editor\EditorNotificationCenterInspector.cs" />
-    <Compile Include="Assets\VoxelBusters\NativePlugins\Scripts\Notification\Editor\EditorPushNotificationService.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\Product\Dashboard\Editor\ProductDashboardInspector.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\MiniJSON\MiniJSON.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXBuildFile.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXBuildPhase.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXDictionary.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXFileReference.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXGroup.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXList.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXObject.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXParser.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXProject.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXSortedDictionary.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\PBX Editor\PBXVariantGroup.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\XCBuildConfiguration.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\XCConfigurationList.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\XCMod.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\XCProject.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\ThirdParty\Editor\XUPorter\XCodePostProcess.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\CustomProperty\ArrayDrawer\Editor\ArrayDrawer.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\CustomProperty\EnumMask\Editor\EnumMaskFieldDrawer.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\CustomProperty\OnValueChange\Editor\ExecuteOnValueChangeDrawer.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\CustomProperty\Regex\Editor\RegexDrawer.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\Editor\Helper\ArrayInspector.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\UnityEditor\Scripts\Editor\UnityEditorUtility.cs" />
-    <Compile Include="Assets\VoxelBusters\Utility\Web\Demo\Scripts\DownloadTexture\Editor\DownloadTextureDemoInspector.cs" />
+    <Compile Include="Assets\Google2u\Editor\Documentation.cs" />
+    <Compile Include="Assets\Google2u\Editor\EditorGUILayoutEx.cs" />
+    <Compile Include="Assets\Google2u\Editor\G2GUIMessage.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2u.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uAccountWorkbook.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uCSV.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uCell.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uDocs.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uEditor.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uEnums.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uExportOptions.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uGUI.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uGUIUtil.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uIcon.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uJSON.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uLanguages.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uManualWorkbook.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uMimeType.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uObjDB.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uStaticDB.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uWorkbookBase.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uWorksheet.cs" />
+    <Compile Include="Assets\Google2u\Editor\Google2uXML.cs" />
+    <Compile Include="Assets\Google2u\Editor\GoogleAppStatus.cs" />
+    <Compile Include="Assets\Google2u\Editor\Localization.cs" />
+    <Compile Include="Assets\Google2u\Samples\SampleAssets\Scripts\Database\Editor\SampleCharacters\SampleCharactersEditor.cs" />
+    <Compile Include="Assets\Google2u\Samples\SampleAssets\Scripts\Database\Editor\SampleDialogMap\SampleDialogMapEditor.cs" />
+    <Compile Include="Assets\Google2u\Samples\SampleAssets\Scripts\Database\Editor\SampleWeapons\SampleWeaponsEditor.cs" />
     <Compile Include="Assets\iTweenEditor\Editor\iTweenEventDataEditor.cs" />
     <Compile Include="Assets\iTweenEditor\Editor\iTweenPathEditor.cs" />
   </ItemGroup>
@@ -150,6 +192,10 @@
     <None Include="Assets\Art\Fonts\Silkscreen\Kottke Silkscreen License.txt" />
     <None Include="Assets\Art\KY_effects\FX_free_pack\ReadMe.txt" />
     <None Include="Assets\Art\Skybox\Fantasy Skybox FREE\Readme\Readme.txt" />
+    <None Include="Assets\Aubergines Toon Shaders\Readme.txt" />
+    <None Include="Assets\Aubergines Toon Shaders\Shaders\Includes\Aubergine_Lights.cginc" />
+    <None Include="Assets\Aubergines Toon Shaders\Shaders\Toony\Diffuse.shader" />
+    <None Include="Assets\Aubergines Toon Shaders\Shaders\Toony\Diffuse-Edges.shader" />
     <None Include="Assets\iTweenEditor\README.txt" />
     <None Include="Assets\Models\PrimitivePlus\Documentation\ReadMe.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest_root_activity_settings_sample.txt" />
@@ -301,8 +347,6 @@
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
-    <None Include="Assets\VoxelBusters\NativePlugins\Readme.txt" />
-    <None Include="Assets\VoxelBusters\Utility\ThirdParty\ExifLib\License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2012\UnityVS.CSharp.targets" />
 </Project>

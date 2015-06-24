@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.4.0" xmlns="http://www.collada.org/2005/11/COLLADASchema">
+  <asset>
+    <contributor>
+      <authoring_tool>Minddesk Qubicle 2</authoring_tool>
+      <comments>Get Qubicle at www.minddesk.com</comments>
+    </contributor>
+    <created>2015-05-275:50 PM17:50:07:520</created>
+    <modified>2015-05-275:50 PM17:50:07:520</modified>
+    <unit meter="0.01" />
+  </asset>
+  <library_images>
+    <image id="Tree1-image" name="Tree1-image">
+      <init_from>file:///Materials/Tree1.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="Tree1-material" name="Tree1-material">
+      <instance_effect url="#Tree1-shader-fx" />
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="Tree1-shader-fx" name="Tree1-shader-fx">
+      <profile_COMMON>
+        <newparam sid="Tree1-image-surface">
+          <surface type="2D">
+            <init_from>Tree1-image</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Tree1-image-sampler">
+          <sampler2D>
+            <source>Tree1-image-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NEAREST</minfilter>
+            <magfilter>NEAREST</magfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="standard">
+          <lambert>
+            <ambient>
+              <color sid="ambient">0.0 0.0 0.0 1.0</color>
+            </ambient>
+            <diffuse>
+              <texture texcoord="CHANNEL0" texture="Tree1-image-sampler" />
+            </diffuse>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry name="Tree" id="Tree-lib">
+      <mesh>
+        <source id="Tree-position">
+          <float_array id="Tree-position-array" count="60">5.0 28.5 -5.0 5.0 7.5 -5.0 -5.0 7.5 -5.0 -5.0 28.5 -5.0 1.0 7.5 -1.0 1.0 0.5 -1.0 -1.0 0.5 -1.0 -1.0 7.5 -1.0 -5.0 28.5 5.0 -5.0 7.5 5.0 5.0 7.5 5.0 5.0 28.5 5.0 -1.0 7.5 1.0 -1.0 0.5 1.0 1.0 0.5 1.0 1.0 7.5 1.0 -1.0 7.5 -5.0 -1.0 7.5 5.0 1.0 7.5 5.0 1.0 7.5 -5.0 </float_array>
+          <technique_common>
+            <accessor source="Tree-position-array" stride="3" count="20">
+              <param name="X" type="float" />
+              <param name="Y" type="float" />
+              <param name="Z" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Tree-normal">
+          <float_array id="Tree-normal-array" count="18">0.0 0.0 1.0 0.0 0.0 -1.0 -1.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 -1.0 0.0</float_array>
+          <technique_common>
+            <accessor source="Tree-normal-array" stride="3" count="6">
+              <param name="X" type="float" />
+              <param name="Y" type="float" />
+              <param name="Z" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Tree-uv">
+          <float_array id="Tree-uv-array" count="112">0.015625 0.34375 0.015625 0.015625 0.171875 0.015625 0.171875 0.34375 0.203125 0.34375 0.203125 0.015625 0.359375 0.015625 0.359375 0.34375 0.390625 0.34375 0.390625 0.015625 0.546875 0.015625 0.546875 0.34375 0.578125 0.34375 0.578125 0.015625 0.734375 0.015625 0.734375 0.34375 0.765625 0.171875 0.765625 0.015625 0.921875 0.015625 0.921875 0.171875 0.015625 0.53125 0.015625 0.375 0.078125 0.375 0.078125 0.53125 0.109375 0.53125 0.109375 0.375 0.171875 0.375 0.171875 0.53125 0.953125 0.125 0.953125 0.015625 0.984375 0.015625 0.984375 0.125 0.765625 0.3125 0.765625 0.203125 0.796875 0.203125 0.796875 0.3125 0.828125 0.3125 0.828125 0.203125 0.859375 0.203125 0.859375 0.3125 0.890625 0.3125 0.890625 0.203125 0.921875 0.203125 0.921875 0.3125 0.953125 0.265625 0.953125 0.203125 0.984375 0.203125 0.984375 0.265625 0.203125 0.4375 0.203125 0.375 0.234375 0.375 0.234375 0.4375 0.265625 0.40625 0.265625 0.375 0.296875 0.375 0.296875 0.40625 </float_array>
+          <technique_common>
+            <accessor source="Tree-uv-array" stride="2" count="56">
+              <param name="S" type="float" />
+              <param name="T" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Tree-vertex">
+          <input semantic="POSITION" source="#Tree-position" />
+        </vertices>
+        <polylist material="Tree1-material" count="14">
+          <input offset="0" semantic="VERTEX" source="#Tree-vertex" />
+          <input offset="1" semantic="NORMAL" source="#Tree-normal" />
+          <input offset="2" semantic="TEXCOORD" source="#Tree-uv" />
+          <vcount>4 4 4 4 4 4 4 4 4 4 4 4 4 4 </vcount>
+          <p>0 1 8 1 1 9 2 1 10 3 1 11 4 1 28 5 1 29 6 1 30 7 1 31 8 0 12 9 0 13 10 0 14 11 0 15 12 0 32 13 0 33 14 0 34 15 0 35 3 2 0 2 2 1 9 2 2 8 2 3 7 2 40 6 2 41 13 2 42 12 2 43 11 3 4 10 3 5 1 3 6 0 3 7 15 3 36 14 3 37 5 3 38 4 3 39 3 4 16 8 4 17 11 4 18 0 4 19 9 5 24 2 5 25 16 5 26 17 5 27 18 5 20 19 5 21 1 5 22 10 5 23 7 5 48 16 5 49 19 5 50 4 5 51 17 5 44 12 5 45 15 5 46 18 5 47 13 5 52 6 5 53 5 5 54 14 5 55 </p>
+        </polylist>
+      </mesh>
+    </geometry>)
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Tree1-scene" name="Tree1-scene">
+      <node sid="Tree" id="Tree" name="Tree">
+        <translate sid="translate">0.00 0.50 0.00</translate>
+        <instance_geometry url="#Tree-lib">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Tree1-material" target="#Tree1-material" />
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene name="" sid="" url="#Tree1-scene" />
+  </scene>
+</COLLADA>

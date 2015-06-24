@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.GetRichorDieTrying.CSharp.Editor", "UnityVS.GetRichorDieTrying.CSharp.Editor.csproj", "{747E3B43-67F0-9AC4-F8CF-9C9C76866D51}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.GetRichorDieTrying.CSharp", "UnityVS.GetRichorDieTrying.CSharp.csproj", "{E06AE733-2B92-CFB3-77B3-5989CFAFFECB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.GetRichorDieTrying.CSharp.Editor", "UnityVS.GetRichorDieTrying.CSharp.Editor.csproj", "{747E3B43-67F0-9AC4-F8CF-9C9C76866D51}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.GetRichorDieTrying.CSharp.Plugins", "UnityVS.GetRichorDieTrying.CSharp.Plugins.csproj", "{E60B3A06-4A8B-1ABE-9855-B288BD22EBDF}"
 EndProject
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{747E3B43-67F0-9AC4-F8CF-9C9C76866D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{747E3B43-67F0-9AC4-F8CF-9C9C76866D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{747E3B43-67F0-9AC4-F8CF-9C9C76866D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{747E3B43-67F0-9AC4-F8CF-9C9C76866D51}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E06AE733-2B92-CFB3-77B3-5989CFAFFECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E06AE733-2B92-CFB3-77B3-5989CFAFFECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E06AE733-2B92-CFB3-77B3-5989CFAFFECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E06AE733-2B92-CFB3-77B3-5989CFAFFECB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{747E3B43-67F0-9AC4-F8CF-9C9C76866D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{747E3B43-67F0-9AC4-F8CF-9C9C76866D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{747E3B43-67F0-9AC4-F8CF-9C9C76866D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{747E3B43-67F0-9AC4-F8CF-9C9C76866D51}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E60B3A06-4A8B-1ABE-9855-B288BD22EBDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E60B3A06-4A8B-1ABE-9855-B288BD22EBDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E60B3A06-4A8B-1ABE-9855-B288BD22EBDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
