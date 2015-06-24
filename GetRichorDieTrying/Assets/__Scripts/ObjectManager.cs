@@ -190,6 +190,7 @@ public class ObjectManager : MonoBehaviour {
                 Application.LoadLevel(gameMain.mainLevel);
 			}
 
+<<<<<<< HEAD
             if ((thisObject.name == "Encyclopedia")
                 ||(thisObject.name == "Achievement")
                 ||(thisObject.name == "Inventory")
@@ -200,6 +201,15 @@ public class ObjectManager : MonoBehaviour {
                     iTween.MoveTo(Camera.main.gameObject, new Vector3(10.5f, 1f, -10f), .5f);
                     hitPoints++;
 			}
+=======
+	void OnMouseDown(){
+		if (GameManager.gameState == GameManager.State.InGame || thisObject.name == "GameOverStart"
+		    || thisObject.name == "Start") {
+            characterController charaCon = GameObject.Find("Player").GetComponent<characterController>();
+           // charaCon.SwipeCheck();
+           // if (characterController.swipeDirection == null)
+           // {
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
             if (thisObject.name == "BackToMenu"){
                 iTween.MoveTo(Camera.main.gameObject, new Vector3(0f, 1f, -10f), .5f);
@@ -208,6 +218,7 @@ public class ObjectManager : MonoBehaviour {
                 //Application.LoadLevel("Menu");
 			}
 
+<<<<<<< HEAD
             if (thisObject.name == "Start"){
                 hitPoints++;
 			}
@@ -250,6 +261,22 @@ public class ObjectManager : MonoBehaviour {
             //iTween.MoveFrom(thisObject, iTween.Hash("y", currentPos.y - 0.25f, "time", 0.5f));
             //iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y - 0.25f, "time", 0.5f));
             hitPoints--;
+=======
+                //Debug.Log(thisObject + " hit!!");
+                gameMain.audioSource.PlayOneShot(hitAudio);
+                //iTween.MoveFrom (cam, iTween.Hash("z", -0.001f, "time", 0.5f)); //Give the camera a little kick in Z
+                if (thisObject.name == "Road")
+                {
+                    //iTween.MoveFrom(thisObject, iTween.Hash("y", currentPos.y - 0.25f, "time", 0.5f));
+                }
+                else
+                {
+                    iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y + -0.25f, "time", 0.5f));
+                }
+                hitPoints--;
+
+           // }
+>>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 		}
 	}
 
