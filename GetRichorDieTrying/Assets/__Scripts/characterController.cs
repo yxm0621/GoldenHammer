@@ -8,12 +8,8 @@ public class characterController : MonoBehaviour {
 	public bool						canControl = false;
 	public static Swipe				swipeDirection;
 	
-<<<<<<< HEAD
 	public float					minSwipeLength = 10;
 	public float					minSwipeSpeed = 100;
-=======
-	public float					minSwipeLength = .5f;
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 	
 	public Vector2 					firstPressPos; //Position of 1st press
 	public Vector2					secondPressPos; //Position of 2nd press
@@ -109,7 +105,6 @@ public class characterController : MonoBehaviour {
 				break;
 			case Swipe.Left:
 				//moving left
-<<<<<<< HEAD
                 if (curPosX > 0) {
                     curPosX--;
                     Move();
@@ -121,29 +116,6 @@ public class characterController : MonoBehaviour {
                     curPosX++;
                     Move();
                 }
-=======
-				//character.transform.localEulerAngles = new Vector3 (0, -90, 0);
-				//if (canMoveLeft) {
-					//moveLeft ();
-                if (curPosX > 0)
-                {
-                    curPosX--;
-                    move();
-                }
-				//}
-				break;
-			case Swipe.Right:
-				//moving right
-				//character.transform.localEulerAngles = new Vector3 (0, 90, 0);
-				//if (canMoveRight) {
-					//moveRight ();
-                if (curPosX < 3)
-                {
-                    curPosX++;
-                    move();
-                }
-				//}
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 				break;
 			default:
 				break;
@@ -174,12 +146,7 @@ public class characterController : MonoBehaviour {
     void CalculateDir(Vector3 first, Vector3 second) {
         currentSwipe = new Vector2(second.x - first.x, second.y - first.y);
         float length = currentSwipe.magnitude;
-<<<<<<< HEAD
         Debug.Log("touch magnitude: "+length);
-=======
-        //float touchSpeed = Input.GetTouch(0).deltaPosition.magnitude / Input.GetTouch(0).deltaTime;
-        //Debug.Log("touchSpeed: " + touchSpeed);
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
         //make sure it was a legit swipe not a tap
         if (currentSwipe.magnitude < minSwipeLength)
@@ -239,7 +206,6 @@ public class characterController : MonoBehaviour {
                     break;
                 case TouchPhase.Moved:
                     float touchSpeed = Input.GetTouch(0).deltaPosition.magnitude / Input.GetTouch(0).deltaTime;
-<<<<<<< HEAD
                     Debug.Log("touchMovingSpeed: " + touchSpeed);
                     //Debug.Log("Touch index " + Input.GetTouch(0).fingerId + " has moved by " + Input.GetTouch(0).deltaPosition);
                     if (touching && touchSpeed > minSwipeSpeed) {
@@ -255,87 +221,26 @@ public class characterController : MonoBehaviour {
                     Debug.Log("touch end");
                     if (touching) {
                         //when player ups the finger too fast and the "moved" state didn't have time to check the direction
-=======
-                    Debug.Log("touchSpeed: " + touchSpeed);
-                    //Debug.Log("Touch index " + Input.GetTouch(0).fingerId + " has moved by " + Input.GetTouch(0).deltaPosition);
-                    if (touching && touchSpeed > 350) {
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
                         secondPressPos = new Vector2(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y);
                         CalculateDir(firstPressPos, secondPressPos);
                     } else {
-                        //when one direction has already been checked
                         swipeDirection = Swipe.None;
                         return;
                     }
-                    break;
-                case TouchPhase.Ended:
-                    swipeDirection = Swipe.None;
-                    return;
-                    //if (touching) {
-                    //    //when player ups the finger too fast and the "moved" state didn't have time to check the direction
-                    //    secondPressPos = new Vector2(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y);
-                    //    calculateDir(firstPressPos, secondPressPos);
-                    //} else {
-                    //    swipeDirection = Swipe.None;
-                    //    return;
-                    //}
                     break;
                 default:
                     swipeDirection = Swipe.None;
                     break;
             }
         } else {
-<<<<<<< HEAD
 /* --------comment from here if test with mouse or
  * cancel comment from here if test with touch-------- */
-<<<<<<< HEAD
     //        swipeDirection = Swipe.None;
     //        return;
     //    }
     //}
-=======
-=======
-/**************comment from here if test with mouse or
- * cancel comment from here if test with touch**********************/
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
-            swipeDirection = Swipe.None;
-            return;
-        }
-    }
-<<<<<<< HEAD
->>>>>>> 3ad7c5732b3f96a67553f63bfb3733fd1a1086f3
 /* --------comment until here if test with mouse or
  * cancel comment until here if test with touch-------- */
-=======
-/**************comment until here if test with mouse or
- * cancel comment until here if test with touch**********************/
-
-
-
-/**************comment from here if test with touch
- * or cancel comment from here if test with mouse**********************/
-            
-    //        if (Input.GetMouseButtonDown(0)) {
-    //            //save began touch 2d point
-    //            firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-    //            touching = true;
-    //        }
-
-    //        if (Input.GetMouseButton(0)) {
-    //            if (!touching) {
-    //                swipeDirection = Swipe.None;
-    //                return;
-    //            }
-    //            //save ended touch 2d point
-    //            secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-    //            calculateDir(firstPressPos, secondPressPos);
-    //        } else {
-    //            swipeDirection = Swipe.None;
-    //            return;
-    //        }
-    //    }
-    //}
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 
 
@@ -371,31 +276,11 @@ public class characterController : MonoBehaviour {
 /* --------comment until here if test with touch
  * or cancel comment until here if test with mouse-------- */
 
-<<<<<<< HEAD
 	void Move() {
         iTween.MoveTo(character, iTween.Hash("x", movePos[curPosX].x, "easeType", "easeOutCubic", "time", .1f));
         iTween.MoveTo(Camera.main.gameObject, iTween.Hash("x", movePos[curPosX].x, "easeType", "linear", "time", .12f));
-<<<<<<< HEAD
         gameMain.camCurrentPos.x = movePos[curPosX].x;
         gameMain.playerSwipe();
-=======
-        gameMain.camStartPos.x = movePos[curPosX].x;
-=======
-	void move() {
-        if(curPosX == 0) {
-            iTween.MoveTo(character, iTween.Hash("x", movePos0.x, "easeType", "easeOutCubic", "time", .05f));
-        }
-        if (curPosX == 1) {
-            iTween.MoveTo(character, iTween.Hash("x", movePos1.x, "easeType", "easeOutCubic", "time", .05f));
-        }
-        if (curPosX == 2) {
-            iTween.MoveTo(character, iTween.Hash("x", movePos2.x, "easeType", "easeOutCubic", "time", .05f));
-        }
-        if (curPosX == 3) {
-            iTween.MoveTo(character, iTween.Hash("x", movePos3.x, "easeType", "easeOutCubic", "time", .05f));
-        }
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
->>>>>>> 3ad7c5732b3f96a67553f63bfb3733fd1a1086f3
 	}
 
 	void forceJump(){

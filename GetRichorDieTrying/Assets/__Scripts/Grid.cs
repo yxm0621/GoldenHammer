@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour {
 	public GameObject[] sidewalk;
 	public GameObject[] road;
     public GameObject holeObj;
+    public GameObject[] pickup;
 	
 	public int[,] buildingData;
 	public int[,] sidewalkData;
@@ -92,7 +93,7 @@ public class Grid : MonoBehaviour {
         newRoad.transform.parent = newSeg.transform;
 
         //Create the grid
-		grid = new GridController(length, width, building, sidewalk, buildingData, sidewalkData);
+        grid = new GridController(length, width, building, sidewalk, pickup, buildingData, sidewalkData);
 		grid.createGrid ();
 
         //Render the grid
@@ -183,17 +184,19 @@ public class GridController {
 	public GameObject[] sidewalk;
 	public int[,] buildingData;
 	public int[,] sidewalkData;
+    public GameObject[] pickup;
 
 	public GridItem[,] items;
 
 	//construction of the class
-	public GridController(int gridLenth, int gridWidth, GameObject[] building, GameObject[] sidewalk, int[,] buildingData, int[,] sidewalkData) {
+	public GridController(int gridLenth, int gridWidth, GameObject[] building, GameObject[] sidewalk, GameObject[] pickup, int[,] buildingData, int[,] sidewalkData) {
 		this.gridLenth = gridLenth;
 		this.gridWidth = gridWidth;
 		this.sidewalkBegin = gridLenth / 2 - 2;
 		this.items = new GridItem[gridLenth, gridWidth];
 		this.building = building;
 		this.sidewalk = sidewalk;
+        this.pickup = pickup;
 		this.buildingData = buildingData;
 		this.sidewalkData = sidewalkData;
 	}
@@ -211,42 +214,90 @@ public class GridController {
 		}
 	}
 
+    //randomly put the pickupItem
+    public void PutItem(int x, int z) {
+        int i = getObj(pickup, 0, pickup.Length, 1);
+        items[x, z] = new GridItem(pickup[i], 1, 1, 0, 0);
+    }
+
 	//create the new grid
 	public void createGrid (){
+        //generate buildings
 		for(int x = 0; x < gridLenth; ++x) {
 			if (x != sidewalkBegin && x != (sidewalkBegin+1) && 
 			    x != (sidewalkBegin+2) && x != (sidewalkBegin+3)) {
 				//generate buildings on lanes except road and sidewalk
 				for (int z = 0; z < gridWidth; ++z) {
-					int hasObject = Random.Range(0,2);
-					if(hasObject == 0) {
-                        //Don't create object, leave the empty space
-						continue;
-					}
-					int i = getObj(building, 0, building.Length, gridWidth-z);
-					GameObject obj = building[i];
-					items[x, z] = new GridItem(obj, buildingData[i,0], buildingData[i,1], buildingData[i,2], buildingData[i,3]);
-					z += (buildingData[i,1] - 1);
-					if ((buildingData[i,0] > 1)&&(x != sidewalkBegin-1)&&(x != gridLenth-1)) {
-						//avoid overlap
-						x++;
-					}
+                    //if (Random.Range(0, 2) > 0) {
+                        // 50% chance to genarate building
+                        int i = getObj(building, 0, building.Length, gridWidth - z);
+                        if ((x == 0) || (x == gridLenth - 1)) {
+                            //edge of the ground
+                            i = getObj(building, 3, 5, 1); // only generate tall buildings
+                        }
+                        
+                        items[x, z] = new GridItem(building[i], buildingData[i, 0], buildingData[i, 1], buildingData[i, 2], buildingData[i, 3]);
+                        z += (buildingData[i, 1] - 1);
+                        if ((buildingData[i, 0] > 1) && (x != sidewalkBegin - 1) && (x != gridLenth - 1)) {
+                            //avoid overlap
+                            x++;
+                        }
+                    //}
+					
 				}
 			}
 		}
-		for(int x = 0; x < gridLenth; ++x) {
-			if (x == sidewalkBegin || x == (sidewalkBegin+3)) {
+
+        //piukup system
+        bool onSidewalk = false;
+        //50% chance to create a pickup item on each segment
+        if (Random.Range(0, 2) == 0) {
+            //75% chance to put the pickup item on the road
+            if (Random.Range(0, 4) < 3) {
+                //randomly choose a position on the road of the segment
+                int x = Random.Range(sidewalkBegin, sidewalkBegin + 2);
+                int z = Random.Range(0, gridWidth);
+                PutItem(x, z);
+            } else {
+                //25% chance to put the pickup item on the sidewalk
+                onSidewalk = true;
+            }
+        }
+
+        //generate sidewalk
+		for(int x = sidewalkBegin; x <= (sidewalkBegin + 3); ++x) {
+			if (x == sidewalkBegin || x == (sidewalkBegin + 3)) {
 				//generate items on sidewalk lanes
 				for (int z = 0; z < gridWidth; ++z) {
-					int hasObject = Random.Range(0,2);
-					if(hasObject == 0) {
-                        //Don't create object, leave the empty space
-						continue;
-					}
-					int i = getObj(sidewalk, 0, sidewalk.Length, gridWidth-z);
-					GameObject obj = sidewalk[i];
-					items[x, z] = new GridItem(obj, sidewalkData[i,0], sidewalkData[i,1], sidewalkData[i,2], sidewalkData[i,3]);
-					z += (sidewalkData[i,1] - 1);
+                    //whether need to generate pickup item
+                    if (onSidewalk) {
+                        if ((x == (sidewalkBegin + 3)) && (z == gridWidth - 1)) {
+                            PutItem(x, z);
+                        } else {
+                            int randomItem = Random.Range(0, 3);
+                            if (randomItem > 0) {
+                                // 2/3 chance to generate item, 1/3 chance to leave it empty
+                                if (randomItem == 1) {
+                                    // 1/2 chance to generate pickup item, 1/2 chance to generate static item
+                                    PutItem(x, z);
+                                    onSidewalk = false;
+                                } else {
+                                    //generate static item
+                                    int i = getObj(sidewalk, 0, sidewalk.Length, gridWidth - z);
+                                    items[x, z] = new GridItem(sidewalk[i], sidewalkData[i, 0], sidewalkData[i, 1], sidewalkData[i, 2], sidewalkData[i, 3]);
+                                    z += (sidewalkData[i, 1] - 1);
+                                }
+                            }
+                        }
+                    } else {
+                        //don't need to generate pickup item
+                        if (Random.Range(0, 2) > 0) {
+                            // 1/2 chance to generate item, 1/2 chance to leave it empty
+                            int i = getObj(sidewalk, 0, sidewalk.Length, gridWidth - z);
+                            items[x, z] = new GridItem(sidewalk[i], sidewalkData[i, 0], sidewalkData[i, 1], sidewalkData[i, 2], sidewalkData[i, 3]);
+                            z += (sidewalkData[i, 1] - 1);
+                        }
+                    }
 				}
 			}
 		}

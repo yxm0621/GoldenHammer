@@ -79,13 +79,13 @@
      <Compile Include="Assets\__Scripts\Global\RainClouds.cs" />
      <Compile Include="Assets\__Scripts\Grid.cs" />
      <Compile Include="Assets\__Scripts\HammerBehavior.cs" />
+     <Compile Include="Assets\__Scripts\Menu\Encyclopedia.cs" />
      <Compile Include="Assets\__Scripts\Menu\HideDetail.cs" />
      <Compile Include="Assets\__Scripts\Menu\LightChange.cs" />
      <Compile Include="Assets\__Scripts\Menu\MenuFrame.cs" />
      <Compile Include="Assets\__Scripts\Menu\ShowDetail.cs" />
      <Compile Include="Assets\__Scripts\Menu\SwipeCheck.cs" />
      <Compile Include="Assets\__Scripts\Moving.cs" />
-     <Compile Include="Assets\__Scripts\MyFirstTouch.cs" />
      <Compile Include="Assets\__Scripts\NewSegTrigger.cs" />
      <Compile Include="Assets\__Scripts\ObjectManager.cs" />
      <Compile Include="Assets\__Scripts\ObstacleMoving.cs" />
@@ -97,7 +97,6 @@
      <Compile Include="Assets\__Scripts\Reset.cs" />
      <Compile Include="Assets\__Scripts\SceneManager.cs" />
      <Compile Include="Assets\__Scripts\SmashRoad.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\__Scripts\Traffic\AnimalBehavior.cs" />
      <Compile Include="Assets\__Scripts\Traffic\BirdBehavior.cs" />
      <Compile Include="Assets\__Scripts\Traffic\CarBehavior.cs" />
@@ -107,11 +106,6 @@
      <Compile Include="Assets\__Scripts\Traffic\TrafficController.cs" />
      <Compile Include="Assets\__Scripts\Traffic\TrafficObjects.cs" />
      <Compile Include="Assets\__Scripts\characterController.cs" />
-=======
-     <Compile Include="Assets\__Scripts\TrafficController.cs" />
-     <Compile Include="Assets\__Scripts\TrafficData.cs" />
-     <Compile Include="Assets\__Scripts\TrafficObjects.cs" />
->>>>>>> 3ad7c5732b3f96a67553f63bfb3733fd1a1086f3
      <Compile Include="Assets\iTweenEditor\Examples\StartAndStopTween.cs" />
      <Compile Include="Assets\iTweenEditor\Helper Classes\EventParamMappings.cs" />
      <Compile Include="Assets\iTweenEditor\Helper Classes\Vector3OrTransform.cs" />

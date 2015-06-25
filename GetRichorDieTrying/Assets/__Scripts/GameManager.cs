@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour {
     //Hammer
     public GameObject                   hammerObj;
     public GameObject                   hammer;
+    public int                          hammerPower = 1;
     public float                        smashAngle = 75;
     public Vector3                      hammerPos = new Vector3(0f, 4f, -2f);
 
@@ -148,13 +149,13 @@ public class GameManager : MonoBehaviour {
     public GameObject                   itemPage;
     public GameObject                   storeItemsObj;
     public GameObject                   storeItems;
+    public GameObject                   encyclopediaObj;
+    public GameObject                   encyclopedia;
     public GameObject                   itemDetailsObj;
     public GameObject                   itemDetails;
 
     //Items in game
     public int                          menuItem = 0;
-    public bool                         isPowerhammer = false;
-    public bool                         isShield = false;
     public bool                         isClock = false;
     public float                        itemTimer = 5f;
     public GameObject                   powerHammer;
@@ -378,22 +379,19 @@ public class GameManager : MonoBehaviour {
 			characterCon.canControl = true;
 //			uiTextObj.SetActive(true);
 
-            levelTimer -= 1 / (Mathf.Pow(2, daikokutenState)) * Time.deltaTime;
-            comboTimer -= 1 / (Mathf.Pow(2, daikokutenState)) * Time.deltaTime;
+            levelTimer -= (1 / (Mathf.Pow(2, daikokutenState))) * Time.deltaTime;
+            comboTimer -= (1 / (Mathf.Pow(2, daikokutenState))) * Time.deltaTime;
             
-            if (isPowerhammer || isShield || isClock) {
-                itemTimer -= 1 / (Mathf.Pow(2, daikokutenState)) * Time.deltaTime;
+            if (isClock) {
+                itemTimer -= (1 / (Mathf.Pow(2, daikokutenState))) * Time.deltaTime;
                 timerText.text = itemTimer.ToString("n2");
             } else {
                 itemTimer = 5f;
                 timerText.text = "";
             }
             if (itemTimer <= 0) {
-                isPowerhammer = false;
-                isShield = false;
                 isClock = false;
                 itemTimer = 5f;
-                shield.SetActive(false);
                 traffic.trafficStop = false;
             }
             
@@ -402,7 +400,7 @@ public class GameManager : MonoBehaviour {
 			}
             
             if (valueShowTimer > 0) {
-                valueShowTimer -= 1 / (Mathf.Pow(2, daikokutenState)) * Time.deltaTime;
+                valueShowTimer -= (1 / (Mathf.Pow(2, daikokutenState))) * Time.deltaTime;
             } else {
                 valueText.text = "";
             }
@@ -481,9 +479,9 @@ public class GameManager : MonoBehaviour {
 			break;
 		}
 
-		if(Application.loadedLevelName == "GameOver") {
-			ScoreScreen ();
-		}
+        //if(Application.loadedLevelName == "GameOver") {
+        //    ScoreScreen ();
+        //}
 
 		if(cam == null) {
 			Start ();
@@ -509,7 +507,7 @@ public class GameManager : MonoBehaviour {
         camCurrentRot = camStartRot;
 
         //Steal hammer
-        iTween.MoveTo(character, iTween.Hash("position", new Vector3(.8f, .5f, -7f), "time", .3f, "easetype", iTween.EaseType.easeInCubic));
+        iTween.MoveTo(character, iTween.Hash("position", new Vector3(.8f, .5f, -6.5f), "time", .3f, "easetype", iTween.EaseType.easeInCubic));
         character.GetComponent<Animation>().Play("run");
         yield return new WaitForSeconds(.3f);
 
@@ -563,28 +561,22 @@ public class GameManager : MonoBehaviour {
     //Segment movement
     public void SegMove() {
         //change the speed based on the combo
-        //if (bonus >= 10) {
-        //    moveSpeed = initialSpeed * 4;
-        //    if (gameState == State.InGame) {
-        //        distance += 4;
-        //    }
-        //} else if (bonus >= 5) {
-        //    moveSpeed = initialSpeed * 2;
-        //    if (gameState == State.InGame) {
-        //        distance += 2;
-        //    }
-        //} else {
-        //    moveSpeed = initialSpeed;
-        //    if (gameState == State.InGame) {
-        //        distance ++;
-        //    }
-        //}
-
-        moveSpeed = initialSpeed;
-        if (gameState == State.InGame) {
-            distance ++;
+        if (bonus >= 10) {
+            moveSpeed = initialSpeed * 4;
+            if (gameState == State.InGame) {
+                distance += 4;
+            }
+        } else if (bonus >= 5) {
+            moveSpeed = initialSpeed * 2;
+            if (gameState == State.InGame) {
+                distance += 2;
+            }
+        } else {
+            moveSpeed = initialSpeed;
+            if (gameState == State.InGame) {
+                distance ++;
+            }
         }
-
 
         //move segments
         if (segments[0] != null) {
@@ -635,6 +627,7 @@ public class GameManager : MonoBehaviour {
             distance++;
         } else {
             Time.timeScale = 1.0F;
+            daikokutenState = 0;
             moveSpeed = 0f;
         }
         //Character position adjustment
@@ -705,7 +698,6 @@ public class GameManager : MonoBehaviour {
 		addScore (value);
         //Debug.Log (objectName + " Monitized");
 
-<<<<<<< HEAD
 		//Check which item was destroyed - [TODO] Save value for amount of screenshake
         //Default Value
         listItem = 2;
@@ -717,16 +709,6 @@ public class GameManager : MonoBehaviour {
 			listItem = 0;
 
 			camShakePower = 0.3f;
-=======
-		// check which item is 
-
-		//Check which item was destroyed - [TODO] Save value for amount of screenshake
-		if(objectName == "Cube" || objectName == "Cube_1"){
-			audioSource.PlayOneShot (finalSmashAudio);
-			listItem = 0;
-
-			camShakePower = 0.4f;
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 			//Spawning Humans from building - Data Checked in TrafficController
 			buildingDestroyed = true;
@@ -738,11 +720,7 @@ public class GameManager : MonoBehaviour {
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 1;
 
-<<<<<<< HEAD
 			camShakePower = 0.4f;
-=======
-			camShakePower = 0.5f;
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 			//Spawning Humans from building - Data Checked in TrafficController
 			buildingDestroyed = true;
@@ -753,33 +731,21 @@ public class GameManager : MonoBehaviour {
 			//audioSource.PlayOneShot ();
 			listItem = 2;
 
-<<<<<<< HEAD
 			camShakePower = 0.05f;
-=======
-			camShakePower = 0.1f;
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 		}
 		if(objectName.Contains ("Tree") || objectName.Contains ("obj") || objectName.Contains ("env")){
 			audioSource.PlayOneShot (woodSmash);
 			listItem = 2;
 
-<<<<<<< HEAD
 			camShakePower = 0.05f;
-=======
-			camShakePower = 0.1f;
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 		}
 		if(objectName.Contains ("Cloud") || objectName.Contains("Planet") || objectName == "Stars"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
 
-<<<<<<< HEAD
 			camShakePower = 0.7f;
-=======
-			camShakePower = 0.75f;
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 		}
 		if(objectName == "BlackHole"){
@@ -788,51 +754,27 @@ public class GameManager : MonoBehaviour {
 
 			camShakePower = 0.75f;
 
-<<<<<<< HEAD
             globalObj.sunUp();
-=======
-			GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunUp();
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 		}
 		if(objectName == "Sun"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
 
-<<<<<<< HEAD
 			camShakePower = 0.7f;
 
             globalObj.sunDown();
-=======
-			camShakePower = 0.75f;
-
-            GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().sunDown();
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 		}
 		if(objectName == "Moon"){
 			//change scene to space
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 3;
 
-<<<<<<< HEAD
 			camShakePower = 0.7f;
 
             globalObj.moonDown();
-=======
-			camShakePower = 0.75f;
-
-            GameObject.Find("GlobalObjects").GetComponent<GlobalObjects>().moonDown();
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 		}
 		if(objectName.Contains("Car") || objectName.Contains("Tank")){
 			audioSource.PlayOneShot (finalSmashAudio);
-
-			if(objectName.Contains("car") || objectName.Contains("Police")){
-				camShakePower = 0.33f;
-			}
-			if(objectName.Contains("Tank")){
-				camShakePower = 0.4f;
-			}
-
 			listItem = 4;
             if (objectName.Contains("Car")) {
                 camShakePower = 0.3f;
@@ -846,21 +788,10 @@ public class GameManager : MonoBehaviour {
 			listItem = 5;
 
 			camShakePower = 0.05f;
-<<<<<<< HEAD
-=======
-
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 		}
-		if(objectName == "Start" || objectName.Contains("PowerUp")){
+		if(objectName == "Start" || objectName == "Special" || objectName == "Bomb"){
 			audioSource.PlayOneShot (cloudSmash);
 			listItem = 2;
-<<<<<<< HEAD
-=======
-
-			camShakePower = 0.0001f;
-
-		}
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
 			camShakePower = 0.05f;
 
@@ -898,6 +829,7 @@ public class GameManager : MonoBehaviour {
 	public void CamShake(){
         camShakePower = camShakePower * 20;
 		float xPos = UnityEngine.Random.Range (-1 * camShakePower, camShakePower);
+        camCurrentRot = cam.transform.eulerAngles;
         iTween.ShakeRotation(cam, iTween.Hash("x", xPos, "y", camShakePower, "time", duration, "oncompletetarget", this.gameObject, "oncomplete", "CamFix")); //X & Y shake
         //iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "y", camShakePower, "time", duration, "oncompletetarget", this.gameObject,"oncomplete", "CamFix")); //X & Y shake
 		//iTween.ShakePosition(cam, iTween.Hash ("x", xPos, "time", duration)); //X shake only
@@ -910,7 +842,7 @@ public class GameManager : MonoBehaviour {
         
         cam.transform.eulerAngles = camCurrentRot;
         if (gameState == State.InGame) {
-            cam.transform.eulerAngles = camCurrentRot;
+            cam.transform.eulerAngles = new Vector3(30f, 0f, 0f);
         }
 	}
 
@@ -949,6 +881,15 @@ public class GameManager : MonoBehaviour {
 			//hitPointAdd += 1;
 			comboAddToTimerCount = 0;
 		}
+
+        //More combos, more powerful the hammer is
+        if (bonus >= 10) {
+            hammerPower = 7;
+        } else if (bonus >= 5) {
+            hammerPower = 4;
+        } else {
+            hammerPower = 1;
+        }
 	}
 
 	public void ComboEnd(){
@@ -956,6 +897,7 @@ public class GameManager : MonoBehaviour {
         //Debug.Log ("Combo Over");
 		comboCount = 0;
 		bonus = 1;
+        hammerPower = 1;
 	} 
 
 	public void loadScene() {
@@ -998,11 +940,13 @@ public class GameManager : MonoBehaviour {
 
         SaveData();
 		//End level
-		Application.LoadLevel ("GameOver");
+        //Application.LoadLevel ("GameOver");
+        
+        ScoreScreen();
 	}
 
 	public void ScoreScreen(){
-		if(Application.loadedLevelName == "GameOver"){
+        //if(Application.loadedLevelName == "GameOver"){
 			highScoreText = GameObject.Find("Best Score").GetComponent<TextMesh>();
 			//	levelCountText = GameObject.Find("Time Added").GetComponent<TextMesh>();
 			comboMaxText = GameObject.Find("ComboMax").GetComponent<TextMesh>();
@@ -1025,10 +969,9 @@ public class GameManager : MonoBehaviour {
 
 			//levelCountText.text = levelCount.ToString ("Goals met \t" + 0);
 			//Debug.Log ("Setting Text");
-		}
-		else{
-			ScoreScreen ();
-		}
+        //} else{
+        //    ScoreScreen ();
+        //}
 
 	}
 
@@ -1066,16 +1009,14 @@ public class GameManager : MonoBehaviour {
     }
 
     public void UseSaw() {
-        Vector3 sawPos = character.transform.position + new Vector3(0, 0, .5f);
-        GameObject line = (GameObject)Instantiate(lineEffect, sawPos, Quaternion.identity);
+        GameObject line = (GameObject)Instantiate(lineEffect, character.transform.position, Quaternion.identity);
         line.transform.eulerAngles = new Vector3(0, 1, 0);
         line.name = lineEffect.name;
         audioSource.PlayOneShot(lineSFX);
     }
 
     public void UseBomb() {
-        Vector3 bombPos = character.transform.position + new Vector3(0, 0, .5f);
-        GameObject explode = (GameObject)Instantiate(explodeEffect, bombPos, Quaternion.identity);
+        GameObject explode = (GameObject)Instantiate(explodeEffect, character.transform.position, Quaternion.identity);
         explode.name = explodeEffect.name;
         audioSource.PlayOneShot(explodeSFX);
     }

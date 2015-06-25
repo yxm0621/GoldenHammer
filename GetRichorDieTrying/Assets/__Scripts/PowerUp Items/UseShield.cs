@@ -16,7 +16,8 @@ public class UseShield : MonoBehaviour {
     void OnCollisionEnter(Collision other){
 		if(!(other.gameObject.CompareTag("Character"))
             &&!(other.gameObject.name.Contains("damage"))
-            && !(other.gameObject.name.Contains("spinCutter"))) {
+            && !(other.gameObject.name.Contains("spinCutter"))
+            && !(other.gameObject.name.Contains("PowerUp"))) {
             Destroy(other.gameObject);
             gameObject.SetActive(false);
             GameManager.manager.itemTimer = 0f;

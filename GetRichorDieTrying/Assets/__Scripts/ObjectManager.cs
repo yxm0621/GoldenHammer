@@ -170,7 +170,6 @@ public class ObjectManager : MonoBehaviour {
                 Application.LoadLevel(gameMain.mainLevel);
 			}
 
-<<<<<<< HEAD
             if ((thisObject.name == "Encyclopedia")
                 ||(thisObject.name == "Achievement")
                 ||(thisObject.name == "Inventory")
@@ -188,6 +187,9 @@ public class ObjectManager : MonoBehaviour {
                 switch (thisObject.name) {
                     case "Encyclopedia":
                         gameMain.currentMenu = GameManager.MenuPage.Encyclopedia;
+                        gameMain.encyclopedia = Instantiate(gameMain.encyclopediaObj, gameMain.encyclopediaObj.transform.position, Quaternion.identity) as GameObject;
+                        gameMain.encyclopedia.name = gameMain.encyclopediaObj.name;
+                        gameMain.encyclopedia.transform.parent = gameMain.itemPage.transform;
                         break;
                     case "Achievement":
                         gameMain.currentMenu = GameManager.MenuPage.Achievement;
@@ -212,15 +214,6 @@ public class ObjectManager : MonoBehaviour {
 
                 }
 			}
-=======
-	void OnMouseDown(){
-		if (GameManager.gameState == GameManager.State.InGame || thisObject.name == "GameOverStart"
-		    || thisObject.name == "Start") {
-            characterController charaCon = GameObject.Find("Player").GetComponent<characterController>();
-           // charaCon.SwipeCheck();
-           // if (characterController.swipeDirection == null)
-           // {
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
 
             if (thisObject.name == "BackToMenu"){
                     iTween.MoveTo(Camera.main.gameObject, new Vector3(0f, 1f, -10f), .5f);
@@ -234,7 +227,6 @@ public class ObjectManager : MonoBehaviour {
                 //Application.LoadLevel("Menu");
 			}
 
-<<<<<<< HEAD
             if (thisObject.name == "Start"){
                 hitPoints++;
 			}
@@ -272,6 +264,7 @@ public class ObjectManager : MonoBehaviour {
                                                             currentPos.z + 0.25f);
                 iTween.MoveTo(thisObject, iTween.Hash("position", localPos, "islocal", true, "time", .5f));
             } else {
+                iTween.ScaleFrom(thisObject, thisObject.transform.localScale - new Vector3(0, .01f, .01f), .5f);
                 //thisObject.transform.position = new Vector3(currentPos.x,
                 //                                            currentPos.y - 0.25f,
                 //                                            currentPos.z);
@@ -283,43 +276,15 @@ public class ObjectManager : MonoBehaviour {
             }
             //iTween.MoveFrom(thisObject, iTween.Hash("y", currentPos.y - 0.25f, "time", 0.5f));
             //iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y - 0.25f, "time", 0.5f));
-<<<<<<< HEAD
 
             if ((thisObject.name == "TreasureBox") && (GameObject.Find("Start") == null)) {
                 //Player is stealing the hammer
             } else {
-                if (gameMain.isPowerhammer) {
-                    hitPoints -= 5;
-                } else {
-                    hitPoints--;
-                }
+                hitPoints -= gameMain.hammerPower;
             }
             if (thisObject.name == "Raijin") {
-                if (gameMain.isPowerhammer) {
-                    gameMain.raijinHP -= 3;
-                } else {
-                    gameMain.raijinHP--;
-                }
+                gameMain.raijinHP -= gameMain.hammerPower;
             }
-=======
-            hitPoints--;
-=======
-                //Debug.Log(thisObject + " hit!!");
-                gameMain.audioSource.PlayOneShot(hitAudio);
-                //iTween.MoveFrom (cam, iTween.Hash("z", -0.001f, "time", 0.5f)); //Give the camera a little kick in Z
-                if (thisObject.name == "Road")
-                {
-                    //iTween.MoveFrom(thisObject, iTween.Hash("y", currentPos.y - 0.25f, "time", 0.5f));
-                }
-                else
-                {
-                    iTween.MoveFrom(thisObject, iTween.Hash("z", currentPos.z + 0.25f, "y", currentPos.y + -0.25f, "time", 0.5f));
-                }
-                hitPoints--;
-
-           // }
->>>>>>> cf122640eb188b48cba94deee09b4f3739b98a51
->>>>>>> 3ad7c5732b3f96a67553f63bfb3733fd1a1086f3
 		}
 	}
 
