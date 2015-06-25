@@ -13,11 +13,11 @@ public class ItemMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (GameManager.manager.gameState == GameManager.State.InGame) {
-            if (!isShowing) {
-                itemMenu.SetActive(true);
-                isShowing = true;
-            }
-        }
+        //if (GameManager.manager.gameState == GameManager.State.InGame) {
+        //    if (!isShowing) {
+        //        itemMenu.SetActive(true);
+        //        isShowing = true;
+        //    }
+        //}
 	}
 }

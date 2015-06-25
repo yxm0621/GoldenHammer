@@ -39,9 +39,9 @@ public class characterController : MonoBehaviour {
 
         //Run gameManager.Start() when restart game
 		if (!gameMain.firstRun) {
-			if(Application.loadedLevelName != "GameOver"){
+            //if(Application.loadedLevelName != "GameOver"){
 				gameMain.Start ();
-			}
+            //}
 		}
 
         movePos[0] = GameObject.Find("PlayerLanes/Pos0").transform.position;

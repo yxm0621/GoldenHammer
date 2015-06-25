@@ -60,8 +60,11 @@ public class GameManager : MonoBehaviour {
     public bool                         isItemShow = false;
     public bool                         isButtonClick = false;
 
-//	public GameObject					uiTextObj;
+	public GameObject					uiText;
 //	public GameObject					goalTextObj;
+    public GameObject                   gameOverScreen;
+    public GameObject                   gameOverText;
+    public TextMesh						bonusGetText;
 
 	public int							score = 0;
 	public TextMesh						scoreText;
@@ -95,12 +98,12 @@ public class GameManager : MonoBehaviour {
 
 	public int							comboCount = 0;
 	public float						comboTimer = 0.0f;
-	public TextMesh						comboText;
+    public TextMesh						comboText;
 	public TextMesh						comboTimerText;
 	public bool							comboStarted = false;
 	private int 						comboAddToTimerCount = 0;
-	public TextMesh						comboMaxText;
-	public int							comboMax;
+    //public TextMesh						comboMaxText;
+    public int							comboMax;
 
 	public int							hitPointAdd = 0;
 
@@ -155,7 +158,6 @@ public class GameManager : MonoBehaviour {
     public GameObject                   itemDetails;
 
     //Items in game
-    public int                          menuItem = 0;
     public bool                         isClock = false;
     public float                        itemTimer = 5f;
     public GameObject                   powerHammer;
@@ -208,7 +210,6 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {
-//		uiTextObj.SetActive (false);
 		currentLevel = Application.loadedLevelName;
         Time.timeScale = 1.0F;
 
@@ -227,6 +228,16 @@ public class GameManager : MonoBehaviour {
 //		Debug.Log (audioSource + " Found");
 
         if (currentLevel != "Menu") {
+            gameState = State.Menu;
+            score = 0;
+            comboMax = 0;
+            levelCount = 1;
+            levelGoal = 500;
+
+            levelTimer = 30;
+
+            //Tn-game text obj
+            uiText = GameObject.Find("UI-Text");
             scoreText = GameObject.Find("Score").GetComponent<TextMesh>();
             valueText = GameObject.Find("Value").GetComponent<TextMesh>();
             timerText = GameObject.Find("Timer").GetComponent<TextMesh>();
@@ -234,26 +245,31 @@ public class GameManager : MonoBehaviour {
             comboTimerText = GameObject.Find("ComboTimer").GetComponent<TextMesh>();
             goalText = GameObject.Find("Goal").GetComponent<TextMesh>();
             distanceText = GameObject.Find("Distance").GetComponent<TextMesh>();
+            //In-game text
+            scoreText.text = "";
+            valueText.text = "";
+            timerText.text = "";
+            comboText.text = "";
+            comboTimerText.text = "";
+            goalText.text = "";
+            distanceText.text = "";
 
-            if (currentLevel != "GameOver") {
-                //startMenu = (GameObject)Instantiate(startMenuScene, startMenuScene.transform.position, startMenuScene.transform.rotation);
+            uiText.SetActive(false);
 
-                gameState = State.Menu;
-                score = 0;
-                comboMax = 0;
-                levelCount = 1;
-                levelGoal = 500;
+            //Game-over text obj
+            gameOverScreen = GameObject.Find("GameOverScreen");
+            gameOverText = gameOverScreen.transform.FindChild("GameOverText").gameObject;
+            highScoreText = gameOverText.transform.FindChild("Best Score").GetComponent<TextMesh>();
+            //	levelCountText = GameObject.Find("Time Added").GetComponent<TextMesh>();
+            bonusGetText = gameOverText.transform.FindChild("BonusGet").GetComponent<TextMesh>();
+            scoreRecap = gameOverText.transform.FindChild("ScoreRecap").GetComponent<TextMesh>();
 
-                levelTimer = 30;
+            //Game-over text
+            highScoreText.text = "";
+            bonusGetText.text = "";
+            scoreRecap.text = "";
 
-                scoreText.text = "";
-                valueText.text = "";
-                timerText.text = "";
-                comboText.text = "";
-                comboTimerText.text = "";
-                goalText.text = "";
-                distanceText.text = "";
-            }
+            gameOverScreen.SetActive(false);
         }
 
 		//feedback for killing!
@@ -377,7 +393,6 @@ public class GameManager : MonoBehaviour {
 				bgmCombo.Stop();
 			}
 			characterCon.canControl = true;
-//			uiTextObj.SetActive(true);
 
             levelTimer -= (1 / (Mathf.Pow(2, daikokutenState))) * Time.deltaTime;
             comboTimer -= (1 / (Mathf.Pow(2, daikokutenState))) * Time.deltaTime;
@@ -524,6 +539,8 @@ public class GameManager : MonoBehaviour {
         iTween.RotateTo(globalObj.lightController, iTween.Hash("x", 25f, "y", 180f, "z", 180f, "time", 2f, "easetype", iTween.EaseType.easeInCubic));
         //globalObj.lightController.transform.eulerAngles = new Vector3(50, 330, 0);
         globalObj.lightController.GetComponent<Light>().intensity = 0.4f;
+
+        uiText.SetActive(true);
     }
 
     void segmentsInitialize() {
@@ -921,58 +938,42 @@ public class GameManager : MonoBehaviour {
 
         //characterMove.Clear ();
 
-		if(comboStarted){
-			ComboEnd ();
-		}
-
-		Debug.Log ("Restarting Level " + currentLevel);
-		
-		//iTween.MoveTo(cam, iTween.Hash ("x", 0.0f, "y", 1.0f, "z", -10.0f));
-		
-		//scoreRecap.text = score.ToString ("$ " + "0,000");
-		//comboMaxText.text = comboMax.ToString ("Combo Max \t" + 0);
-		//highScoreText.text = highScore.ToString ("High Score \t" + "$" + "0,000");
-		//levelCountText.text = levelCount.ToString ("Goals met \t" + 0);
-		//Debug.Log ("Setting Text");
-	
-		//iTween.RotateTo(cam, iTween.Hash ("x", -90.0f, "time", 1));
-		//Debug.Log ("Rotating Camera");
+		if (comboStarted)
+            ComboEnd ();
 
         SaveData();
+
 		//End level
         //Application.LoadLevel ("GameOver");
+        //Debug.Log ("Restarting Level " + currentLevel);
+        iTween.MoveTo(cam, camCurrentPos + new Vector3(0, .3f, 0), .5f);
+        iTween.RotateTo(cam, iTween.Hash("x", 60.0f, "time", 1));
         
         ScoreScreen();
 	}
 
 	public void ScoreScreen(){
-        //if(Application.loadedLevelName == "GameOver"){
-			highScoreText = GameObject.Find("Best Score").GetComponent<TextMesh>();
-			//	levelCountText = GameObject.Find("Time Added").GetComponent<TextMesh>();
-			comboMaxText = GameObject.Find("ComboMax").GetComponent<TextMesh>();
-			scoreRecap = GameObject.Find("ScoreRecap").GetComponent<TextMesh>();
+        uiText.SetActive(false);
+        gameOverScreen.SetActive(true);
 
+        if (score < 1000) {
+            scoreRecap.text = score.ToString("$ " + "0");
+        } else {
+            scoreRecap.text = score.ToString("$ " + "0,000");
+        }
 
-			if(score < 1000){
-				scoreRecap.text = score.ToString ("$ " + "0");
-			} else{
-				scoreRecap.text = score.ToString ("$ " + "0,000");
-			}
+        bonusGetText.text = comboMax.ToString("0");
 
-			comboMaxText.text = comboMax.ToString ("0");
+        if (highScore < 1000) {
+            highScoreText.text = highScore.ToString("$ " + "0");
+        } else {
+            highScoreText.text = highScore.ToString("$ " + "0,000");
+        }
 
-			if(highScore < 1000){
-				highScoreText.text = highScore.ToString ("$ " + "0");
-			} else{
-				highScoreText.text = highScore.ToString ("$ " + "0,000");
-			}
-
-			//levelCountText.text = levelCount.ToString ("Goals met \t" + 0);
-			//Debug.Log ("Setting Text");
-        //} else{
-        //    ScoreScreen ();
-        //}
-
+        //comboMaxText.text = comboMax.ToString ("Combo Max \t" + 0);
+        //highScoreText.text = highScore.ToString ("High Score \t" + "$" + "0,000");
+        //levelCountText.text = levelCount.ToString ("Goals met \t" + 0);
+        //Debug.Log ("Setting Text");
 	}
 
     //Save persistent data
