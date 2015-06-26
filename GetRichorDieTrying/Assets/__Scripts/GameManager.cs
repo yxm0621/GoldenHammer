@@ -146,6 +146,8 @@ public class GameManager : MonoBehaviour {
     public int                          killTank;
     public int                          killHelicopter;
     //public TextMesh						feedbackText;
+    public GameObject                   hitObj; //the object makes player die
+    public GameObject                   showHit; //show hitObj on the gameover screen
 
     //Menu data
     public MenuPage                     currentMenu = MenuPage.Main;
@@ -263,6 +265,7 @@ public class GameManager : MonoBehaviour {
             //	levelCountText = GameObject.Find("Time Added").GetComponent<TextMesh>();
             bonusGetText = gameOverText.transform.FindChild("BonusGet").GetComponent<TextMesh>();
             scoreRecap = gameOverText.transform.FindChild("ScoreRecap").GetComponent<TextMesh>();
+            showHit = gameOverText.transform.FindChild("HitObj").gameObject;
 
             //Game-over text
             highScoreText.text = "";
@@ -317,6 +320,8 @@ public class GameManager : MonoBehaviour {
             segmentsInitialize();
             //segments = new GameObject[initialSegNum];
         }
+
+        hitObj = null; //Clear hitObj
 	}
 
 	// Update is called once per frame
@@ -949,10 +954,12 @@ public class GameManager : MonoBehaviour {
         iTween.MoveTo(cam, camCurrentPos + new Vector3(0, .3f, 0), .5f);
         iTween.RotateTo(cam, iTween.Hash("x", 60.0f, "time", 1));
         
-        ScoreScreen();
+        StartCoroutine(ScoreScreen());
 	}
 
-	public void ScoreScreen(){
+	IEnumerator ScoreScreen(){
+        yield return new WaitForSeconds(1f);
+
         uiText.SetActive(false);
         gameOverScreen.SetActive(true);
 
@@ -974,6 +981,15 @@ public class GameManager : MonoBehaviour {
         //highScoreText.text = highScore.ToString ("High Score \t" + "$" + "0,000");
         //levelCountText.text = levelCount.ToString ("Goals met \t" + 0);
         //Debug.Log ("Setting Text");
+
+        //Show hit object
+        if (hitObj.transform.childCount > 0) {
+            hitObj = hitObj.transform.GetChild(0).gameObject;
+        }
+        //showHit.transform.localScale = hitObj.transform.localScale;
+        showHit.transform.localScale = new Vector3(.03f, .03f, .03f);
+        showHit.GetComponent<MeshFilter>().mesh = hitObj.GetComponent<MeshFilter>().mesh;
+        showHit.GetComponent<Renderer>().material = hitObj.GetComponent<Renderer>().material;
 	}
 
     //Save persistent data
@@ -1048,9 +1064,9 @@ public class GameManager : MonoBehaviour {
 
     //Draw mouse position with gizmoz
     void OnDrawGizmos() {
-        Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(p, 0.05F);
+        //Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawSphere(p, 0.05F);
 	}
 
     /*

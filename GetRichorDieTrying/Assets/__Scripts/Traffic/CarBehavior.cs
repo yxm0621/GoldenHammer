@@ -156,6 +156,7 @@ public class CarBehavior : MonoBehaviour {
             gameMain.audioSource.PlayOneShot(objManager.hitAudio);
 			
 			//TODO end game when obstacle hit
+            gameMain.hitObj = gameObject;
 			gameMain.GameOver ();
 		}
 	}

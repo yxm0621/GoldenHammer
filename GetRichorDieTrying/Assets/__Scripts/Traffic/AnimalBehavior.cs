@@ -88,6 +88,7 @@ public class AnimalBehavior : MonoBehaviour {
             gameMain.audioSource.PlayOneShot(animalHit);
 
             //TODO end game when obstacle hit
+            gameMain.hitObj = gameObject;
             gameMain.GameOver();
         }
 

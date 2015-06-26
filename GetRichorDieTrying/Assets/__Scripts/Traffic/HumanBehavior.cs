@@ -130,6 +130,7 @@ public class HumanBehavior : MonoBehaviour {
 			//gameMain.audioSource.PlayOneShot (humanHit);
 			
 			//TODO end game when obstacle hit
+            gameMain.hitObj = gameObject;
 			gameMain.GameOver ();
 		}
 		if(other.collider.name.Contains("Car") || other.collider.name.Contains("Police") || other.collider.name.Contains("Tank")){

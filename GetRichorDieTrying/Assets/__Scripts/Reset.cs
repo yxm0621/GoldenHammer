@@ -2,15 +2,12 @@
 using System.Collections;
 
 public class Reset : MonoBehaviour {
-
 	public GameObject			button;
-
 	public GameManager			gameMain;
 
 	// Use this for initialization
 	void Start () {
 		button = this.gameObject;
-
 		gameMain = GameManager.manager;
 	}
 	
@@ -20,7 +17,7 @@ public class Reset : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		Debug.Log ("Restarting Level " + gameMain.currentLevel);
+        Debug.Log("Restarting Level " + gameMain.currentLevel);
 		Application.LoadLevel (gameMain.currentLevel);
 	}
 }
