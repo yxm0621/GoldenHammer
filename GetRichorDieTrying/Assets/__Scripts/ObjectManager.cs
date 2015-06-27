@@ -175,50 +175,49 @@ public class ObjectManager : MonoBehaviour {
                 ||(thisObject.name == "Inventory")
                 ||(thisObject.name == "Store")
                 ||(thisObject.name == "Setting")
-                ||(thisObject.name == "Credits")){
-
-                //Camera.main.gameObject.transform.position += new Vector3(10.5f, 0f, 0f);
+                ||(thisObject.name == "Credits"))
+            {
+                iTween.MoveTo(Camera.main.gameObject, new Vector3(6.5f, 1f, -10f), .5f);
+                
                 hitPoints++;
                 if (gameMain.itemPage == null) {
                     gameMain.itemPage = GameObject.Find("Menu");
                 }
-                gameMain.itemPage.transform.FindChild("Title").GetComponent<TextMesh>().text = thisObject.name;
+
+                //gameMain.itemPage.transform.FindChild("Title").GetComponent<TextMesh>().text = thisObject.name;
+                GameObject.Find("Title").GetComponent<TextMesh>().text = thisObject.name;
+
                 switch (thisObject.name) {
                     case "Encyclopedia":
-                        iTween.MoveTo(Camera.main.gameObject, new Vector3(0.0f, -3f, -10f), .5f);
-
                         gameMain.currentMenu = GameManager.MenuPage.Encyclopedia;
                         gameMain.encyclopedia = Instantiate(gameMain.encyclopediaObj, gameMain.encyclopediaObj.transform.position, Quaternion.identity) as GameObject;
                         gameMain.encyclopedia.name = gameMain.encyclopediaObj.name;
-                        gameMain.encyclopedia.transform.parent = gameMain.itemPage.transform;
+                        Encyclopedia.showEncyclopedia = true;
+                        Debug.Log("Pedia called!");
+                        //TODO//1. touch handle -> dont duplicate objects by instantiation 2. tab
+                        //gameMain.encyclopedia.transform.parent = gameMain.itemPage.transform;
                         break;
                     case "Achievement":
-                        iTween.MoveTo(Camera.main.gameObject, new Vector3(6.5f, 1f, -10f), .5f);
-
                         gameMain.currentMenu = GameManager.MenuPage.Achievement;
                         break;
                     case "Inventory":
-                        iTween.MoveTo(Camera.main.gameObject, new Vector3(6.5f, 1f, -10f), .5f);
-
                         gameMain.currentMenu = GameManager.MenuPage.Inventory;
                         break;
                     case "Store":
-                        iTween.MoveTo(Camera.main.gameObject, new Vector3(6.5f, 1f, -10f), .5f);
-
                         gameMain.currentMenu = GameManager.MenuPage.Store;
                         gameMain.storeItems = Instantiate(gameMain.storeItemsObj, gameMain.storeItemsObj.transform.position, Quaternion.identity) as GameObject;
                         gameMain.storeItems.name = gameMain.storeItemsObj.name;
-                        gameMain.storeItems.transform.parent = gameMain.itemPage.transform;
+                        Debug.Log("Store called!");
+                        
+                        //gameMain.storeItems.transform.parent = gameMain.itemPage.transform;
                         break;
                     case "Setting":
-                        iTween.MoveTo(Camera.main.gameObject, new Vector3(6.5f, 1f, -10f), .5f);
-
                         gameMain.currentMenu = GameManager.MenuPage.Setting;
+                        
                         break;
                     case "Credits":
-                        iTween.MoveTo(Camera.main.gameObject, new Vector3(6.5f, 1f, -10f), .5f);
-
                         gameMain.currentMenu = GameManager.MenuPage.Credits;
+                        
                         break;
                     default:
                         break;
@@ -226,17 +225,22 @@ public class ObjectManager : MonoBehaviour {
                 }
 			}
 
-            if (thisObject.name == "BackToMenu"){
-                    iTween.MoveTo(Camera.main.gameObject, new Vector3(0f, 1f, -10f), .5f);
-                    Destroy(gameMain.storeItems);
-                    if (gameMain.itemDetails != null) {
-                        Destroy(gameMain.itemDetails);
-                    }
-                    gameMain.currentMenu = GameManager.MenuPage.Main;
+            if (thisObject.name == "BackToMenu")
+            {
+                iTween.MoveTo(Camera.main.gameObject, new Vector3(0f, 1f, -10f), .5f);
+                Destroy(gameMain.storeItems);
+                if (gameMain.itemDetails != null)
+                {
+                    Destroy(gameMain.itemDetails);
+                }
+                gameMain.currentMenu = GameManager.MenuPage.Main;
                 hitPoints++;
-                    //Camera.main.transform.position -= new Vector3(10.5f, 0f, 0f);
+                //Encyclopedia.showEncyclopedia = false;
+                Debug.Log("back to menu called!");
+                        
+                //Camera.main.transform.position -= new Vector3(10.5f, 0f, 0f);
                 //Application.LoadLevel("Menu");
-			}
+            }
 
             if (thisObject.name == "Start"){
                 hitPoints++;

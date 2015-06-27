@@ -15,12 +15,14 @@ public class Encyclopedia : MonoBehaviour
 
     public GameObject pediaItemPrefab;
 
-    private GameObject backArrow;
+    public GameObject icon;
 
-    private Vector3 pediaStartPoint;
+    public static bool showEncyclopedia;
+
 
     //
 
+    private List<GameObject> allObjList;
     private List<GameObject> cityObjList;
     private List<GameObject> rainObjList;
     private List<GameObject> battleFieldObjList;
@@ -39,10 +41,11 @@ public class Encyclopedia : MonoBehaviour
 
     void Initialize()
     {
-        pediaStartPoint = new Vector3(1.0f, -4.0f, 0);
         gameMain = GameManager.manager;
         objData = Google2u.ObjList_G2U.Instance;
+        showEncyclopedia = false;
 
+        allObjList = new List<GameObject>();
         cityObjList = new List<GameObject>();
         rainObjList = new List<GameObject>();
         battleFieldObjList = new List<GameObject>();
@@ -62,15 +65,23 @@ public class Encyclopedia : MonoBehaviour
 
     void CreateHeader()
     {
-        backArrow = Instantiate(Resources.Load("Menu/General/BackToMenu")) as GameObject;
-        backArrow.transform.position = pediaStartPoint - new Vector3(3.0f, 0, 0);
-        backArrow.name = "BackArrowFromPediaToMainMenu";
+        GameObject pedia = Instantiate(icon);
     }
 
     void CreateContent()
     {
         if (objData != null)
         {
+            int cityCount = 0;
+            int rainCount = 0;
+            int battleCount = 0;
+            int countryCount = 0;
+            int wilderCount = 0;
+            int oceanCount = 0;
+            int spaceCount = 0;
+            int nightCount = 0;
+            int anyCount = 0;
+
             for (int i = 0; i < objData.Rows.Count; i++)
             {
                 /*** Eliminating things that are not supposed to be on the list ***/
@@ -80,73 +91,70 @@ public class Encyclopedia : MonoBehaviour
                 }
 
                 /************************************************************************/
-                GameObject pediaItem = Instantiate(pediaItemPrefab);//Resources.Load("Menu/Encyclopedia/PediaItem")) as GameObject;
-                pediaItem.name = "PediaItem_" + objData.Rows[i]._Name;
-                pediaItem.transform.SetParent(GameObject.Find("PediaPage").transform);
-                pediaItem.transform.position = pediaStartPoint;
-
-                GameObject tmpItemNameObj = GameObject.Find("ItemName");
-                if (tmpItemNameObj == null) Debug.Log("null!");
-                else Debug.Log("not null");
-                tmpItemNameObj.GetComponent<TextMesh>().text = objData.Rows[i]._Name;
-                tmpItemNameObj.name = "ItemName_" + objData.Rows[i]._Name;
-
-                GameObject tmpItemDscrObj = GameObject.Find("ItemDescription");
-                //TODO//tmpItemDscrObj.GetComponent<TextMesh>().text = objData.Rows[i]._Description;
-                tmpItemDscrObj.name = "ItemDescription_" + objData.Rows[i]._Name;
-
-                GameObject tmpItemHPObj = GameObject.Find("ItemHP");
-                tmpItemHPObj.GetComponent<TextMesh>().text = objData.Rows[i]._HitPoints.ToString();
-                tmpItemHPObj.name = "ItemHP_" + objData.Rows[i]._Name;
-
-                GameObject tmpItemValuObj = GameObject.Find("ItemValue");
-                tmpItemValuObj.GetComponent<TextMesh>().text = objData.Rows[i]._Gold.ToString();
-                tmpItemValuObj.name = "ItemValue_" + objData.Rows[i]._Name;
+                
 
                 if (objData.Rows[i]._Location.Contains("City"))
                 {
-                    pediaItem.transform.position += new Vector3(0, -i * 3.0f, 0);
+                    GameObject pediaItem = Instantiate(i);
+                    pediaItem.transform.position += new Vector3(0, -cityCount * 1.3f, 0);
                     cityObjList.Add(pediaItem);
+                    cityCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Rain"))
                 {
-                    pediaItem.transform.position += new Vector3(0, -i * 3.0f, 0);
+                    GameObject pediaItem = Instantiate(i);
+                    pediaItem.transform.position += new Vector3(0, -rainCount * 1.3f, 0);
                     rainObjList.Add(pediaItem);
+                    rainCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Battlefield"))
                 {
-                    pediaItem.transform.position += new Vector3(0, -i * 3.0f, 0);
+                    GameObject pediaItem = Instantiate(i);
+                    pediaItem.transform.position += new Vector3(0, -battleCount * 1.3f, 0);
                     battleFieldObjList.Add(pediaItem);
+                    battleCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Countryside"))
                 {
-                    pediaItem.transform.position += new Vector3(0, -i * 3.0f, 0);
+                    GameObject pediaItem = Instantiate(i);
+                    pediaItem.transform.position += new Vector3(0, -countryCount * 1.3f, 0);
                     countrySideObjList.Add(pediaItem);
+                    countryCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Wilderness"))
                 {
-                    pediaItem.transform.position += new Vector3(0, -i * 3.0f, 0);
+                    GameObject pediaItem = Instantiate(i);
+                    pediaItem.transform.position += new Vector3(0, -wilderCount * 1.3f, 0);
                     wildernessObjList.Add(pediaItem);
+                    wilderCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Ocean"))
                 {
-                    pediaItem.transform.position += new Vector3(0, -i * 3.0f, 0);
+                    GameObject pediaItem = Instantiate(i);
+                    pediaItem.transform.position += new Vector3(0, -oceanCount * 1.3f, 0);
                     oceanObjList.Add(pediaItem);
+                    oceanCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Space"))
                 {
-                    pediaItem.transform.position += new Vector3(0, -i * 3.0f, 0);
+                    GameObject pediaItem = Instantiate(i);
+                    pediaItem.transform.position += new Vector3(0, -spaceCount * 1.3f, 0);
                     spaceObjList.Add(pediaItem);
+                    spaceCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Night"))
                 {
-                    pediaItem.transform.position += new Vector3(0, -i * 3.0f, 0);
+                    GameObject pediaItem = Instantiate(i);
+                    pediaItem.transform.position += new Vector3(0, -nightCount * 1.3f, 0);
                     nightObjList.Add(pediaItem);
+                    nightCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Any"))
                 {
-                    pediaItem.transform.position += new Vector3(0, -i * 3.0f, 0);
+                    GameObject pediaItem = Instantiate(i);
+                    pediaItem.transform.position += new Vector3(0, -anyCount * 1.3f, 0);
                     anyObjList.Add(pediaItem);
+                    anyCount++;
                 }
             }
         }
@@ -162,8 +170,43 @@ public class Encyclopedia : MonoBehaviour
         //Debug.Log("Any obstacles count = " + anyObjList.Count);
     }
 
+    GameObject Instantiate(int i)
+    {
+        GameObject pediaItem = Instantiate(pediaItemPrefab);
+        pediaItem.name = "PediaItem_" + objData.Rows[i]._Name;
+        pediaItem.transform.SetParent(GameObject.Find("PediaPage").transform);
+        pediaItem.transform.position = GameObject.Find("MenuStartPoint").transform.position;
+
+        GameObject tmpItemNameObj = GameObject.Find("ItemName");
+        tmpItemNameObj.GetComponent<TextMesh>().text = objData.Rows[i]._Name;
+        tmpItemNameObj.name = "ItemName_" + objData.Rows[i]._Name;
+
+        GameObject tmpItemDscrObj = GameObject.Find("ItemDescription");
+        //TODO//tmpItemDscrObj.GetComponent<TextMesh>().text = objData.Rows[i]._Description;
+        tmpItemDscrObj.name = "ItemDescription_" + objData.Rows[i]._Name;
+
+        GameObject tmpItemHPObj = GameObject.Find("ItemHP");
+        tmpItemHPObj.GetComponent<TextMesh>().text = "HP: " + objData.Rows[i]._HitPoints.ToString();
+        tmpItemHPObj.name = "ItemHP_" + objData.Rows[i]._Name;
+
+        GameObject tmpItemValuObj = GameObject.Find("ItemValue");
+        tmpItemValuObj.GetComponent<TextMesh>().text = "$$: " + objData.Rows[i]._Gold.ToString();
+        tmpItemValuObj.name = "ItemValue_" + objData.Rows[i]._Name;
+
+        return pediaItem;
+    }
+
     void Update()
     {
-
+        if (showEncyclopedia)
+        {
+            this.gameObject.transform.position = new Vector3(-3.36f, -4.08f, 0);
+            Debug.Log("!!!!!!");
+        }
+        else
+        {
+            this.gameObject.transform.position = new Vector3(-100.0f, -100.0f, 0);
+            Debug.Log("333333");
+        }
     }
 }
