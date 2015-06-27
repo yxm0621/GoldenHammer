@@ -110,6 +110,7 @@
     <Compile Include="Assets\__Scripts\Menu\HideDetail.cs" />
     <Compile Include="Assets\__Scripts\Menu\LightChange.cs" />
     <Compile Include="Assets\__Scripts\Menu\MenuFrame.cs" />
+    <Compile Include="Assets\__Scripts\Menu\ShoppingCart.cs" />
     <Compile Include="Assets\__Scripts\Menu\ShowDetail.cs" />
     <Compile Include="Assets\__Scripts\Menu\SwipeCheck.cs" />
     <Compile Include="Assets\__Scripts\Moving.cs" />
