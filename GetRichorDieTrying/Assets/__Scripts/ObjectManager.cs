@@ -190,7 +190,6 @@ public class ObjectManager : MonoBehaviour {
                         gameMain.currentMenu = GameManager.MenuPage.Encyclopedia;
                         gameMain.encyclopedia = Instantiate(gameMain.encyclopediaObj, gameMain.encyclopediaObj.transform.position, Quaternion.identity) as GameObject;
                         gameMain.encyclopedia.name = gameMain.encyclopediaObj.name;
-                        gameMain.encyclopedia.SetActive(true);
                         gameMain.encyclopedia.transform.parent = gameMain.itemPage.transform;
                         break;
                     case "Achievement":
