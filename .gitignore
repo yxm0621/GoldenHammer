@@ -4,6 +4,8 @@ Library/
 Temp
 Temp/
 TestToonMat.mat
+.sync
+.sync/
 *.csproj
 *.booproj
 *.pidb
