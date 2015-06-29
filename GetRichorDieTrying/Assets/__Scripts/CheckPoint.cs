@@ -62,7 +62,7 @@ public class CheckPoint : MonoBehaviour {
 
     //flicker to warn player
     IEnumerator Flickering() {
-        iTween.RotateTo(arm, new Vector3(0,0,0), .5f);
+        //iTween.RotateTo(arm, new Vector3(0,0,0), .5f);
         checkText.SetActive(false);
         yield return new WaitForSeconds(.15f);
         checkText.SetActive(true);
@@ -76,20 +76,20 @@ public class CheckPoint : MonoBehaviour {
     void CheckGoal() {
         //Goal for the level hasn't been met
         if (gameMain.score < goal) {
-            Debug.Log("Goals not met. Time Up");
-            gameMain.GameOver();
+            Debug.Log("Goals not met.");
+            //gameMain.GameOver();
             Destroy(this.gameObject);
         }
 
         //Goal for the level has been met
         if (gameMain.score >= goal) {
-            Debug.Log("Goals Met. Adding time. Raise goal.");
+            Debug.Log("Goals Met. Raise goal.");
             gameMain.levelCount++;
 
             //Move the arm up
-            if (isFlicker) {
-                iTween.RotateTo(arm, new Vector3(0, 0, -90), .2f);
-            }
+            //if (isFlicker) {
+            //    iTween.RotateTo(arm, new Vector3(0, 0, -90), .2f);
+            //}
 
             //Load level goal from database
             if (gameMain.traffic.trafficDatabase == null) {

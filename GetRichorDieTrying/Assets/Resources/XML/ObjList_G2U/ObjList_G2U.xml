@@ -1,0 +1,1545 @@
+<Sheets>
+  <sheet name="ObjList_G2U">
+    <row name="Static_Checkpoint">
+      <Name type="string">Checkpoint</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City/Countryside/Wilderness/Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Special Power</Trigger>
+      <Gold type="int">3</Gold>
+      <HitPoints type="int">500</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Boss_Fujin">
+      <Name type="string">Fujin</Name>
+      <Category type="string">Boss</Category>
+      <Location type="string">City/Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Levels 5, 10, 15, 20...</Trigger>
+      <Gold type="int">5000</Gold>
+      <HitPoints type="int">100</HitPoints>
+      <Occurance type="float">0.35</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">God of Wind.</Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Static_Cloud">
+      <Name type="string">Cloud</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City/Countryside/Wilderness/Battlefield</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Always Present</Trigger>
+      <Gold type="int">50</Gold>
+      <HitPoints type="int">5</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">Living the free life.</Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Static_RainClouds">
+      <Name type="string">RainClouds</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City/Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Clouds Destroyed</Trigger>
+      <Gold type="int">25</Gold>
+      <HitPoints type="int">3</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">When you smash it you make the others cry.</Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Static_Sun">
+      <Name type="string">Sun</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City/Countryside/Wilderness/Battlefield</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Always Present</Trigger>
+      <Gold type="int">200</Gold>
+      <HitPoints type="int">50</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">Giving life.</Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Static_Moon">
+      <Name type="string">Moon</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City/Countryside/Wilderness/Battlefield</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Always Present</Trigger>
+      <Gold type="int">200</Gold>
+      <HitPoints type="int">50</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Boss_Bishamonten">
+      <Name type="string">Bishamonten</Name>
+      <Category type="string">Boss</Category>
+      <Location type="string">Battlefield</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Destroy Tank</Trigger>
+      <Gold type="int">5000</Gold>
+      <HitPoints type="int">100</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Static_City_Road">
+      <Name type="string">City_Road</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">10</Gold>
+      <HitPoints type="int">5</HitPoints>
+      <Occurance type="float">1.00</Occurance>
+      <Size type="int">1</Size>
+      <Encyclopedia type="string">Piece of Road.</Encyclopedia>
+      <Lane type="string">Road</Lane>
+    </row>
+    <row name="Static_City_Tree_1">
+      <Name type="string">City_Tree_1</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">5</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">1</Size>
+      <Encyclopedia type="string">Never gets too big.</Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Static_City_Tree_2">
+      <Name type="string">City_Tree_2</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">5</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">1</Size>
+      <Encyclopedia type="string">It grows fruit.</Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Static_Streetlight">
+      <Name type="string">Streetlight</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">3</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">Lights for safety.</Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Static_FireHydrant">
+      <Name type="string">FireHydrant</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">1</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">1</Size>
+      <Encyclopedia type="string">Don't park in front of them.</Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Static_Building_1">
+      <Name type="string">Building_1</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">20</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">1</Size>
+      <Encyclopedia type="string">Average brownstone.</Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Building_2">
+      <Name type="string">Building_2</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">20</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">1</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Building_3">
+      <Name type="string">Building_3</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">20</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">1</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Long_Building_1">
+      <Name type="string">Long_Building_1</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">25</Gold>
+      <HitPoints type="int">3</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">3</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Long_Building_2">
+      <Name type="string">Long_Building_2</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">25</Gold>
+      <HitPoints type="int">3</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">2</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Long_Building_3">
+      <Name type="string">Long_Building_3</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">25</Gold>
+      <HitPoints type="int">3</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Large_Building_1">
+      <Name type="string">Large_Building_1</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">50</Gold>
+      <HitPoints type="int">4</HitPoints>
+      <Occurance type="float">0.80</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Large_Building_2">
+      <Name type="string">Large_Building_2</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">50</Gold>
+      <HitPoints type="int">4</HitPoints>
+      <Occurance type="float">0.80</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Large_Building_3">
+      <Name type="string">Large_Building_3</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">50</Gold>
+      <HitPoints type="int">4</HitPoints>
+      <Occurance type="float">0.80</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_SkyScraper">
+      <Name type="string">SkyScraper</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">75</Gold>
+      <HitPoints type="int">10</HitPoints>
+      <Occurance type="float">0.40</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Traffic_SafetyCones">
+      <Name type="string">SafetyCones</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">N/A</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">1</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_City_Man">
+      <Name type="string">City_Man</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">Walk down Sidewalk toward screen</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">15</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.85</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_City_Woman">
+      <Name type="string">City_Woman</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">Walk down Sidewalk toward screen</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">15</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.85</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Police_Officer">
+      <Name type="string">Police_Officer</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">Walk toward Player to arrest</Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">35</Gold>
+      <HitPoints type="int">3</HitPoints>
+      <Occurance type="float">0.35</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Police_Car">
+      <Name type="string">Police_Car</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">Block Street in front of Player</Behaviors>
+      <Trigger type="string">Smash 3 people or one police officer</Trigger>
+      <Gold type="int">25</Gold>
+      <HitPoints type="int">5</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Road</Lane>
+    </row>
+    <row name="Static_Flowerpot">
+      <Name type="string">Flowerpot</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">45</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.20</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Seeds">
+      <Name type="string">Seeds</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">35</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.20</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Traffic_Soldier">
+      <Name type="string">Soldier</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">Cover each walkable block and move toward screen</Behaviors>
+      <Trigger type="string">Smash Tank or summon Bishamonten</Trigger>
+      <Gold type="int">50</Gold>
+      <HitPoints type="int">5</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Tank">
+      <Name type="string">Tank</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Smash Police Car or summon Bishamonten</Trigger>
+      <Gold type="int">500</Gold>
+      <HitPoints type="int">20</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Road</Lane>
+    </row>
+    <row name="Global_Airplane">
+      <Name type="string">Airplane</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">50</Gold>
+      <HitPoints type="int">3</HitPoints>
+      <Occurance type="float">0.45</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Static_Banana_Peel">
+      <Name type="string">Banana_Peel</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.75</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Static_Soda_Machine">
+      <Name type="string">Soda_Machine</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">3</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Static_Arcade">
+      <Name type="string">Arcade</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">80</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.35</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Global_Balloon">
+      <Name type="string">Balloon</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">City/Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">1</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Static_Telephone_Pole">
+      <Name type="string">Telephone_Pole</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City/Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">3</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Cat">
+      <Name type="string">Cat</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City/Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_White_Cat">
+      <Name type="string">White_Cat</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City/Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Fat_Cat">
+      <Name type="string">Fat_Cat</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City/Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">4</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Fat_Dog">
+      <Name type="string">Fat_Dog</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City/Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">4</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Dog">
+      <Name type="string">Dog</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City/Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Squirrell">
+      <Name type="string">Squirrell</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">City/Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Global_Bird">
+      <Name type="string">Bird</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">City/Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Traffic_Sheep">
+      <Name type="string">Sheep</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">3</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Shepherd">
+      <Name type="string">Shepherd</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">5</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Cow">
+      <Name type="string">Cow</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">3</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Road</Lane>
+    </row>
+    <row name="Traffic_Chicken">
+      <Name type="string">Chicken</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Tractor">
+      <Name type="string">Tractor</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">5</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Road</Lane>
+    </row>
+    <row name="Static_Silo">
+      <Name type="string">Silo</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">20</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Farmhouse">
+      <Name type="string">Farmhouse</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">20</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Traffic_Farmer_Woman">
+      <Name type="string">Farmer_Woman</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">15</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Farmer_Man">
+      <Name type="string">Farmer_Man</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">15</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Tsuchinoko">
+      <Name type="string">Tsuchinoko</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">200</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.20</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Fence">
+      <Name type="string">Fence</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">5</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Windmill">
+      <Name type="string">Windmill</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">20</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Haystack">
+      <Name type="string">Haystack</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">1</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Fruit_Tree">
+      <Name type="string">Fruit_Tree</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">3</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Corn">
+      <Name type="string">Corn</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Countryside</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Traffic_Wolf">
+      <Name type="string">Wolf</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Static_Mushroom">
+      <Name type="string">Mushroom</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.35</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Global_Crow">
+      <Name type="string">Crow</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Static_Seaweed">
+      <Name type="string">Seaweed</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">1</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Static_Clam">
+      <Name type="string">Clam</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Oyster">
+      <Name type="string">Oyster</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">900</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.20</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Static_Coral">
+      <Name type="string">Coral</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Traffic_Whale">
+      <Name type="string">Whale</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">250</Gold>
+      <HitPoints type="int">5</HitPoints>
+      <Occurance type="float">0.45</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Traffic_Electronic_Eel">
+      <Name type="string">Electronic_Eel</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">2</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Road</Lane>
+    </row>
+    <row name="Traffic_Diver">
+      <Name type="string">Diver</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">5</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Road</Lane>
+    </row>
+    <row name="Traffic_Kappa">
+      <Name type="string">Kappa</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">500</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.20</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_FishHook">
+      <Name type="string">FishHook</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">1</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Static_Wrecked_Ship">
+      <Name type="string">Wrecked_Ship</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">350</Gold>
+      <HitPoints type="int">7</HitPoints>
+      <Occurance type="float">0.25</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Treasure_Chest">
+      <Name type="string">Treasure_Chest</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">9000</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.15</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Giant_Anchor">
+      <Name type="string">Giant_Anchor</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">100</Gold>
+      <HitPoints type="int">5</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Traffic_Octopus">
+      <Name type="string">Octopus</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_PufferFish">
+      <Name type="string">PufferFish</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Dolphin">
+      <Name type="string">Dolphin</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Road</Lane>
+    </row>
+    <row name="Traffic_Shark">
+      <Name type="string">Shark</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Road</Lane>
+    </row>
+    <row name="Boss_Ebisu">
+      <Name type="string">Ebisu</Name>
+      <Category type="string">Boss</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Ocean</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">50</HitPoints>
+      <Occurance type="float">0.75</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Boss_Ebisu_Hook">
+      <Name type="string">Ebisu_Hook</Name>
+      <Category type="string">Boss</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Ocean</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.75</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Traffic_Flying_Fish">
+      <Name type="string">Flying_Fish</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Traffic_Crab">
+      <Name type="string">Crab</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Nemo">
+      <Name type="string">Nemo</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.20</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Boss_Raijin">
+      <Name type="string">Raijin</Name>
+      <Category type="string">Boss</Category>
+      <Location type="string">Rain</Location>
+      <Behaviors type="string">Appears every 5 seconds during rain and throws lighting bolts</Behaviors>
+      <Trigger type="string">Appears During Rain</Trigger>
+      <Gold type="int">5000</Gold>
+      <HitPoints type="int">100</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">God of Thunder.</Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Boss_Lightning">
+      <Name type="string">Lightning</Name>
+      <Category type="string">Boss</Category>
+      <Location type="string">Rain</Location>
+      <Behaviors type="string">Can destroy any obstacle hit</Behaviors>
+      <Trigger type="string">During Rain</Trigger>
+      <Gold type="int">3</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.45</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Traffic_Asterorid">
+      <Name type="string">Asterorid</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Space</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">4</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Mercury">
+      <Name type="string">Mercury</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Space</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">3</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Venus">
+      <Name type="string">Venus</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Space</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">4</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Mars">
+      <Name type="string">Mars</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Space</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">4</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Saturn">
+      <Name type="string">Saturn</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Space</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">5</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Jupiter">
+      <Name type="string">Jupiter</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Space</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">8</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Neptune">
+      <Name type="string">Neptune</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Space</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">4</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Uranus">
+      <Name type="string">Uranus</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Space</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">4</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Pluto">
+      <Name type="string">Pluto</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Space</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.90</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_UFO">
+      <Name type="string">UFO</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Space</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">3</HitPoints>
+      <Occurance type="float">0.20</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Space_Baby">
+      <Name type="string">Space_Baby</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Space</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.15</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Stars">
+      <Name type="string">Stars</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">Space/Night</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">In Space</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Traffic_Fox">
+      <Name type="string">Fox</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Deer">
+      <Name type="string">Deer</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Static_Wild_Tree">
+      <Name type="string">Wild_Tree</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Static_Boulder">
+      <Name type="string">Boulder</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">3</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Traffic_Tengu">
+      <Name type="string">Tengu</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.20</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Static_Cave">
+      <Name type="string">Cave</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">2</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Ground</Lane>
+    </row>
+    <row name="Traffic_Monkey">
+      <Name type="string">Monkey</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">1</HitPoints>
+      <Occurance type="float">0.95</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Traffic_Titan">
+      <Name type="string">Titan</Name>
+      <Category type="string">Traffic</Category>
+      <Location type="string">Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">N/A</Trigger>
+      <Gold type="int">0</Gold>
+      <HitPoints type="int">5</HitPoints>
+      <Occurance type="float">0.25</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Road</Lane>
+    </row>
+  </sheet>
+</Sheets>

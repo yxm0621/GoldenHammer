@@ -1,0 +1,107 @@
+G2U_ID,Name,Category,Location,Behaviors,Trigger,Gold,HitPoints,Occurance,Size,Encyclopedia,Lane
+G2U_TYPE,string,string,string,string,string,int,int,float,int,string,string
+Static_Checkpoint,Checkpoint,Static,City/Countryside/Wilderness/Ocean,,Special Power,3,500,0.00,0,,Sidewalk
+Boss_Fujin,Fujin,Boss,City/Countryside/Wilderness,,Levels 5, 10, 15, 20...,5000,100,0.35,0,God of Wind.,Special
+Static_Cloud,Cloud,Static,City/Countryside/Wilderness/Battlefield,,Always Present,50,5,0.00,0,Living the free life.,Special
+Static_RainClouds,RainClouds,Static,City/Countryside/Wilderness,,Clouds Destroyed,25,3,0.00,0,When you smash it you make the others cry.,Special
+Static_Sun,Sun,Static,City/Countryside/Wilderness/Battlefield,,Always Present,200,50,0.00,0,Giving life.,Special
+Static_Moon,Moon,Static,City/Countryside/Wilderness/Battlefield,,Always Present,200,50,0.00,0,,Special
+Boss_Bishamonten,Bishamonten,Boss,Battlefield,,Destroy Tank,5000,100,0.00,0,,Special
+Static_City_Road,City_Road,Static,City,N/A,N/A,10,5,1.00,1,Piece of Road.,Road
+Static_City_Tree_1,City_Tree_1,Static,City,N/A,N/A,5,1,0.95,1,Never gets too big.,Sidewalk
+Static_City_Tree_2,City_Tree_2,Static,City,N/A,N/A,5,1,0.95,1,It grows fruit.,Sidewalk
+Static_Streetlight,Streetlight,Static,City,N/A,N/A,3,1,0.90,0,Lights for safety.,Sidewalk
+Static_FireHydrant,FireHydrant,Static,City,N/A,N/A,1,1,0.90,1,Don't park in front of them.,Sidewalk
+Static_Building_1,Building_1,Static,City,N/A,N/A,20,2,0.95,1,Average brownstone.,Ground
+Static_Building_2,Building_2,Static,City,N/A,N/A,20,2,0.95,1,,Ground
+Static_Building_3,Building_3,Static,City,N/A,N/A,20,2,0.95,1,,Ground
+Static_Long_Building_1,Long_Building_1,Static,City,N/A,N/A,25,3,0.90,3,,Ground
+Static_Long_Building_2,Long_Building_2,Static,City,N/A,N/A,25,3,0.90,2,,Ground
+Static_Long_Building_3,Long_Building_3,Static,City,N/A,N/A,25,3,0.90,0,,Ground
+Static_Large_Building_1,Large_Building_1,Static,City,N/A,N/A,50,4,0.80,0,,Ground
+Static_Large_Building_2,Large_Building_2,Static,City,N/A,N/A,50,4,0.80,0,,Ground
+Static_Large_Building_3,Large_Building_3,Static,City,N/A,N/A,50,4,0.80,0,,Ground
+Static_SkyScraper,SkyScraper,Static,City,N/A,N/A,75,10,0.40,0,,Ground
+Traffic_SafetyCones,SafetyCones,Traffic,City,N/A,N/A,1,1,0.95,0,,Sidewalk
+Traffic_City_Man,City_Man,Traffic,City,Walk down Sidewalk toward screen,N/A,15,2,0.85,0,,Sidewalk
+Traffic_City_Woman,City_Woman,Traffic,City,Walk down Sidewalk toward screen,N/A,15,2,0.85,0,,Sidewalk
+Traffic_Police_Officer,Police_Officer,Traffic,City,Walk toward Player to arrest,N/A,35,3,0.35,0,,Sidewalk
+Traffic_Police_Car,Police_Car,Traffic,City,Block Street in front of Player,Smash 3 people or one police officer,25,5,0.00,0,,Road
+Static_Flowerpot,Flowerpot,Static,City,,N/A,45,1,0.20,0,,Ground
+Static_Seeds,Seeds,Static,City,,N/A,35,1,0.20,0,,Ground
+Traffic_Soldier,Soldier,Traffic,City,Cover each walkable block and move toward screen,Smash Tank or summon Bishamonten,50,5,0.00,0,,Sidewalk
+Traffic_Tank,Tank,Traffic,City,,Smash Police Car or summon Bishamonten,500,20,0.00,0,,Road
+Global_Airplane,Airplane,Global,City,,N/A,50,3,0.45,0,,Special
+Static_Banana_Peel,Banana_Peel,Static,City,,N/A,2,1,0.75,0,,Sidewalk
+Static_Soda_Machine,Soda_Machine,Static,City,,N/A,3,1,0.95,0,,Sidewalk
+Static_Arcade,Arcade,Static,City,,N/A,80,1,0.35,0,,Sidewalk
+Global_Balloon,Balloon,Global,City/Countryside,,N/A,1,1,0.95,0,,Special
+Static_Telephone_Pole,Telephone_Pole,Static,City/Countryside,,N/A,3,1,0.95,0,,Sidewalk
+Traffic_Cat,Cat,Traffic,City/Countryside/Wilderness,,N/A,2,1,0.95,0,,Sidewalk
+Traffic_White_Cat,White_Cat,Traffic,City/Countryside/Wilderness,,N/A,2,1,0.95,0,,Sidewalk
+Traffic_Fat_Cat,Fat_Cat,Traffic,City/Countryside/Wilderness,,N/A,4,2,0.95,0,,Sidewalk
+Traffic_Fat_Dog,Fat_Dog,Traffic,City/Countryside/Wilderness,,N/A,4,2,0.95,0,,Sidewalk
+Traffic_Dog,Dog,Traffic,City/Countryside/Wilderness,,N/A,2,1,0.95,0,,Sidewalk
+Traffic_Squirrell,Squirrell,Traffic,City/Countryside/Wilderness,,N/A,2,1,0.95,0,,Sidewalk
+Global_Bird,Bird,Global,City/Countryside/Wilderness,,N/A,2,1,0.95,0,,Special
+Traffic_Sheep,Sheep,Traffic,Countryside,,N/A,3,1,0.95,0,,Sidewalk
+Traffic_Shepherd,Shepherd,Traffic,Countryside,,N/A,5,1,0.95,0,,Sidewalk
+Traffic_Cow,Cow,Traffic,Countryside,,N/A,3,1,0.95,0,,Road
+Traffic_Chicken,Chicken,Traffic,Countryside,,N/A,2,1,0.95,0,,Sidewalk
+Traffic_Tractor,Tractor,Traffic,Countryside,,N/A,5,1,0.95,0,,Road
+Static_Silo,Silo,Static,Countryside,,N/A,20,2,0.95,0,,Ground
+Static_Farmhouse,Farmhouse,Static,Countryside,,N/A,20,2,0.95,0,,Ground
+Traffic_Farmer_Woman,Farmer_Woman,Traffic,Countryside,,N/A,15,2,0.95,0,,Sidewalk
+Traffic_Farmer_Man,Farmer_Man,Traffic,Countryside,,N/A,15,2,0.95,0,,Sidewalk
+Traffic_Tsuchinoko,Tsuchinoko,Traffic,Countryside,,N/A,200,1,0.20,0,,Ground
+Static_Fence,Fence,Static,Countryside,,N/A,5,1,0.95,0,,Ground
+Static_Windmill,Windmill,Static,Countryside,,N/A,20,2,0.95,0,,Ground
+Static_Haystack,Haystack,Static,Countryside,,N/A,1,2,0.95,0,,Ground
+Static_Fruit_Tree,Fruit_Tree,Static,Countryside,,N/A,3,1,0.95,0,,Ground
+Static_Corn,Corn,Static,Countryside,,N/A,2,1,0.95,0,,Ground
+Traffic_Wolf,Wolf,Traffic,Countryside/Wilderness,,N/A,2,1,0.95,0,,Sidewalk
+Static_Mushroom,Mushroom,Static,Countryside/Wilderness,,N/A,2,1,0.35,0,,Ground
+Global_Crow,Crow,Global,Countryside/Wilderness,,N/A,2,1,0.95,0,,Special
+Static_Seaweed,Seaweed,Static,Ocean,,N/A,1,1,0.95,0,,Sidewalk
+Static_Clam,Clam,Static,Ocean,,N/A,2,1,0.95,0,,Ground
+Static_Oyster,Oyster,Static,Ocean,,N/A,900,1,0.20,0,,Sidewalk
+Static_Coral,Coral,Static,Ocean,,N/A,2,1,0.95,0,,Ground
+Traffic_Whale,Whale,Traffic,Ocean,,N/A,250,5,0.45,0,,Ground
+Traffic_Electronic_Eel,Electronic_Eel,Traffic,Ocean,,N/A,2,1,0.95,0,,Road
+Traffic_Diver,Diver,Traffic,Ocean,,N/A,5,2,0.95,0,,Road
+Traffic_Kappa,Kappa,Traffic,Ocean,,N/A,500,2,0.20,0,,Sidewalk
+Traffic_FishHook,FishHook,Traffic,Ocean,,N/A,1,1,0.95,0,,Special
+Static_Wrecked_Ship,Wrecked_Ship,Static,Ocean,,N/A,350,7,0.25,0,,Ground
+Static_Treasure_Chest,Treasure_Chest,Static,Ocean,,N/A,9000,1,0.15,0,,Ground
+Static_Giant_Anchor,Giant_Anchor,Static,Ocean,,N/A,100,5,0.95,0,,Ground
+Traffic_Octopus,Octopus,Traffic,Ocean,,N/A,0,1,0.95,0,,Sidewalk
+Traffic_PufferFish,PufferFish,Traffic,Ocean,,N/A,0,1,0.95,0,,Sidewalk
+Traffic_Dolphin,Dolphin,Traffic,Ocean,,N/A,0,1,0.95,0,,Road
+Traffic_Shark,Shark,Traffic,Ocean,,N/A,0,1,0.95,0,,Road
+Boss_Ebisu,Ebisu,Boss,Ocean,,In Ocean,0,50,0.75,0,,Special
+Boss_Ebisu_Hook,Ebisu_Hook,Boss,Ocean,,In Ocean,0,1,0.75,0,,Special
+Traffic_Flying_Fish,Flying_Fish,Traffic,Ocean,,N/A,0,1,0.95,0,,Special
+Traffic_Crab,Crab,Traffic,Ocean,,N/A,0,2,0.95,0,,Sidewalk
+Traffic_Nemo,Nemo,Traffic,Ocean,,N/A,0,1,0.20,0,,Sidewalk
+Boss_Raijin,Raijin,Boss,Rain,Appears every 5 seconds during rain and throws lighting bolts,Appears During Rain,5000,100,0.00,0,God of Thunder.,Special
+Boss_Lightning,Lightning,Boss,Rain,Can destroy any obstacle hit,During Rain,3,1,0.45,0,,Special
+Traffic_Asterorid,Asterorid,Traffic,Space,,In Space,0,4,0.90,0,,Special
+Global_Mercury,Mercury,Global,Space,,In Space,0,3,0.90,0,,Special
+Global_Venus,Venus,Global,Space,,In Space,0,4,0.90,0,,Special
+Global_Mars,Mars,Global,Space,,In Space,0,4,0.90,0,,Special
+Global_Saturn,Saturn,Global,Space,,In Space,0,5,0.90,0,,Special
+Global_Jupiter,Jupiter,Global,Space,,In Space,0,8,0.90,0,,Special
+Global_Neptune,Neptune,Global,Space,,In Space,0,4,0.90,0,,Special
+Global_Uranus,Uranus,Global,Space,,In Space,0,4,0.90,0,,Special
+Global_Pluto,Pluto,Global,Space,,In Space,0,2,0.90,0,,Special
+Global_UFO,UFO,Global,Space,,In Space,0,3,0.20,0,,Special
+Global_Space_Baby,Space_Baby,Global,Space,,In Space,0,1,0.15,0,,Special
+Global_Stars,Stars,Global,Space/Night,,In Space,0,1,0.95,0,,Special
+Traffic_Fox,Fox,Traffic,Wilderness,,N/A,0,1,0.95,0,,Sidewalk
+Traffic_Deer,Deer,Traffic,Wilderness,,N/A,0,1,0.95,0,,Sidewalk
+Static_Wild_Tree,Wild_Tree,Static,Wilderness,,N/A,0,1,0.95,0,,Ground
+Static_Boulder,Boulder,Static,Wilderness,,N/A,0,3,0.95,0,,Ground
+Traffic_Tengu,Tengu,Traffic,Wilderness,,N/A,0,1,0.20,0,,Sidewalk
+Static_Cave,Cave,Static,Wilderness,,N/A,0,2,0.95,0,,Ground
+Traffic_Monkey,Monkey,Traffic,Wilderness,,N/A,0,1,0.95,0,,Sidewalk
+Traffic_Titan,Titan,Traffic,Wilderness,,N/A,0,5,0.25,0,,Road

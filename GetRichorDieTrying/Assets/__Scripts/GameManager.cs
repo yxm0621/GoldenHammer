@@ -238,7 +238,7 @@ public class GameManager : MonoBehaviour {
 
             levelTimer = 30;
 
-            //Tn-game text obj
+            //In-game text obj
             uiText = GameObject.Find("UI-Text");
             scoreText = GameObject.Find("Score").GetComponent<TextMesh>();
             valueText = GameObject.Find("Value").GetComponent<TextMesh>();
