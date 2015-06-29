@@ -1,0 +1,17 @@
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\Assembly-CSharp-firstpass.dll
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\Assembly-CSharp-firstpass.pdb
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEditor.dll
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.dll
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEngine.dll
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEngine.Networking.dll
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEngine.xml
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEditor.xml
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEngine.Networking.xml
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.xml
+D:\GitHub\GoldenHammer\GetRichorDieTrying\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
+D:\GitHub\GoldenHammer\GetRichorDieTrying\obj\Debug\UnityVS.GetRichorDieTrying.CSharp.Plugins.csprojResolveAssemblyReference.cache
+D:\GitHub\GoldenHammer\GetRichorDieTrying\obj\Debug\Assembly-CSharp-firstpass.dll
+D:\GitHub\GoldenHammer\GetRichorDieTrying\obj\Debug\Assembly-CSharp-firstpass.pdb

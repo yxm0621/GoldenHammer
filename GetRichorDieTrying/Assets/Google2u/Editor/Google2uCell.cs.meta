@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: fb1d58219af28ae4fa9b9dc5f48f4b8b
+labels:
+- GoogleFu
+- Google
+- Database
+- Data
+- Spreadsheet
+- XML
+- CSV
+- JSON
+- NGUI
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
