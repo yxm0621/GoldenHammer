@@ -192,8 +192,9 @@ public class ObjectManager : MonoBehaviour {
                         gameMain.currentMenu = GameManager.MenuPage.Encyclopedia;
                         gameMain.encyclopedia = Instantiate(gameMain.encyclopediaObj, gameMain.encyclopediaObj.transform.position, Quaternion.identity) as GameObject;
                         gameMain.encyclopedia.name = gameMain.encyclopediaObj.name;
-                        Encyclopedia.showEncyclopedia = true;
-                        Debug.Log("Pedia called!");
+
+                        //this.gameObject.transform.position = new Vector3(-3.36f, -4.08f, 0);
+                        Debug.Log("asdfasdfasdf" + this.gameObject.name);
                         //TODO//1. touch handle -> dont duplicate objects by instantiation 2. tab
                         //gameMain.encyclopedia.transform.parent = gameMain.itemPage.transform;
                         break;
@@ -208,7 +209,8 @@ public class ObjectManager : MonoBehaviour {
                         gameMain.storeItems = Instantiate(gameMain.storeItemsObj, gameMain.storeItemsObj.transform.position, Quaternion.identity) as GameObject;
                         gameMain.storeItems.name = gameMain.storeItemsObj.name;
                         Debug.Log("Store called!");
-                        
+
+                        this.gameObject.transform.position = new Vector3(-100.0f, -100.0f, 0);
                         //gameMain.storeItems.transform.parent = gameMain.itemPage.transform;
                         break;
                     case "Setting":

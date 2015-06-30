@@ -6,7 +6,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Encyclopedia : MonoBehaviour
+public class PediaPage : MonoBehaviour
 {
 
     public GameManager gameMain;
@@ -17,8 +17,7 @@ public class Encyclopedia : MonoBehaviour
 
     public GameObject icon;
 
-    public static bool showEncyclopedia;
-
+    
 
     //
 
@@ -43,7 +42,6 @@ public class Encyclopedia : MonoBehaviour
     {
         gameMain = GameManager.manager;
         objData = Google2u.ObjList_G2U.Instance;
-        showEncyclopedia = false;
 
         allObjList = new List<GameObject>();
         cityObjList = new List<GameObject>();
@@ -174,8 +172,8 @@ public class Encyclopedia : MonoBehaviour
     {
         GameObject pediaItem = Instantiate(pediaItemPrefab);
         pediaItem.name = "PediaItem_" + objData.Rows[i]._Name;
-        pediaItem.transform.SetParent(GameObject.Find("PediaPage").transform);
-        pediaItem.transform.position = GameObject.Find("MenuStartPoint").transform.position;
+        pediaItem.transform.SetParent(GameObject.Find("PediaItemsStartPoint").gameObject.transform);
+        pediaItem.transform.position = GameObject.Find("PediaItemsStartPoint").transform.position;
 
         GameObject tmpItemNameObj = GameObject.Find("ItemName");
         tmpItemNameObj.GetComponent<TextMesh>().text = objData.Rows[i]._Name;
@@ -198,15 +196,15 @@ public class Encyclopedia : MonoBehaviour
 
     void Update()
     {
-        if (showEncyclopedia)
-        {
-            this.gameObject.transform.position = new Vector3(-3.36f, -4.08f, 0);
-            Debug.Log("!!!!!!");
-        }
-        else
-        {
-            this.gameObject.transform.position = new Vector3(-100.0f, -100.0f, 0);
-            Debug.Log("333333");
-        }
+        //if (showEncyclopedia)
+        //{
+        //    this.gameObject.transform.position = new Vector3(-3.36f, -4.08f, 0);
+        //    Debug.Log("!!!!!!");
+        //}
+        //else
+        //{
+        //    this.gameObject.transform.position = new Vector3(-100.0f, -100.0f, 0);
+        //    Debug.Log("333333");
+        //}
     }
 }
