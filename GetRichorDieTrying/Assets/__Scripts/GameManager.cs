@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 	public string						currentLevel;
 	public string						mainLevel;
 	public bool							firstRun = true;
+    public Google2u.ObjList_G2U         objData;
 
 	public GameObject					cam;
 	public Vector3						camStartPos;
@@ -214,6 +215,7 @@ public class GameManager : MonoBehaviour {
 	public void Start () {
 		currentLevel = Application.loadedLevelName;
         Time.timeScale = 1.0F;
+        objData = Google2u.ObjList_G2U.Instance;
 
         cam = Camera.main.gameObject;
         camStartPos = cam.transform.position;
@@ -425,7 +427,7 @@ public class GameManager : MonoBehaviour {
                 valueText.text = "";
             }
 
-			goalText.text = levelGoal.ToString("Goal " + "$0");
+			goalText.text = levelGoal.ToString("GOAL " + "$0");
 			//update distance text
 			if(distance < 1000) {
                 distanceText.text = distance.ToString("0");
