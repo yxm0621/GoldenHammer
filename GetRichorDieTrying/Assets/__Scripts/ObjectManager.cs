@@ -16,19 +16,22 @@ public class ObjectManager : MonoBehaviour {
 
 	public AudioClip			hitAudio;
 
+    private Vector3             subMenuPosition;
+
 	//public GameObject			human;
 
 
 	// Use this for initialization
 	void Start () {
         gameMain = GameManager.manager; //Set Ref to GameManager Script
+        subMenuPosition = new Vector3(6.4f, 1, 1);
 
 		thisObject = this.gameObject;
 		iTween.Init (thisObject);
 
         localPos = thisObject.transform.localPosition;
 
-        objData = Google2u.ObjList_G2U.Instance;
+        objData = gameMain.objData;
         if (objData != null) {
             for (int i = 0; i < objData.Rows.Count; i++) {
                 if(thisObject.name == objData.Rows[i]._Name){
@@ -193,6 +196,7 @@ public class ObjectManager : MonoBehaviour {
                         gameMain.encyclopedia = Instantiate(gameMain.encyclopediaObj, gameMain.encyclopediaObj.transform.position, Quaternion.identity) as GameObject;
                         gameMain.encyclopedia.name = gameMain.encyclopediaObj.name;
 
+                        GameObject.Find("PediaPage").transform.position = subMenuPosition;
                         //this.gameObject.transform.position = new Vector3(-3.36f, -4.08f, 0);
                         Debug.Log("asdfasdfasdf" + this.gameObject.name);
                         //TODO//1. touch handle -> dont duplicate objects by instantiation 2. tab

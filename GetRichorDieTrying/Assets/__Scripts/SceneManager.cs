@@ -47,8 +47,11 @@ public class SceneManager : MonoBehaviour {
 	public Material						nightSky;
 	public Material						spaceSky;
 
+    public Google2u.ObjList_G2U         objData;
+
 	// Use this for initialization
 	void Start () {
+        objData = GameManager.manager.objData;
 		changeScene (scene.city);
 	}
 	
@@ -104,12 +107,12 @@ public class SceneManager : MonoBehaviour {
 		building = cityBuilding;
 		sidewalk = citySidewalk;
 		road = cityRoad;
-		buildingData = new int[15, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
-			{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
-            {1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,2,0,0}};
-        sidewalkData = new int[15, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
-			{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
-            {1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0}};
+        buildingData = new int[15, 2] {{1,1},{1,1},{1,1},{1,1},{1,1},
+                                       {1,1},{1,1},{1,1},{1,1},{1,1},
+                                       {1,1},{1,1},{1,1},{1,1},{1,2}};
+        sidewalkData = new int[15, 2] {{1,1},{1,1},{1,1},{1,1},{1,1},
+                                       {1,1},{1,1},{1,1},{1,1},{1,1},
+                                       {1,1},{1,1},{1,1},{1,1},{1,1}};
 	}
 
 	void loadCountryside(){
@@ -130,11 +133,12 @@ public class SceneManager : MonoBehaviour {
 		building = spaceBuilding;
 		sidewalk = spaceSidewalk;
 		road = spaceRoad;
-		buildingData = new int[15, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
-			{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
-            {1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0}};
-		sidewalkData = new int[7, 4] {{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},{1,1,0,0},
-            {1,1,0,0},{1,1,0,0}};
+        buildingData = new int[15, 2] {{1,1},{1,1},{1,1},{1,1},{1,1},
+                                       {1,1},{1,1},{1,1},{1,1},{1,1},
+                                       {1,1},{1,1},{1,1},{1,1},{1,1}};
+        sidewalkData = new int[15, 2] {{1,1},{1,1},{1,1},{1,1},{1,1},
+                                       {1,1},{1,1},{1,1},{1,1},{1,1},
+                                       {1,1},{1,1},{1,1},{1,1},{1,1}};
 		Camera.main.GetComponent<Skybox> ().material = spaceSky;
 		reloadScene = true;
         deleteObstacles();
