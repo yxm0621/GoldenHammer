@@ -7,14 +7,16 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E06AE733-2B92-CFB3-77B3-5989CFAFFECB}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
@@ -108,11 +110,8 @@
     <Compile Include="Assets\__Scripts\Menu\HideDetail.cs" />
     <Compile Include="Assets\__Scripts\Menu\LightChange.cs" />
     <Compile Include="Assets\__Scripts\Menu\MenuFrame.cs" />
-<<<<<<< HEAD
-=======
     <Compile Include="Assets\__Scripts\Menu\PediaPage.cs" />
     <Compile Include="Assets\__Scripts\Menu\ShoppingCart.cs" />
->>>>>>> tak
     <Compile Include="Assets\__Scripts\Menu\ShowDetail.cs" />
     <Compile Include="Assets\__Scripts\Menu\SwipeCheck.cs" />
     <Compile Include="Assets\__Scripts\Moving.cs" />
@@ -301,7 +300,9 @@
     <None Include="Assets\Plugins\Android\twitter_lib\res\values-xxhdpi-v4\values.xml" />
     <None Include="Assets\Plugins\Android\voxelbusters_utility_lib\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\youtube_lib\AndroidManifest.xml" />
-    <None Include="Assets\Resources\XML\ObjList_G2U\ObjList_G2U.xml" />
+    <None Include="Assets\Resources\XML\ObjList_G2U\ObjList_G2U.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
