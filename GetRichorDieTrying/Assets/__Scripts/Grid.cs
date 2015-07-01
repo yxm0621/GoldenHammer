@@ -6,6 +6,7 @@ public class Grid : MonoBehaviour {
 	int length; //total length of the grid(x axis)
 	int width; // width of each grid(z axis)
 
+    //public GameObject[] edge;
 	public GameObject[] building;
 	public GameObject[] sidewalk;
 	public GameObject[] road;
@@ -14,6 +15,8 @@ public class Grid : MonoBehaviour {
 	
 	public int[,] buildingData;
 	public int[,] sidewalkData;
+    public float[] buildingOccur;
+    public float[] sidewalkOccur;
 
 	public GridController grid;
 	public bool[,] playerMove;
@@ -37,12 +40,15 @@ public class Grid : MonoBehaviour {
 	}
 
 	//read new object list when scene changes
-	public void setGrid(GameObject[] setBuilding, GameObject[] setSide, GameObject[] setRoad, int[,] setBuildingData, int[,] setSidewalkData){
+	public void setGrid(GameObject[] setBuilding, GameObject[] setSide, GameObject[] setRoad,
+                        int[,] setBuildingData, int[,] setSidewalkData, float[] setBuildingOccur, float[] setSidewalkOccur){
 		building = setBuilding;
 		sidewalk = setSide;
 		road = setRoad;
 		buildingData = setBuildingData;
 		sidewalkData = setSidewalkData;
+        buildingOccur = setBuildingOccur;
+        sidewalkOccur = setSidewalkOccur;
 	}
 
 	//instanciate the new grid
@@ -93,7 +99,7 @@ public class Grid : MonoBehaviour {
         newRoad.transform.parent = newSeg.transform;
 
         //Create the grid
-        grid = new GridController(length, width, building, sidewalk, pickup, buildingData, sidewalkData);
+        grid = new GridController(length, width, building, sidewalk, pickup, buildingData, sidewalkData, buildingOccur, sidewalkOccur);
 		grid.createGrid ();
 
         //Render the grid
@@ -116,13 +122,13 @@ public class Grid : MonoBehaviour {
                         newObj = (GameObject)Instantiate(grid.items[x, z].obj, new Vector3(posX + .3f, posY, posZ), Quaternion.identity);
 					} else {
                         newObj = (GameObject)Instantiate(grid.items[x, z].obj, new Vector3(posX, posY, posZ), Quaternion.identity);
-                        if (grid.items[x, z].obj.name.Contains("Building_1")) {
-                            if (posX > 0) {
-                                newObj.transform.localEulerAngles = new Vector3(0,90,0);
-                            } else {
-                                newObj.transform.localEulerAngles = new Vector3(0, -90, 0);
-                            }
-                        }
+                        //if (grid.items[x, z].obj.name.Contains("Building_1")) {
+                        //    if (posX > 0) {
+                        //        newObj.transform.localEulerAngles = new Vector3(0,90,0);
+                        //    } else {
+                        //        newObj.transform.localEulerAngles = new Vector3(0, -90, 0);
+                        //    }
+                        //}
 					}
 //					GameObject newObj = (GameObject) Instantiate (grid.items[x ,z].obj, new Vector3(posX, posY, posZ), Quaternion.identity);
 					newObj.transform.parent = newSeg.transform;
@@ -184,12 +190,17 @@ public class GridController {
 	public GameObject[] sidewalk;
 	public int[,] buildingData;
 	public int[,] sidewalkData;
+    public float[] buildingOccur;
+    public float[] sidewalkOccur;
     public GameObject[] pickup;
 
 	public GridItem[,] items;
 
 	//construction of the class
-	public GridController(int gridLenth, int gridWidth, GameObject[] building, GameObject[] sidewalk, GameObject[] pickup, int[,] buildingData, int[,] sidewalkData) {
+	public GridController(int gridLenth, int gridWidth, 
+                          GameObject[] building, GameObject[] sidewalk, GameObject[] pickup, 
+                          int[,] buildingData, int[,] sidewalkData,
+                          float[] buildingOccur, float[] sidewalkOccur) {
 		this.gridLenth = gridLenth;
 		this.gridWidth = gridWidth;
 		this.sidewalkBegin = gridLenth / 2 - 2;
@@ -199,25 +210,51 @@ public class GridController {
         this.pickup = pickup;
 		this.buildingData = buildingData;
 		this.sidewalkData = sidewalkData;
+        this.buildingOccur = buildingOccur;
+        this.sidewalkOccur = sidewalkOccur;
 	}
 
 	//randomly choose the objects
-	public int getObj(GameObject[] objs, int min, int max, int maxWidth){
-		int i = Random.Range(min, max);
-//		Debug.Log (i);
-		GameObject obj = objs[i];
-		if (obj.transform.localScale.z > maxWidth) {
-			//when the item's width beyond the edge of the grid, change another item
-			return getObj(objs, min, max, maxWidth);
-		} else {
-			return i;
-		}
+	public int getObj(GameObject[] objs, int min, int max, int maxWidth, float[] occurance){
+        int i;
+        int totalOccur = 0; //occurance calculate
+        int[] occurChange = new int[occurance.Length]; //change occurance data by * 100 and turn into int type
+        for (i = min; i < max; ++i) {
+            occurChange[i] = (int) (100 * occurance[i]);
+            totalOccur += occurChange[i];
+        }
+
+        //Randomly choose the object based on the occurance
+        int objOccur = Random.Range(0, totalOccur);
+        totalOccur = 0;
+        for (i = min; i < max; ++i) {
+            totalOccur += occurChange[i];
+            if (totalOccur >= objOccur) {
+                i--;
+                GameObject obj = objs[i];
+                if (obj.transform.localScale.z > maxWidth) {
+                    //when the item's length beyond the edge of the grid, change another item
+                    //long building length > 1
+                    return getObj(objs, min, max, maxWidth, occurance);
+                } else {
+                    return i;
+                }
+            } else {
+                continue;
+            }
+        }
+        return -1;
 	}
 
     //randomly put the pickupItem
     public void PutItem(int x, int z) {
-        int i = getObj(pickup, 0, pickup.Length, 1);
-        items[x, z] = new GridItem(pickup[i], 1, 1);
+        float[] occurArray = new float[pickup.Length];
+        int i;
+        for (i = 0; i < pickup.Length; ++i) {
+            occurArray[i] = 1f;
+        }
+        i = getObj(pickup, 0, pickup.Length, 1, occurArray);
+        items[x, z] = new GridItem(pickup[i], 1, 1, 1);
     }
 
 	//create the new grid
@@ -230,18 +267,22 @@ public class GridController {
 				for (int z = 0; z < gridWidth; ++z) {
                     //if (Random.Range(0, 2) > 0) {
                         // 50% chance to genarate building
-                        int i = getObj(building, 0, building.Length, gridWidth - z);
+
+                        //Now it's 100% chance to generate building
+                        int i = getObj(building, 0, building.Length, gridWidth - z, buildingOccur);
                         if ((x == 0) || (x == gridLenth - 1)) {
                             //edge of the ground
-                            i = getObj(building, 3, 5, 1); // only generate tall buildings
+                            i = getObj(building, 3, 5, 1, buildingOccur); // only generate tall buildings
                         }
-                        
-                        items[x, z] = new GridItem(building[i], buildingData[i, 0], buildingData[i, 1]);
+
+                        items[x, z] = new GridItem(building[i], buildingData[i, 0], buildingData[i, 1], buildingOccur[i]);
                         z += (buildingData[i, 1] - 1);
                         if ((buildingData[i, 0] > 1) && (x != sidewalkBegin - 1) && (x != gridLenth - 1)) {
                             //avoid overlap
                             x++;
                         }
+
+
                     //}
 					
 				}
@@ -283,8 +324,8 @@ public class GridController {
                                     onSidewalk = false;
                                 } else {
                                     //generate static item
-                                    int i = getObj(sidewalk, 0, sidewalk.Length, gridWidth - z);
-                                    items[x, z] = new GridItem(sidewalk[i], sidewalkData[i, 0], sidewalkData[i, 1]);
+                                    int i = getObj(sidewalk, 0, sidewalk.Length, gridWidth - z, sidewalkOccur);
+                                    items[x, z] = new GridItem(sidewalk[i], sidewalkData[i, 0], sidewalkData[i, 1], sidewalkOccur[i]);
                                     z += (sidewalkData[i, 1] - 1);
                                 }
                             }
@@ -293,8 +334,8 @@ public class GridController {
                         //don't need to generate pickup item
                         if (Random.Range(0, 2) > 0) {
                             // 1/2 chance to generate item, 1/2 chance to leave it empty
-                            int i = getObj(sidewalk, 0, sidewalk.Length, gridWidth - z);
-                            items[x, z] = new GridItem(sidewalk[i], sidewalkData[i, 0], sidewalkData[i, 1]);
+                            int i = getObj(sidewalk, 0, sidewalk.Length, gridWidth - z, sidewalkOccur);
+                            items[x, z] = new GridItem(sidewalk[i], sidewalkData[i, 0], sidewalkData[i, 1], sidewalkOccur[i]);
                             z += (sidewalkData[i, 1] - 1);
                         }
                     }
@@ -309,14 +350,16 @@ public class GridItem {
     public GameObject obj;
     public int width; //width of the obj, normally == 1
 	public int length; //ledth of the obj
+    public float occurance;
     //public float xOffset;
     //public float zOffset;
 
-	public GridItem(GameObject obj, int width, int length) {
+    public GridItem(GameObject obj, int width, int length, float occurance) {
 		this.obj = obj;
 //		this.obj.transform.localScale.x = length;
 //		this.obj.transform.localScale.z = width;
         this.width = width;
         this.length = length;
+        this.occurance = occurance;
 	}
 }

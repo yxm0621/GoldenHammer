@@ -40,6 +40,8 @@ public class SceneManager : MonoBehaviour {
 
 	public int[,] buildingData;
 	public int[,] sidewalkData;
+    public float[] buildingOccur;
+    public float[] sidewalkOccur;
 
 	public bool reloadScene = false;
 	
@@ -86,7 +88,8 @@ public class SceneManager : MonoBehaviour {
 			break;
 		}
         if (GameObject.Find("Grid") != null) {
-            GameObject.Find("Grid").GetComponent<Grid>().setGrid(building, sidewalk, road, buildingData, sidewalkData);
+            GameObject.Find("Grid").GetComponent<Grid>().setGrid(building, sidewalk, road,
+                                                                 buildingData, sidewalkData, buildingOccur, sidewalkOccur);
         }
         if (GameObject.Find("Traffic") != null) {
             GameObject.Find("Traffic").GetComponent<TrafficObjects>().changeTraffic();
@@ -107,38 +110,30 @@ public class SceneManager : MonoBehaviour {
 		building = cityBuilding;
 		sidewalk = citySidewalk;
 		road = cityRoad;
-        buildingData = new int[15, 2] {{1,1},{1,1},{1,1},{1,1},{1,1},
-                                       {1,1},{1,1},{1,1},{1,1},{1,1},
-                                       {1,1},{1,1},{1,1},{1,1},{1,2}};
-        sidewalkData = new int[15, 2] {{1,1},{1,1},{1,1},{1,1},{1,1},
-                                       {1,1},{1,1},{1,1},{1,1},{1,1},
-                                       {1,1},{1,1},{1,1},{1,1},{1,1}};
+        getObjData();
 	}
-
 	void loadCountryside(){
 		building = countrysideBuilding;
 		sidewalk = countrysideSidewalk;
 		road = countrysideRoad;
+        getObjData();
 	}
 	void loadWilderness(){
 		building = wildernessBuilding;
 		sidewalk = wildernessSidewalk;
 		road = wildernessRoad;
-		
+        getObjData();
 	}
 	void loadSpace(){
 		iTweenEvent.GetEvent(Camera.main.gameObject, "loadScene").Play();
 		iTweenEvent.GetEvent(Camera.main.gameObject, "loadScene1").Play();
 		iTweenEvent.GetEvent(Camera.main.gameObject, "loadScene2").Play();
+
 		building = spaceBuilding;
 		sidewalk = spaceSidewalk;
 		road = spaceRoad;
-        buildingData = new int[15, 2] {{1,1},{1,1},{1,1},{1,1},{1,1},
-                                       {1,1},{1,1},{1,1},{1,1},{1,1},
-                                       {1,1},{1,1},{1,1},{1,1},{1,1}};
-        sidewalkData = new int[15, 2] {{1,1},{1,1},{1,1},{1,1},{1,1},
-                                       {1,1},{1,1},{1,1},{1,1},{1,1},
-                                       {1,1},{1,1},{1,1},{1,1},{1,1}};
+        getObjData();
+
 		Camera.main.GetComponent<Skybox> ().material = spaceSky;
 		reloadScene = true;
         deleteObstacles();
@@ -148,19 +143,56 @@ public class SceneManager : MonoBehaviour {
 		building = oceanBuilding;
 		sidewalk = oceanSidewalk;
 		road = oceanRoad;
+        getObjData();
         deleteObstacles();
 	}
 	void loadBattlefield(){
 		building = battlefieldBuilding;
 		sidewalk = battlefieldSidewalk;
 		road = battlefieldRoad;
+        getObjData();
         deleteObstacles();
 	}
 
+    void getObjData() {
+        buildingData = new int[building.Length, 2];
+        sidewalkData = new int[sidewalk.Length, 2];
+        buildingOccur = new float[building.Length];
+        sidewalkOccur = new float[sidewalk.Length];
+
+        if (objData == null) {
+            objData = Google2u.ObjList_G2U.Instance;
+        }
+        string objID = "Static_";
+        for (int i = 0; i < building.Length; ++i) {
+            objID = "Static_" + building[i].name;
+            if ((objData.GetRow(objID) != null) &&
+                (objData.GetRow(objID)._Location.Contains("City")) &&
+                (objData.GetRow(objID)._Lane.Contains("Ground"))) {
+                buildingData[i, 0] = 1;
+                buildingData[i, 1] = objData.GetRow(objID)._Size > 0 ? objData.GetRow(objID)._Size : 1;
+                buildingOccur[i] = objData.GetRow(objID)._Occurance;
+            } else {
+                Debug.Log("building data error.");
+            }
+        }
+        for (int i = 0; i < sidewalk.Length; ++i) {
+            objID = "Static_" + sidewalk[i].name;
+            if ((objData.GetRow(objID) != null) && 
+                (objData.GetRow(objID)._Location.Contains("City")) &&
+                (objData.GetRow(objID)._Lane.Contains("Sidewalk"))) {
+                sidewalkData[i, 0] = 1;
+                sidewalkData[i, 1] = objData.GetRow(objID)._Size > 0 ? objData.GetRow(objID)._Size : 1;
+                sidewalkOccur[i] = objData.GetRow(objID)._Occurance;
+            } else {
+                Debug.Log("sidewalk data error.");
+            }
+        }
+    }
+
     void deleteObstacles() {
         GameObject[] obss = GameObject.FindGameObjectsWithTag("Obstacle");
-        foreach (GameObject obs in obss)
-        {
+        foreach (GameObject obs in obss) {
             Destroy(obs);
         }
     }

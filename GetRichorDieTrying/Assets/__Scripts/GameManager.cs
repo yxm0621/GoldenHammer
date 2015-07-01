@@ -728,7 +728,7 @@ public class GameManager : MonoBehaviour {
         camShakePower = 0.05f;
 
         //Different Objects
-		if((objectName.Contains("Building")) && (objectName != "Building_3")){
+		if((objectName.Contains("Building")) && (!objectName.Contains("_Building"))){
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 0;
 
@@ -739,7 +739,7 @@ public class GameManager : MonoBehaviour {
 			buildingType = objectName;
 			spawnHumanPos = coinPos;
 		}
-		if(objectName == "Building_3"){
+		if(objectName.Contains("_Building")){
 
 			audioSource.PlayOneShot (finalSmashAudio);
 			listItem = 1;
@@ -758,7 +758,11 @@ public class GameManager : MonoBehaviour {
 			camShakePower = 0.05f;
 
 		}
-		if(objectName.Contains ("Tree") || objectName.Contains ("obj") || objectName.Contains ("env")){
+		if(objectName.Contains ("Tree") ||
+           objectName.Contains ("FireHydrant") ||
+           objectName.Contains ("Streetlight") ||
+           objectName.Contains("Telephone_Pole") || 
+           objectName.Contains("Flowerpot")) {
 			audioSource.PlayOneShot (woodSmash);
 			listItem = 2;
 
