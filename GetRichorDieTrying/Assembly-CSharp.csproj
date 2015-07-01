@@ -87,6 +87,7 @@
      <Compile Include="Assets\__Scripts\Menu\ShoppingCart.cs" />
      <Compile Include="Assets\__Scripts\Menu\ShowDetail.cs" />
      <Compile Include="Assets\__Scripts\Menu\SwipeCheck.cs" />
+     <Compile Include="Assets\__Scripts\Menu\Tab\TabItem.cs" />
      <Compile Include="Assets\__Scripts\Menu\TabDetailSwipe.cs" />
      <Compile Include="Assets\__Scripts\Menu\TabManager.cs" />
      <Compile Include="Assets\__Scripts\Menu\TabSwipe.cs" />
