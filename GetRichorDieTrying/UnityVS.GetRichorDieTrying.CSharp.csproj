@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Analytics">
       <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
@@ -111,6 +105,7 @@
     <Compile Include="Assets\__Scripts\Grid.cs" />
     <Compile Include="Assets\__Scripts\HammerBehavior.cs" />
     <Compile Include="Assets\__Scripts\HitObj.cs" />
+    <Compile Include="Assets\__Scripts\Menu\ClickTabObject.cs" />
     <Compile Include="Assets\__Scripts\Menu\HideDetail.cs" />
     <Compile Include="Assets\__Scripts\Menu\LightChange.cs" />
     <Compile Include="Assets\__Scripts\Menu\MenuFrame.cs" />
@@ -118,6 +113,9 @@
     <Compile Include="Assets\__Scripts\Menu\ShoppingCart.cs" />
     <Compile Include="Assets\__Scripts\Menu\ShowDetail.cs" />
     <Compile Include="Assets\__Scripts\Menu\SwipeCheck.cs" />
+    <Compile Include="Assets\__Scripts\Menu\TabDetailSwipe.cs" />
+    <Compile Include="Assets\__Scripts\Menu\TabManager.cs" />
+    <Compile Include="Assets\__Scripts\Menu\TabSwipe.cs" />
     <Compile Include="Assets\__Scripts\Moving.cs" />
     <Compile Include="Assets\__Scripts\NewSegTrigger.cs" />
     <Compile Include="Assets\__Scripts\ObjectManager.cs" />
