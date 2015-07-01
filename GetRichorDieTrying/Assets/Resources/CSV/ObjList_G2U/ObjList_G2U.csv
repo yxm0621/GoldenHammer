@@ -1,11 +1,5 @@
 G2U_ID,Name,Category,Location,Behaviors,Trigger,Gold,HitPoints,Occurance,Size,Encyclopedia,Lane
 G2U_TYPE,string,string,string,string,string,int,int,float,int,string,string
-Static_Checkpoint,Checkpoint,Static,City/Countryside/Wilderness/Ocean,,Special Power,3,500,0.00,0,,Sidewalk
-Boss_Fujin,Fujin,Boss,City/Countryside/Wilderness,,Levels 5, 10, 15, 20...,5000,100,0.35,0,God of Wind.,Special
-Static_Cloud,Cloud,Static,City/Countryside/Wilderness/Battlefield,,Always Present,50,5,0.00,0,Living the free life.,Special
-Static_RainClouds,RainClouds,Static,City/Countryside/Wilderness,,Clouds Destroyed,25,3,0.00,0,When you smash it you make the others cry.,Special
-Static_Sun,Sun,Static,City/Countryside/Wilderness/Battlefield,,Always Present,200,50,0.00,0,Giving life.,Special
-Static_Moon,Moon,Static,City/Countryside/Wilderness/Battlefield,,Always Present,200,50,0.00,0,,Special
 Boss_Bishamonten,Bishamonten,Boss,Battlefield,,Destroy Tank,5000,100,0.00,0,,Special
 Static_City_Road,City_Road,Static,City,N/A,N/A,10,5,1.00,1,Piece of Road.,Road
 Static_City_Tree_1,City_Tree_1,Static,City,N/A,N/A,5,1,0.95,1,Never gets too big.,Sidewalk
@@ -32,11 +26,13 @@ Static_Seeds,Seeds,Static,City,,N/A,35,1,0.20,0,,Ground
 Traffic_Soldier,Soldier,Traffic,City,Cover each walkable block and move toward screen,Smash Tank or summon Bishamonten,50,5,0.00,0,,Sidewalk
 Traffic_Tank,Tank,Traffic,City,,Smash Police Car or summon Bishamonten,500,20,0.00,0,,Road
 Global_Airplane,Airplane,Global,City,,N/A,50,3,0.45,0,,Special
-Static_Banana_Peel,Banana_Peel,Static,City,,N/A,2,1,0.75,0,,Sidewalk
+Traffic_Banana_Peel,Banana_Peel,Traffic,City,,N/A,2,1,0.75,0,,Sidewalk
 Static_Soda_Machine,Soda_Machine,Static,City,,N/A,3,1,0.95,0,,Sidewalk
 Static_Arcade,Arcade,Static,City,,N/A,80,1,0.35,0,,Sidewalk
 Global_Balloon,Balloon,Global,City/Countryside,,N/A,1,1,0.95,0,,Special
 Static_Telephone_Pole,Telephone_Pole,Static,City/Countryside,,N/A,3,1,0.95,0,,Sidewalk
+Boss_Fujin,Fujin,Boss,City/Countryside/Wilderness,,Levels 5, 10, 15, 20...,5000,100,0.35,0,God of Wind.,Special
+Global_RainClouds,RainClouds,Global,City/Countryside/Wilderness,,Clouds Destroyed,25,3,0.00,0,When you smash it you make the others cry.,Special
 Traffic_Cat,Cat,Traffic,City/Countryside/Wilderness,,N/A,2,1,0.95,0,,Sidewalk
 Traffic_White_Cat,White_Cat,Traffic,City/Countryside/Wilderness,,N/A,2,1,0.95,0,,Sidewalk
 Traffic_Fat_Cat,Fat_Cat,Traffic,City/Countryside/Wilderness,,N/A,4,2,0.95,0,,Sidewalk
@@ -44,6 +40,10 @@ Traffic_Fat_Dog,Fat_Dog,Traffic,City/Countryside/Wilderness,,N/A,4,2,0.95,0,,Sid
 Traffic_Dog,Dog,Traffic,City/Countryside/Wilderness,,N/A,2,1,0.95,0,,Sidewalk
 Traffic_Squirrell,Squirrell,Traffic,City/Countryside/Wilderness,,N/A,2,1,0.95,0,,Sidewalk
 Global_Bird,Bird,Global,City/Countryside/Wilderness,,N/A,2,1,0.95,0,,Special
+Global_Cloud,Cloud,Global,City/Countryside/Wilderness/Battlefield,,Always Present,50,5,0.00,0,Living the free life.,Special
+Global_Sun,Sun,Global,City/Countryside/Wilderness/Battlefield,,Always Present,200,50,0.00,0,Giving life.,Special
+Global_Moon,Moon,Global,City/Countryside/Wilderness/Battlefield,,Always Present,200,50,0.00,0,,Special
+Static_Checkpoint,Checkpoint,Static,City/Countryside/Wilderness/Ocean,,Special Power,3,500,0.00,0,,Sidewalk
 Traffic_Sheep,Sheep,Traffic,Countryside,,N/A,3,1,0.95,0,,Sidewalk
 Traffic_Shepherd,Shepherd,Traffic,Countryside,,N/A,5,1,0.95,0,,Sidewalk
 Traffic_Cow,Cow,Traffic,Countryside,,N/A,3,1,0.95,0,,Road
