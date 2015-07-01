@@ -178,17 +178,17 @@ namespace Google2u
 	public sealed class ObjList_G2U : IGoogle2uDB
 	{
 		public enum rowIds {
-			Static_Checkpoint, Boss_Fujin, Static_Cloud, Static_RainClouds, Static_Sun, Static_Moon, Boss_Bishamonten, Static_City_Road, Static_City_Tree_1, Static_City_Tree_2, Static_Streetlight, Static_FireHydrant, Static_Building_1, Static_Building_2, Static_Building_3, Static_Long_Building_1, Static_Long_Building_2, Static_Long_Building_3
-			, Static_Large_Building_1, Static_Large_Building_2, Static_Large_Building_3, Static_SkyScraper, Traffic_SafetyCones, Traffic_City_Man, Traffic_City_Woman, Traffic_Police_Officer, Traffic_Police_Car, Static_Flowerpot, Static_Seeds, Traffic_Soldier, Traffic_Tank, Global_Airplane, Static_Banana_Peel, Static_Soda_Machine, Static_Arcade, Global_Balloon, Static_Telephone_Pole, Traffic_Cat
-			, Traffic_White_Cat, Traffic_Fat_Cat, Traffic_Fat_Dog, Traffic_Dog, Traffic_Squirrell, Global_Bird, Traffic_Sheep, Traffic_Shepherd, Traffic_Cow, Traffic_Chicken, Traffic_Tractor, Static_Silo, Static_Farmhouse, Traffic_Farmer_Woman, Traffic_Farmer_Man, Traffic_Tsuchinoko, Static_Fence, Static_Windmill, Static_Haystack, Static_Fruit_Tree
+			Boss_Bishamonten, Static_City_Road, Static_City_Tree_1, Static_City_Tree_2, Static_Streetlight, Static_FireHydrant, Static_Building_1, Static_Building_2, Static_Building_3, Static_Long_Building_1, Static_Long_Building_2, Static_Long_Building_3, Static_Large_Building_1, Static_Large_Building_2, Static_Large_Building_3, Static_SkyScraper, Traffic_SafetyCones, Traffic_City_Man
+			, Traffic_City_Woman, Traffic_Police_Officer, Traffic_Police_Car, Static_Flowerpot, Static_Seeds, Traffic_Soldier, Traffic_Tank, Global_Airplane, Traffic_Banana_Peel, Static_Soda_Machine, Static_Arcade, Global_Balloon, Static_Telephone_Pole, Boss_Fujin, Global_RainClouds, Traffic_Cat, Traffic_White_Cat, Traffic_Fat_Cat, Traffic_Fat_Dog, Traffic_Dog
+			, Traffic_Squirrell, Global_Bird, Global_Cloud, Global_Sun, Global_Moon, Static_Checkpoint, Traffic_Sheep, Traffic_Shepherd, Traffic_Cow, Traffic_Chicken, Traffic_Tractor, Static_Silo, Static_Farmhouse, Traffic_Farmer_Woman, Traffic_Farmer_Man, Traffic_Tsuchinoko, Static_Fence, Static_Windmill, Static_Haystack, Static_Fruit_Tree
 			, Static_Corn, Traffic_Wolf, Static_Mushroom, Global_Crow, Static_Seaweed, Static_Clam, Static_Oyster, Static_Coral, Traffic_Whale, Traffic_Electronic_Eel, Traffic_Diver, Traffic_Kappa, Traffic_FishHook, Static_Wrecked_Ship, Static_Treasure_Chest, Static_Giant_Anchor, Traffic_Octopus, Traffic_PufferFish, Traffic_Dolphin, Traffic_Shark
 			, Boss_Ebisu, Boss_Ebisu_Hook, Traffic_Flying_Fish, Traffic_Crab, Traffic_Nemo, Boss_Raijin, Boss_Lightning, Traffic_Asterorid, Global_Mercury, Global_Venus, Global_Mars, Global_Saturn, Global_Jupiter, Global_Neptune, Global_Uranus, Global_Pluto, Global_UFO, Global_Space_Baby, Global_Stars, Traffic_Fox
 			, Traffic_Deer, Static_Wild_Tree, Static_Boulder, Traffic_Tengu, Static_Cave, Traffic_Monkey, Traffic_Titan
 		};
 		public string [] rowNames = {
-			"Static_Checkpoint", "Boss_Fujin", "Static_Cloud", "Static_RainClouds", "Static_Sun", "Static_Moon", "Boss_Bishamonten", "Static_City_Road", "Static_City_Tree_1", "Static_City_Tree_2", "Static_Streetlight", "Static_FireHydrant", "Static_Building_1", "Static_Building_2", "Static_Building_3", "Static_Long_Building_1", "Static_Long_Building_2", "Static_Long_Building_3"
-			, "Static_Large_Building_1", "Static_Large_Building_2", "Static_Large_Building_3", "Static_SkyScraper", "Traffic_SafetyCones", "Traffic_City_Man", "Traffic_City_Woman", "Traffic_Police_Officer", "Traffic_Police_Car", "Static_Flowerpot", "Static_Seeds", "Traffic_Soldier", "Traffic_Tank", "Global_Airplane", "Static_Banana_Peel", "Static_Soda_Machine", "Static_Arcade", "Global_Balloon", "Static_Telephone_Pole", "Traffic_Cat"
-			, "Traffic_White_Cat", "Traffic_Fat_Cat", "Traffic_Fat_Dog", "Traffic_Dog", "Traffic_Squirrell", "Global_Bird", "Traffic_Sheep", "Traffic_Shepherd", "Traffic_Cow", "Traffic_Chicken", "Traffic_Tractor", "Static_Silo", "Static_Farmhouse", "Traffic_Farmer_Woman", "Traffic_Farmer_Man", "Traffic_Tsuchinoko", "Static_Fence", "Static_Windmill", "Static_Haystack", "Static_Fruit_Tree"
+			"Boss_Bishamonten", "Static_City_Road", "Static_City_Tree_1", "Static_City_Tree_2", "Static_Streetlight", "Static_FireHydrant", "Static_Building_1", "Static_Building_2", "Static_Building_3", "Static_Long_Building_1", "Static_Long_Building_2", "Static_Long_Building_3", "Static_Large_Building_1", "Static_Large_Building_2", "Static_Large_Building_3", "Static_SkyScraper", "Traffic_SafetyCones", "Traffic_City_Man"
+			, "Traffic_City_Woman", "Traffic_Police_Officer", "Traffic_Police_Car", "Static_Flowerpot", "Static_Seeds", "Traffic_Soldier", "Traffic_Tank", "Global_Airplane", "Traffic_Banana_Peel", "Static_Soda_Machine", "Static_Arcade", "Global_Balloon", "Static_Telephone_Pole", "Boss_Fujin", "Global_RainClouds", "Traffic_Cat", "Traffic_White_Cat", "Traffic_Fat_Cat", "Traffic_Fat_Dog", "Traffic_Dog"
+			, "Traffic_Squirrell", "Global_Bird", "Global_Cloud", "Global_Sun", "Global_Moon", "Static_Checkpoint", "Traffic_Sheep", "Traffic_Shepherd", "Traffic_Cow", "Traffic_Chicken", "Traffic_Tractor", "Static_Silo", "Static_Farmhouse", "Traffic_Farmer_Woman", "Traffic_Farmer_Man", "Traffic_Tsuchinoko", "Static_Fence", "Static_Windmill", "Static_Haystack", "Static_Fruit_Tree"
 			, "Static_Corn", "Traffic_Wolf", "Static_Mushroom", "Global_Crow", "Static_Seaweed", "Static_Clam", "Static_Oyster", "Static_Coral", "Traffic_Whale", "Traffic_Electronic_Eel", "Traffic_Diver", "Traffic_Kappa", "Traffic_FishHook", "Static_Wrecked_Ship", "Static_Treasure_Chest", "Static_Giant_Anchor", "Traffic_Octopus", "Traffic_PufferFish", "Traffic_Dolphin", "Traffic_Shark"
 			, "Boss_Ebisu", "Boss_Ebisu_Hook", "Traffic_Flying_Fish", "Traffic_Crab", "Traffic_Nemo", "Boss_Raijin", "Boss_Lightning", "Traffic_Asterorid", "Global_Mercury", "Global_Venus", "Global_Mars", "Global_Saturn", "Global_Jupiter", "Global_Neptune", "Global_Uranus", "Global_Pluto", "Global_UFO", "Global_Space_Baby", "Global_Stars", "Traffic_Fox"
 			, "Traffic_Deer", "Static_Wild_Tree", "Static_Boulder", "Traffic_Tengu", "Static_Cave", "Traffic_Monkey", "Traffic_Titan"
@@ -208,12 +208,6 @@ namespace Google2u
 
 		private ObjList_G2U()
 		{
-			Rows.Add( new ObjList_G2URow("Static_Checkpoint", "Checkpoint", "Static", "City/Countryside/Wilderness/Ocean", "", "Special Power", "3", "500", "0.00", "0", "", "Sidewalk"));
-			Rows.Add( new ObjList_G2URow("Boss_Fujin", "Fujin", "Boss", "City/Countryside/Wilderness", "", "Levels 5, 10, 15, 20...", "5000", "100", "0.35", "0", "God of Wind.", "Special"));
-			Rows.Add( new ObjList_G2URow("Static_Cloud", "Cloud", "Static", "City/Countryside/Wilderness/Battlefield", "", "Always Present", "50", "5", "0.00", "0", "Living the free life.", "Special"));
-			Rows.Add( new ObjList_G2URow("Static_RainClouds", "RainClouds", "Static", "City/Countryside/Wilderness", "", "Clouds Destroyed", "25", "3", "0.00", "0", "When you smash it you make the others cry.", "Special"));
-			Rows.Add( new ObjList_G2URow("Static_Sun", "Sun", "Static", "City/Countryside/Wilderness/Battlefield", "", "Always Present", "200", "50", "0.00", "0", "Giving life.", "Special"));
-			Rows.Add( new ObjList_G2URow("Static_Moon", "Moon", "Static", "City/Countryside/Wilderness/Battlefield", "", "Always Present", "200", "50", "0.00", "0", "", "Special"));
 			Rows.Add( new ObjList_G2URow("Boss_Bishamonten", "Bishamonten", "Boss", "Battlefield", "", "Destroy Tank", "5000", "100", "0.00", "0", "", "Special"));
 			Rows.Add( new ObjList_G2URow("Static_City_Road", "City_Road", "Static", "City", "N/A", "N/A", "10", "5", "1.00", "1", "Piece of Road.", "Road"));
 			Rows.Add( new ObjList_G2URow("Static_City_Tree_1", "City_Tree_1", "Static", "City", "N/A", "N/A", "5", "1", "0.95", "1", "Never gets too big.", "Sidewalk"));
@@ -240,11 +234,13 @@ namespace Google2u
 			Rows.Add( new ObjList_G2URow("Traffic_Soldier", "Soldier", "Traffic", "City", "Cover each walkable block and move toward screen", "Smash Tank or summon Bishamonten", "50", "5", "0.00", "0", "", "Sidewalk"));
 			Rows.Add( new ObjList_G2URow("Traffic_Tank", "Tank", "Traffic", "City", "", "Smash Police Car or summon Bishamonten", "500", "20", "0.00", "0", "", "Road"));
 			Rows.Add( new ObjList_G2URow("Global_Airplane", "Airplane", "Global", "City", "", "N/A", "50", "3", "0.45", "0", "", "Special"));
-			Rows.Add( new ObjList_G2URow("Static_Banana_Peel", "Banana_Peel", "Static", "City", "", "N/A", "2", "1", "0.75", "0", "", "Sidewalk"));
+			Rows.Add( new ObjList_G2URow("Traffic_Banana_Peel", "Banana_Peel", "Traffic", "City", "", "N/A", "2", "1", "0.75", "0", "", "Sidewalk"));
 			Rows.Add( new ObjList_G2URow("Static_Soda_Machine", "Soda_Machine", "Static", "City", "", "N/A", "3", "1", "0.95", "0", "", "Sidewalk"));
 			Rows.Add( new ObjList_G2URow("Static_Arcade", "Arcade", "Static", "City", "", "N/A", "80", "1", "0.35", "0", "", "Sidewalk"));
 			Rows.Add( new ObjList_G2URow("Global_Balloon", "Balloon", "Global", "City/Countryside", "", "N/A", "1", "1", "0.95", "0", "", "Special"));
 			Rows.Add( new ObjList_G2URow("Static_Telephone_Pole", "Telephone_Pole", "Static", "City/Countryside", "", "N/A", "3", "1", "0.95", "0", "", "Sidewalk"));
+			Rows.Add( new ObjList_G2URow("Boss_Fujin", "Fujin", "Boss", "City/Countryside/Wilderness", "", "Levels 5, 10, 15, 20...", "5000", "100", "0.35", "0", "God of Wind.", "Special"));
+			Rows.Add( new ObjList_G2URow("Global_RainClouds", "RainClouds", "Global", "City/Countryside/Wilderness", "", "Clouds Destroyed", "25", "3", "0.00", "0", "When you smash it you make the others cry.", "Special"));
 			Rows.Add( new ObjList_G2URow("Traffic_Cat", "Cat", "Traffic", "City/Countryside/Wilderness", "", "N/A", "2", "1", "0.95", "0", "", "Sidewalk"));
 			Rows.Add( new ObjList_G2URow("Traffic_White_Cat", "White_Cat", "Traffic", "City/Countryside/Wilderness", "", "N/A", "2", "1", "0.95", "0", "", "Sidewalk"));
 			Rows.Add( new ObjList_G2URow("Traffic_Fat_Cat", "Fat_Cat", "Traffic", "City/Countryside/Wilderness", "", "N/A", "4", "2", "0.95", "0", "", "Sidewalk"));
@@ -252,6 +248,10 @@ namespace Google2u
 			Rows.Add( new ObjList_G2URow("Traffic_Dog", "Dog", "Traffic", "City/Countryside/Wilderness", "", "N/A", "2", "1", "0.95", "0", "", "Sidewalk"));
 			Rows.Add( new ObjList_G2URow("Traffic_Squirrell", "Squirrell", "Traffic", "City/Countryside/Wilderness", "", "N/A", "2", "1", "0.95", "0", "", "Sidewalk"));
 			Rows.Add( new ObjList_G2URow("Global_Bird", "Bird", "Global", "City/Countryside/Wilderness", "", "N/A", "2", "1", "0.95", "0", "", "Special"));
+			Rows.Add( new ObjList_G2URow("Global_Cloud", "Cloud", "Global", "City/Countryside/Wilderness/Battlefield", "", "Always Present", "50", "5", "0.00", "0", "Living the free life.", "Special"));
+			Rows.Add( new ObjList_G2URow("Global_Sun", "Sun", "Global", "City/Countryside/Wilderness/Battlefield", "", "Always Present", "200", "50", "0.00", "0", "Giving life.", "Special"));
+			Rows.Add( new ObjList_G2URow("Global_Moon", "Moon", "Global", "City/Countryside/Wilderness/Battlefield", "", "Always Present", "200", "50", "0.00", "0", "", "Special"));
+			Rows.Add( new ObjList_G2URow("Static_Checkpoint", "Checkpoint", "Static", "City/Countryside/Wilderness/Ocean", "", "Special Power", "3", "500", "0.00", "0", "", "Sidewalk"));
 			Rows.Add( new ObjList_G2URow("Traffic_Sheep", "Sheep", "Traffic", "Countryside", "", "N/A", "3", "1", "0.95", "0", "", "Sidewalk"));
 			Rows.Add( new ObjList_G2URow("Traffic_Shepherd", "Shepherd", "Traffic", "Countryside", "", "N/A", "5", "1", "0.95", "0", "", "Sidewalk"));
 			Rows.Add( new ObjList_G2URow("Traffic_Cow", "Cow", "Traffic", "Countryside", "", "N/A", "3", "1", "0.95", "0", "", "Road"));

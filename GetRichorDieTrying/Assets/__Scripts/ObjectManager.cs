@@ -31,7 +31,7 @@ public class ObjectManager : MonoBehaviour {
 
         localPos = thisObject.transform.localPosition;
 
-        objData = Google2u.ObjList_G2U.Instance;
+        objData = gameMain.objData;
         if (objData != null) {
             for (int i = 0; i < objData.Rows.Count; i++) {
                 if(thisObject.name == objData.Rows[i]._Name){
