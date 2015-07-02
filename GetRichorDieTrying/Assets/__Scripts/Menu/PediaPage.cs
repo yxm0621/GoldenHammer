@@ -17,22 +17,30 @@ public class PediaPage : MonoBehaviour
 
     public GameObject icon;
 
-    
 
-    //
+    public GameObject allObjParent;
+    public GameObject cityObjParent;
+    public GameObject rainObjParent;
+    public GameObject battleFieldObjParent;
+    public GameObject countrySideObjParent;
+    public GameObject wildernessObjParent;
+    public GameObject oceanObjParent;
+    public GameObject spaceObjParent;
+    public GameObject nightObjParent;
+    public GameObject anyObjParent;
 
-    private List<GameObject> allObjList;
-    private List<GameObject> cityObjList;
-    private List<GameObject> rainObjList;
-    private List<GameObject> battleFieldObjList;
-    private List<GameObject> countrySideObjList;
-    private List<GameObject> wildernessObjList;
-    private List<GameObject> oceanObjList;
-    private List<GameObject> spaceObjList;
-    private List<GameObject> nightObjList;
-    private List<GameObject> anyObjList;
+    public List<GameObject> allObjList;
+    public List<GameObject> cityObjList;
+    public List<GameObject> rainObjList;
+    public List<GameObject> battleFieldObjList;
+    public List<GameObject> countrySideObjList;
+    public List<GameObject> wildernessObjList;
+    public List<GameObject> oceanObjList;
+    public List<GameObject> spaceObjList;
+    public List<GameObject> nightObjList;
+    public List<GameObject> anyObjList;
 
-    void Start()
+    void Awake()
     {
         Initialize();
         CreateLayout();
@@ -42,6 +50,17 @@ public class PediaPage : MonoBehaviour
     {
         gameMain = GameManager.manager;
         objData = Google2u.ObjList_G2U.Instance;
+
+        //allObjList = new GameObject();
+        //cityObjList = new GameObject();
+        //rainObjList = new GameObject();
+        //battleFieldObjList = new GameObject();
+        //countrySideObjList = new GameObject();
+        //wildernessObjList = new GameObject();
+        //oceanObjList = new GameObject();
+        //spaceObjList = new GameObject();
+        //nightObjList = new GameObject();
+        //anyObjList = new GameObject();
 
         allObjList = new List<GameObject>();
         cityObjList = new List<GameObject>();
@@ -82,6 +101,7 @@ public class PediaPage : MonoBehaviour
 
             for (int i = 0; i < objData.Rows.Count; i++)
             {
+
                 /*** Eliminating things that are not supposed to be on the list ***/
                 if (objData.Rows[i]._Name == "Checkpoint")
                 {
@@ -94,63 +114,72 @@ public class PediaPage : MonoBehaviour
                 if (objData.Rows[i]._Location.Contains("City"))
                 {
                     GameObject pediaItem = Instantiate(i);
-                    pediaItem.transform.position += new Vector3(0, -cityCount * 1.3f, 0);
+                    pediaItem.transform.localPosition += new Vector3(0, -cityCount * 1.3f, 0);
+                    pediaItem.transform.SetParent(cityObjParent.transform);
                     cityObjList.Add(pediaItem);
                     cityCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Rain"))
                 {
                     GameObject pediaItem = Instantiate(i);
-                    pediaItem.transform.position += new Vector3(0, -rainCount * 1.3f, 0);
+                    pediaItem.transform.localPosition += new Vector3(10, -rainCount * 1.3f, 0);
+                    pediaItem.transform.SetParent(rainObjParent.transform);
                     rainObjList.Add(pediaItem);
                     rainCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Battlefield"))
                 {
                     GameObject pediaItem = Instantiate(i);
-                    pediaItem.transform.position += new Vector3(0, -battleCount * 1.3f, 0);
+                    pediaItem.transform.localPosition += new Vector3(12, -battleCount * 1.3f, 0);
+                    pediaItem.transform.SetParent(battleFieldObjParent.transform);
                     battleFieldObjList.Add(pediaItem);
                     battleCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Countryside"))
                 {
                     GameObject pediaItem = Instantiate(i);
-                    pediaItem.transform.position += new Vector3(0, -countryCount * 1.3f, 0);
+                    pediaItem.transform.localPosition += new Vector3(14, -countryCount * 1.3f, 0);
+                    pediaItem.transform.SetParent(countrySideObjParent.transform);
                     countrySideObjList.Add(pediaItem);
                     countryCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Wilderness"))
                 {
                     GameObject pediaItem = Instantiate(i);
-                    pediaItem.transform.position += new Vector3(0, -wilderCount * 1.3f, 0);
+                    pediaItem.transform.localPosition += new Vector3(16, -wilderCount * 1.3f, 0);
+                    pediaItem.transform.SetParent(wildernessObjParent.transform);
                     wildernessObjList.Add(pediaItem);
                     wilderCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Ocean"))
                 {
                     GameObject pediaItem = Instantiate(i);
-                    pediaItem.transform.position += new Vector3(0, -oceanCount * 1.3f, 0);
+                    pediaItem.transform.localPosition += new Vector3(18, -oceanCount * 1.3f, 0);
+                    pediaItem.transform.SetParent(oceanObjParent.transform);
                     oceanObjList.Add(pediaItem);
                     oceanCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Space"))
                 {
                     GameObject pediaItem = Instantiate(i);
-                    pediaItem.transform.position += new Vector3(0, -spaceCount * 1.3f, 0);
+                    pediaItem.transform.localPosition += new Vector3(20, -spaceCount * 1.3f, 0);
+                    pediaItem.transform.SetParent(spaceObjParent.transform);
                     spaceObjList.Add(pediaItem);
                     spaceCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Night"))
                 {
                     GameObject pediaItem = Instantiate(i);
-                    pediaItem.transform.position += new Vector3(0, -nightCount * 1.3f, 0);
+                    pediaItem.transform.localPosition += new Vector3(22, -nightCount * 1.3f, 0);
+                    pediaItem.transform.SetParent(nightObjParent.transform);
                     nightObjList.Add(pediaItem);
                     nightCount++;
                 }
                 if (objData.Rows[i]._Location.Contains("Any"))
                 {
                     GameObject pediaItem = Instantiate(i);
-                    pediaItem.transform.position += new Vector3(0, -anyCount * 1.3f, 0);
+                    pediaItem.transform.localPosition += new Vector3(24, -anyCount * 1.3f, 0);
+                    pediaItem.transform.SetParent(anyObjParent.transform);
                     anyObjList.Add(pediaItem);
                     anyCount++;
                 }
@@ -172,8 +201,8 @@ public class PediaPage : MonoBehaviour
     {
         GameObject pediaItem = Instantiate(pediaItemPrefab);
         pediaItem.name = "PediaItem_" + objData.Rows[i]._Name;
-        pediaItem.transform.SetParent(GameObject.Find("PediaItemsStartPoint").gameObject.transform);
-        pediaItem.transform.position = GameObject.Find("PediaItemsStartPoint").transform.position;
+        //pediaItem.transform.SetParent(GameObject.Find("PediaItemsStartPoint").gameObject.transform);
+        //////no need//pediaItem.transform.position = GameObject.Find("PediaItemsStartPoint").transform.position;
 
         GameObject tmpItemNameObj = GameObject.Find("ItemName");
         tmpItemNameObj.GetComponent<TextMesh>().text = objData.Rows[i]._Name;
@@ -196,15 +225,5 @@ public class PediaPage : MonoBehaviour
 
     void Update()
     {
-        //if (showEncyclopedia)
-        //{
-        //    this.gameObject.transform.position = new Vector3(-3.36f, -4.08f, 0);
-        //    Debug.Log("!!!!!!");
-        //}
-        //else
-        //{
-        //    this.gameObject.transform.position = new Vector3(-100.0f, -100.0f, 0);
-        //    Debug.Log("333333");
-        //}
     }
 }

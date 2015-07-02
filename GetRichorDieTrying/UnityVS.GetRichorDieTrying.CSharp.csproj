@@ -105,6 +105,7 @@
     <Compile Include="Assets\__Scripts\Grid.cs" />
     <Compile Include="Assets\__Scripts\HammerBehavior.cs" />
     <Compile Include="Assets\__Scripts\HitObj.cs" />
+    <Compile Include="Assets\__Scripts\Menu\ClickTabObject.cs" />
     <Compile Include="Assets\__Scripts\Menu\HideDetail.cs" />
     <Compile Include="Assets\__Scripts\Menu\LightChange.cs" />
     <Compile Include="Assets\__Scripts\Menu\MenuFrame.cs" />
@@ -112,6 +113,10 @@
     <Compile Include="Assets\__Scripts\Menu\ShoppingCart.cs" />
     <Compile Include="Assets\__Scripts\Menu\ShowDetail.cs" />
     <Compile Include="Assets\__Scripts\Menu\SwipeCheck.cs" />
+    <Compile Include="Assets\__Scripts\Menu\Tab\TabItem.cs" />
+    <Compile Include="Assets\__Scripts\Menu\TabDetailSwipe.cs" />
+    <Compile Include="Assets\__Scripts\Menu\TabManager.cs" />
+    <Compile Include="Assets\__Scripts\Menu\TabSwipe.cs" />
     <Compile Include="Assets\__Scripts\Moving.cs" />
     <Compile Include="Assets\__Scripts\NewSegTrigger.cs" />
     <Compile Include="Assets\__Scripts\ObjectManager.cs" />
