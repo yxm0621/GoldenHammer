@@ -230,7 +230,7 @@ public class GridController {
         for (i = min; i < max; ++i) {
             totalOccur += occurChange[i];
             if (totalOccur >= objOccur) {
-                i--;
+                if (i > 0) i--;
                 GameObject obj = objs[i];
                 if (obj.transform.localScale.z > maxWidth) {
                     //when the item's length beyond the edge of the grid, change another item
