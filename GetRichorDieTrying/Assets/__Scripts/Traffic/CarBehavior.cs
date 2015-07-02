@@ -78,21 +78,33 @@ public class CarBehavior : MonoBehaviour {
         runSpeed = runDistance / runTime;
 
         characterDis = car.transform.position.z - gameMain.characterPos.z;
-        if (characterDis < -4f) {
-            Destroy(gameObject);
-		}
-        if (gameObject.transform.position.y > .08f) {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, .08f, gameObject.transform.position.z);
+        //Turn on renderer when it reaches the edge of the scene
+        if (characterDis > 30) {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+        } else {
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
-        if (gameObject.transform.position.x != startX) {
-            gameObject.transform.position = new Vector3(startX, gameObject.transform.position.y, gameObject.transform.position.z);
-        }
+        //Add gravity when car is 3 segments away from player
         if ((characterDis < 18) && !addGravity){
             gameObject.GetComponent<Rigidbody>().useGravity = true;
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             addGravity = true;
         }
+        //Destroy car when it passes player
+        if (characterDis < -4f) {
+            Destroy(gameObject);
+		}
 
+        //make the car stay on the ground
+        if (gameObject.transform.position.y > .08f) {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, .08f, gameObject.transform.position.z);
+        }
+        //make the car stay at its lane
+        if (gameObject.transform.position.x != startX) {
+            gameObject.transform.position = new Vector3(startX, gameObject.transform.position.y, gameObject.transform.position.z);
+        }
+
+        //Car movement
         if (gameMain.gameState == GameManager.State.InGame) {
             //Stop police cars and tanks
             if (car.name.Contains("Police") || car.name.Contains("Tank")) {

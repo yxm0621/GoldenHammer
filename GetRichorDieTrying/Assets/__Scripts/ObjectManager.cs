@@ -193,13 +193,10 @@ public class ObjectManager : MonoBehaviour {
                 switch (thisObject.name) {
                     case "Encyclopedia":
                         gameMain.currentMenu = GameManager.MenuPage.Encyclopedia;
-                        gameMain.encyclopedia = Instantiate(gameMain.encyclopediaObj, gameMain.encyclopediaObj.transform.position, Quaternion.identity) as GameObject;
-                        gameMain.encyclopedia.name = gameMain.encyclopediaObj.name;
+                        //gameMain.encyclopedia = Instantiate(gameMain.encyclopediaObj, gameMain.encyclopediaObj.transform.position, Quaternion.identity) as GameObject;
+                        //gameMain.encyclopedia.name = gameMain.encyclopediaObj.name;
 
                         GameObject.Find("PediaPage").transform.position = subMenuPosition;
-                        //this.gameObject.transform.position = new Vector3(-3.36f, -4.08f, 0);
-                        Debug.Log("asdfasdfasdf" + this.gameObject.name);
-                        //TODO//1. touch handle -> dont duplicate objects by instantiation 2. tab
                         //gameMain.encyclopedia.transform.parent = gameMain.itemPage.transform;
                         break;
                     case "Achievement":
@@ -243,7 +240,10 @@ public class ObjectManager : MonoBehaviour {
                 hitPoints++;
                 //Encyclopedia.showEncyclopedia = false;
                 Debug.Log("back to menu called!");
-                        
+
+
+                GameObject.Find("PediaPage").transform.position = new Vector3(-1, -5, 0);
+
                 //Camera.main.transform.position -= new Vector3(10.5f, 0f, 0f);
                 //Application.LoadLevel("Menu");
             }
