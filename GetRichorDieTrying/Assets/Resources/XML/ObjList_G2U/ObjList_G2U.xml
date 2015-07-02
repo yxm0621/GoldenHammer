@@ -1,91 +1,5 @@
 <Sheets>
   <sheet name="ObjList_G2U">
-    <row name="Static_Checkpoint">
-      <Name type="string">Checkpoint</Name>
-      <Category type="string">Static</Category>
-      <Location type="string">City/Countryside/Wilderness/Ocean</Location>
-      <Behaviors type="string">
-      </Behaviors>
-      <Trigger type="string">Special Power</Trigger>
-      <Gold type="int">3</Gold>
-      <HitPoints type="int">500</HitPoints>
-      <Occurance type="float">0.00</Occurance>
-      <Size type="int">0</Size>
-      <Encyclopedia type="string">
-      </Encyclopedia>
-      <Lane type="string">Sidewalk</Lane>
-    </row>
-    <row name="Boss_Fujin">
-      <Name type="string">Fujin</Name>
-      <Category type="string">Boss</Category>
-      <Location type="string">City/Countryside/Wilderness</Location>
-      <Behaviors type="string">
-      </Behaviors>
-      <Trigger type="string">Levels 5, 10, 15, 20...</Trigger>
-      <Gold type="int">5000</Gold>
-      <HitPoints type="int">100</HitPoints>
-      <Occurance type="float">0.35</Occurance>
-      <Size type="int">0</Size>
-      <Encyclopedia type="string">God of Wind.</Encyclopedia>
-      <Lane type="string">Special</Lane>
-    </row>
-    <row name="Static_Cloud">
-      <Name type="string">Cloud</Name>
-      <Category type="string">Static</Category>
-      <Location type="string">City/Countryside/Wilderness/Battlefield</Location>
-      <Behaviors type="string">
-      </Behaviors>
-      <Trigger type="string">Always Present</Trigger>
-      <Gold type="int">50</Gold>
-      <HitPoints type="int">5</HitPoints>
-      <Occurance type="float">0.00</Occurance>
-      <Size type="int">0</Size>
-      <Encyclopedia type="string">Living the free life.</Encyclopedia>
-      <Lane type="string">Special</Lane>
-    </row>
-    <row name="Static_RainClouds">
-      <Name type="string">RainClouds</Name>
-      <Category type="string">Static</Category>
-      <Location type="string">City/Countryside/Wilderness</Location>
-      <Behaviors type="string">
-      </Behaviors>
-      <Trigger type="string">Clouds Destroyed</Trigger>
-      <Gold type="int">25</Gold>
-      <HitPoints type="int">3</HitPoints>
-      <Occurance type="float">0.00</Occurance>
-      <Size type="int">0</Size>
-      <Encyclopedia type="string">When you smash it you make the others cry.</Encyclopedia>
-      <Lane type="string">Special</Lane>
-    </row>
-    <row name="Static_Sun">
-      <Name type="string">Sun</Name>
-      <Category type="string">Static</Category>
-      <Location type="string">City/Countryside/Wilderness/Battlefield</Location>
-      <Behaviors type="string">
-      </Behaviors>
-      <Trigger type="string">Always Present</Trigger>
-      <Gold type="int">200</Gold>
-      <HitPoints type="int">50</HitPoints>
-      <Occurance type="float">0.00</Occurance>
-      <Size type="int">0</Size>
-      <Encyclopedia type="string">Giving life.</Encyclopedia>
-      <Lane type="string">Special</Lane>
-    </row>
-    <row name="Static_Moon">
-      <Name type="string">Moon</Name>
-      <Category type="string">Static</Category>
-      <Location type="string">City/Countryside/Wilderness/Battlefield</Location>
-      <Behaviors type="string">
-      </Behaviors>
-      <Trigger type="string">Always Present</Trigger>
-      <Gold type="int">200</Gold>
-      <HitPoints type="int">50</HitPoints>
-      <Occurance type="float">0.00</Occurance>
-      <Size type="int">0</Size>
-      <Encyclopedia type="string">
-      </Encyclopedia>
-      <Lane type="string">Special</Lane>
-    </row>
     <row name="Boss_Bishamonten">
       <Name type="string">Bishamonten</Name>
       <Category type="string">Boss</Category>
@@ -449,9 +363,9 @@
       </Encyclopedia>
       <Lane type="string">Special</Lane>
     </row>
-    <row name="Static_Banana_Peel">
+    <row name="Traffic_Banana_Peel">
       <Name type="string">Banana_Peel</Name>
-      <Category type="string">Static</Category>
+      <Category type="string">Traffic</Category>
       <Location type="string">City</Location>
       <Behaviors type="string">
       </Behaviors>
@@ -523,6 +437,34 @@
       <Encyclopedia type="string">
       </Encyclopedia>
       <Lane type="string">Sidewalk</Lane>
+    </row>
+    <row name="Boss_Fujin">
+      <Name type="string">Fujin</Name>
+      <Category type="string">Boss</Category>
+      <Location type="string">City/Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Levels 5, 10, 15, 20...</Trigger>
+      <Gold type="int">5000</Gold>
+      <HitPoints type="int">100</HitPoints>
+      <Occurance type="float">0.35</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">God of Wind.</Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_RainClouds">
+      <Name type="string">RainClouds</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">City/Countryside/Wilderness</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Clouds Destroyed</Trigger>
+      <Gold type="int">25</Gold>
+      <HitPoints type="int">3</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">When you smash it you make the others cry.</Encyclopedia>
+      <Lane type="string">Special</Lane>
     </row>
     <row name="Traffic_Cat">
       <Name type="string">Cat</Name>
@@ -628,6 +570,64 @@
       <Encyclopedia type="string">
       </Encyclopedia>
       <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Cloud">
+      <Name type="string">Cloud</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">City/Countryside/Wilderness/Battlefield</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Always Present</Trigger>
+      <Gold type="int">50</Gold>
+      <HitPoints type="int">5</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">Living the free life.</Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Sun">
+      <Name type="string">Sun</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">City/Countryside/Wilderness/Battlefield</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Always Present</Trigger>
+      <Gold type="int">200</Gold>
+      <HitPoints type="int">50</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">Giving life.</Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Global_Moon">
+      <Name type="string">Moon</Name>
+      <Category type="string">Global</Category>
+      <Location type="string">City/Countryside/Wilderness/Battlefield</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Always Present</Trigger>
+      <Gold type="int">200</Gold>
+      <HitPoints type="int">50</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Special</Lane>
+    </row>
+    <row name="Static_Checkpoint">
+      <Name type="string">Checkpoint</Name>
+      <Category type="string">Static</Category>
+      <Location type="string">City/Countryside/Wilderness/Ocean</Location>
+      <Behaviors type="string">
+      </Behaviors>
+      <Trigger type="string">Special Power</Trigger>
+      <Gold type="int">3</Gold>
+      <HitPoints type="int">500</HitPoints>
+      <Occurance type="float">0.00</Occurance>
+      <Size type="int">0</Size>
+      <Encyclopedia type="string">
+      </Encyclopedia>
+      <Lane type="string">Sidewalk</Lane>
     </row>
     <row name="Traffic_Sheep">
       <Name type="string">Sheep</Name>

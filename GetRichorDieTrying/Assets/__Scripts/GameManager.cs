@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 	public string						currentLevel;
 	public string						mainLevel;
 	public bool							firstRun = true;
+    public Google2u.ObjList_G2U         objData;
 
 	public GameObject					cam;
 	public Vector3						camStartPos;
@@ -214,6 +215,7 @@ public class GameManager : MonoBehaviour {
 	public void Start () {
 		currentLevel = Application.loadedLevelName;
         Time.timeScale = 1.0F;
+        objData = Google2u.ObjList_G2U.Instance;
 
         cam = Camera.main.gameObject;
         camStartPos = cam.transform.position;
@@ -305,7 +307,7 @@ public class GameManager : MonoBehaviour {
             characterCon = character.GetComponent<characterController>();
             //characterPos = character.transform.position;
             characterPos = new Vector3(.5f, 0f, 0f);
-            character.GetComponent<Animation>().Play("idle");
+            //character.GetComponent<Animation>().Play("idle");
             iTween.Init(character);
 
             shield = character.transform.FindChild("Shield").gameObject;
@@ -425,7 +427,7 @@ public class GameManager : MonoBehaviour {
                 valueText.text = "";
             }
 
-			goalText.text = levelGoal.ToString("Goal " + "$0");
+			goalText.text = levelGoal.ToString("GOAL " + "$0");
 			//update distance text
 			if(distance < 1000) {
                 distanceText.text = distance.ToString("0");
@@ -528,7 +530,7 @@ public class GameManager : MonoBehaviour {
 
         //Steal hammer
         iTween.MoveTo(character, iTween.Hash("position", new Vector3(.8f, .5f, -6.5f), "time", .3f, "easetype", iTween.EaseType.easeInCubic));
-        character.GetComponent<Animation>().Play("run");
+        //character.GetComponent<Animation>().Play("run");
         yield return new WaitForSeconds(.3f);
 
         //Camera's movement when character escapes

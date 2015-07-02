@@ -217,7 +217,7 @@ public class GridController {
     //randomly put the pickupItem
     public void PutItem(int x, int z) {
         int i = getObj(pickup, 0, pickup.Length, 1);
-        items[x, z] = new GridItem(pickup[i], 1, 1, 0, 0);
+        items[x, z] = new GridItem(pickup[i], 1, 1);
     }
 
 	//create the new grid
@@ -236,7 +236,7 @@ public class GridController {
                             i = getObj(building, 3, 5, 1); // only generate tall buildings
                         }
                         
-                        items[x, z] = new GridItem(building[i], buildingData[i, 0], buildingData[i, 1], buildingData[i, 2], buildingData[i, 3]);
+                        items[x, z] = new GridItem(building[i], buildingData[i, 0], buildingData[i, 1]);
                         z += (buildingData[i, 1] - 1);
                         if ((buildingData[i, 0] > 1) && (x != sidewalkBegin - 1) && (x != gridLenth - 1)) {
                             //avoid overlap
@@ -284,7 +284,7 @@ public class GridController {
                                 } else {
                                     //generate static item
                                     int i = getObj(sidewalk, 0, sidewalk.Length, gridWidth - z);
-                                    items[x, z] = new GridItem(sidewalk[i], sidewalkData[i, 0], sidewalkData[i, 1], sidewalkData[i, 2], sidewalkData[i, 3]);
+                                    items[x, z] = new GridItem(sidewalk[i], sidewalkData[i, 0], sidewalkData[i, 1]);
                                     z += (sidewalkData[i, 1] - 1);
                                 }
                             }
@@ -294,7 +294,7 @@ public class GridController {
                         if (Random.Range(0, 2) > 0) {
                             // 1/2 chance to generate item, 1/2 chance to leave it empty
                             int i = getObj(sidewalk, 0, sidewalk.Length, gridWidth - z);
-                            items[x, z] = new GridItem(sidewalk[i], sidewalkData[i, 0], sidewalkData[i, 1], sidewalkData[i, 2], sidewalkData[i, 3]);
+                            items[x, z] = new GridItem(sidewalk[i], sidewalkData[i, 0], sidewalkData[i, 1]);
                             z += (sidewalkData[i, 1] - 1);
                         }
                     }
@@ -306,19 +306,17 @@ public class GridController {
 
 //items on the grid
 public class GridItem {
-	public GameObject obj;
-	public int length;
-	public int width;
-	public float xOffset;
-	public float zOffset;
+    public GameObject obj;
+    public int width; //width of the obj, normally == 1
+	public int length; //ledth of the obj
+    //public float xOffset;
+    //public float zOffset;
 
-	public GridItem(GameObject obj, int length, int width, float xOffset, float zOffset) {
+	public GridItem(GameObject obj, int width, int length) {
 		this.obj = obj;
 //		this.obj.transform.localScale.x = length;
 //		this.obj.transform.localScale.z = width;
-		this.length = length;
-		this.width = width;
-		this.xOffset = xOffset;
-		this.zOffset = zOffset;
+        this.width = width;
+        this.length = length;
 	}
 }
